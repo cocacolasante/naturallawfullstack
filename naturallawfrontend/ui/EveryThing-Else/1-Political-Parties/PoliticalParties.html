@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Politics-Parties-&-Ideologies</title>
+      <style>
+    /* Root Variables and Basic Reset */
+    :root {
+      --primary-dark: #000000;
+      --secondary-dark: #111111;
+      --tertiary-dark: #1a1a1a;
+      --accent-gold: #f5d442;
+      --accent-gold-hover: #ffe97f;
+      --text-light: #ffffcc;
+      --text-white: #fefefe;
+      --highlight-pink: #ff33e3;
+      --border-color: #444;
+      --shadow-color: rgba(255, 215, 0, 0.2);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Times New Roman", Times, serif;  /* Changed from "Segoe UI" */
+    background-color: var(--primary-dark);
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+    /* Typography */
+    h1, h2, h3, h4, h5, h6 {
+      color: var(--accent-gold);
+      margin-bottom: 1rem;
+    }
+
+    a {
+      color: var(--accent-gold);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      color: var(--accent-gold-hover);
+    }
+
+    /* Header Styles */
+    .main-header {
+      background-color: var(--primary-dark);
+      border-bottom: 2px solid var(--accent-gold);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .header-title {
+    text-align: center;
+    padding: 1rem 0;    /* Reduced from 1.5rem to 0.5rem */
+}
+
+    .header-title h1 {
+      font-size: 2.7rem;
+      margin: 0;
+        color: #ffffff;   /* Changed to white, overriding the default gold color */
+    }
+
+    /* Navigation Styles */
+.topnav {
+    background-color: var(--secondary-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.0rem 0;    /* Reduced from 0.5rem to 0rem */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+      margin: 0 0.5rem;
+    }
+
+    .dropbtn {
+      background-color: transparent;
+      color: var(--accent-gold);
+      padding: 0.8rem 1.2rem;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    .dropbtn:hover {
+      color: var(--accent-gold-hover);
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: var(--tertiary-dark);
+      min-width: 200px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+      z-index: 1;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+    }
+
+    .dropdown-content a {
+      color: var(--text-light);
+      padding: 12px 16px;
+      display: block;
+      text-align: left;
+    }
+
+.dropdown-content .long-item {
+    white-space: normal;
+    line-height: 1.2;
+    padding: 8px 16px;
+}
+
+    .dropdown-content a:hover {
+      background-color: var(--secondary-dark);
+      color: var(--accent-gold);
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    /* Main Container Styles */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: .1rem;    /* Reduced from 2rem */
+    }
+
+    /* Content Section Styles */
+ .content-section {
+    background-color: var(--secondary-dark);
+    margin: 0.1rem 0;
+    padding: 0.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px var(--shadow-color);
+    border: 1px solid var(--border-color);
+}
+
+    /* Front Page Specific Styles */
+    .welcome-content {
+      padding: .1rem;   /* Reduced from 3rem */
+    }
+
+.welcome-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0;  /* Controls spacing between lines */
+    padding-top: 0rem;     /* minimal top space */
+    padding-bottom: 1rem;   /* larger bottom space */
+}
+
+
+.welcome-line {
+    font-size: 1.8rem;
+    color: var(--accent-gold);
+    font-weight: bold;
+    line-height: 1.2;  /* Tighter line spacing */
+    margin: 0;
+    padding: 0;
+}
+
+.welcome-text {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    font-weight: 500;
+    line-height: 1.2;
+    margin: 0;
+    padding: 0;
+}
+
+.welcome-block > div:nth-child(2) {
+    margin-bottom: 0.5rem;  /* Small space before the smaller text */
+}
+
+/* Map Styles */
+.map-container {
+    width: 100%;
+    overflow: hidden;
+    padding: 0.5rem 0;    /* Reduced from 1rem */
+    margin-bottom: 0.5rem; /* Add this to reduce space before footer */
+}
+
+.responsive-map {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 8px;  /* Optional: adds slightly rounded corners */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);  /* Optional: adds subtle shadow */
+}
+
+/* Optional: Add hover effect */
+.responsive-map:hover {
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.2);
+    transition: box-shadow 0.3s ease;
+}
+
+@media screen and (max-width: 768px) {
+    .map-container {
+        padding: 0.5rem 0;
+    }
+    
+    .responsive-map {
+        width: 100%;
+    }
+}
+
+    .registration-cta {
+      padding: 2rem;
+    }
+
+    .registration-cta h3 {
+      font-size: 1.6rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .registration-cta p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+    }
+
+/* Footer Styles */
+.main-footer {
+    background-color: var(--secondary-dark);
+    padding: 1rem;          /* Reduced padding */
+    margin-top: 1rem;       /* Reduced top margin */
+    border-top: 2px solid var(--border-color);
+}
+
+.footer-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: block;
+}
+
+.footer-section {
+    padding: 0.2rem;        /* Reduced padding */
+    margin-bottom: 0.2rem;  /* Reduced margin */
+    text-align: center;
+}
+
+.footer-section p {
+    margin-bottom: 0.2rem;
+    line-height: 1.4;
+    max-width: 800px;     /* Add this to control text width */
+    margin-left: auto;    /* Center the contained text */
+    margin-right: auto;
+}
+
+.footer-section p.mt-1 {
+    margin-top: 0.2rem;     /* Reduced margin for paragraphs with mt-1 class */
+}
+
+.footer-section:hover {
+    background-color: var(--tertiary-dark);
+    transition: background-color 0.3s ease;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 0.5rem;    /* Reduced padding */
+    margin-top: 0.5rem;     /* Reduced margin */
+    border-top: 1px solid var(--border-color);
+}
+
+    /* Utility Classes */
+    .text-center {
+      text-align: center;
+    }
+
+    .mt-1 { margin-top: 1rem; }
+    .mt-2 { margin-top: 2rem; }
+
+    /* Responsive Design */
+    @media screen and (max-width: 768px) {
+      .topnav {
+        flex-direction: column;
+        padding: 0;
+      }
+
+      .dropdown {
+        width: 100%;
+        margin: 0;
+      }
+
+      .dropbtn {
+        width: 100%;
+        padding: 1rem;
+      }
+
+      .dropdown-content {
+        width: 100%;
+        position: relative;
+      }
+
+      .container {
+        padding: 1rem;
+      }
+
+      .content-section {
+        padding: 1rem;
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+        <header class="main-header">
+        <div class="header-title">
+            <h1><u>Common-Law Republic</u>; <u>U.S.A.</u>.</h1>
+        </div>
+
+        <nav class="topnav">
+            <div class="dropdown">
+                <button class="dropbtn">Home-Page</button>
+                <div class="dropdown-content">
+                    <a href="index.html">Home Page</a>
+                    <a href="USA-LocalJurisdictions/OrganicHierarchiesUSA-V4.2.pdf">Social-Organizing Under Constitutional "Organic Hierarchies"</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Register;
+                  or: Log-In.</button>
+                <div class="dropdown-content">
+                    <a href="Accounts-Profiles-Registering/NewUsers-Registration.html">Register</a>
+                    <a href="./Accounts-Profiles-Registering/Login.html">Login</a>
+                    <a href="Accounts-Profiles-Registering/ProfileIndexManagement.html">Different User-Account Profile-Pages; Explained</a>
+                </div>
+            </div>
+
+        <nav class="topnav">
+            <div class="dropdown">
+                <button class="dropbtn">USA-National-Categories-Index</button>
+                <div class="dropdown-content">
+                    <a href="./USA-NationalIssues/NationalCategories-Index.html">USA-National-Categories-Index</a>
+                    <a href="./USA-NationalIssues/ExecutiveDepartment-Prez/index.html">Executive-Department-Prez</a>
+                    <a href="./USA-NationalIssues/JudicialDepartment/JudicialIndex.html">Judicial-Department</a>
+                    <a href="./USA-NationalIssues/Legislature-HouseReps/Leg-HRepsIndex.html">Legislature-HouseReps</a>
+                    <a href="./USA-NationalIssues/Legislature-Senate/Leg-Senate.html">Legislature-Senate</a>
+                    <a href="./USA-NationalIssues/Treasury/TreasuryIndex.html">Treasury</a>
+                    <a href="./USA-NationalIssues/SecretaryofState/SecofStateIndex.html">Secretary-of-State</a>
+                    <a href="./USA-NationalIssues/Z-Agencies/Agencies.html">Z-Agencies-CIA-DOJ-FBI</a>                                                            
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Local Community Organizing</button>
+                <div class="dropdown-content"style="text-align:center;">
+                    <a href="#">Residence & Geographical-Location</a>
+                    <p><u>USA Super-States</u>:</p>
+                            <a href="./USA-LocalJurisdictions/01-NewEngland-SS/NewEngland-SS.html" value="usa-01">USA-01: New-England</a>
+                            <a href="./USA-LocalJurisdictions/02-NewYork-SS/NewYork-SS.html" value="usa-02">USA-02: New-York</a>
+                            <a href="./USA-LocalJurisdictions/03-Jersey-Penn-SS/JerseyPenn-SS.html" value="usa-03">USA-03: Jersey-Penn</a>
+                            <a href="./USA-LocalJurisdictions/04-GreatLakes-SS/GreatLakes-SS.html" value="usa-04">USA-04: Great-Lakes</a>
+                            <a href="./USA-LocalJurisdictions/05-VirginiaCarolins-SS/Virginia-Carolina-SS.html" value="usa-05">USA-05: Virginia-Carolina</a>
+                            <a href="./USA-LocalJurisdictions/07-MississippiValley-SS/MississippiValley-SS.html" value="usa-06">USA-06: Mississippi-Valley</a>
+                            <a href="./USA-LocalJurisdictions/06-FloridaGeorgia-SS/FloridaGeorgia-SS.html" value="usa-07">USA-07: Florida-Georgia</a>
+                            <a href="./USA-LocalJurisdictions/08-WestGreatLakes-SS/WestreatLakes-SS.html" value="usa-08">USA-08: West-Great-Lakes</a>
+                            <a href="./USA-LocalJurisdictions/09-Texas-SS/Texas-SS.html" value="usa-09">USA-09: Texas</a>
+                            <a href="./USA-LocalJurisdictions/10-SouthWest-SS/SouthWest-SS.html" value="usa-10">USA-10: South-West</a>
+                            <a href="./USA-LocalJurisdictions/11-PacificNW-SS/PacificNW-SS.html" value="usa-11">USA-11: Pacific-NW</a>
+                            <a href="./USA-LocalJurisdictions/12-California-SS/California-SS.html"value="usa-12">USA-12: California</a>
+                            <p><u>World Regions</u>:</p>
+                            <a href="../../WorldJurisdictions/01-NorthAmerica-Canada/NorthAmerica-Canada.html" value="world-01">World-01: North-America Canada</a>
+                            <a href="../../WorldJurisdictions/02-WesternEurope/WesternEurope.html" value="world-02">World-02: Western-Europe</a>
+                            <a href="../../WorldJurisdictions/03-PacificOcean/PacificOcean.html" value="world-03">World-03: Pacific-Ocean</a>
+                            <a href="../../WorldJurisdictions/04-SouthEastAsia/SouthEastAsia.html" value="world-04">World-04: South-East Asia</a>
+                            <a href="../../WorldJurisdictions/05-NorthAsia-&-EasternEurope/NorthAsia-&-EasternEurope.html" value="world-05">World-05: Northern-Asia & Eastern-Europe</a>
+                            <a href="../../WorldJurisdictions/06-Central-&SouthAmerica/Central&SouthAmerica.html" value="world-06">World-06: Central-&-South-America</a>
+                            <a href="../../WorldJurisdictions/07-EasrernMediteranean&NorthAfrica/EasternMediteranean-&-NorthAfrica.html" value="world-07">World-07: Eastern-Mediterranean & North-Africa</a>
+                            <a href="../../WorldJurisdictions/08-India/India.html" value="world-08">World-08: India</a>
+                            <a href="../../WorldJurisdictions/09-South&CentralAfrica/South&CentralAfrica.html" value="world-09">World-09: South-&-Central Africa</a>
+                            <a href="../../WorldJurisdictions/10-China/China.html" value="world-10">World-10: China</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Private/Special/Ideological/Religious Organizing</button>
+                <div class="dropdown-content">
+                    <a href="./PrivateSpecialReligiousCommunities/1-Religous-&-Spiritual-Communities/SpiritualIndex.html">Religious & Spiritual Communities</a>
+                    <a href="./PrivateSpecialReligiousCommunities/2-Political-Parties/PoliticalParties.html">Political Parties</a>
+                    <a href="./PrivateSpecialReligiousCommunities/3-Business&Financial-Communities&Corporations/Biz&Finances.html">Business & Financial Communities & Corporations</a>
+                    <a href="./PrivateSpecialReligiousCommunities/4-Trade-Unions/TradeUnions.html">Trade Unions</a>
+                    <a href="./PrivateSpecialReligiousCommunities/5-FoodProduction&Distribution-Communities/FoodProduction.html">Food Production & Distribution Communities</a>
+                    <a href="./PrivateSpecialReligiousCommunities/6-EnvironmentalActivist-Communities/EnvironmentActivism.html">Environmental Activist Communities</a>
+                    <a href="./PrivateSpecialReligiousCommunities/7-HealthActivist-Communities/HealthActivism.html">Health Activist Communities</a>
+                    <a href="./PrivateSpecialReligiousCommunities/8-DNA-Genetic-Racial-Bloodlines-Communities/GeneticHeritage.html">DNA, Genetic, Racial, Blood-line, & Ethnic Communities</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Support</button>
+                <div class="dropdown-content">
+                    <a href="./Support/Support.html">Support-Help-Contacts</a>                </div>
+            </div>
+        </nav>
+    </header>
+    
+</body>
+</html>

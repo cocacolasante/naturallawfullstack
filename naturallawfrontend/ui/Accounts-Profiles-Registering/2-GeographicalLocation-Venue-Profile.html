@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2-Geographical-Location-Profile</title>
+    <style>
+        /* Root Variables and Basic Reset */
+        :root {
+            --primary-dark: #000000;
+            --secondary-dark: #111111;
+            --tertiary-dark: #1a1a1a;
+            --accent-gold: #f5d442;
+            --accent-gold-hover: #ffe97f;
+            --text-light: #ffffcc;
+            --text-white: #fefefe;
+            --highlight-pink: #ff33e3;
+            --border-color: #444;
+            --shadow-color: rgba(255, 215, 0, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Base Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Times New Roman", Times, serif;
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+        }
+
+        a {
+            color: var(--accent-gold);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent-gold-hover);
+        }
+
+        /* Header Styles */
+        .main-header {
+            background-color: var(--primary-dark);
+            border-bottom: 2px solid var(--accent-gold);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .header-title {
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        .header-title h1 {
+            font-size: 2.7rem;
+            margin: 0;
+            color: #ffffff;
+        }
+
+        /* Navigation Styles */
+        .topnav {
+            background-color: var(--secondary-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            margin: 0 0.5rem;
+        }
+
+        .dropbtn {
+            background-color: transparent;
+            color: var(--accent-gold);
+            padding: 0.8rem 1.2rem;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .dropbtn:hover {
+            color: var(--accent-gold-hover);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--tertiary-dark);
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+            z-index: 1;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+        }
+
+        .dropdown-content a {
+            color: var(--text-light);
+            padding: 12px 16px;
+            display: block;
+            text-align: left;
+        }
+
+        .dropdown-content a:hover {
+            background-color: var(--secondary-dark);
+            color: var(--accent-gold);
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        /* Form Sections */
+        .section {
+            background-color: var(--secondary-dark);
+            margin: 1.5rem auto;
+            padding: 1.5rem;
+            max-width: 700px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px var(--shadow-color);
+            border: 1px solid var(--border-color);
+        }
+
+        .section h3 {
+            background-color: #333;
+            color: #ffec99;
+            padding: 0.6rem;
+            margin: -1.5rem -1.5rem 1.5rem -1.5rem;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            border-bottom: 2px solid #ffec99;
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin: 1.5rem 0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: var(--text-light);
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 80%;
+            padding: 0.5rem;
+            margin-top: 0.4rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background-color: var(--tertiary-dark);
+            color: var(--text-light);
+            text-align: center;
+        }
+
+        .radio-group {
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .radio-group label {
+            display: inline-block;
+            margin: 0 1rem;
+            font-weight: normal;
+        }
+
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .form-note {
+            background-color: var(--tertiary-dark);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            text-align: left;
+        }
+
+        .section-divider {
+            border-top: 1px solid var(--border-color);
+            margin: 2rem 0;
+            padding-top: 1rem;
+        }
+
+        /* Button Styles */
+        .submit-section {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        button {
+            background-color: var(--accent-gold);
+            color: var(--primary-dark);
+            border: none;
+            padding: 0.8rem 1.6rem;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        button:hover {
+            background-color: var(--accent-gold-hover);
+        }
+
+        /* Footer Styles */
+        footer {
+            margin-top: 4rem;
+            padding: 1rem;
+            background-color: var(--secondary-dark);
+            color: var(--text-light);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            .topnav {
+                flex-direction: column;
+            }
+
+            .dropdown {
+                width: 100%;
+                margin: 0;
+            }
+
+            .dropbtn {
+                width: 100%;
+                padding: 1rem;
+            }
+
+            .dropdown-content {
+                width: 100%;
+                position: relative;
+            }
+
+            .section {
+                margin: 1rem;
+                padding: 1rem;
+            }
+
+            input[type="text"],
+            input[type="number"],
+            select,
+            textarea {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="header-title">
+            <h1><u>Common-Law Republic</u>; <u>U.S.A.</u>.</h1>
+        </div>
+
+        <nav class="topnav">
+            <div class="dropdown">
+                <button class="dropbtn">Home</button>
+                <div class="dropdown-content">
+                    <a href="index.html">Main Page</a>
+                    <a href="#">CommonLaw-Republic Governing-Modal Explained</a>
+                    <a href="#">Political Voting & Elections Process Explained</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Register, or Log-In</button>
+                <div class="dropdown-content">
+                    <a href="registration.html">Register</a>
+                    <a href="#">Login</a>
+                    <a href="#">Profile</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Local Community Organizing</button>
+                <div class="dropdown-content">
+                    <a href="#">Local Communities</a>
+                    <a href="#">Members Directory</a>
+                    <a href="#">Events</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Private/Special/Religious Organizing</button>
+                <div class="dropdown-content">
+                    <a href="#">Religious Communities</a>
+                    <a href="#">Political Parties</a>
+                    <a href="#">Economics Research Communities</a>
+                    <a href="#">Trade Unions</a>
+                    <a href="#">Agriculture & Food-Production Communities</a>
+                    <a href="#">Environmental Activists</a>
+                    <a href="#">Health Activists</a>
+                    <a href="#">Conspiracy Research Communities</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Support</button>
+                <div class="dropdown-content">
+                    <a href="#">Help Center</a>
+                    <a href="#">Contact Us</a>
+                    <a href="#">FAQ</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <h2><u>Registration-Form</u>, <u>Section-2</u>;<br>
+            <u>Users Local Geographical Residence & Venue Profile</u>.</h2>
+
+        <div class="section">
+            <h3>Primary Geographical Location</h3>
+            <p>Your currently registered "Home Geographical-Location" is marked below. You may update it by selecting a different option.</p>
+            
+            <form>
+                <div class="form-group">
+                    <select required>
+                        <optgroup label="USA Regions">
+                            <option value="usa-01">USA-01: New-England</option>
+                            <option value="usa-02">USA-02: New-York</option>
+                            <option value="usa-03">USA-03: Jersey-Penn</option>
+                            <option value="usa-04">USA-04: Great-Lakes</option>
+                            <option value="usa-05">USA-05: Virginia-Carolina</option>
+                            <option value="usa-06">USA-06: Mississippi-Valley</option>
+                            <option value="usa-07">USA-07: Florida-Georgia</option>
+                            <option value="usa-08">USA-08: West-Great-Lakes</option>
+                            <option value="usa-09">USA-09: Texas</option>
+                            <option value="usa-10">USA-10: South-West</option>
+                            <option value="usa-11">USA-11: Pacific-NW</option>
+                            <option value="usa-12">USA-12: California</option>
+                        </optgroup>
+                        <optgroup label="World Regions">
+                            <option value="world-01">World-01: North-America Canada</option>
+                            <option value="world-02">World-02: Western-Europe</option>
+                            <option value="world-03">World-03: Pacific-Ocean</option>
+                            <option value="world-04">World-04: South-East Asia</option>
+                            <option value="world-05">World-05: Northern-Asia & Eastern-Europe</option>
+                            <option value="world-06">World-06: Central-&-South-America</option>
+                            <option value="world-07">World-07: Eastern-Mediterranean & North-Africa</option>
+                            <option value="world-08">World-08: India</option>
+                            <option value="world-09">World-09: South-&-Central Africa</option>
+                            <option value="world-10">World-10: China</option>
+                        </optgroup>
+                    </select>
+                </div>
+            </form>
+        </div>
+
+        <div class="section">
+            <h3>Detailed U.S.A. Location Information</h3>
+            <p class="form-note">This section is for U.S.A. residents only. A separate form will be available for international locations.</p>
+
+            <form>
+                <div class="form-group">
+                    <label for="state">State of Residence:</label>
+                    <select id="state" name="state" required>
+                        <option value="">Select a State</option>
+    <option value="AL">Alabama</option>
+    <option value="AK">Alaska</option>
+    <option value="AZ">Arizona</option>
+    <option value="AR">Arkansas</option>
+    <option value="CA">California</option>
+    <option value="CO">Colorado</option>
+    <option value="CT">Connecticut</option>
+    <option value="DE">Delaware</option>
+    <option value="FL">Florida</option>
+    <option value="GA">Georgia</option>
+    <option value="HI">Hawaii</option>
+    <option value="ID">Idaho</option>
+    <option value="IL">Illinois</option>
+    <option value="IN">Indiana</option>
+    <option value="IA">Iowa</option>
+    <option value="KS">Kansas</option>
+    <option value="KY">Kentucky</option>
+    <option value="LA">Louisiana</option>
+    <option value="ME">Maine</option>
+    <option value="MD">Maryland</option>
+    <option value="MA">Massachusetts</option>
+    <option value="MI">Michigan</option>
+    <option value="MN">Minnesota</option>
+    <option value="MS">Mississippi</option>
+    <option value="MO">Missouri</option>
+    <option value="MT">Montana</option>
+    <option value="NE">Nebraska</option>
+    <option value="NV">Nevada</option>
+    <option value="NH">New Hampshire</option>
+    <option value="NJ">New Jersey</option>
+    <option value="NM">New Mexico</option>
+    <option value="NY">New York</option>
+    <option value="NC">North Carolina</option>
+    <option value="ND">North Dakota</option>
+    <option value="OH">Ohio</option>
+    <option value="OK">Oklahoma</option>
+    <option value="OR">Oregon</option>
+    <option value="PA">Pennsylvania</option>
+    <option value="RI">Rhode Island</option>
+    <option value="SC">South Carolina</option>
+    <option value="SD">South Dakota</option>
+    <option value="TN">Tennessee</option>
+    <option value="TX">Texas</option>
+    <option value="UT">Utah</option>
+    <option value="VT">Vermont</option>
+    <option value="VA">Virginia</option>
+    <option value="WA">Washington</option>
+    <option value="WV">West Virginia</option>
+    <option value="WI">Wisconsin</option>
+    <option value="WY">Wyoming</option>
+</select>
+                </div>
+
+                <div class="form-group">
+                    <label for="street">Residential Street Address:</label>
+                    <input type="text" id="street" name="street">
+                </div>
+
+                <div class="form-group">
+                    <label for="city">City:</label>
+                    <input type="text" id="city" name="city">
+                </div>
+
+                <div class="radio-group">
+                    <label>Residence Location:</label>
+                    <label><input type="radio" name="in_city" value="yes"> Do reside within city limits</label>
+                    <label><input type="radio" name="in_city" value="no"> Do Not reside within city limits</label>
+                </div>
+
+                <div class="section-divider"></div>
+
+                <div class="form-group">
+                    <label for="zipcode">Zip Code:</label>
+                    <input type="text" id="zipcode" name="zipcode">
+                </div>
+
+                <div class="form-note">
+                    <p>Note: Our main organizers recognize that using "Zip-Code" Data is commonly misconstrued as "Consenting to be Governed" under Un-Constitutional Private-Corporation "Contract-Law". In This Community Web-Page, all voluntary submission of this "Zip-Code Data" is Specifically "Not To Be Construed" as any "Consent of the Governed" to have our "Constitutionally-Guaranteed Rights" Construed as having been "Contracted Away".</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="pobox">Post Office Box/Suite Number (if applicable):</label>
+                    <input type="text" id="pobox" name="pobox">
+                </div>
+
+                <div class="section-divider"></div>
+
+                <div class="form-group">
+                    <label for="county">County:</label>
+                    <input type="text" id="county" name="county">
+                </div>
+
+                <div class="form-group">
+                    <label for="congress_district">Congressional Representative District:</label>
+                    <input type="text" id="congress_district" name="congress_district">
+                </div>
+
+                <div class="form-group">
+                    <label for="precinct">Precinct Number:</label>
+                    <input type="text" id="precinct" name="precinct">
+                </div>
+
+                <div class="form-group">
+                    <label for="commissioner_district">County Commissioner/Supervisor District:</label>
+                    <input type="text" id="commissioner_district" name="commissioner_district">
+                </div>
+
+                <div class="form-group">
+                    <label for="state_district">State Representative District:</label>
+                    <input type="text" id="state_district" name="state_district">
+                </div>
+
+                <div class="form-group">
+                    <label for="additional_info">Additional Geographic/Residential Information:</label>
+                    <textarea id="additional_info" name="additional_info" placeholder="Enter any additional information or relevant web links here"></textarea>
+                </div>
+
+                <div style="text-align: center; margin-top: 2rem;">
+                    <button type="submit" class="submit-btn" 
+                    style="width: auto; min-width: 200px;">
+                    Up-Date This Profile-Page.</button>
+
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-bottom">
+            <p><u>Common-Law Republic, U.S.A.</u>; <u>Empowering Self-Governing Communities</u>.<br>
+                With the help of many others; this entire project, as presented thru this web-page,<br>
+                has been engineered, by: Charles Stewart, of Coleman Texas. ... Last up-dated: June-2025.</p>
+        </div>
+    </footer>
+    <script>
+(() => {
+  // --- config ---
+  // Change this if your API is on a different origin:
+  const API_BASE = (document.body.dataset.apiBase || '').replace(/\/+$/, '') || '/api/v1';
+
+  // Try several common token keys so you don't get stuck on naming differences.
+  function getAuthToken() {
+    return (
+      localStorage.getItem('authToken') ||
+      localStorage.getItem('token') ||
+      localStorage.getItem('jwt') ||
+      ''
+    );
+  }
+
+  // Grab the address form. On this page, it's the second <form>.
+  const forms = Array.from(document.querySelectorAll('form'));
+  if (!forms.length) return;
+  const addressForm = forms[forms.length - 1]; // last form is the detailed USA address form
+
+  // Helper: split "123 Main St Apt 4" -> { number: "123", name: "Main St Apt 4" }
+  function splitStreet(raw) {
+    if (!raw) return { number: undefined, name: undefined };
+    const trimmed = raw.trim();
+    const m = trimmed.match(/^(\d+)\s+(.*)$/);
+    if (m) return { number: m[1], name: m[2] };
+    // No leading number — send everything as street_name
+    return { number: undefined, name: trimmed };
+  }
+
+  // Build JSON payload with only non-empty fields the backend accepts
+  function buildAddressPayload() {
+    const state = document.getElementById('state')?.value?.trim() || '';
+    const street = document.getElementById('street')?.value?.trim() || '';
+    const city = document.getElementById('city')?.value?.trim() || '';
+    const zipcode = document.getElementById('zipcode')?.value?.trim() || '';
+    const pobox = document.getElementById('pobox')?.value?.trim() || '';
+
+    const { number: street_number, name: street_name } = splitStreet(street);
+
+    const body = {};
+    if (street_number) body.street_number = street_number;
+    if (street_name) body.street_name = street_name;
+    if (pobox) body.address_line_2 = pobox;      // maps to "address_line_2"
+    if (city) body.city = city;
+    if (state) body.state = state;
+    if (zipcode) body.zip_code = zipcode;
+
+    return body;
+  }
+
+  // Minimal UI feedback
+  function toast(msg, isError = false) {
+    let el = document.getElementById('profile-toast');
+    if (!el) {
+      el = document.createElement('div');
+      el.id = 'profile-toast';
+      el.style.position = 'fixed';
+      el.style.left = '50%';
+      el.style.top = '20px';
+      el.style.transform = 'translateX(-50%)';
+      el.style.zIndex = '99999';
+      el.style.padding = '10px 14px';
+      el.style.borderRadius = '8px';
+      el.style.boxShadow = '0 2px 8px rgba(0,0,0,0.4)';
+      el.style.fontWeight = 'bold';
+      document.body.appendChild(el);
+    }
+    el.textContent = msg;
+    el.style.background = isError ? '#7a1f1f' : '#2a4';
+    el.style.color = '#fff';
+    clearTimeout(el._t);
+    el._t = setTimeout(() => (el.style.display = 'none'), 4000);
+    el.style.display = 'block';
+  }
+
+  async function authedFetch(url, options = {}) {
+    const token = getAuthToken();
+    if (!token) {
+      throw new Error('No auth token found in localStorage (authToken/token/jwt).');
+    }
+    const headers = new Headers(options.headers || {});
+    headers.set('Content-Type', 'application/json');
+    headers.set('Authorization', `Bearer ${token}`);
+    return fetch(url, { ...options, headers });
+  }
+
+  async function submitAddressUpdate(evt) {
+    evt.preventDefault();
+
+    const payload = buildAddressPayload();
+    if (Object.keys(payload).length === 0) {
+      toast('No address fields to update.', true);
+      return;
+    }
+
+    const putUrl = `${API_BASE}/profile/address`;
+    try {
+      // Try UPDATE first
+      let res = await authedFetch(putUrl, {
+        method: 'PUT',
+        body: JSON.stringify(payload),
+      });
+
+      if (res.status === 404) {
+        // No existing address row — create it
+        res = await authedFetch(putUrl, {
+          method: 'POST',
+          body: JSON.stringify(payload),
+        });
+      }
+
+      if (res.status === 401) {
+        toast('Unauthorized. Please log in again.', true);
+        return;
+      }
+
+      if (!res.ok) {
+        const err = await safeJson(res);
+        throw new Error(err?.error || `Request failed (${res.status})`);
+      }
+
+      const data = await res.json();
+      // You can also reflect returned data back into the form if desired.
+      toast('Address saved successfully.');
+      // console.log('Saved address:', data);
+    } catch (e) {
+      toast(`Save failed: ${e.message}`, true);
+    }
+  }
+
+  async function safeJson(res) {
+    try { return await res.json(); } catch { return null; }
+  }
+
+  addressForm.addEventListener('submit', submitAddressUpdate);
+})();
+</script>
+
+</body>
+</html>
+

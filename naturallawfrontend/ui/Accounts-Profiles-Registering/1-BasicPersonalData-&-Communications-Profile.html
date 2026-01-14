@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1-BasicProfile-Personal&CommunicationsData</title>
+    <style>
+        /* Root Variables and Basic Reset */
+        :root {
+            --primary-dark: #000000;
+            --secondary-dark: #111111;
+            --tertiary-dark: #1a1a1a;
+            --accent-gold: #f5d442;
+            --accent-gold-hover: #ffe97f;
+            --text-light: #ffffcc;
+            --text-white: #fefefe;
+            --highlight-pink: #ff33e3;
+            --border-color: #444;
+            --shadow-color: rgba(255, 215, 0, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Base Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Times New Roman", Times, serif;
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+        }
+
+        a {
+            color: var(--accent-gold);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent-gold-hover);
+        }
+
+        /* Header Styles */
+        .main-header {
+            background-color: var(--primary-dark);
+            border-bottom: 2px solid var(--accent-gold);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .header-title {
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        .header-title h1 {
+            font-size: 2.7rem;
+            margin: 0;
+            color: #ffffff;
+        }
+
+        /* Navigation Styles */
+        .topnav {
+            background-color: var(--secondary-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            margin: 0 0.5rem;
+        }
+
+        .dropbtn {
+            background-color: transparent;
+            color: var(--accent-gold);
+            padding: 0.8rem 1.2rem;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .dropbtn:hover {
+            color: var(--accent-gold-hover);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--tertiary-dark);
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+            z-index: 1;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+        }
+
+        .dropdown-content a {
+            color: var(--text-light);
+            padding: 12px 16px;
+            display: block;
+            text-align: left;
+        }
+
+        .dropdown-content a:hover {
+            background-color: var(--secondary-dark);
+            color: var(--accent-gold);
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        /* Form Sections */
+        .section {
+            background-color: var(--secondary-dark);
+            margin: 1.5rem auto;
+            padding: 1.5rem;
+            max-width: 700px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px var(--shadow-color);
+            border: 1px solid var(--border-color);
+        }
+
+        .section h3 {
+            background-color: #333;
+            color: #ffec99;
+            padding: 0.6rem;
+            margin: -1.5rem -1.5rem 1.5rem -1.5rem;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            border-bottom: 2px solid #ffec99;
+        }
+
+        /* Form Elements */
+        label {
+            display: block;
+            margin-top: 1rem;
+            font-weight: bold;
+            color: var(--text-light);
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 80%;
+            padding: 0.5rem;
+            margin-top: 0.4rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background-color: var(--tertiary-dark);
+            color: var(--text-light);
+            text-align: center;
+        }
+
+        .radio-group,
+        .checkbox-group {
+            margin: 1rem 0;
+        }
+
+        .radio-group label,
+        .checkbox-group label {
+            display: inline-block;
+            margin: 0.4rem 1rem;
+            font-weight: normal;
+        }
+
+        textarea {
+            height: 60px;
+            resize: vertical;
+        }
+
+        /* Status Section */
+        .status-section {
+            background-color: var(--secondary-dark);
+            padding: 1rem;
+            margin: 1rem auto;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            max-width: 700px;
+        }
+
+        .category-list {
+            text-align: left;
+            max-width: 600px;
+            margin: 1rem auto;
+        }
+
+        /* Button Styles */
+        .submit {
+            margin-top: 2rem;
+        }
+
+        button {
+            background-color: var(--accent-gold);
+            color: var(--primary-dark);
+            border: none;
+            padding: 0.8rem 1.6rem;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        button:hover {
+            background-color: var(--accent-gold-hover);
+        }
+
+        /* Footer Styles */
+        footer {
+            margin-top: 4rem;
+            padding: 1rem;
+            background-color: var(--secondary-dark);
+            color: var(--text-light);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            .topnav {
+                flex-direction: column;
+            }
+
+            .dropdown {
+                width: 100%;
+                margin: 0;
+            }
+
+            .dropbtn {
+                width: 100%;
+                padding: 1rem;
+            }
+
+            .dropdown-content {
+                width: 100%;
+                position: relative;
+            }
+
+            .section {
+                margin: 1rem;
+                padding: 1rem;
+            }
+
+            input[type="text"],
+            input[type="email"],
+            input[type="number"],
+            select,
+            textarea {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-title">
+            <h1><u>Common-Law Republic</u>; <u>U.S.A.</u>.</h1>
+        </div>
+
+        <nav class="topnav">
+            <div class="dropdown">
+                <button class="dropbtn">Home</button>
+                <div class="dropdown-content">
+                    <a href="index.html">Main Page</a>
+                    <a href="#">CommonLaw-Republic Governing-Modal Explained</a>
+                    <a href="#">Political Voting & Elections Process Explained</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Register, or Log-In</button>
+                <div class="dropdown-content">
+                    <a href="registration.html">Register</a>
+                    <a href="#">Login</a>
+                    <a href="ProfileIndexManagement.html">Profile</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Local Community Organizing</button>
+                <div class="dropdown-content">
+                    <a href="#">Residence & Geographical-Location</a>
+                    <p>USA Super-States</p>
+                            <a href="#" value="usa-00">USA-00: National-USA</a>
+                            <a href="#" value="usa-01">USA-01: New-England</a>
+                            <a href="#" value="usa-02">USA-02: New-York</a>
+                            <a href="#" value="usa-03">USA-03: Jersey-Penn</a>
+                            <a href="#" value="usa-04">USA-04: Great-Lakes</a>
+                            <a href="#" value="usa-05">USA-05: Virginia-Carolina</a>
+                            <a href="#" value="usa-06">USA-06: Mississippi-Valley</a>
+                            <a href="#" value="usa-07">USA-07: Florida-Georgia</a>
+                            <a href="#" value="usa-08">USA-08: West-Great-Lakes</a>
+                            <a href="#" value="usa-09">USA-09: Texas</a>
+                            <a href="#" value="usa-10">USA-10: South-West</a>
+                            <a href="#" value="usa-11">USA-11: Pacific-NW</a>
+                            <a href="#"value="usa-12">USA-12: California</a>
+                            <p>World Regions:</p>
+                            <a href="#" value="world-01">World-01: North-America Canada</a>
+                            <a href="#" value="world-02">World-02: Western-Europe</a>
+                            <a href="#" value="world-03">World-03: Pacific-Ocean</a>
+                            <a href="#" value="world-04">World-04: South-East Asia</a>
+                            <a href="#" value="world-05">World-05: Northern-Asia & Eastern-Europe</a>
+                            <a href="#" value="world-06">World-06: Central-&-South-America</a>
+                            <a href="#" value="world-07">World-07: Eastern-Mediterranean & North-Africa</a>
+                            <a href="#" value="world-08">World-08: India</a>
+                            <a href="#" value="world-09">World-09: South-&-Central Africa</a>
+                            <a href="#" value="world-10">World-10: China</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Private/Special/Religious Organizing</button>
+                <div class="dropdown-content">
+                    <a href="#">USA Federal-Government; Departments & Agencies</a>
+                    <a href="#">Religious & Spiritual Communities</a>
+                    <a href="#">Political Parties</a>
+                    <a href="#">Business & Financial Communities & Corporations</a>
+                    <a href="#">Trade Unions</a>
+                    <a href="#">Food Production & Distribution Communities</a>
+                    <a href="#">Environmental Activist Communities</a>
+                    <a href="#">Health Activist Communities</a>
+                    <a href="#">DNA, Genetic, Racial, Blood-line, & Ethnic Communities</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Support</button>
+                <div class="dropdown-content">
+                    <a href="#">Help Center</a>
+                    <a href="#">Contact Us</a>
+                    <a href="#">FAQ</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <h2><u>Registration-Form</u>, <u>Level-1</u>;<br>
+            <u>Users Basic Personal-Profile</u>, <u>& Communications-Data</u>.</h2>
+
+        <div class="status-section">
+            <p>You are presently Logged-In to Your Account.<br>
+                Presently, Your User-Account Has the Status of:</p>
+            <div class="radio-group">
+                <label><input type="radio" name="status" checked> 1: Lowest-Level User</label>
+                <label><input type="radio" name="status" disabled> 2: Lower-Middle-Level User</label>
+                <label><input type="radio" name="status" disabled> 3: Middle-Level User</label>
+                <label><input type="radio" name="status" disabled> 4: Middle-Higher-Level User</label>
+                <label><input type="radio" name="status" disabled> 5: Higher-Level User</label>
+                <label><input type="radio" name="status" disabled> 6: Upper-Higher-Level User</label>
+                <label><input type="radio" name="status" disabled> 7: Highest-Level User</label>
+            </div>
+        </div>
+
+
+        <div class="section">
+            <h3>Your Main Registered Basic # 1 Personal-Profile Data Is:</h3>
+            <p class="note">(This Account-Holder May Change All Sections here-in, 
+                Except those few early Sections With a: "*" next to them; 
+                because, those "*" Sections are the "Required Fields" through which 
+                this entire Users-Account has been created.<br>
+                If this Account-Holder wishes to change these sections, 
+                then his/her only option, is, to create an entirely new users-account.)</p>
+
+            <form>
+                <label>User-Name *</label>
+                <input type="text" required readonly>
+                
+                <label>Main Email-Address *</label>
+                <input type="email" required readonly>
+                
+                <label>First Name</label>
+                <input type="text">
+                
+                <label>Middle Name</label>
+                <input type="text">
+                
+                <label>Last/Family Name</label>
+                <input type="text">
+
+                <div class="radio-group">
+                    <label>Gender/Sex:</label>
+                    <label><input type="radio" name="gender"> Man/Male</label>
+                    <label><input type="radio" name="gender"> Woman/Female</label>
+                    <label><input type="radio" name="gender"> Other</label>
+                </div>
+
+                <label>Year of Birth</label>
+                <input type="number">
+                
+                <label>Month of Birth</label>
+                <input type="number" min="1" max="12">
+                
+                <label>Day of Birth</label>
+                <input type="number" min="1" max="31">
+
+                <label>General Age Category</label>
+                <select>
+                    <option>12 or under</option>
+                    <option>12 - 15</option>
+                    <option>15 - 20</option>
+                    <option>20 - 30</option>
+                    <option>30 - 40</option>
+                    <option>40 - 50</option>
+                    <option>50 - 60</option>
+                    <option>60 - 70</option>
+                    <option>70 or older</option>
+                </select>
+
+                <label>Mother's Maiden Name</label>
+                <input type="text">
+            </form>
+        </div>
+
+        <div class="section">
+            <h3>Communications-Contact Data</h3>
+            <form>
+                <label>Additional Email Address #2</label>
+                <input type="email">
+                
+                <label>Additional Email Address #3</label>
+                <input type="email">
+                
+                <label>Phone Number #1</label>
+                <input type="text">
+
+                <div class="radio-group">
+                    <label><input type="radio" name="phone1"> Land-Line</label>
+                    <label><input type="radio" name="phone1"> Cell-Phone</label>
+                </div>
+
+                <label>Phone Number #2</label>
+                <input type="text">
+                
+                <label>Phone Number #3</label>
+                <input type="text">
+
+                <div class="radio-group">
+                    <label>Text-Messages Welcome?</label>
+                    <label><input type="radio" name="texts"> Are</label>
+                    <label><input type="radio" name="texts"> Are-Not</label>
+                </div>
+            </form>
+        </div>
+
+        <div class="section">
+            <h3>Social Media Links</h3>
+            <form>
+                <label>Facebook</label>
+                <input type="text">
+                
+                <label>X/Twitter</label>
+                <input type="text">
+                
+                <label>Telegram</label>
+                <input type="text">
+                
+                <label>Instagram</label>
+                <input type="text">
+                
+                <label>Discord</label>
+                <input type="text">
+                
+                <label>Other Links</label>
+                <textarea></textarea>
+
+                <div style="text-align: center; margin-top: 2rem;">
+                    <button type="submit" class="submit-btn" 
+                    style="width: auto; min-width: 200px;">
+                    Up-Date This Profile-Page.</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-bottom">
+            <p><u>Common-Law Republic, U.S.A.</u>; <u>Empowering Self-Governing Communities</u>.<br>
+                With the help of many others; this entire project, as presented thru this web-page,<br>
+                has been engineered, by: Charles Stewart, of Coleman Texas. ... Last up-dated: June-2025.</p>
+        </div>
+    </footer>
+    <script>
+/* ===== API helpers ===== */
+const API_BASE = (location.hostname === "localhost") ? "http://localhost:8081/api/v1" : "/api/v1";
+const alertBox = document.getElementById("alert");
+let profileExists = false;
+let original = {};
+
+function showMsg(msg, kind="success"){ alertBox.textContent = msg; alertBox.className = `helper ${kind}`; }
+function getToken(){ return localStorage.getItem("jwt") || ""; }
+async function api(path, {method="GET", body} = {}){
+  const res = await fetch(`${API_BASE}${path}`, {
+    method,
+    headers: {
+      "Accept": "application/json",
+      ...(method !== "GET" ? {"Content-Type": "application/json"} : {}),
+      "Authorization": `Bearer ${getToken()}`
+    },
+    body: body ? JSON.stringify(body) : undefined
+  });
+  if (res.status === 404) return { _404: true };
+  if (!res.ok){
+    const t = await res.text().catch(()=> "");
+    throw new Error(`${method} ${path} ${res.status} ${t}`);
+  }
+  const text = await res.text();
+  return text ? JSON.parse(text) : {};
+}
+
+/* ===== DOM utils ===== */
+const val = id => (document.getElementById(id)?.value || "").trim();
+const setVal = (id, v) => { const el = document.getElementById(id); if (el) el.value = v ?? ""; };
+function getRadio(name){
+  const el = document.querySelector(`input[name="${name}"]:checked`);
+  return el ? el.value : null;
+}
+function setRadio(name, value){
+  if (!value) return;
+  const el = document.querySelector(`input[name="${name}"][value="${value}"]`);
+  if (el) el.checked = true;
+}
+
+/* ===== mapping functions ===== */
+function buildBirthday(){
+  const y = val("birthYear"), m = val("birthMonth"), d = val("birthDay");
+  if (!y || !m || !d) return "";
+  const mm = String(Number(m)).padStart(2,"0");
+  const dd = String(Number(d)).padStart(2,"0");
+  return `${y}-${mm}-${dd}`;
+}
+function hydrateBirthday(iso){
+  if (!iso) return;
+  const [y,m,d] = iso.split("-");
+  setVal("birthYear", y || "");
+  setVal("birthMonth", (m||"").replace(/^0/,""));
+  setVal("birthDay", (d||"").replace(/^0/,""));
+}
+function fullNameFromForm(){
+  return [val("firstName"), val("middleName"), val("lastName")].filter(Boolean).join(" ");
+}
+function emailsArray(){
+  return [val("email2"), val("email3")].filter(Boolean);
+}
+
+/* ===== load identity + profile info ===== */
+async function loadIdentity(){
+  try{
+    const u = await api("/profile", { method:"GET" }); // from auth handler
+    if (!u._404){
+      setVal("username", u.username || "");
+      setVal("email", u.email || "");
+    }
+  }catch{ /* not fatal */ }
+}
+async function loadProfileInfo(){
+  const token = getToken();
+  if(!token){ showMsg("Not logged in. Please log in to view/edit your profile.", "error"); return; }
+  await loadIdentity();
+  try{
+    const p = await api("/profile/info", { method:"GET" });
+    if (p._404){
+      profileExists = false;
+      original = {};
+      showMsg("No profile info yet. Fill the form and save to create it.");
+      return;
+    }
+    profileExists = true;
+    original = p;
+    // map server → form
+    if (p.full_name){
+      const parts = String(p.full_name).split(" ");
+      setVal("firstName", parts[0] || "");
+      setVal("middleName", parts.length > 2 ? parts.slice(1,-1).join(" ") : "");
+      setVal("lastName", parts.length > 1 ? parts[parts.length-1] : "");
+    }
+    hydrateBirthday(p.birthday);
+    setRadio("gender", p.gender || null);
+    setVal("mothersMaidenName", p.mothers_maiden_name || "");
+    setVal("phone1", p.phone_number || "");
+    if (Array.isArray(p.additional_emails)){
+      setVal("email2", p.additional_emails[0] || "");
+      setVal("email3", p.additional_emails[1] || "");
+    }
+    showMsg("Profile info loaded.");
+  }catch(err){
+    console.error(err);
+    showMsg("Failed to load profile info.", "error");
+  }
+}
+document.addEventListener("DOMContentLoaded", loadProfileInfo);
+
+/* ===== submit create/update ===== */
+document.getElementById("profileInfoForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  try{
+    if (!profileExists){
+      const payload = {
+        full_name: fullNameFromForm() || null,
+        birthday: buildBirthday() || "",
+        gender: getRadio("gender"),
+        mothers_maiden_name: val("mothersMaidenName") || null,
+        phone_number: val("phone1") || null,
+        additional_emails: emailsArray()
+      };
+      const result = await api("/profile/info", { method:"POST", body: payload });
+      profileExists = true; original = result || {};
+      showMsg("Profile info created successfully.");
+    } else {
+      const next = {
+        full_name: fullNameFromForm() || null,
+        birthday: buildBirthday() || "",
+        gender: getRadio("gender"),
+        mothers_maiden_name: val("mothersMaidenName") || null,
+        phone_number: val("phone1") || null,
+        additional_emails: emailsArray()
+      };
+      const patch = {};
+      if ((next.full_name||null) !== (original.full_name||null)) patch.full_name = next.full_name;
+      if ((next.birthday||"") !== (original.birthday||"")) patch.birthday = next.birthday || null;
+      if ((next.gender||null) !== (original.gender||null)) patch.gender = next.gender || null;
+      if ((next.mothers_maiden_name||null) !== (original.mothers_maiden_name||null)) patch.mothers_maiden_name = next.mothers_maiden_name;
+      if ((next.phone_number||null) !== (original.phone_number||null)) patch.phone_number = next.phone_number;
+      const a = Array.isArray(next.additional_emails)?next.additional_emails:[], b = Array.isArray(original.additional_emails)?original.additional_emails:[];
+      const arraysEqual = (a.length===b.length) && a.every((v,i)=>v===b[i]);
+      if (!arraysEqual) patch.additional_emails = a;
+
+      if (Object.keys(patch).length === 0){ showMsg("No changes to save."); return; }
+
+      const result = await api("/profile/info", { method:"PUT", body: patch });
+      original = result || original;
+      showMsg("Profile info updated successfully.");
+    }
+    
+  }catch(err){
+    console.error(err);
+    showMsg("Save failed. Please review your entries and try again.", "error");
+  }
+});
+</script>
+</body>
+</html>

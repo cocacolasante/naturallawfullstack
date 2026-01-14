@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6-DNA-GeneticRacialBloodlines-Heritage-Profile</title>
+    <style>
+        /* Root Variables and Basic Reset */
+        :root {
+            --primary-dark: #000000;
+            --secondary-dark: #111111;
+            --tertiary-dark: #1a1a1a;
+            --accent-gold: #f5d442;
+            --accent-gold-hover: #ffe97f;
+            --text-light: #ffffcc;
+            --text-white: #fefefe;
+            --highlight-pink: #ff33e3;
+            --border-color: #444;
+            --shadow-color: rgba(255, 215, 0, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Base Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Times New Roman", Times, serif;
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+        }
+
+        a {
+            color: var(--accent-gold);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent-gold-hover);
+        }
+
+        /* Header Styles */
+        .main-header {
+            background-color: var(--primary-dark);
+            border-bottom: 2px solid var(--accent-gold);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .header-title {
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        .header-title h1 {
+            font-size: 2.7rem;
+            margin: 0;
+            color: #ffffff;
+        }
+
+        /* Navigation Styles */
+        .topnav {
+            background-color: var(--secondary-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            margin: 0 0.5rem;
+        }
+
+        .dropbtn {
+            background-color: transparent;
+            color: var(--accent-gold);
+            padding: 0.8rem 1.2rem;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .dropbtn:hover {
+            color: var(--accent-gold-hover);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--tertiary-dark);
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+            z-index: 1;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+        }
+
+        .dropdown-content a {
+            color: var(--text-light);
+            padding: 12px 16px;
+            display: block;
+            text-align: left;
+        }
+
+        .dropdown-content a:hover {
+            background-color: var(--secondary-dark);
+            color: var(--accent-gold);
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        /* Form Sections */
+        .section {
+            background-color: var(--secondary-dark);
+            margin: 1.5rem auto;
+            padding: 1.5rem;
+            max-width: 700px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px var(--shadow-color);
+            border: 1px solid var(--border-color);
+        }
+
+        .section h3 {
+            background-color: #333;
+            color: #ffec99;
+            padding: 0.6rem;
+            margin: -1.5rem -1.5rem 1.5rem -1.5rem;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            border-bottom: 2px solid #ffec99;
+        }
+
+        /* Heritage Grid Styles */
+        .heritage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .heritage-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background-color: var(--tertiary-dark);
+        }
+
+        .heritage-item label {
+            margin: 0;
+            flex: 1;
+            text-align: left;
+            padding-right: 1rem;
+        }
+
+        .heritage-item input {
+            width: 60px !important;
+            text-align: center;
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin: 1.5rem 0;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: var(--text-light);
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 80%;
+            padding: 0.5rem;
+            margin-top: 0.4rem;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background-color: var(--tertiary-dark);
+            color: var(--text-light);
+            text-align: center;
+        }
+
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .form-note {
+            background-color: var(--tertiary-dark);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            text-align: left;
+        }
+
+        /* Button Styles */
+        .submit-section {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        button {
+            background-color: var(--accent-gold);
+            color: var(--primary-dark);
+            border: none;
+            padding: 0.8rem 1.6rem;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        button:hover {
+            background-color: var(--accent-gold-hover);
+        }
+
+        /* Footer Styles */
+        footer {
+            margin-top: 4rem;
+            padding: 1rem;
+            background-color: var(--secondary-dark);
+            color: var(--text-light);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            .topnav {
+                flex-direction: column;
+            }
+
+            .dropdown {
+                width: 100%;
+                margin: 0;
+            }
+
+            .dropbtn {
+                width: 100%;
+                padding: 1rem;
+            }
+
+            .dropdown-content {
+                width: 100%;
+                position: relative;
+            }
+
+            .section {
+                margin: 1rem;
+                padding: 1rem;
+            }
+
+            .heritage-grid {
+                grid-template-columns: 1fr;
+            }
+
+            input[type="text"],
+            input[type="number"],
+            select,
+            textarea {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+
+~~~~
+
+<body>
+    <header class="main-header">
+        <div class="header-title">
+            <h1><u>Common-Law Republic</u>; <u>U.S.A.</u>.</h1>
+        </div>
+
+        <nav class="topnav">
+            <div class="dropdown">
+                <button class="dropbtn">Home</button>
+                <div class="dropdown-content">
+                    <a href="index.html">Main Page</a>
+                    <a href="#">CommonLaw-Republic Governing-Modal Explained</a>
+                    <a href="#">Political Voting & Elections Process Explained</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Register, or Log-In</button>
+                <div class="dropdown-content">
+                    <a href="registration.html">Register</a>
+                    <a href="#">Login</a>
+                    <a href="#">Profile</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Local Community Organizing</button>
+                <div class="dropdown-content">
+                    <a href="#">Local Communities</a>
+                    <a href="#">Members Directory</a>
+                    <a href="#">Events</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Private/Special/Religious Organizing</button>
+                <div class="dropdown-content">
+                    <a href="#">Religious Communities</a>
+                    <a href="#">Political Parties</a>
+                    <a href="#">Economics Research Communities</a>
+                    <a href="#">Trade Unions</a>
+                    <a href="#">Agriculture & Food-Production Communities</a>
+                    <a href="#">Environmental Activists</a>
+                    <a href="#">Health Activists</a>
+                    <a href="#">Conspiracy Research Communities</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Support</button>
+                <div class="dropdown-content">
+                    <a href="#">Help Center</a>
+                    <a href="#">Contact Us</a>
+                    <a href="#">FAQ</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <h2><u>Registration-Form</u>, <u>Section-4</u>;<br>
+            <u>Users DNA, Genetic, Racial, Blood-lines,<br>
+                & Ethnic Community-Heritage Profile Data</u>.</h2>
+
+        <div class="section">
+            <h3>Heritage Declaration</h3>
+            <form>
+                <div class="form-group">
+                    <label>This CLR-Account-User Solemnly Affirms, That,<br>
+the Largest Portion of His or Her Racial & Ethnic Blood-Lines Heritage, is:</label>
+                    <input type="text" name="primary_heritage" required>
+                </div>
+                <div class="form-note">
+                    <p>More specifically, & proceeding in good faith, 
+                        This User Affirms, that,<br> 
+His or Her Blood-Line Racial-Heritage, is, Roughly but fairly Accurately, 
+Reflected by the Numerical Percentage Entries Listed here-in below, as follows:</p>
+                </div>
+
+                <div class="heritage-grid">
+                    <div class="heritage-item">
+                        <label>African/Black:</label>
+                        <input type="number" min="0" max="100" name="african" placeholder="%">
+                    </div>
+                    <div class="heritage-item">
+                        <label>Arabian/Eastern-Mediterranean:</label>
+                        <input type="number" min="0" max="100" name="arabian" placeholder="%">
+                    </div>
+                    <div class="heritage-item">
+                        <label>Ashkenazi/Khazarian:</label>
+                        <input type="number" min="0" max="100" name="ashkenazi" placeholder="%">
+                    </div>
+                    <div class="heritage-item">
+                        <label>Central or South-American Native, Latino:</label>
+                        <input type="number" min="0" max="100" name="latino" placeholder="%">
+                    </div>
+                    <div class="heritage-item">
+                        <label>Chinese:</label>
+                        <input type="number" min="0" max="100" name="chinese" placeholder="%">
+                    </div>
+                    <div class="heritage-item">
+                        <label>English:</label>
+                        <input type="number" min="0" max="100" name="english" placeholder="%">
+                    </div>
+                    <div class="heritage-item">
+                        <label>Filipino:</label>
+                        <input type="number" min="0" max="100" name="filipino" placeholder="%">
+                    </div>
+                    <div class="heritage-item">
+                        <label>French:</label>
+                        <input type="number" min="0" max="100" name="french" placeholder="%">
+                    </div>
+                    <div class="heritage-item">
+                        <label>Germanic:</label>
+                        <input type="number" min="0" max="100" name="germanic" placeholder="%">
+                    </div>
+                    <div class="heritage-item">
+                        <label>Indian (South-Asian Indian):</label>
+                        <input type="number" min="0" max="100" name="indian" placeholder="%">
+                    </div>
+                    <div class="heritage-item">
+                        <label>Irish:</label>
+                        <input type="number" min="0" max="100" name="irish" placeholder="%">
+                    </div>
+                    <div class="heritage-item">
+                        <label>Italian:</label>
+                        <input type="number" min="0" max="100" name="italian" placeholder="%">
+                    </div>
+                    <div class="heritage-item">
+                        <label>Japanese:</label>
+                        <input type="number" min="0" max="100" name="japanese" placeholder="%">
+                    </div>
+                    <div class="heritage-item">
+                        <label>Korean:</label>
+                        <input type="number" min="0" max="100" name="korean" placeholder="%">
+                    </div>
+                    <div class="heritage-item">
+                        <label>North-American Native:</label>
+                        <input type="number" min="0" max="100" name="native_american" placeholder="%">
+                    </div>
+                    <div class="heritage-item">
+                        <label>Russian:</label>
+                        <input type="number" min="0" max="100" name="russian" placeholder="%">
+                    </div>
+                    <div class="heritage-item">
+                        <label>Scottish:</label>
+                        <input type="number" min="0" max="100" name="scottish" placeholder="%">
+                    </div>
+                    <div class="heritage-item">
+                        <label>Semitic:</label>
+                        <input type="number" min="0" max="100" name="semitic" placeholder="%">
+                    </div>
+                    <div class="heritage-item">
+                        <label>Sephardic:</label>
+                        <input type="number" min="0" max="100" name="sephardic" placeholder="%">
+                    </div>
+                    <div class="heritage-item">
+                        <label>Spanish:</label>
+                        <input type="number" min="0" max="100" name="spanish" placeholder="%">
+                    </div>
+                    <div class="heritage-item">
+                        <label>Z-Other:</label>
+                        <input type="number" min="0" max="100" name="other" placeholder="%">
+                    </div>
+                </div>
+
+                <div class="form-note">
+                    <p>(This list is constantly expanding; please submit suggestions for new categories.)</p>
+                </div>
+
+                <div class="form-group">
+                    <label>DNA Test Results & Additional Information (Web Links):</label>
+                    <textarea name="dna_links" rows="3" placeholder="Enter relevant web links here"></textarea>
+                </div>
+
+            <div style="text-align: center; margin-top: 2rem;">
+                <button type="submit" class="submit-btn" 
+                style="width: auto; min-width: 200px;">Up-
+                Date This Profile-Page.</button>
+</div>
+
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-bottom">
+            <p><u>Common-Law Republic, U.S.A.</u>; <u>Empowering Self-Governing Communities</u>.<br>
+                With the help of many others; this entire project, as presented thru this web-page,<br>
+                has been engineered, by: Charles Stewart, of Coleman Texas. ... Last up-dated: June-2025.</p>
+        </div>
+    </footer>
+    <script>
+(() => {
+  // ===== Config =====
+  const API_BASE = (document.body.dataset.apiBase || '').replace(/\/+$/, '') || '/api/v1';
+  const ENDPOINT = `${API_BASE}/profile/heritage`; // update if your backend differs
+
+  // ===== Helpers =====
+  const $ = (sel, root = document) => root.querySelector(sel);
+  const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+
+  function getAuthToken() {
+    return (
+      localStorage.getItem('authToken') ||
+      localStorage.getItem('token') ||
+      localStorage.getItem('jwt') ||
+      ''
+    );
+  }
+
+  async function authedFetch(url, options = {}) {
+    const token = getAuthToken();
+    if (!token) throw new Error('No auth token found (authToken/token/jwt in localStorage).');
+    const headers = new Headers(options.headers || {});
+    if (!(options.body instanceof FormData)) headers.set('Content-Type', 'application/json');
+    headers.set('Authorization', `Bearer ${token}`);
+    return fetch(url, { ...options, headers });
+  }
+
+  function toast(msg, isError = false) {
+    let el = document.getElementById('heritage-toast');
+    if (!el) {
+      el = document.createElement('div');
+      el.id = 'heritage-toast';
+      Object.assign(el.style, {
+        position: 'fixed', left: '50%', top: '20px', transform: 'translateX(-50%)',
+        zIndex: 99999, padding: '10px 14px', borderRadius: '8px',
+        boxShadow: '0 2px 8px rgba(0,0,0,.4)', fontWeight: 'bold', color: '#fff'
+      });
+      document.body.appendChild(el);
+    }
+    el.textContent = msg;
+    el.style.background = isError ? '#7a1f1f' : '#2a4';
+    clearTimeout(el._t);
+    el.style.display = 'block';
+    el._t = setTimeout(() => (el.style.display = 'none'), 4000);
+  }
+
+  // ===== Domain =====
+  // All number inputs we expect to capture (names must match your form)
+  const COMPONENT_KEYS = [
+    'african','arabian','ashkenazi','latino','chinese','english','filipino','french',
+    'germanic','indian','irish','italian','japanese','korean','native_american','russian',
+    'scottish','semitic','sephardic','spanish','other'
+  ];
+
+  function parseNumber(v) {
+    if (v == null || v === '') return null;
+    const n = Number(v);
+    return Number.isFinite(n) ? n : null;
+  }
+
+  function collectPayload() {
+    const primary_heritage = ($('input[name="primary_heritage"]')?.value || '').trim();
+
+    // Build components map
+    const components = {};
+    let total = 0;
+    COMPONENT_KEYS.forEach(k => {
+      const input = $(`input[name="${k}"]`);
+      const n = input ? parseNumber(input.value) : null;
+      if (n != null) {
+        components[k] = n;
+        total += n;
+      }
+    });
+
+    // Links: split by newline/commas/spaces, keep basic URLs/strings
+    const rawLinks = ($('textarea[name="dna_links"]')?.value || '').trim();
+    const dna_links = rawLinks
+      ? rawLinks
+          .split(/[\n,]+/).map(s => s.trim()).filter(Boolean)
+      : [];
+
+    return { primary_heritage, components, dna_links, components_total: total };
+  }
+
+  function validate(payload) {
+    // Basic checks
+    if (!payload.primary_heritage) {
+      return 'Please enter your primary heritage.';
+    }
+    // Percentages must be between 0 and 100 each
+    for (const [k, v] of Object.entries(payload.components || {})) {
+      if (v < 0 || v > 100) return `Value for "${k}" must be between 0 and 100.`;
+    }
+    // Warn if total > 100; block submission
+    if (payload.components_total > 100) {
+      return `The sum of percentages (${payload.components_total}%) exceeds 100. Please adjust.`;
+    }
+    return null;
+  }
+
+  function prefillForm(api) {
+    if (!api || typeof api !== 'object') return;
+
+    if (api.primary_heritage && $('input[name="primary_heritage"]')) {
+      $('input[name="primary_heritage"]').value = api.primary_heritage;
+    }
+
+    const comps = api.components || {};
+    COMPONENT_KEYS.forEach(k => {
+      const el = $(`input[name="${k}"]`);
+      if (el && comps[k] != null) el.value = comps[k];
+    });
+
+    if (Array.isArray(api.dna_links) && $('textarea[name="dna_links"]')) {
+      $('textarea[name="dna_links"]').value = api.dna_links.join('\n');
+    }
+  }
+
+  async function safeJson(res) {
+    try { return await res.json(); } catch { return null; }
+  }
+
+  async function loadExisting() {
+    try {
+      const res = await authedFetch(ENDPOINT, { method: 'GET' });
+      if (res.status === 404) return; // nothing saved yet
+      if (!res.ok) return;
+      const data = await res.json();
+      prefillForm(data);
+    } catch (e) {
+      if (/No auth token/i.test(String(e?.message))) toast(e.message, true);
+    }
+  }
+
+  async function submitHandler(e) {
+    e.preventDefault();
+    const payload = collectPayload();
+    const err = validate(payload);
+    if (err) {
+      toast(err, true);
+      return;
+    }
+
+    try {
+      // Try update first
+      let res = await authedFetch(ENDPOINT, {
+        method: 'PUT',
+        body: JSON.stringify({
+          primary_heritage: payload.primary_heritage,
+          components: payload.components,
+          dna_links: payload.dna_links
+        })
+      });
+
+      if (res.status === 404) {
+        // Create if none exists
+        res = await authedFetch(ENDPOINT, {
+          method: 'POST',
+          body: JSON.stringify({
+            primary_heritage: payload.primary_heritage,
+            components: payload.components,
+            dna_links: payload.dna_links
+          })
+        });
+      }
+
+      if (res.status === 401) {
+        toast('Unauthorized. Please log in again.', true);
+        return;
+      }
+
+      if (!res.ok) {
+        const j = await safeJson(res);
+        throw new Error(j?.error || `Request failed (${res.status})`);
+      }
+
+      toast('Heritage profile saved.');
+    } catch (e) {
+      toast(`Save failed: ${e.message}`, true);
+    }
+  }
+
+  // Wire up
+  const form = document.querySelector('main form') || document.querySelector('form');
+  if (!form) return;
+  form.addEventListener('submit', submitHandler);
+  loadExisting();
+})();
+</script>
+
+</body>
+</html>

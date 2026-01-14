@@ -1,0 +1,26 @@
+# Logs
+logs/*.log
+logs/*.pid
+
+# OS files
+.DS_Store
+*.swp
+*.swo
+*~
+
+# Editor files
+.vscode/
+.idea/
+*.iml
+
+# Build artifacts
+naturallawvoting/voting-api
+naturallawvoting/coverage.out
+
+# Node modules (if accidentally added at root)
+node_modules/
+
+# Environment files
+.env
+.env.local
+.env.*.local

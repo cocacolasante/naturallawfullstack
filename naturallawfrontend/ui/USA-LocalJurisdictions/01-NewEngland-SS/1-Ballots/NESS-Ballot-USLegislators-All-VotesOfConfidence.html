@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ballot-VoteOfConfidence-USLegislators-NewEnglandSSCLR</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* Navigation Dropdown Styles */
+        .topnav {
+            background-color: #111111;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .dropdown { position: relative; display: inline-block; margin: 0 0.5rem; }
+        .dropbtn {
+            background-color: transparent;
+            color: #f5d442;
+            padding: 0.8rem 1.2rem;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .dropbtn:hover { color: #ffe97f; }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #1a1a1a;
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+            z-index: 1;
+            border: 1px solid #444;
+            border-radius: 4px;
+        }
+        .dropdown-content a {
+            color: #ffffcc;
+            padding: 14px 18px;
+            display: block;
+            text-align: left;
+            font-size: 1.05rem;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .dropdown-content .long-item {
+            white-space: normal;
+            line-height: 1.2;
+            padding: 10px 18px;
+        }
+        .dropdown-content a:hover {
+            background-color: #111111;
+            color: #f5d442;
+        }
+        .dropdown:hover .dropdown-content { display: block; }
+
+        /* Form Input Styles */
+        .vote-input {
+            width: 70px;
+            text-align: center;
+            padding: 0.5rem;
+            border: 1px solid #444;
+            border-radius: 4px;
+            background-color: #000000;
+            color: #ffffcc;
+            font-size: 1.1rem;
+        }
+
+        /* Submit Button Styles */
+        .submit-section button {
+            background-color: #f5d442;
+            color: #000000;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+        .submit-section button:hover {
+            background-color: #ffe97f;
+            transform: scale(1.02);
+        }
+
+        /* Mobile Responsive */
+        @media screen and (max-width: 768px) {
+            .topnav { flex-direction: column; padding: 0; }
+            .dropdown { width: 100%; margin: 0; }
+            .dropbtn { width: 100%; padding: 1rem; font-size: 1.05rem; }
+            .dropdown-content { width: 100%; position: relative; }
+            .vote-input { width: 50px; font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body style="margin: 0; padding: 0; font-family: 'Times New Roman', Times, serif; background-color: #000000; color: #ffffcc; line-height: 1.6; font-size: 1.38rem;">
+    <header style="background-color: #000000; border-bottom: 2px solid #f5d442; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);">
+        <div style="text-align: center; padding: 1rem 0;">
+            <h1 style="font-size: 3.2rem; margin: 0; color: #ffffff;"><u>Common-Law Republic</u>; <u>U.S.A.</u>.</h1>
+        </div>
+        <nav class="topnav">
+            <div class="dropdown">
+                <button class="dropbtn">Home Page.</button>
+                <div class="dropdown-content">
+                    <a href="../../index.html">Home Page.</a>
+                    <a href="../../Z-ReferenceDocuments/BriefGuidelines-PreferentialVotingBallot-Generic-Edit3.pdf">Using Ballots; Instructions.</a>
+                    <a href="../../Z-ReferenceDocuments/OrganicHierarchiesUSA-V4.2.pdf">Social-Organizing Under Constitutional "Organic Hierarchies".</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Register; or: Log-In.</button>
+                <div class="dropdown-content">
+                    <a href="../../Accounts-Profiles-Registering/NewUsers-Registration.html">Register</a>
+                    <a href="../../Accounts-Profiles-Registering/Login.html">Login</a>
+                    <a href="../../Accounts-Profiles-Registering/AccountProfiles-Management-Index.html">AccountProfiles-Management-Index</a>
+                    <a href="../../Accounts-Profiles-Registering/Subscribe-EmailList.html">Subscribe To Email-List</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">National Civil-Government; Political-Activism.</button>
+                <div class="dropdown-content">
+                    <a href="../../USA-GoverningBodies/Executive-Department-SubDepartments-Agencies/ExcDpt-SubDepartments&Agencies-Listed.html">Executive-Department;<br>Sub-Departments, & Agencies.</a>
+                    <a href="../../USA-GoverningBodies/JudicialDepartment/JudicialIndex.html">Judicial-Department.</a>
+                    <a href="../../USA-GoverningBodies/Legislature-HouseReps/Leg-HRepsIndex.html">Legislature: House Representatives.</a>
+                    <a href="../../USA-GoverningBodies/Legislature-Senate/Leg-Senate.html">Legislature; Senate.</a> 
+                    <a href="../../USA-GoverningBodies/Ballots-Index.html"><u>Ballots</u>.</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Local Civil-Governments; Political-Activism.</button>
+                <div class="dropdown-content" style="text-align:center;">
+                    <a href="../../USA-LocalJurisdictions/01-NewEngland-SS/NewEngland-SS.html" value="usa-01">01: New-England</a>
+                    <a href="../../USA-LocalJurisdictions/02-NewYork-SS/NewYork-SS.html" value="usa-02">02: New-York</a>
+                    <a href="../../USA-LocalJurisdictions/03-Jersey-Penn-SS/JerseyPenn-SS.html" value="usa-03">03: Jersey-Penn</a>
+                    <a href="../../USA-LocalJurisdictions/04-GreatLakes-SS/GreatLakes-SS.html" value="usa-04">04: Great-Lakes</a>
+                    <a href="../../USA-LocalJurisdictions/05-VirginiaCarolina-SS/Virginia-Carolina-SS.html" value="usa-05">05: Virginia-Carolina</a>
+                    <a href="../../USA-LocalJurisdictions/06-FloridaGeorgia-SS/FloridaGeorgia-SS.html" value="usa-07">06: Florida-Georgia</a>
+                    <a href="../../USA-LocalJurisdictions/07-MississippiValley-SS/MississippiValley-SS.html" value="usa-06">07: Mississippi-Valley</a>
+                    <a href="../../USA-LocalJurisdictions/08-NorthCentralPlains-SS/NorthCentralPlains-SS.html" value="usa-08">08: NorthCentral-Plains</a>
+                    <a href="../../USA-LocalJurisdictions/09-Texas-SS/Texas-SS.html" value="usa-09">09: Texas</a>
+                    <a href="../../USA-LocalJurisdictions/10-SouthWest-SS/SouthWest-SS.html" value="usa-10">10: South-West</a>
+                    <a href="../../USA-LocalJurisdictions/11-PacificNW-SS/PacificNW-SS.html" value="usa-11">11: Pacific-NW</a>
+                    <a href="../../USA-LocalJurisdictions/12-California-SS/California-SS.html" value="usa-12">12: California</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">EveryThing Else:</button>
+                <div class="dropdown-content">
+                    <a href="../../EveryThing-Else/1-Political-Parties/PoliticalParties.html">Political Parties.</a>
+                    <a href="../../EveryThing-Else/2-Religous-&-Spiritual-Communities/SpiritualIndex.html">Religious & Spiritual Communities.</a>
+                    <a href="../../EveryThing-Else/3-Business&Financial-Communities&Corporations/Biz&Finances.html">Business & Financial Communities & Corporations.</a>
+                    <a href="../../EveryThing-Else/4-DNA-Genetic-Racial-Communities/GeneticCommunities.html">DNA, Genetic, Racial, Communities.</a>
+                    <a href="../../EveryThing-Else/5-World-Communities-OutsideOfUSA/World-Communities-Index.html">World-Communities.</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Support.</button>
+                <div class="dropdown-content">
+                    <a href="../../Support/Support.html">Support-Help-Contacts</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    <main style="max-width: 1200px; margin: 0 auto; padding: 2rem 1rem 1rem 1rem; text-align: center;">
+        <h2 style="color: #f5d442; text-align: center; font-size: 2.35rem; margin-bottom: 0.5rem;"><u>CLR-Super-State</u>, of: <u>New-England</u>:<br> 
+        <u>Ballot</u>: <u>Votes-of-Confidence Listing</u>; <u>US-Legislators</u>.</h2>
+        
+        <div style="background-color: #1a1a1a; padding: 1.5rem; margin: 2rem auto; border-radius: 8px; text-align: center; line-height: 1.4; font-size: 1.4rem; max-width: 800px;">
+            <h3 style="color: #f5d442; margin-bottom: 1rem; font-size: 2.5rem;"><u>Instructions</u>:</h3>
+            <p style="font-size: 1.4rem; margin-bottom: 0.8rem;"><u>Registered Users in our Common-Law Republic Community should</u>:<br>
+            <u>Insert Numbers Closer to 100 for Preferred Candidates</u>; &:<br>
+            <u>Insert Numbers Closer to Zero for Opposed Candidates</u>.</p>
+            <p style="font-size: 1.4rem; margin-bottom: 0;">(More detailed instructions are available under<br> 
+                the "Home" Tab; under our main CLR web-page here.)</p>
+        </div>
+        
+        <div style="background-color: #111111; margin: 2rem auto; padding: 2rem 1rem; border-radius: 12px; box-shadow: 0 4px 10px rgba(255, 215, 0, 0.2); border: 6px solid #444; max-width: 1000px;">
+            <div style="background-color: #1a1a1a; color: #f5d442; padding: 1rem; margin: -2rem -1rem 2rem -1rem; border-top-left-radius: 12px; border-top-right-radius: 12px; border-bottom: 1px solid #ff4444; text-align: center;">
+                <h4 style="font-size: 1.8rem; margin: 0;"><u>New-England's Present Delegates</u> To:<br>
+                <u>USA Civil-Government Congressional-Offices</u>, <u>Listed As Follows</u>:</h4>
+            </div>
+            
+            <form id="ballot-form" method="POST" action="/submit-ballot">
+                <table style="width: 100%; border-collapse: collapse; margin: 1rem 0;">
+                    <thead>
+                        <tr>
+                            <th style="background-color: #1a1a1a; color: #f5d442; padding: 12px 8px; text-align: center; font-weight: bold; font-size: 1.3rem; border-bottom: 1px solid #ff4444; width: 20%;">Ranked-Vote</th>
+                            <th style="background-color: #1a1a1a; color: #f5d442; padding: 12px 8px; text-align: center; font-weight: bold; font-size: 1.3rem; border-bottom: 1px solid #ff4444; width: 30%;">Name</th>
+                            <th style="background-color: #1a1a1a; color: #f5d442; padding: 12px 8px; text-align: center; font-weight: bold; font-size: 1.3rem; border-bottom: 1px solid #ff4444; width: 15%;">Party</th>
+                            <th style="background-color: #1a1a1a; color: #f5d442; padding: 12px 8px; text-align: center; font-weight: bold; font-size: 1.3rem; border-bottom: 1px solid #ff4444; width: 35%;">Web-Pages</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <!-- Vermont -->
+                        <tr><td colspan="4" style="height: 1px; background: 
+linear-gradient(to right, transparent 50%, #DC143C 50%, #DC143C 50%, transparent 50%); 
+padding: 0; border: none; line-height: 0;"></td></tr>
+
+                        <tr><td colspan="4" style="background: transparent; font-weight: 400; 
+text-align: left; font-size: 1.4em; color: #DC143C; padding: 12px 8px;"><u>Vermont</u></td></tr>
+
+                        <tr><td colspan="4" style="height: 1px; background: 
+linear-gradient(to right, transparent 30%, #FFD700 30%, #FFD700 70%, transparent 70%); 
+padding: 0; border: none; line-height: 0;"></td></tr>
+
+                        <tr>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+<input type="number" min="0" max="100" class="vote-input" id="balint-vote" name="balint-vote"></td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+<span style="font-weight: bold; color: #f5d442;"><u>Becca Balint</u><br><small>(House District 1)</small></span></td>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;"><span style="color: #f5d442;">Democrat</span></td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <a href="https://balint.house.gov/" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">House.Gov/Balint</a><br>
+                                <a href="https://en.wikipedia.org/wiki/Becca_Balint" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">Wikipedia.Org/Balint</a><br>
+                                <a href="https://www.govtrack.us/congress/members/becca_balint/456948" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">GovTrack.Us/Balint</a>
+                            </td>
+                        </tr>
+                        
+                        <!-- Red Separator -->
+                        <tr><td colspan="4" style="height: 1px; background: 
+linear-gradient(to right, transparent 35%, #DC143C 35%, #DC143C 65%, transparent 65%); 
+padding: 0; border: none; line-height: 0;"></td></tr>
+                        
+                        <tr>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;"><input type="number" min="0" max="100" class="vote-input" id="sanders-vote" name="sanders-vote"></td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;"><span style="font-weight: bold; color: #f5d442;"><u>Bernie Sanders</u><br><small>(Senator)</small></span></td>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;"><span style="color: #f5d442;">Independent</span></td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <a href="https://sanders.senate.gov/" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">Sanders.Senate.Gov</a><br>
+                                <a href="https://en.wikipedia.org/wiki/Bernie_Sanders" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">Wikipedia/Sanders</a><br>
+                                <a href="https://www.govtrack.us/congress/members/bernard_sanders/400357" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">GovTrack.Us/Sanders</a>
+                            </td>
+                        </tr>
+                        
+                        <!-- Yellow Separator -->
+                            <tr><td colspan="4" style="height: 1px; background: 
+linear-gradient(to right, transparent 38%, #FFD700 38%, #FFD700 62%, transparent 62%); 
+padding: 0; border: none; line-height: 0;"></td></tr>
+                        
+                        <tr>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;"><input type="number" min="0" max="100" class="vote-input" id="welch-vote" name="welch-vote"></td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;"><span style="font-weight: bold; color: #f5d442;"><u>Peter Welch</u><br><small>(Senator)</small></span></td>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;"><span style="color: #f5d442;">Democrat</span></td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <a href="https://welch.senate.gov/" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">Welch.Senate.Gov</a><br>
+                                <a href="https://en.wikipedia.org/wiki/Peter_Welch" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">Wikipedia/Welch</a><br>
+                                <a href="https://www.govtrack.us/congress/members/peter_welch/412239" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">GovTrack.Us/Welch</a>
+                            </td>
+                        </tr>
+
+                        <!-- Rhode Island -->
+                        <tr><td colspan="4" style="background: transparent; font-weight: 400; 
+text-align: left; font-size: 1.4em; color: #DC143C; padding: 12px 8px; border-top: 1px 
+solid #DC143C; border-bottom: 1px solid #FFD700;"><u>Rhode Island</u></td></tr>
+
+                        <tr>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <input type="number" min="0" max="100" class="vote-input" id="amo-vote" name="amo-vote">
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <span style="font-weight: bold; color: #f5d442;"><u>Gabe Amo</u><br><small>(House District 1)</small></span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <span style="color: #f5d442;">Democrat</span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <a href="https://amo.house.gov/" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">Amo.House.Gov</a><br>
+                                <a href="https://www.govtrack.us/congress/members/gabe_amo/456955" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">GovTrack.Us/Amo</a>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="4" style="height: 1px; background: linear-gradient(to right, transparent 25%, #FFD700 25%, #FFD700 75%, transparent 75%); padding: 0; border: none; line-height: 0;"></td>
+                        </tr>
+
+                        <tr>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <input type="number" min="0" max="100" class="vote-input" id="magaziner-vote" name="magaziner-vote">
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <span style="font-weight: bold; color: #f5d442;"><u>Seth Magaziner</u><br><small>(House District 2)</small></span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <span style="color: #f5d442;">Democrat</span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <a href="https://magaziner.house.gov/" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">Magaziner.House.Gov</a><br>
+                                <a href="https://www.govtrack.us/congress/members/seth_magaziner/456937" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">GovTrack.Us/Magaziner</a>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="4" style="height: 2px; background: linear-gradient(to right, transparent 25%, #DC143C 25%, #DC143C 75%, transparent 75%); padding: 0; border: none; line-height: 0;"></td>
+                        </tr>
+
+                        <tr>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <input type="number" min="0" max="100" class="vote-input" id="reed-vote" name="reed-vote">
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <span style="font-weight: bold; color: #f5d442;"><u>Jack Reed</u><br><small>(Senator)</small></span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <span style="color: #f5d442;">Democrat</span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <a href="https://reed.senate.gov/" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">Reed.Senate.Gov</a><br>
+                                <a href="https://en.wikipedia.org/wiki/Jack_Reed_(Rhode_Island_politician)" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">Wikipedia/Reed</a><br>
+                                <a href="https://www.govtrack.us/congress/members/john_reed/300081" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">GovTrack.Us/Reed</a>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="4" style="height: 1px; background: linear-gradient(to right, transparent 25%, #FFD700 25%, #FFD700 75%, transparent 75%); padding: 0; border: none; line-height: 0;"></td>
+                        </tr>
+
+                        <tr>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <input type="number" min="0" max="100" class="vote-input" id="whitehouse-vote" name="whitehouse-vote">
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <span style="font-weight: bold; color: #f5d442;"><u>Sheldon Whitehouse</u><br><small>(Senator)</small></span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <span style="color: #f5d442;">Democrat</span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <a href="https://whitehouse.senate.gov/" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">Whitehouse.Senate.Gov</a><br>
+                                <a href="https://en.wikipedia.org/wiki/Sheldon_Whitehouse" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">Wikipedia/Whitehouse</a><br>
+                                <a href="https://www.govtrack.us/congress/members/sheldon_whitehouse/412247" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">GovTrack.Us/Whitehouse</a>
+                            </td>
+                        </tr>
+
+                        <!-- Maine -->
+                        <tr>
+                            <td colspan="4" style="background: transparent; font-weight: 400; text-align: left; font-size: 1.4em; color: #DC143C; padding: 12px 8px; border-top: 1px solid #DC143C; border-bottom: 1px solid #FFD700;"><u>Maine</u></td>
+                        </tr>
+
+                        <tr>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <input type="number" min="0" max="100" class="vote-input" id="pingree-vote" name="pingree-vote">
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <span style="font-weight: bold; color: #f5d442;"><u>Chellie Pingree</u><br><small>(House District 1)</small></span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <span style="color: #f5d442;">Democrat</span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <a href="https://pingree.house.gov/" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">Pingree.House.Gov</a><br>
+                                <a href="https://www.govtrack.us/congress/members/chellie_pingree/412307" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">GovTrack.Us/Pingree</a><br>
+                                <a href="https://www.opensecrets.org/members-of-congress/chellie-pingree/summary?cid=N00013817&cycle=2024" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">OpenSecrets.Org/Pingree</a>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="4" style="height: 1px; background: linear-gradient(to right, transparent 25%, #FFD700 25%, #FFD700 75%, transparent 75%); padding: 0; border: none; line-height: 0;"></td>
+                        </tr>
+
+                        <tr>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <input type="number" min="0" max="100" class="vote-input" id="golden-vote" name="golden-vote">
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <span style="font-weight: bold; color: #f5d442;"><u>Jared Golden</u><br><small>(House District 2)</small></span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <span style="color: #f5d442;">Democrat</span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <a href="https://golden.house.gov/" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">Golden.House.Gov</a><br>
+                                <a href="https://www.govtrack.us/congress/members/jared_golden/412842" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">GovTrack.Us/Golden</a>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="4" style="height: 2px; background: linear-gradient(to right, transparent 25%, #DC143C 25%, #DC143C 75%, transparent 75%); padding: 0; border: none; line-height: 0;"></td>
+                        </tr>
+
+                        <tr>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <input type="number" min="0" max="100" class="vote-input" id="collins-vote" name="collins-vote">
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <span style="font-weight: bold; color: #f5d442;"><u>Susan Collins</u><br><small>(Senator)</small></span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <span style="color: #f5d442;">Republican</span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <a href="https://collins.senate.gov/" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">Collins.Senate.Gov</a><br>
+                                <a href="https://en.wikipedia.org/wiki/Susan_Collins" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">Wikipedia/Collins</a><br>
+                                <a href="https://www.govtrack.us/congress/members/susan_collins/300025" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">GovTrack.Us/Collins</a>
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td colspan="4" style="height: 1px; background: linear-gradient(to right, transparent 25%, #FFD700 25%, #FFD700 75%, transparent 75%); padding: 0; border: none; line-height: 0;"></td>
+                        </tr>
+                        
+                        <tr>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <input type="number" min="0" max="100" class="vote-input" id="king-vote" name="king-vote">
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <span style="font-weight: bold; color: #f5d442;"><u>Angus King</u><br><small>(Senator)</small></span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <span style="color: #f5d442;">Independent</span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <a href="https://king.senate.gov/" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">King.Senate.Gov</a><br>
+                                <a href="https://en.wikipedia.org/wiki/Angus_King" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">Wikipedia/King</a><br>
+                                <a href="https://www.govtrack.us/congress/members/angus_king/412545" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">GovTrack.Us/King</a>
+                            </td>
+                        </tr>
+
+                        <!-- New Hampshire -->
+                        <tr>
+                            <td colspan="4" style="background: transparent; font-weight: 400; text-align: left; font-size: 1.4em; color: #DC143C; padding: 12px 8px; border-top: 1px solid #DC143C; border-bottom: 1px solid #FFD700;"><u>New Hampshire</u></td>
+                        </tr>
+
+                        <tr>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <input type="number" min="0" max="100" class="vote-input" id="pappas-vote" name="pappas-vote">
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <span style="font-weight: bold; color: #f5d442;"><u>Chris Pappas</u><br><small>(House District 1)</small></span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <span style="color: #f5d442;">Democrat</span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <a href="https://pappas.house.gov/" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">Pappas.House.Gov</a><br>
+                                <a href="https://www.govtrack.us/congress/members/chris_pappas/412795" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">GovTrack.Us/Pappas</a>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="4" style="height: 1px; background: linear-gradient(to right, transparent 25%, #FFD700 25%, #FFD700 75%, transparent 75%); padding: 0; border: none; line-height: 0;"></td>
+                        </tr>
+
+                        <tr>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <input type="number" min="0" max="100" class="vote-input" id="goodlander-vote" name="goodlander-vote">
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <span style="font-weight: bold; color: #f5d442;"><u>Maggie Goodlander</u><br><small>(House District 2)</small></span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <span style="color: #f5d442;">Democrat</span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <a href="https://goodlander.house.gov/" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">Goodlander.House.Gov</a><br>
+                                <a href="https://www.govtrack.us/congress/members/maggie_goodlander/457007" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">GovTrack.Us/Goodlander</a>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="4" style="height: 2px; background: linear-gradient(to right, transparent 25%, #DC143C 25%, #DC143C 75%, transparent 75%); padding: 0; border: none; line-height: 0;"></td>
+                        </tr>
+
+                        <tr>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <input type="number" min="0" max="100" class="vote-input" id="shaheen-vote" name="shaheen-vote">
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <span style="font-weight: bold; color: #f5d442;"><u>Jeanne Shaheen</u><br><small>(Senator)</small></span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <span style="color: #f5d442;">Democrat</span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <a href="https://shaheen.senate.gov/" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">Shaheen.Senate.Gov</a><br>
+                                <a href="https://en.wikipedia.org/wiki/Jeanne_Shaheen" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">Wikipedia/Shaheen</a><br>
+                                <a href="https://www.govtrack.us/congress/members/jeanne_shaheen/412323" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">GovTrack.Us/Shaheen</a>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="4" style="height: 1px; background: linear-gradient(to right, transparent 25%, #FFD700 25%, #FFD700 75%, transparent 75%); padding: 0; border: none; line-height: 0;"></td>
+                        </tr>
+
+                        <tr>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <input type="number" min="0" max="100" class="vote-input" id="hassan-vote" name="hassan-vote">
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <span style="font-weight: bold; color: #f5d442;"><u>Maggie Hassan</u><br><small>(Senator)</small></span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <span style="color: #f5d442;">Democrat</span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <a href="https://hassan.senate.gov/" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">Hassan.Senate.Gov</a><br>
+                                <a href="https://en.wikipedia.org/wiki/Maggie_Hassan" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">Wikipedia/Hassan</a><br>
+                                <a href="https://www.govtrack.us/congress/members/margaret_hassan/412678" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">GovTrack.Us/Hassan</a>
+                            </td>
+                        </tr>
+
+                        <!-- Connecticut -->
+                        <tr>
+                            <td colspan="4" style="background: transparent; font-weight: 400; text-align: left; font-size: 1.4em; color: #DC143C; padding: 12px 8px; border-top: 1px solid #DC143C; border-bottom: 1px solid #FFD700;"><u>Connecticut</u></td>
+                        </tr>
+
+                        <tr>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <input type="number" min="0" max="100" class="vote-input" id="larson-vote" name="larson-vote">
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <span style="font-weight: bold; color: #f5d442;"><u>John Larson</u><br><small>(House District 1)</small></span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <span style="color: #f5d442;">Democrat</span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <a href="https://larson.house.gov/" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">Larson.House.Gov</a><br>
+                                <a href="https://www.govtrack.us/congress/members/john_larson/400227" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">GovTrack.Us/Larson</a>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="4" style="height: 1px; background: linear-gradient(to right, transparent 25%, #FFD700 25%, #FFD700 75%, transparent 75%); padding: 0; border: none; line-height: 0;"></td>
+                        </tr>
+
+                        <tr>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <input type="number" min="0" max="100" class="vote-input" id="courtney-vote" name="courtney-vote">
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <span style="font-weight: bold; color: #f5d442;"><u>Joe Courtney</u><br><small>(House District 2)</small></span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <span style="color: #f5d442;">Democrat</span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <a href="https://courtney.house.gov/" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">Courtney.House.Gov</a><br>
+                                <a href="https://www.govtrack.us/congress/members/joe_courtney/412193" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">GovTrack.Us/Courtney</a>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="4" style="height: 1px; background: linear-gradient(to right, transparent 25%, #FFD700 25%, #FFD700 75%, transparent 75%); padding: 0; border: none; line-height: 0;"></td>
+                        </tr>
+
+                        <tr>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <input type="number" min="0" max="100" class="vote-input" id="delauro-vote" name="delauro-vote">
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <span style="font-weight: bold; color: #f5d442;"><u>Rosa DeLauro</u><br><small>(House District 3)</small></span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <span style="color: #f5d442;">Democrat</span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <a href="https://delauro.house.gov/" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">DeLauro.House.Gov</a><br>
+                                <a href="https://www.govtrack.us/congress/members/rosa_delauro/400103" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">GovTrack.Us/DeLauro</a>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="4" style="height: 1px; background: linear-gradient(to right, transparent 25%, #FFD700 25%, #FFD700 75%, transparent 75%); padding: 0; border: none; line-height: 0;"></td>
+                        </tr>
+
+                        <tr>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <input type="number" min="0" max="100" class="vote-input" id="himes-vote" name="himes-vote">
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <span style="font-weight: bold; color: #f5d442;"><u>Jim Himes</u><br><small>(House District 4)</small></span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <span style="color: #f5d442;">Democrat</span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <a href="https://himes.house.gov/" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">Himes.House.Gov</a><br>
+                                <a href="https://www.govtrack.us/congress/members/james_himes/412282" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">GovTrack.Us/Himes</a>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="4" style="height: 1px; background: linear-gradient(to right, transparent 25%, #FFD700 25%, #FFD700 75%, transparent 75%); padding: 0; border: none; line-height: 0;"></td>
+                        </tr>
+
+                        <tr>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <input type="number" min="0" max="100" class="vote-input" id="hayes-vote" name="hayes-vote">
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <span style="font-weight: bold; color: #f5d442;"><u>Jahana Hayes</u><br><small>(House District 5)</small></span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <span style="color: #f5d442;">Democrat</span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <a href="https://hayes.house.gov/" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">Hayes.House.Gov</a><br>
+                                <a href="https://www.govtrack.us/congress/members/jahana_hayes/412789" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">GovTrack.Us/Hayes</a>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="4" style="height: 2px; background: linear-gradient(to right, transparent 25%, #DC143C 25%, #DC143C 75%, transparent 75%); padding: 0; border: none; line-height: 0;"></td>
+                        </tr>
+
+                        <tr>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <input type="number" min="0" max="100" class="vote-input" id="blumenthal-vote" name="blumenthal-vote">
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <span style="font-weight: bold; color: #f5d442;"><u>Richard Blumenthal</u><br><small>(Senator)</small></span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <span style="color: #f5d442;">Democrat</span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <a href="https://blumenthal.senate.gov/" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">Blumenthal.Senate.Gov</a><br>
+                                <a href="https://en.wikipedia.org/wiki/Richard_Blumenthal" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">Wikipedia/Blumenthal</a><br>
+                                <a href="https://www.govtrack.us/congress/members/richard_blumenthal/412490" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">GovTrack.Us/Blumenthal</a>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="4" style="height: 1px; background: linear-gradient(to right, transparent 25%, #FFD700 25%, #FFD700 75%, transparent 75%); padding: 0; border: none; line-height: 0;"></td>
+                        </tr>
+
+                        <tr>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <input type="number" min="0" max="100" class="vote-input" id="murphy-vote" name="murphy-vote">
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <span style="font-weight: bold; color: #f5d442;"><u>Chris Murphy</u><br><small>(Senator)</small></span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <span style="color: #f5d442;">Democrat</span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <a href="https://murphy.senate.gov/" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">Murphy.Senate.Gov</a><br>
+                                <a href="https://en.wikipedia.org/wiki/Chris_Murphy_(politician)" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">Wikipedia/Murphy</a><br>
+                                <a href="https://www.govtrack.us/congress/members/christopher_murphy/412194" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">GovTrack.Us/Murphy</a>
+                            </td>
+                        </tr>
+
+                        <!-- Massachusetts -->
+                        <tr>
+                            <td colspan="4" style="background: transparent; font-weight: 400; text-align: left; font-size: 1.4em; color: #DC143C; padding: 12px 8px; border-top: 1px solid #DC143C; border-bottom: 1px solid #FFD700;"><u>Massachusetts</u></td>
+                        </tr>
+
+                        <tr>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <input type="number" min="0" max="100" class="vote-input" id="neal-vote" name="neal-vote">
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <span style="font-weight: bold; color: #f5d442;"><u>Richard Neal</u><br><small>(House District 1)</small></span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <span style="color: #f5d442;">Democrat</span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <a href="https://neal.house.gov/" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">Neal.House.Gov</a><br>
+                                <a href="https://www.govtrack.us/congress/members/richard_neal/400291" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">GovTrack.Us/Neal</a>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="4" style="height: 1px; background: linear-gradient(to right, transparent 25%, #FFD700 25%, #FFD700 75%, transparent 75%); padding: 0; border: none; line-height: 0;"></td>
+                        </tr>
+
+                        <tr>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <input type="number" min="0" max="100" class="vote-input" id="mcgovern-vote" name="mcgovern-vote">
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <span style="font-weight: bold; color: #f5d442;"><u>Jim McGovern</u><br><small>(House District 2)</small></span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <span style="color: #f5d442;">Democrat</span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <a href="https://mcgovern.house.gov/" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">McGovern.House.Gov</a><br>
+                                <a href="https://www.govtrack.us/congress/members/james_mcgovern/400263" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">GovTrack.Us/McGovern</a>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="4" style="height: 1px; background: linear-gradient(to right, transparent 25%, #FFD700 25%, #FFD700 75%, transparent 75%); padding: 0; border: none; line-height: 0;"></td>
+                        </tr>
+
+                        <tr>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <input type="number" min="0" max="100" class="vote-input" id="trahan-vote" name="trahan-vote">
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <span style="font-weight: bold; color: #f5d442;"><u>Lori Trahan</u><br><small>(House District 3)</small></span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <span style="color: #f5d442;">Democrat</span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <a href="https://trahan.house.gov/" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">Trahan.House.Gov</a><br>
+                                <a href="https://www.govtrack.us/congress/members/lori_trahan/412810" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">GovTrack.Us/Trahan</a>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="4" style="height: 1px; background: linear-gradient(to right, transparent 25%, #FFD700 25%, #FFD700 75%, transparent 75%); padding: 0; border: none; line-height: 0;"></td>
+                        </tr>
+
+                        <tr>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <input type="number" min="0" max="100" class="vote-input" id="auchincloss-vote" name="auchincloss-vote">
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <span style="font-weight: bold; color: #f5d442;"><u>Jake Auchincloss</u><br><small>(House District 4)</small></span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <span style="color: #f5d442;">Democrat</span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <a href="https://auchincloss.house.gov/" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">Auchincloss.House.Gov</a><br>
+                                <a href="https://www.govtrack.us/congress/members/jake_auchincloss/456826" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">GovTrack.Us/Auchincloss</a>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="4" style="height: 1px; background: linear-gradient(to right, transparent 25%, #FFD700 25%, #FFD700 75%, transparent 75%); padding: 0; border: none; line-height: 0;"></td>
+                        </tr>
+
+                        <tr>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <input type="number" min="0" max="100" class="vote-input" id="clark-vote" name="clark-vote">
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <span style="font-weight: bold; color: #f5d442;"><u>Katherine Clark</u><br><small>(House District 5)</small></span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <span style="color: #f5d442;">Democrat</span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <a href="https://katherineclark.house.gov/" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">KatherineClark.House.Gov</a><br>
+                                <a href="https://www.govtrack.us/congress/members/katherine_clark/412600" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">GovTrack.Us/Clark</a>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="4" style="height: 1px; background: linear-gradient(to right, transparent 25%, #FFD700 25%, #FFD700 75%, transparent 75%); padding: 0; border: none; line-height: 0;"></td>
+                        </tr>
+
+                        <tr>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <input type="number" min="0" max="100" class="vote-input" id="moulton-vote" name="moulton-vote">
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <span style="font-weight: bold; color: #f5d442;"><u>Seth Moulton</u><br><small>(House District 6)</small></span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <span style="color: #f5d442;">Democrat</span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <a href="https://moulton.house.gov/" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">Moulton.House.Gov</a><br>
+                                <a href="https://www.govtrack.us/congress/members/seth_moulton/412632" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">GovTrack.Us/Moulton</a>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="4" style="height: 1px; background: linear-gradient(to right, transparent 25%, #FFD700 25%, #FFD700 75%, transparent 75%); padding: 0; border: none; line-height: 0;"></td>
+                        </tr>
+
+                        <tr>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <input type="number" min="0" max="100" class="vote-input" id="pressley-vote" name="pressley-vote">
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <span style="font-weight: bold; color: #f5d442;"><u>Ayanna Pressley</u><br><small>(House District 7)</small></span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <span style="color: #f5d442;">Democrat</span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <a href="https://pressley.house.gov/" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">Pressley.House.Gov</a><br>
+                                <a href="https://www.govtrack.us/congress/members/ayanna_pressley/412791" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">GovTrack.Us/Pressley</a>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="4" style="height: 1px; background: linear-gradient(to right, transparent 25%, #FFD700 25%, #FFD700 75%, transparent 75%); padding: 0; border: none; line-height: 0;"></td>
+                        </tr>
+
+                        <tr>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <input type="number" min="0" max="100" class="vote-input" id="lynch-vote" name="lynch-vote">
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <span style="font-weight: bold; color: #f5d442;"><u>Stephen Lynch</u><br><small>(House District 8)</small></span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <span style="color: #f5d442;">Democrat</span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <a href="https://lynch.house.gov/" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">Lynch.House.Gov</a><br>
+                                <a href="https://www.govtrack.us/congress/members/stephen_lynch/400249" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">GovTrack.Us/Lynch</a>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="4" style="height: 1px; background: linear-gradient(to right, transparent 25%, #FFD700 25%, #FFD700 75%, transparent 75%); padding: 0; border: none; line-height: 0;"></td>
+                        </tr>
+
+                        <tr>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <input type="number" min="0" max="100" class="vote-input" id="keating-vote" name="keating-vote">
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <span style="font-weight: bold; color: #f5d442;"><u>Bill Keating</u><br><small>(House District 9)</small></span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <span style="color: #f5d442;">Democrat</span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <a href="https://keating.house.gov/" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">Keating.House.Gov</a><br>
+                                <a href="https://www.govtrack.us/congress/members/william_keating/412557" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">GovTrack.Us/Keating</a>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="4" style="height: 2px; background: linear-gradient(to right, transparent 25%, #DC143C 25%, #DC143C 75%, transparent 75%); padding: 0; border: none; line-height: 0;"></td>
+                        </tr>
+
+                        <tr>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <input type="number" min="0" max="100" class="vote-input" id="warren-vote" name="warren-vote">
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <span style="font-weight: bold; color: #f5d442;"><u>Elizabeth Warren</u><br><small>(Senator)</small></span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <span style="color: #f5d442;">Democrat</span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <a href="https://warren.senate.gov/" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">Warren.Senate.Gov</a><br>
+                                <a href="https://en.wikipedia.org/wiki/Elizabeth_Warren" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">Wikipedia/Warren</a><br>
+                                <a href="https://www.govtrack.us/congress/members/elizabeth_warren/412542" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">GovTrack.Us/Warren</a>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="4" style="height: 1px; background: linear-gradient(to right, transparent 25%, #FFD700 25%, #FFD700 75%, transparent 75%); padding: 0; border: none; line-height: 0;"></td>
+                        </tr>
+
+                        <tr>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <input type="number" min="0" max="100" class="vote-input" id="markey-vote" name="markey-vote">
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <span style="font-weight: bold; color: #f5d442;"><u>Ed Markey</u><br><small>(Senator)</small></span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: center; vertical-align: middle;">
+                                <span style="color: #f5d442;">Democrat</span>
+                            </td>
+                            <td style="padding: 10px 8px; text-align: left; vertical-align: middle;">
+                                <a href="https://markey.senate.gov/" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">Markey.Senate.Gov</a><br>
+                                <a href="https://en.wikipedia.org/wiki/Ed_Markey" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">Wikipedia/Markey</a><br>
+                                <a href="https://www.govtrack.us/congress/members/edward_markey/400253" target="_blank" style="color: #f5d442; text-decoration: none; display: inline-block; margin-bottom: 2px; font-size: 0.9rem;">GovTrack.Us/Markey</a>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+                <div style="text-align: center; margin-top: 30px; padding: 20px;">
+                    <button type="submit" style="background: linear-gradient(135deg, #DC143C, #8B0000); color: #f5d442; border: 2px solid #FFD700; padding: 12px 30px; font-size: 1.1rem; font-weight: bold; border-radius: 8px; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 4px 8px rgba(0,0,0,0.3); transition: all 0.3s ease;">Submit Ballot</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer style="background: linear-gradient(135deg, #1a1a1a, #2d2d2d); color: #f5d442; text-align: center; padding: 20px 0; margin-top: 40px; border-top: 2px solid #DC143C;">
+        <div>
+            <p style="margin: 0 0 10px 0; font-size: 1.1rem;"><u>Common-Law Republic, U.S.A.</u>; <u>Empowering Self-Governing Communities</u>.</p>
+            <p style="margin: 0; font-size: 0.9rem; line-height: 1.4;">With the help of many others; this entire project, as presented thru this web-page,<br>
+            has been engineered, by: Charles Stewart, of Coleman Texas. ... Last up-dated: September-2025.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Basic form validation
+        document.getElementById('ballot-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const inputs = document.querySelectorAll('.vote-input');
+            let hasVotes = false;
+            
+            inputs.forEach(input => {
+                if (input.value && input.value.trim() !== '') {
+                    hasVotes = true;
+                }
+            });
+            
+            if (!hasVotes) {
+                alert('Please enter at least one vote before submitting.');
+                return;
+            }
+            
+            // Here you would normally submit the form data
+            alert('Ballot submitted successfully! (This is a demo - no actual submission occurred)');
+        });
+    </script>
+</body>
+</html>
+
+

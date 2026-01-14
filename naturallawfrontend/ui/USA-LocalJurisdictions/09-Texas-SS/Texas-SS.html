@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Texas-SState-CLR</title>
+    <style>
+        /* Root Variables and Basic Reset */
+        :root {
+            --primary-dark: #000000;
+            --secondary-dark: #111111;
+            --tertiary-dark: #1a1a1a;
+            --accent-gold: #f5d442;
+            --accent-gold-hover: #ffe97f;
+            --text-light: #ffffcc;
+            --text-white: #fefefe;
+            --highlight-pink: #ff33e3;
+            --border-color: #444;
+            --shadow-color: rgba(255, 215, 0, 0.2);
+            --separator-color: #cc4444; /* Clean, classic light red /  / */
+            --yellow-separator: #e6c200; /* Yellow for mini-state separators */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Times New Roman", Times, serif;
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            font-size: 1.38rem;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            font-size: 2.35rem;
+        }
+
+        a {
+            color: var(--accent-gold);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent-gold-hover);
+        }
+
+        p {
+            font-size: 1.61rem;
+            margin-bottom: 1rem;
+        }
+
+        /* New subtitle class */
+        .subtitle {
+            font-size: 1.84rem;
+            color: var(--accent-gold);
+            margin-top: -0.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 900;
+        }
+
+        /* Header Styles */
+        .main-header {
+            background-color: var(--primary-dark);
+            border-bottom: 2px solid var(--accent-gold);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .header-title {
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        .header-title h1 {
+            font-size: 3.2rem;
+            margin: 0;
+            color: #ffffff;
+        }
+
+        /* Navigation Styles */
+        .topnav {
+            background-color: var(--secondary-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            margin: 0 0.5rem;
+        }
+
+        .dropbtn {
+            background-color: transparent;
+            color: var(--accent-gold);
+            padding: 0.8rem 1.2rem;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .dropbtn:hover {
+            color: var(--accent-gold-hover);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--tertiary-dark);
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+            z-index: 1;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+        }
+
+        .dropdown-content a {
+            color: var(--text-light);
+            padding: 14px 18px;
+            display: block;
+            text-align: left;
+            font-size: 1.05rem;
+        }
+
+        .dropdown-content .long-item {
+            white-space: normal;
+            line-height: 1.2;
+            padding: 10px 18px;
+        }
+
+        .dropdown-content a:hover {
+            background-color: var(--secondary-dark);
+            color: var(--accent-gold);
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem 1rem 1rem 1rem;
+            text-align: center;
+        }
+
+        .state-list {
+            background-color: var(--secondary-dark);
+            border-radius: 12px;
+            padding: 2rem 1rem;
+            max-width: 800px;
+            margin: 2rem auto;
+            box-shadow: 0 4px 10px var(--shadow-color);
+            border: 1px solid var(--border-color);
+        }
+
+        /* Simplified table styling - no automatic borders */
+        .state-list table {
+            width: 100%;
+            border-collapse: collapse;
+            color: var(--text-light);
+            font-size: 1.5rem;
+            table-layout: fixed;
+        }
+
+        .state-list th, .state-list td {
+            padding: 12px 10px;
+            text-align: left;
+        }
+
+        /* Column width adjustments */
+        .state-list th:first-child,
+        .state-list td:first-child {
+            width: 52%;
+        }
+        
+        .state-list th:nth-child(2),
+        .state-list td:nth-child(2) {
+            width: 32%;
+        }
+        
+        .state-list th:nth-child(3),
+        .state-list td:nth-child(3) {
+            width: 16%;
+        }
+
+        /* Header row styling - no border, clean background */
+        .state-list th {
+            background-color: var(--tertiary-dark);
+            color: var(--accent-gold);
+            font-size: 1.6rem;
+            font-weight: 900;
+        }
+
+        .header-footer-separator td {
+            padding: 0;
+            text-align: center;           /* Centers the div */
+        }
+
+        /* Regular red separators */
+        .table-separator td {
+            padding: 0;
+            text-align: center;
+        }
+
+        .table-separator .separator-line-red {
+            height: 1px;
+            background-color: var(--separator-color);
+            width: 50%;
+            margin: 0 auto;
+        }
+
+        .header-footer-separator .separator-line {
+            height: 5px;
+            background-color: #883333;
+            width: 98%;                   /* This will work! */
+            margin: 0 auto;              /* Centers the line */
+        }
+
+        /* Yellow separators */
+        .yellow-separator td {
+            padding: 0;
+            text-align: center;
+        }
+
+        .yellow-separator .separator-line-yellow {
+            height: 1px;
+            background-color: var(--yellow-separator);
+            width: 40%;
+            margin: 0 auto;
+        }
+
+        .state-list td a {
+            color: var(--accent-gold);
+            text-decoration: underline;
+            font-weight: 900;
+            font-size: 1.3rem;
+        }
+
+        .state-list td a:hover {
+            color: var(--accent-gold-hover);
+        }
+
+/* Reference Section Styles */
+.reference-section {
+    background-color: var(--secondary-dark);
+    border-radius: 12px;
+    padding: 2rem 1rem;
+    max-width: 900px;
+    margin: 2rem auto;
+    box-shadow: 0 4px 10px var(--shadow-color);
+    border: 1px solid var(--border-color);
+}
+
+.reference-grid {
+    display: flex;
+    gap: 2rem;
+    justify-content: space-between;
+}
+
+.reference-table {
+    flex: 1;
+    border-collapse: collapse;
+    color: var(--text-light);
+    font-size: 1.1rem;
+    background-color: var(--tertiary-dark);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.reference-table th {
+    background-color: var(--accent-gold);
+    color: var(--primary-dark);
+    padding: 12px 8px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.reference-table td {
+    padding: 8px;
+    border-bottom: 1px solid var(--border-color);
+    text-align: left;
+}
+
+.reference-table tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.reference-table tr:hover {
+    background-color: rgba(245, 212, 66, 0.1);
+}
+
+/* Responsive design for reference tables */
+@media screen and (max-width: 768px) {
+    .reference-grid {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .reference-table {
+        font-size: 0.9rem;
+    }
+    
+    .reference-table th {
+        font-size: 1rem;
+        padding: 8px 4px;
+    }
+    
+    .reference-table td {
+        padding: 6px 4px;
+    }
+}
+
+/* Explanatory text section styling */
+.explanatory-text {
+    text-align: left;                    
+    font-size: 1.4rem;                   
+    line-height: 1.4;                    
+    margin: 1.5rem auto;                 
+    max-width: 800px;                    
+    font-family: "Times New Roman", Times, serif;
+    color: var(--text-light);
+}
+
+.explanatory-text p {
+    margin-bottom: 0.8rem;               
+    text-indent: 2rem;                   
+    font-size: inherit;                  
+}
+
+        /* Map Styles */
+        .map-container {
+            width: 140%;
+            overflow: hidden;
+            padding: 1rem 0;
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .responsive-map1 {
+            min-width: 90%;
+            max-width: 140%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .responsive-map2 {
+            min-width: 40%;
+            max-width: 90%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .responsive-map3 {
+            min-width: 40%;
+            max-width: 90%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .responsive-map1:hover, .responsive-map2:hover, .responsive-map3:hover {
+            box-shadow: 0 4px 12px rgba(255, 215, 0, 0.2);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .note {
+            font-size: 1.3rem;
+            color: var(--highlight-pink);
+            margin-top: 0.5em;
+        }
+
+        /* Footer Styles */
+        .main-footer {
+            background-color: var(--secondary-dark);
+            padding: 1rem;
+            margin-top: 2rem;
+            border-top: 2px solid var(--border-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 0.5rem;
+            margin-top: 0.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-bottom p {
+            font-size: 1.4rem;
+        }
+
+        /* Utility Classes */
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-1 { margin-top: 1rem; }
+        .mt-2 { margin-top: 2rem; }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            body {
+                font-size: 1.1rem;
+            }
+
+            .topnav {
+                flex-direction: column;
+                padding: 0;
+            }
+
+            .dropdown {
+                width: 100%;
+                margin: 0;
+            }
+
+            .dropbtn {
+                width: 100%;
+                padding: 1rem;
+                font-size: 1.05rem;
+            }
+
+            .dropdown-content {
+                width: 100%;
+                position: relative;
+            }
+
+            .dropdown-content a {
+                font-size: 1rem;
+            }
+
+            .main-content {
+                padding: 1rem;
+            }
+
+            .state-list {
+                padding: 1.2rem 0.4rem;
+            }
+
+            .state-list table {
+                font-size: 1.1rem;
+            }
+
+            .state-list th {
+                font-size: 1.3rem;
+            }
+
+            .state-list td a {
+                font-size: 1.1rem;
+            }
+
+            .header-title h1 {
+                font-size: 2.4rem;
+            }
+
+            h2 {
+                font-size: 1.9rem;
+            }
+
+            .subtitle {
+                font-size: 1.4rem;
+            }
+
+            p {
+                font-size: 1.2rem;
+            }
+
+            .responsive-map1, .responsive-map2, .responsive-map3, .responsive-map4 {
+                max-width: 95%;
+            }
+            
+            .footer-bottom p {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header Section -->  
+    <header class="main-header">
+        <div class="header-title">
+            <h1><u>Common-Law Republic</u>; <u>U.S.A.</u>.</h1>
+        </div>
+
+        <nav class="topnav">
+            <div class="dropdown">
+                <button class="dropbtn">Home Page.</button>
+                <div class="dropdown-content">
+                    <a href="../../index.html">Home Page.</a>
+                    <a href="../../Z-ReferenceDocuments/BriefGuidelines-PreferentialVotingBallot-Generic-Edit3.pdf">Using Ballots; Instructions.</a>
+                    <a href="../../Z-ReferenceDocuments/OrganicHierarchiesUSA-V4.2.pdf">Social-Organizing Under Constitutional "Organic Hierarchies".</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Register; or: Log-In.</button>
+                <div class="dropdown-content">
+                    <a href="../../Accounts-Profiles-Registering/NewUsers-Registration.html">Register</a>
+                    <a href="../../Accounts-Profiles-Registering/Login.html">Login</a>
+                    <a href="../../Accounts-Profiles-Registering/AccountProfiles-Management-Index.html">AccountProfiles-Management-Index</a>
+                    <a href="../../Accounts-Profiles-Registering/Subscribe-EmailList.html">Subscribe To Email-List</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">National Civil-Government; Political-Activism.</button>
+                <div class="dropdown-content">
+                    <a href="../../USA-GoverningBodies/Executive-Department-SubDepartments-Agencies/ExcDpt-SubDepartments&Agencies-Listed.html">Executive-Department;<br>Sub-Departments, & Agencies.</a>
+                    <a href="../../USA-GoverningBodies/JudicialDepartment/JudicialIndex.html">Judicial-Department.</a>
+                    <a href="../../USA-GoverningBodies/Legislature-HouseReps/Leg-HRepsIndex.html">Legislature: House Representatives.</a>
+                    <a href="../../USA-GoverningBodies/Legislature-Senate/Leg-Senate.html">Legislature; Senate.</a> 
+                    <a href="../../USA-GoverningBodies/Ballots-Index.html"><u>Ballots</u>.</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Local Civil-Governments; Political-Activism.</button>
+                <div class="dropdown-content" style="text-align:center;">
+                    <a href="../../USA-LocalJurisdictions/01-NewEngland-SS/NewEngland-SS.html" value="usa-01">01: New-England</a>
+                    <a href="../../USA-LocalJurisdictions/02-NewYork-SS/NewYork-SS.html" value="usa-02">02: New-York</a>
+                    <a href="../../USA-LocalJurisdictions/03-Jersey-Penn-SS/JerseyPenn-SS.html" value="usa-03">03: Jersey-Penn</a>
+                    <a href="../../USA-LocalJurisdictions/04-GreatLakes-SS/GreatLakes-SS.html" value="usa-04">04: Great-Lakes</a>
+                    <a href="../../USA-LocalJurisdictions/05-VirginiaCarolina-SS/Virginia-Carolina-SS.html" value="usa-05">05: Virginia-Carolina</a>
+                    <a href="../../USA-LocalJurisdictions/06-FloridaGeorgia-SS/FloridaGeorgia-SS.html" value="usa-07">06: Florida-Georgia</a>
+                    <a href="../../USA-LocalJurisdictions/07-MississippiValley-SS/MississippiValley-SS.html" value="usa-06">07: Mississippi-Valley</a>
+                    <a href="../../USA-LocalJurisdictions/08-NorthCentralPlains-SS/NorthCentralPlains-SS.html" value="usa-08">08: NorthCentral-Plains</a>
+                    <a href="../../USA-LocalJurisdictions/09-Texas-SS/Texas-SS.html" value="usa-09">09: Texas</a>
+                    <a href="../../USA-LocalJurisdictions/10-SouthWest-SS/SouthWest-SS.html" value="usa-10">10: South-West</a>
+                    <a href="../../USA-LocalJurisdictions/11-PacificNW-SS/PacificNW-SS.html" value="usa-11">11: Pacific-NW</a>
+                    <a href="../../USA-LocalJurisdictions/12-California-SS/California-SS.html" value="usa-12">12: California</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">EveryThing Else:</button>
+                <div class="dropdown-content">
+                    <a href="../../EveryThing-Else/1-Political-Parties/PoliticalParties.html">Political Parties.</a>
+                    <a href="../../EveryThing-Else/2-Religous-&-Spiritual-Communities/SpiritualIndex.html">Religious & Spiritual Communities.</a>
+                    <a href="../../EveryThing-Else/3-Business&Financial-Communities&Corporations/Biz&Finances.html">Business & Financial Communities & Corporations.</a>
+                    <a href="../../EveryThing-Else/4-DNA-Genetic-Racial-Communities/GeneticCommunities.html">DNA, Genetic, Racial, Communities.</a>
+                    <a href="../../EveryThing-Else/5-World-Communities-OutsideOfUSA/World-Communities-Index.html">World-Communities.</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Support.</button>
+                <div class="dropdown-content">
+                    <a href="../../Support/Support.html">Support-Help-Contacts</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+        <h2><u>As With-In This</u>:<br>
+        "<u>Texas CLR-Super-State</u>":</h2>
+        <p class="subtitle"><u>Below Are Listed Details About our</u><br>
+        Twelve Politically-Sub-Divided & Individual<br>
+        "<u>Common-Law Republic Mini-States</u>":</p>
+        
+        <p><u>Total Texas Super-State's "Population</u>" Included Here-In: <u>31,290,831</u>.<br>
+        <u>Total "US-Civil-Government Representatives-Districts</u>" Included Here-In: <u>38</u>.</p>
+        
+        <div class="state-list">
+            <table>
+                <thead>
+                    <tr>
+                        <th>CommonLaw-Republic<br>US-Rep Districts:</th>
+                        <th>Civil-Government US-Rep Districts:</th>
+                        <th>Population Estimates:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Header Separator Row -->
+                    <tr class="header-footer-separator">
+                        <td colspan="3"><div class="separator-line"></div></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./">CLR-D-1, South-East Dallas</a></td>
+                        <td>1, 5, & 30</td>
+                        <td>2,471,645</td>
+                    </tr>
+                    <!-- Yellow separator between mini-states -->
+                    <tr class="yellow-separator">
+                        <td colspan="3"><div class="separator-line-yellow"></div></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./">CLR-D-2, North-East Dallas</a></td>
+                        <td>3, 4, & 32</td>
+                        <td>2,471,645</td>
+                    </tr>
+                    <!-- Yellow separator between mini-states -->
+                    <tr class="yellow-separator">
+                        <td colspan="3"><div class="separator-line-yellow"></div></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./">CLR-D-3, North-West Texas</a></td>
+                        <td>13, 24, & 26</td>
+                        <td>2,471,645</td>
+                    </tr>
+                    <!-- Yellow separator between mini-states -->
+                    <tr class="yellow-separator">
+                        <td colspan="3"><div class="separator-line-yellow"></div></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./">CLR-D-4, West Texas</a></td>
+                        <td>12, 19, 25, & 33</td>
+                        <td>3,295,527</td>
+                    </tr>
+                    <!-- Yellow separator between mini-states -->
+                    <tr class="yellow-separator">
+                        <td colspan="3"><div class="separator-line-yellow"></div></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./">CLR-D-5, South-West Texas</a></td>
+                        <td>16, 20, & 23</td>
+                        <td>2,471,645</td>
+                    </tr>
+                    <!-- Yellow separator between mini-states -->
+                    <tr class="yellow-separator">
+                        <td colspan="3"><div class="separator-line-yellow"></div></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./">CLR-D-6, South Dallas</a></td>
+                        <td>6, 11, & 31</td>
+                        <td>2,471,645</td>
+                    </tr>
+                    <!-- Yellow separator between mini-states -->
+                    <tr class="yellow-separator">
+                        <td colspan="3"><div class="separator-line-yellow"></div></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./">CLR-D-7, South-Central Texas</a></td>
+                        <td>21, 28, 35, & 37</td>
+                        <td>3,295,527</td>
+                    </tr>
+                    <!-- Yellow separator between mini-states -->
+                    <tr class="yellow-separator">
+                        <td colspan="3"><div class="separator-line-yellow"></div></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./">CLR-D-8, South-Coast Texas</a></td>
+                        <td>15, 27, & 34</td>
+                        <td>2,471,645</td>
+                    </tr>
+                    <!-- Yellow separator between mini-states -->
+                    <tr class="yellow-separator">
+                        <td colspan="3"><div class="separator-line-yellow"></div></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./">CLR-D-9, South-West Houston</a></td>
+                        <td>7, 9, & 22</td>
+                        <td>2,471,645</td>
+                    </tr>
+                    <!-- Yellow separator between mini-states -->
+                    <tr class="yellow-separator">
+                        <td colspan="3"><div class="separator-line-yellow"></div></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./">CLR-D-10, Central-East Texas</a></td>
+                        <td>8, 10, & 17</td>
+                        <td>2,471,645</td>
+                    </tr>
+                    <!-- Yellow separator between mini-states -->
+                    <tr class="yellow-separator">
+                        <td colspan="3"><div class="separator-line-yellow"></div></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./">CLR-D-11, North Houston</a></td>
+                        <td>2, 18, & 38</td>
+                        <td>2,471,645</td>
+                    </tr>
+                    <!-- Yellow separator between mini-states -->
+                    <tr class="yellow-separator">
+                        <td colspan="3"><div class="separator-line-yellow"></div></td>
+                    </tr>
+                    <tr>
+                        <td><a href="./">CLR-D-12, South-East Texas</a></td>
+                        <td>14, 29, & 36</td>
+                        <td>2,471,645</td>
+                    </tr>
+                    <!-- Header Separator Row -->
+                    <tr class="header-footer-separator">
+                        <td colspan="3"><div class="separator-line"></div></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+<div class="explanatory-text">
+    <p>..... "<u>Essential Principles" of "Common-Law Republicanism</u>", <u>Require</u>, that: 
+<u>All Smaller-Communities</u>, <u>become</u> <u>Organized for "Responsible Self-Governing</u>"; 
+<u>all of which</u>, here-under, <u>Mandate</u> Our Vigilantly Engaging In <u>Regular 
+"Political-Polling Process</u>", "Administering Justice", "Keeping the Peace"; 
+& "Paying All of Our Legitimate Commercial-Debts".</p>
+    <p><u>In Pursuit of</u> This "Public Interest", aka: These "Public Purposes", aka: 
+<u>These Essential Organic/Constitutional Purposes</u>, our CLR-Leadership has <u>Re-Assigned</u> 
+the Above Listed 38 <u>US-Civil-Government Representatives-Districts</u>, <u>in-to</u> the Twelve 
+Above-Listed & Individually Sovereign <u>Common-Law Republic Mini-State Districts</u>.</p>
+</div>
+
+
+        <!-- Map Section -->
+        <div class="map-container">
+            <img 
+                src="./Tx-CongressiDistrictsMap.png"
+                alt="Map of Texas US-Civil-Reps-Districts" 
+                class="responsive-map1"
+            >
+        </div>
+
+        <!-- Reference Section -->
+        <div class="divider"></div>
+        <h3><u>Civil US-Rep-Districts Reference Guide</u>:</h3>
+        <p>Find Your US-Rep CLR-District, From Your US-Rep Civil-District.</p>
+        
+        <div class="reference-section">
+            <div class="reference-grid">
+                <table class="reference-table">
+                    <thead>
+                        <tr>
+                            <th>Civil District</th>
+                            <th>CLR District</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>District 1</td><td>CLR-D-1, South-East Dallas</td></tr>
+                        <tr><td>District 2</td><td>CLR-D-11, North Houston</td></tr>
+                        <tr><td>District 3</td><td>CLR-D-2, North-East Dallas</td></tr>
+                        <tr><td>District 4</td><td>CLR-D-2, North-East Dallas</td></tr>
+                        <tr><td>District 5</td><td>CLR-D-1, South-East Dallas</td></tr>
+                        <tr><td>District 6</td><td>CLR-D-6, South Dallas</td></tr>
+                        <tr><td>District 7</td><td>CLR-D-9, South-West Houston</td></tr>
+                        <tr><td>District 8</td><td>CLR-D-10, Central-East Texas</td></tr>
+                        <tr><td>District 9</td><td>CLR-D-9, South-West Houston</td></tr>
+                        <tr><td>District 10</td><td>CLR-D-10, Central-East Texas</td></tr>
+                        <tr><td>District 11</td><td>CLR-D-6, South Dallas</td></tr>
+                        <tr><td>District 12</td><td>CLR-D-4, West Texas</td></tr>
+                        <tr><td>District 13</td><td>CLR-D-3, North-West Texas</td></tr>
+                        <tr><td>District 14</td><td>CLR-D-12, South-East Texas</td></tr>
+                        <tr><td>District 15</td><td>CLR-D-8, South-Coast Texas</td></tr>
+                        <tr><td>District 16</td><td>CLR-D-5, South-West Texas</td></tr>
+                        <tr><td>District 17</td><td>CLR-D-10, Central-East Texas</td></tr>
+                        <tr><td>District 18</td><td>CLR-D-11, North Houston</td></tr>
+                        <tr><td>District 19</td><td>CLR-D-4, West Texas</td></tr>
+                    </tbody>
+                </table>
+                <table class="reference-table">
+                    <thead>
+                        <tr>
+                            <th>Civil District</th>
+                            <th>CLR District</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>District 20</td><td>CLR-D-5, South-West Texas</td></tr>
+                        <tr><td>District 21</td><td>CLR-D-7, South-Central Texas</td></tr>
+                        <tr><td>District 22</td><td>CLR-D-9, South-West Houston</td></tr>
+                        <tr><td>District 23</td><td>CLR-D-5, South-West Texas</td></tr>
+                        <tr><td>District 24</td><td>CLR-D-3, North-West Texas</td></tr>
+                        <tr><td>District 25</td><td>CLR-D-4, West Texas</td></tr>
+                        <tr><td>District 26</td><td>CLR-D-3, North-West Texas</td></tr>
+                        <tr><td>District 27</td><td>CLR-D-8, South-Coast Texas</td></tr>
+                        <tr><td>District 28</td><td>CLR-D-7, South-Central Texas</td></tr>
+                        <tr><td>District 29</td><td>CLR-D-12, South-East Texas</td></tr>
+                        <tr><td>District 30</td><td>CLR-D-1, South-East Dallas</td></tr>
+                        <tr><td>District 31</td><td>CLR-D-6, South Dallas</td></tr>
+                        <tr><td>District 32</td><td>CLR-D-2, North-East Dallas</td></tr>
+                        <tr><td>District 33</td><td>CLR-D-4, West Texas</td></tr>
+                        <tr><td>District 34</td><td>CLR-D-8, South-Coast Texas</td></tr>
+                        <tr><td>District 35</td><td>CLR-D-7, South-Central Texas</td></tr>
+                        <tr><td>District 36</td><td>CLR-D-12, South-East Texas</td></tr>
+                        <tr><td>District 37</td><td>CLR-D-7, South-Central Texas</td></tr>
+                        <tr><td>District 38</td><td>CLR-D-11, North Houston</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer class="main-footer">
+        <div class="footer-bottom">
+            <p><u>Common-Law Republic, U.S.A.</u>; <u>Empowering Self-Governing Communities</u>.<br>
+                With the help of many others; this entire project, as presented thru this web-page,<br>
+                has been engineered, by: Charles Stewart, of Coleman Texas. ... Last up-dated: August-2025.</p>
+        </div>
+    </footer>
+</body>
+</html>

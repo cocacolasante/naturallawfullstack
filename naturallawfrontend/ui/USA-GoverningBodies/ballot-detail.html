@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ballot Details</title>
+      <style>
+    /* Root Variables and Basic Reset */
+    :root {
+      --primary-dark: #000000;
+      --secondary-dark: #111111;
+      --tertiary-dark: #1a1a1a;
+      --accent-gold: #f5d442;
+      --accent-gold-hover: #ffe97f;
+      --text-light: #ffffcc;
+      --text-white: #fefefe;
+      --highlight-pink: #ff33e3;
+      --border-color: #444;
+      --shadow-color: rgba(255, 215, 0, 0.2);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Times New Roman", Times, serif;
+    background-color: var(--primary-dark);
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+    /* Typography */
+    h1, h2, h3, h4, h5, h6 {
+      color: var(--accent-gold);
+      margin-bottom: 1rem;
+    }
+
+    a {
+      color: var(--accent-gold);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      color: var(--accent-gold-hover);
+    }
+
+    /* Header Styles */
+    .main-header {
+      background-color: var(--primary-dark);
+      border-bottom: 2px solid var(--accent-gold);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .header-title {
+    text-align: center;
+    padding: 1rem 0;
+}
+
+    .header-title h1 {
+      font-size: 2.7rem;
+      margin: 0;
+        color: #ffffff;
+    }
+
+    /* Navigation Styles */
+.topnav {
+    background-color: var(--secondary-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.0rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+      margin: 0 0.5rem;
+    }
+
+    .dropbtn {
+      background-color: transparent;
+      color: var(--accent-gold);
+      padding: 0.8rem 1.2rem;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    .dropbtn:hover {
+      color: var(--accent-gold-hover);
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: var(--tertiary-dark);
+      min-width: 200px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+      z-index: 1;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+    }
+
+    .dropdown-content a {
+      color: var(--text-light);
+      padding: 12px 16px;
+      display: block;
+      text-align: left;
+    }
+
+.dropdown-content .long-item {
+    white-space: normal;
+    line-height: 1.2;
+    padding: 8px 16px;
+}
+
+    .dropdown-content a:hover {
+      background-color: var(--secondary-dark);
+      color: var(--accent-gold);
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    /* Main Container Styles */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: .1rem;
+    }
+
+    /* Content Section Styles */
+ .content-section {
+    background-color: var(--secondary-dark);
+    margin: 0.1rem 0;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px var(--shadow-color);
+    border: 1px solid var(--border-color);
+}
+
+    /* Ballot Detail Styles */
+    .ballot-header {
+        margin-bottom: 2rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 2px solid var(--border-color);
+    }
+
+    .ballot-title {
+        font-size: 2rem;
+        color: var(--accent-gold);
+        margin-bottom: 1rem;
+    }
+
+    .ballot-description {
+        font-size: 1.1rem;
+        color: var(--text-light);
+        line-height: 1.8;
+        margin-bottom: 1.5rem;
+    }
+
+    .ballot-meta {
+        display: flex;
+        gap: 2rem;
+        flex-wrap: wrap;
+        color: #888;
+        font-size: 0.95rem;
+    }
+
+    .meta-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .meta-label {
+        font-weight: bold;
+        color: var(--accent-gold);
+    }
+
+    .ballot-status {
+        padding: 0.4rem 1rem;
+        border-radius: 4px;
+        font-size: 0.9rem;
+        font-weight: bold;
+    }
+
+    .status-active {
+        background-color: #28a745;
+        color: white;
+    }
+
+    .status-closed {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    /* Options Section */
+    .options-section {
+        margin: 2rem 0;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+        color: var(--accent-gold);
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .option-card {
+        background-color: var(--tertiary-dark);
+        border: 2px solid var(--border-color);
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    .option-card:hover {
+        border-color: var(--accent-gold);
+        box-shadow: 0 4px 12px var(--shadow-color);
+    }
+
+    .option-card.selected {
+        border-color: var(--accent-gold);
+        background-color: rgba(245, 212, 66, 0.1);
+    }
+
+    .option-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .option-radio {
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+    }
+
+    .option-title {
+        font-size: 1.2rem;
+        color: var(--accent-gold);
+        font-weight: bold;
+    }
+
+    .option-description {
+        color: var(--text-light);
+        margin-left: 2rem;
+        line-height: 1.6;
+    }
+
+    /* Buttons */
+    .btn {
+        padding: 0.8rem 2rem;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+        font-size: 1rem;
+    }
+
+    .btn-primary {
+        background-color: var(--accent-gold);
+        color: var(--primary-dark);
+    }
+
+    .btn-primary:hover:not(:disabled) {
+        background-color: var(--accent-gold-hover);
+    }
+
+    .btn-primary:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    .btn-secondary {
+        background-color: transparent;
+        color: var(--accent-gold);
+        border: 1px solid var(--accent-gold);
+    }
+
+    .btn-secondary:hover {
+        background-color: var(--accent-gold);
+        color: var(--primary-dark);
+    }
+
+    .btn-group {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+
+    .back-link {
+        display: inline-block;
+        margin-bottom: 1rem;
+        color: var(--accent-gold);
+        text-decoration: none;
+    }
+
+    .back-link:hover {
+        color: var(--accent-gold-hover);
+    }
+
+    /* Message styles */
+    .message {
+        padding: 1rem 1.5rem;
+        border-radius: 4px;
+        margin: 1rem 0;
+    }
+
+    .message-success {
+        background-color: rgba(40, 167, 69, 0.2);
+        border: 1px solid #28a745;
+        color: #6fff6f;
+    }
+
+    .message-error {
+        background-color: rgba(220, 53, 69, 0.2);
+        border: 1px solid #dc3545;
+        color: #ff6b6b;
+    }
+
+    .message-info {
+        background-color: rgba(0, 123, 255, 0.2);
+        border: 1px solid #007bff;
+        color: #6bc5ff;
+    }
+
+    .message-warning {
+        background-color: rgba(255, 193, 7, 0.2);
+        border: 1px solid #ffc107;
+        color: #ffd454;
+    }
+
+/* Footer Styles */
+.main-footer {
+    background-color: var(--secondary-dark);
+    padding: 1rem;
+    margin-top: 2rem;
+    border-top: 2px solid var(--border-color);
+}
+
+.footer-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: block;
+}
+
+.footer-section {
+    padding: 0.2rem;
+    margin-bottom: 0.2rem;
+    text-align: center;
+}
+
+.footer-section p {
+    margin-bottom: 0.2rem;
+    line-height: 1.4;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 0.5rem;
+    margin-top: 0.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+    /* Loading and Empty States */
+    .loading-state, .empty-state, .error-state {
+        text-align: center;
+        padding: 3rem;
+    }
+
+    .loading-state p {
+        font-size: 1.2rem;
+        color: var(--accent-gold);
+    }
+
+    /* Responsive Design */
+    @media screen and (max-width: 768px) {
+      .topnav {
+        flex-direction: column;
+        padding: 0;
+      }
+
+      .dropdown {
+        width: 100%;
+        margin: 0;
+      }
+
+      .dropbtn {
+        width: 100%;
+        padding: 1rem;
+      }
+
+      .dropdown-content {
+        width: 100%;
+        position: relative;
+      }
+
+      .container {
+        padding: 1rem;
+      }
+
+      .content-section {
+        padding: 1rem;
+      }
+
+      .btn-group {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-title">
+            <h1><u>Common-Law Republic</u>; <u>U.S.A.</u>.</h1>
+        </div>
+
+        <nav class="topnav">
+            <div class="dropdown">
+                <button class="dropbtn">Home-Page</button>
+                <div class="dropdown-content">
+                    <a href="../index.html">Home Page</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Register; or: Log-In.</button>
+                <div class="dropdown-content">
+                    <a href="../Accounts-Profiles-Registering/NewUsers-Registration.html">Register</a>
+                    <a href="../Accounts-Profiles-Registering/Login.html">Login</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Ballots</button>
+                <div class="dropdown-content">
+                    <a href="Ballots-Index.html">View All Ballots</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Support</button>
+                <div class="dropdown-content">
+                    <a href="../Support/Support.html">Support-Help-Contacts</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="content-section">
+            <a href="Ballots-Index.html" class="back-link">&larr; Back to Ballots</a>
+
+            <!-- Loading State -->
+            <div id="loadingState" class="loading-state">
+                <p>Loading ballot details...</p>
+            </div>
+
+            <!-- Error State -->
+            <div id="errorState" class="error-state" style="display: none;">
+                <div class="message message-error">
+                    <p id="errorMessage"></p>
+                </div>
+            </div>
+
+            <!-- Ballot Content -->
+            <div id="ballotContent" style="display: none;">
+                <!-- Ballot Header -->
+                <div class="ballot-header">
+                    <h2 class="ballot-title" id="ballotTitle"></h2>
+                    <p class="ballot-description" id="ballotDescription"></p>
+                    <div class="ballot-meta">
+                        <div class="meta-item">
+                            <span class="meta-label">Created:</span>
+                            <span id="ballotCreated"></span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Status:</span>
+                            <span id="ballotStatus" class="ballot-status"></span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-label">Created by:</span>
+                            <span id="ballotCreator"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Messages -->
+                <div id="messageContainer"></div>
+
+                <!-- Already Voted Notice -->
+                <div id="alreadyVotedNotice" style="display: none;">
+                    <div class="message message-info">
+                        <p>You have already voted on this ballot. Your vote: <strong id="userVoteDisplay"></strong></p>
+                    </div>
+                </div>
+
+                <!-- Voting Section -->
+                <div id="votingSection" class="options-section">
+                    <h3 class="section-title">Cast Your Vote</h3>
+                    <div id="optionsContainer"></div>
+
+                    <div class="btn-group">
+                        <button id="submitVoteBtn" class="btn btn-primary" onclick="submitVote()">Submit Vote</button>
+                        <a href="ballot-results.html" id="viewResultsLink" class="btn btn-secondary">View Results</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <p>&copy; 2025 Common-Law Republic, U.S.A. All rights reserved.</p>
+                <p class="mt-1">Empowering communities through democratic participation</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>Contact: support@commonlawrepublic.org</p>
+        </div>
+    </footer>
+
+    <script>
+        // API Configuration
+        const API_BASE_URL = 'http://localhost:8080/api/v1';
+
+        // DOM Elements
+        const loadingState = document.getElementById('loadingState');
+        const errorState = document.getElementById('errorState');
+        const errorMessage = document.getElementById('errorMessage');
+        const ballotContent = document.getElementById('ballotContent');
+        const messageContainer = document.getElementById('messageContainer');
+
+        // Ballot data
+        let currentBallot = null;
+        let selectedOptionId = null;
+        let userToken = null;
+
+        // Get ballot ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const ballotId = urlParams.get('id');
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            if (!ballotId) {
+                showError('No ballot ID provided');
+                return;
+            }
+
+            // Check for auth token
+            userToken = localStorage.getItem('authToken');
+
+            // Update results link with ballot ID
+            document.getElementById('viewResultsLink').href = `ballot-results.html?id=${ballotId}`;
+
+            // Load ballot data
+            loadBallotDetails();
+
+            // If user is logged in, check if they already voted
+            if (userToken) {
+                checkUserVote();
+            }
+        });
+
+        // Fetch ballot details
+        async function loadBallotDetails() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/public/ballots/${ballotId}`);
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                currentBallot = await response.json();
+                displayBallot();
+
+            } catch (error) {
+                console.error('Error fetching ballot:', error);
+                showError('Failed to load ballot details. Please try again later.');
+            }
+        }
+
+        // Check if user has already voted
+        async function checkUserVote() {
+            if (!userToken) return;
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/ballots/${ballotId}/my-vote`, {
+                    headers: {
+                        'Authorization': `Bearer ${userToken}`
+                    }
+                });
+
+                if (response.ok) {
+                    const voteData = await response.json();
+                    if (voteData.option_id) {
+                        showAlreadyVoted(voteData);
+                    }
+                }
+            } catch (error) {
+                console.error('Error checking user vote:', error);
+            }
+        }
+
+        // Display ballot
+        function displayBallot() {
+            document.getElementById('ballotTitle').textContent = currentBallot.title || 'Untitled Ballot';
+            document.getElementById('ballotDescription').textContent = currentBallot.description || 'No description available.';
+
+            // Format date
+            const createdDate = currentBallot.created_at ?
+                new Date(currentBallot.created_at).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                }) : 'Unknown';
+            document.getElementById('ballotCreated').textContent = createdDate;
+
+            // Status
+            const isActive = currentBallot.is_active !== false;
+            const statusElement = document.getElementById('ballotStatus');
+            statusElement.textContent = isActive ? 'Active' : 'Closed';
+            statusElement.className = `ballot-status ${isActive ? 'status-active' : 'status-closed'}`;
+
+            // Creator
+            document.getElementById('ballotCreator').textContent = currentBallot.created_by || 'Anonymous';
+
+            // Display options
+            displayOptions();
+
+            // Show content
+            loadingState.style.display = 'none';
+            ballotContent.style.display = 'block';
+        }
+
+        // Display voting options
+        function displayOptions() {
+            const optionsContainer = document.getElementById('optionsContainer');
+            optionsContainer.innerHTML = '';
+
+            const options = currentBallot.options || [];
+
+            if (options.length === 0) {
+                optionsContainer.innerHTML = '<p>No voting options available.</p>';
+                return;
+            }
+
+            options.forEach(option => {
+                const optionCard = document.createElement('div');
+                optionCard.className = 'option-card';
+                optionCard.onclick = () => selectOption(option.id, optionCard);
+
+                optionCard.innerHTML = `
+                    <div class="option-header">
+                        <input type="radio" name="vote-option" class="option-radio" value="${option.id}">
+                        <h4 class="option-title">${escapeHtml(option.title || 'Untitled Option')}</h4>
+                    </div>
+                    ${option.description ? `<p class="option-description">${escapeHtml(option.description)}</p>` : ''}
+                `;
+
+                optionsContainer.appendChild(optionCard);
+            });
+        }
+
+        // Select an option
+        function selectOption(optionId, cardElement) {
+            selectedOptionId = optionId;
+
+            // Update visual selection
+            document.querySelectorAll('.option-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            cardElement.classList.add('selected');
+
+            // Update radio button
+            const radio = cardElement.querySelector('input[type="radio"]');
+            radio.checked = true;
+        }
+
+        // Submit vote
+        async function submitVote() {
+            if (!selectedOptionId) {
+                showMessage('Please select an option before submitting your vote.', 'warning');
+                return;
+            }
+
+            if (!userToken) {
+                showMessage('You must be logged in to vote. <a href="../Accounts-Profiles-Registering/Login.html">Login here</a>.', 'error');
+                return;
+            }
+
+            const submitBtn = document.getElementById('submitVoteBtn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/ballots/${ballotId}/vote`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${userToken}`
+                    },
+                    body: JSON.stringify({
+                        option_id: selectedOptionId
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    showMessage('Your vote has been submitted successfully!', 'success');
+                    setTimeout(() => {
+                        window.location.href = `ballot-results.html?id=${ballotId}`;
+                    }, 1500);
+                } else {
+                    throw new Error(data.error || 'Failed to submit vote');
+                }
+
+            } catch (error) {
+                console.error('Error submitting vote:', error);
+                showMessage(error.message || 'Failed to submit vote. Please try again.', 'error');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit Vote';
+            }
+        }
+
+        // Show already voted notice
+        function showAlreadyVoted(voteData) {
+            const notice = document.getElementById('alreadyVotedNotice');
+            const votingSection = document.getElementById('votingSection');
+
+            // Find the option title
+            const option = currentBallot.options?.find(opt => opt.id === voteData.option_id);
+            const optionTitle = option ? option.title : 'Unknown option';
+
+            document.getElementById('userVoteDisplay').textContent = optionTitle;
+            notice.style.display = 'block';
+            votingSection.style.display = 'none';
+        }
+
+        // Show message
+        function showMessage(message, type) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message message-${type}`;
+            messageDiv.innerHTML = `<p>${message}</p>`;
+
+            messageContainer.innerHTML = '';
+            messageContainer.appendChild(messageDiv);
+
+            // Auto-remove success messages
+            if (type === 'success') {
+                setTimeout(() => {
+                    messageDiv.remove();
+                }, 5000);
+            }
+        }
+
+        // Show error
+        function showError(message) {
+            loadingState.style.display = 'none';
+            errorMessage.textContent = message;
+            errorState.style.display = 'block';
+            ballotContent.style.display = 'none';
+        }
+
+        // Escape HTML
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    </script>
+</body>
+</html>

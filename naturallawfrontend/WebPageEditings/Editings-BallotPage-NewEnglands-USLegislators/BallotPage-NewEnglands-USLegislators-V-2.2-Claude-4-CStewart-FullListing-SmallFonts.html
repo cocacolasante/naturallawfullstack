@@ -1,0 +1,1383 @@
+Copy
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ballot-VoteOfConfidence-USLegislators-NewEnglandSSCLR</title>
+    <style>
+        /* Root Variables and Basic Reset */
+        :root {
+            --primary-dark: #000000;
+            --secondary-dark: #111111;
+            --tertiary-dark: #1a1a1a;
+            --accent-gold: #f5d442;
+            --accent-gold-hover: #ffe97f;
+            --text-light: #ffffcc;
+            --text-white: #fefefe;
+            --highlight-pink: #ff33e3;
+            --border-color: #444;
+            --shadow-color: rgba(255, 215, 0, 0.2);
+            --separator-yellow: #ffd700;
+            --separator-red: #ff4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Base Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Times New Roman", Times, serif;
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            font-size: 1.38rem;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2.35rem;
+            margin-bottom: 0.5rem;
+        }
+
+        a {
+            color: var(--accent-gold);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--accent-gold-hover);
+        }
+
+        p {
+            font-size: 1.61rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Header Styles */
+        .main-header {
+            background-color: var(--primary-dark);
+            border-bottom: 2px solid var(--accent-gold);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .header-title {
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        .header-title h1 {
+            font-size: 3.2rem;
+            margin: 0;
+            color: #ffffff;
+        }
+
+        /* Navigation Styles */
+        .topnav {
+            background-color: var(--secondary-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            margin: 0 0.5rem;
+        }
+
+        .dropbtn {
+            background-color: transparent;
+            color: var(--accent-gold);
+            padding: 0.8rem 1.2rem;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .dropbtn:hover {
+            color: var(--accent-gold-hover);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--tertiary-dark);
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+            z-index: 1;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+        }
+
+        .dropdown-content a {
+            color: var(--text-light);
+            padding: 14px 18px;
+            display: block;
+            text-align: left;
+            font-size: 1.05rem;
+        }
+
+        .dropdown-content .long-item {
+            white-space: normal;
+            line-height: 1.2;
+            padding: 10px 18px;
+        }
+
+        .dropdown-content a:hover {
+            background-color: var(--secondary-dark);
+            color: var(--accent-gold);
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem 1rem 1rem;
+            text-align: center;
+        }
+
+        /* Ballot Specific Styles */
+        .ballot-section {
+            background-color: var(--secondary-dark);
+            margin: 2rem auto;
+            padding: 2rem 1rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px var(--shadow-color);
+            border: 1px solid var(--border-color);
+            max-width: 1000px;
+        }
+
+        .ballot-header {
+            background-color: var(--tertiary-dark);
+            color: var(--accent-gold);
+            padding: 1rem;
+            margin: -2rem -1rem 2rem -1rem;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            border-bottom: 3px solid var(--separator-red);
+            text-align: center;
+        }
+
+        .ballot-header h4 {
+            font-size: 1.8rem;
+            margin: 0;
+        }
+
+        /* Instructions Section */
+        .instructions {
+            background-color: var(--tertiary-dark);
+            padding: 1.5rem;
+            margin: 2rem auto;
+            border-radius: 8px;
+            text-align: center;
+            line-height: 1.4;
+            font-size: 1.4rem;
+            max-width: 800px;
+        }
+
+        .instructions h3 {
+            margin-bottom: 1rem;
+            font-size: 2.5rem;
+        }
+
+        .instructions p {
+            margin-bottom: 0.8rem;
+            font-size: 1.4rem;
+        }
+
+        .instructions p:last-of-type {
+            margin-bottom: 0;
+        }
+
+        /* Ballot Table Styles */
+        .ballot-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        .ballot-table th {
+            background-color: var(--tertiary-dark);
+            color: var(--accent-gold);
+            padding: 12px 8px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.3rem;
+            border-bottom: 2px solid var(--separator-red);
+        }
+
+        .ballot-table td {
+            padding: 10px 8px;
+            border-bottom: 1px solid var(--separator-red);
+            text-align: left;
+            vertical-align: middle;
+        }
+
+        .ballot-table tr:hover {
+            background-color: var(--tertiary-dark);
+        }
+
+        /* Column widths */
+        .vote-column { width: 12%; text-align: center; }
+        .name-column { width: 30%; }
+        .party-column { width: 15%; text-align: center; }
+        .webpage-column { width: 43%; }
+
+        .vote-input {
+            width: 70px;
+            text-align: center;
+            padding: 0.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        .candidate-name {
+            font-weight: bold;
+            color: var(--accent-gold);
+        }
+
+        .party-affiliation {
+            color: var(--accent-gold);
+        }
+
+        .candidate-link {
+            color: var(--accent-gold);
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 2px;
+        }
+
+        .candidate-link:hover {
+            color: var(--accent-gold-hover);
+        }
+
+        /* State Header Styles */
+        .state-header td {
+            background: transparent !important;
+            font-weight: 400 !important;  
+            text-align: left !important;
+            font-size: 1.2em;
+            color: #FF6B6B !important;
+            padding: 12px 8px !important;
+            border-top: 3px solid #FF6B6B !important;
+            border-bottom: 1px solid #FFD700 !important;
+        }
+
+        /* ===== MAIN SEPARATOR STYLES ===== */
+
+        /* Full-Width Separators (Original) */
+        .red-separator td {
+            height: 3px !important;
+            background: #DC143C !important;
+            padding: 0 !important;
+            border: none !important;
+            line-height: 0;
+        }
+
+        .yellow-separator td {
+            height: 1px !important;
+            background: #FFD700 !important;
+            padding: 0 !important;
+            border: none !important;
+            line-height: 0;
+        }
+
+        /* Red Gradient Separators (Centered, Partial Width) */
+        .red-separator-90 td {
+            height: 2px !important;
+            background: linear-gradient(to right, 
+                transparent 5%, 
+                #FF6B6B 5%, 
+                #FF6B6B 95%, 
+                transparent 95%) !important;
+            padding: 0 !important;
+            border: none !important;
+            line-height: 0;
+        }
+
+        .red-separator-gradient-75 td {
+            height: 3px !important;
+            background: linear-gradient(to right, 
+                transparent 12.5%, 
+                #DC143C 12.5%, 
+                #DC143C 87.5%, 
+                transparent 87.5%) !important;
+            padding: 0 !important;
+            border: none !important;
+            line-height: 0;
+        }
+
+        .red-separator-gradient-50 td {
+            height: 2px !important;
+            background: linear-gradient(to right, 
+                transparent 25%, 
+                #DC143C 25%, 
+                #DC143C 75%, 
+                transparent 75%) !important;
+            padding: 0 !important;
+            border: none !important;
+            line-height: 0;
+        }
+
+        .red-separator-gradient-25 td {
+            height: 3px !important;
+            background: linear-gradient(to right, 
+                transparent 37.5%, 
+                #DC143C 37.5%, 
+                #DC143C 62.5%, 
+                transparent 62.5%) !important;
+            padding: 0 !important;
+            border: none !important;
+            line-height: 0;
+        }
+
+        /* Yellow Gradient Separators (Centered, Partial Width) */
+        .yellow-separator-gradient-75 td {
+            height: 1px !important;
+            background: linear-gradient(to right, 
+                transparent 12.5%, 
+                #FFD700 12.5%, 
+                #FFD700 87.5%, 
+                transparent 87.5%) !important;
+            padding: 0 !important;
+            border: none !important;
+            line-height: 0;
+        }
+
+        .yellow-separator-gradient-50 td {
+            height: 1px !important;
+            background: linear-gradient(to right, 
+                transparent 25%, 
+                #FFD700 25%, 
+                #FFD700 75%, 
+                transparent 75%) !important;
+            padding: 0 !important;
+            border: none !important;
+            line-height: 0;
+        }
+
+        .yellow-separator-gradient-25 td {
+            height: 1px !important;
+            background: linear-gradient(to right, 
+                transparent 37.5%, 
+                #FFD700 37.5%, 
+                #FFD700 62.5%, 
+                transparent 62.5%) !important;
+            padding: 0 !important;
+            border: none !important;
+            line-height: 0;
+        }
+
+        /* Submit Button Styles */
+        .submit-section {
+            margin-top: 3rem;
+            text-align: center;
+        }
+
+        .submit-section button {
+            background-color: var(--accent-gold);
+            color: var(--primary-dark);
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .submit-section button:hover {
+            background-color: var(--accent-gold-hover);
+            transform: scale(1.02);
+        }
+
+        /* Footer Styles */
+        .main-footer {
+            background-color: var(--secondary-dark);
+            padding: 1rem;
+            margin-top: 2rem;
+            border-top: 2px solid var(--border-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 0.5rem;
+            margin-top: 0.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-bottom p {
+            font-size: 1.4rem;
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            body {
+                font-size: 1.1rem;
+            }
+
+            .topnav {
+                flex-direction: column;
+                padding: 0;
+            }
+
+            .dropdown {
+                width: 100%;
+                margin: 0;
+            }
+
+            .dropbtn {
+                width: 100%;
+                padding: 1rem;
+                font-size: 1.05rem;
+            }
+
+            .dropdown-content {
+                width: 100%;
+                position: relative;
+            }
+
+            .main-content {
+                padding: 1rem;
+            }
+
+            .ballot-section {
+                padding: 1rem 0.5rem;
+            }
+
+            .ballot-table th,
+            .ballot-table td {
+                padding: 8px 4px;
+                font-size: 0.9rem;
+            }
+
+            .vote-input {
+                width: 50px;
+                font-size: 0.9rem;
+            }
+
+            .header-title h1 {
+                font-size: 2.4rem;
+            }
+
+            h2 {
+                font-size: 1.9rem;
+            }
+
+            .instructions {
+                font-size: 1.1rem;
+                padding: 1rem;
+            }
+
+            .footer-bottom p {
+                font-size: 1.2rem;
+            }
+
+            .candidate-link {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="header-title">
+            <h1><u>Common-Law Republic</u>; <u>U.S.A.</u>.</h1>
+        </div>
+
+        <nav class="topnav">
+            <div class="dropdown">
+                <button class="dropbtn">Home Page.</button>
+                <div class="dropdown-content">
+                    <a href="../../index.html">Home Page.</a>
+                    <a href="../../Z-ReferenceDocuments/BriefGuidelines-PreferentialVotingBallot-Generic-Edit3.pdf">Using Ballots; Instructions.</a>
+                    <a href="../../Z-ReferenceDocuments/OrganicHierarchiesUSA-V4.2.pdf">Social-Organizing Under Constitutional "Organic Hierarchies".</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Register; or: Log-In.</button>
+                <div class="dropdown-content">
+                    <a href="../../Accounts-Profiles-Registering/NewUsers-Registration.html">Register</a>
+                    <a href="../../Accounts-Profiles-Registering/Login.html">Login</a>
+                    <a href="../../Accounts-Profiles-Registering/AccountProfiles-Management-Index.html">AccountProfiles-Management-Index</a>
+                    <a href="../../Accounts-Profiles-Registering/Subscribe-EmailList.html">Subscribe To Email-List</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">National Civil-Government; Political-Activism.</button>
+                <div class="dropdown-content">
+                    <a href="../../USA-GoverningBodies/Executive-Department-SubDepartments-Agencies/ExcDpt-SubDepartments&Agencies-Listed.html">Executive-Department;<br>Sub-Departments, & Agencies.</a>
+                    <a href="../../USA-GoverningBodies/JudicialDepartment/JudicialIndex.html">Judicial-Department.</a>
+                    <a href="../../USA-GoverningBodies/Legislature-HouseReps/Leg-HRepsIndex.html">Legislature: House Representatives.</a>
+                    <a href="../../USA-GoverningBodies/Legislature-Senate/Leg-Senate.html">Legislature; Senate.</a> 
+                    <a href="../../USA-GoverningBodies/Ballots-Index.html"><u>Ballots</u>.</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Local Civil-Governments; Political-Activism.</button>
+                <div class="dropdown-content" style="text-align:center;">
+                    <a href="../../USA-LocalJurisdictions/01-NewEngland-SS/NewEngland-SS.html" value="usa-01">01: New-England</a>
+                    <a href="../../USA-LocalJurisdictions/02-NewYork-SS/NewYork-SS.html" value="usa-02">02: New-York</a>
+                    <a href="../../USA-LocalJurisdictions/03-Jersey-Penn-SS/JerseyPenn-SS.html" value="usa-03">03: Jersey-Penn</a>
+                    <a href="../../USA-LocalJurisdictions/04-GreatLakes-SS/GreatLakes-SS.html" value="usa-04">04: Great-Lakes</a>
+                    <a href="../../USA-LocalJurisdictions/05-VirginiaCarolina-SS/Virginia-Carolina-SS.html" value="usa-05">05: Virginia-Carolina</a>
+                    <a href="../../USA-LocalJurisdictions/06-FloridaGeorgia-SS/FloridaGeorgia-SS.html" value="usa-07">06: Florida-Georgia</a>
+                    <a href="../../USA-LocalJurisdictions/07-MississippiValley-SS/MississippiValley-SS.html" value="usa-06">07: Mississippi-Valley</a>
+                    <a href="../../USA-LocalJurisdictions/08-NorthCentralPlains-SS/NorthCentralPlains-SS.html" value="usa-08">08: NorthCentral-Plains</a>
+                    <a href="../../USA-LocalJurisdictions/09-Texas-SS/Texas-SS.html" value="usa-09">09: Texas</a>
+                    <a href="../../USA-LocalJurisdictions/10-SouthWest-SS/SouthWest-SS.html" value="usa-10">10: South-West</a>
+                    <a href="../../USA-LocalJurisdictions/11-PacificNW-SS/PacificNW-SS.html" value="usa-11">11: Pacific-NW</a>
+                    <a href="../../USA-LocalJurisdictions/12-California-SS/California-SS.html" value="usa-12">12: California</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">EveryThing Else:</button>
+                <div class="dropdown-content">
+                    <a href="../../EveryThing-Else/1-Political-Parties/PoliticalParties.html">Political Parties.</a>
+                    <a href="../../EveryThing-Else/2-Religous-&-Spiritual-Communities/SpiritualIndex.html">Religious & Spiritual Communities.</a>
+                    <a href="../../EveryThing-Else/3-Business&Financial-Communities&Corporations/Biz&Finances.html">Business & Financial Communities & Corporations.</a>
+                    <a href="../../EveryThing-Else/4-DNA-Genetic-Racial-Communities/GeneticCommunities.html">DNA, Genetic, Racial, Communities.</a>
+                    <a href="../../EveryThing-Else/5-World-Communities-OutsideOfUSA/World-Communities-Index.html">World-Communities.</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Support.</button>
+                <div class="dropdown-content">
+                    <a href="../../Support/Support.html">Support-Help-Contacts</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <h2><u>CLR-Super-State</u>, of: <u>New-England</u>:<br> 
+        <u>Ballot</u>: <u>Votes-of-Confidence Listing</u>; <u>US-Legislators</u>.</h2>
+
+        <div class="instructions">
+            <h3><u>Instructions</u>:</h3>
+            <p><u>Registered Users in our Common-Law Republic Community should</u>:<br>
+            <u>Insert Numbers Closer to 100 for Preferred Candidates</u>; &:<br>
+            <u>Insert Numbers Closer to Zero for Opposed Candidates</u>.</p>
+            <p>(More detailed instructions are available under the "Home" tab of our main CLR web-page.)</p>
+        </div>
+
+        <div class="ballot-section">
+            <div class="ballot-header">
+                <h4><u>New-England's Present Delegates</u> To:<br>
+                <u>USA Civil-Government Congressional-Offices</u>, <u>Listed As Follows</u>:</h4>
+            </div>
+
+            <table class="ballot-table">
+                <thead>
+                    <tr>
+                        <th class="vote-column">Ranked-Vote</th>
+                        <th class="name-column">Name</th>
+                        <th class="party-column">Party</th>
+                        <th class="webpage-column">Web-Pages</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="red-separator-90">
+                        <td colspan="4"></td>
+                    </tr>
+
+                    <!-- Vermont -->
+                    <tr class="state-header">
+                        <td colspan="4"><u>Vermont</u></td>
+                    </tr>
+
+                    <tr>
+                        <td class="vote-column">
+                            <input type="number" min="0" max="100" class="vote-input" id="balint-vote" name="balint-vote">
+                        </td>
+                        <td class="name-column">
+                            <span class="candidate-name"><u>Becca Balint</u><br><small>(House District 1)</small></span>
+                        </td>
+                        <td class="party-column">
+                            <span class="party-affiliation">Democrat</span>
+                        </td>
+                        <td class="webpage-column">
+                            <a href="https://balint.house.gov/" target="_blank" class="candidate-link">House.Gov/Balint</a><br>
+                            <a href="https://en.wikipedia.org/wiki/Becca_Balint" target="_blank" class="candidate-link">Wikipedia.Org/Balint</a><br>
+                            <a href="https://www.govtrack.us/congress/members/becca_balint/456948" target="_blank" class="candidate-link">GovTrack.Us/Balint</a>
+                        </td>
+                    </tr>
+
+                    <tr class="red-separator-gradient-50">
+                        <td colspan="4"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="vote-column">
+                            <input type="number" min="0" max="100" class="vote-input" id="sanders-vote" name="sanders-vote">
+                        </td>
+                        <td class="name-column">
+                            <span class="candidate-name"><u>Bernie Sanders</u><br><small>(Senator)</small></span>
+                        </td>
+                        <td class="party-column">
+                            <span class="party-affiliation">Independent</span>
+                        </td>
+                        <td class="webpage-column">
+                            <a href="https://sanders.senate.gov/" target="_blank" class="candidate-link">Sanders.Senate.Gov</a><br>
+                            <a href="https://en.wikipedia.org/wiki/Bernie_Sanders" target="_blank" class="candidate-link">Wikipedia/Sanders</a><br>
+                            <a href="https://www.govtrack.us/congress/members/bernard_sanders/400357" target="_blank" class="candidate-link">GovTrack.Us/Sanders</a>
+                        </td>
+                    </tr>
+
+                    <tr class="yellow-separator-gradient-50">
+                        <td colspan="4"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="vote-column">
+                            <input type="number" min="0" max="100" class="vote-input" id="welch-vote" name="welch-vote">
+                        </td>
+                        <td class="name-column">
+                            <span class="candidate-name"><u>Peter Welch</u><br><small>(Senator)</small></span>
+                        </td>
+                        <td class="party-column">
+                            <span class="party-affiliation">Democrat</span>
+                        </td>
+                        <td class="webpage-column">
+                            <a href="https://welch.senate.gov/" target="_blank" class="candidate-link">Welch.Senate.Gov</a><br>
+                            <a href="https://en.wikipedia.org/wiki/Peter_Welch" target="_blank" class="candidate-link">Wikipedia/Welch</a><br>
+                            <a href="https://www.govtrack.us/congress/members/peter_welch/412239" target="_blank" class="candidate-link">GovTrack.Us/Welch</a>
+                        </td>
+                    </tr>
+
+                    <tr class="red-separator-90">
+                        <td colspan="4"></td>
+                    </tr>
+
+                    <!-- Rhode Island -->
+                    <tr class="state-header">
+                        <td colspan="4"><u>Rhode Island</u></td>
+                    </tr>
+
+                    <tr>
+                        <td class="vote-column">
+                            <input type="number" min="0" max="100" class="vote-input" id="amo-vote" name="amo-vote">
+                        </td>
+                        <td class="name-column">
+                            <span class="candidate-name"><u>Gabe Amo</u><br><small>(House District 1)</small></span>
+                        </td>
+                        <td class="party-column">
+                            <span class="party-affiliation">Democrat</span>
+                        </td>
+                        <td class="webpage-column">
+                            <a href="https://amo.house.gov/" target="_blank" class="candidate-link">Amo.House.Gov</a><br>
+                            <a href="https://www.govtrack.us/congress/members/gabe_amo/456955" target="_blank" class="candidate-link">GovTrack.Us/Amo</a>
+                        </td>
+                    </tr>
+
+                    <tr class="yellow-separator-gradient-50">
+                        <td colspan="4"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="vote-column">
+                            <input type="number" min="0" max="100" class="vote-input" id="magaziner-vote" name="magaziner-vote">
+                        </td>
+                        <td class="name-column">
+                            <span class="candidate-name"><u>Seth Magaziner</u><br><small>(House District 2)</small></span>
+                        </td>
+                        <td class="party-column">
+                            <span class="party-affiliation">Democrat</span>
+                        </td>
+                        <td class="webpage-column">
+                            <a href="https://magaziner.house.gov/" target="_blank" class="candidate-link">Magaziner.House.Gov</a><br>
+                            <a href="https://www.govtrack.us/congress/members/seth_magaziner/456937" target="_blank" class="candidate-link">GovTrack.Us/Magaziner</a>
+                        </td>
+                    </tr>
+
+                    <tr class="red-separator-gradient-50">
+                        <td colspan="4"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="vote-column">
+                            <input type="number" min="0" max="100" class="vote-input" id="reed-vote" name="reed-vote">
+                        </td>
+                        <td class="name-column">
+                            <span class="candidate-name"><u>Jack Reed</u><br><small>(Senator)</small></span>
+                        </td>
+                        <td class="party-column">
+                            <span class="party-affiliation">Democrat</span>
+                        </td>
+                        <td class="webpage-column">
+                            <a href="https://reed.senate.gov/" target="_blank" class="candidate-link">Reed.Senate.Gov</a><br>
+                            <a href="https://en.wikipedia.org/wiki/Jack_Reed_(Rhode_Island_politician)" target="_blank" class="candidate-link">Wikipedia/Reed</a><br>
+                            <a href="https://www.govtrack.us/congress/members/john_reed/300081" target="_blank" class="candidate-link">GovTrack.Us/Reed</a>
+                        </td>
+                    </tr>
+
+                    <tr class="yellow-separator-gradient-50">
+                        <td colspan="4"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="vote-column
+
+
+***************************************************************************************
+
+                        <td class="webpage-column">
+                            <a href="https://reed.senate.gov/" target="_blank" class="candidate-link">Reed.Senate.Gov</a><br>
+                            <a href="https://en.wikipedia.org/wiki/Jack_Reed_(Rhode_Island_politician)" target="_blank" class="candidate-link">Wikipedia/Reed</a><br>
+                            <a href="https://www.govtrack.us/congress/members/john_reed/300081" target="_blank" class="candidate-link">GovTrack.Us/Reed</a>
+                        </td>
+                    </tr>
+
+                    <!-- 50% width centered Yellow line -->
+                    <tr class="yellow-separator-gradient-50">
+                        <td colspan="4"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="vote-column">
+                            <input type="number" min="0" max="100" class="vote-input" id="whitehouse-vote" name="whitehouse-vote">
+                        </td>
+                        <td class="name-column">
+                            <span class="candidate-name"><u>Sheldon Whitehouse</u><br><small>(Senator)</small></span>
+                        </td>
+                        <td class="party-column">
+                            <span class="party-affiliation">Democrat</span>
+                        </td>
+                        <td class="webpage-column">
+                            <a href="https://whitehouse.senate.gov/" target="_blank" class="candidate-link">Whitehouse.Senate.Gov</a><br>
+                            <a href="https://en.wikipedia.org/wiki/Sheldon_Whitehouse" target="_blank" class="candidate-link">Wikipedia/Whitehouse</a><br>
+                            <a href="https://www.govtrack.us/congress/members/sheldon_whitehouse/412247" target="_blank" class="candidate-link">GovTrack.Us/Whitehouse</a>
+                        </td>
+                    </tr>
+
+                    <tr class="red-separator-90">
+                        <td colspan="4"></td>
+                    </tr>
+
+                    <!-- Maine -->
+                    <tr class="state-header">
+                        <td colspan="4"><u>Maine</u></td>
+                    </tr>
+
+                    <tr>
+                        <td class="vote-column">
+                            <input type="number" min="0" max="100" class="vote-input" id="pingree-vote" name="pingree-vote">
+                        </td>
+                        <td class="name-column">
+                            <span class="candidate-name"><u>Chellie Pingree</u><br><small>(House District 1)</small></span>
+                        </td>
+                        <td class="party-column">
+                            <span class="party-affiliation">Democrat</span>
+                        </td>
+                        <td class="webpage-column">
+                            <a href="https://pingree.house.gov/" target="_blank" class="candidate-link">Pingree.House.Gov</a><br>
+                            <a href="https://www.govtrack.us/congress/members/chellie_pingree/412307" target="_blank" class="candidate-link">GovTrack.Us/Pingree</a>
+                        </td>
+                    </tr>
+
+                    <!-- 50% width centered Yellow line -->
+                    <tr class="yellow-separator-gradient-50">
+                        <td colspan="4"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="vote-column">
+                            <input type="number" min="0" max="100" class="vote-input" id="golden-vote" name="golden-vote">
+                        </td>
+                        <td class="name-column">
+                            <span class="candidate-name"><u>Jared Golden</u><br><small>(House District 2)</small></span>
+                        </td>
+                        <td class="party-column">
+                            <span class="party-affiliation">Democrat</span>
+                        </td>
+                        <td class="webpage-column">
+                            <a href="https://golden.house.gov/" target="_blank" class="candidate-link">Golden.House.Gov</a><br>
+                            <a href="https://www.govtrack.us/congress/members/jared_golden/412842" target="_blank" class="candidate-link">GovTrack.Us/Golden</a>
+                        </td>
+                    </tr>
+
+                    <!-- 50% width Red centered separators -->
+                    <tr class="red-separator-gradient-50">
+                        <td colspan="4"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="vote-column">
+                            <input type="number" min="0" max="100" class="vote-input" id="collins-vote" name="collins-vote">
+                        </td>
+                        <td class="name-column">
+                            <span class="candidate-name"><u>Susan Collins</u><br><small>(Senator)</small></span>
+                        </td>
+                        <td class="party-column">
+                            <span class="party-affiliation">Democrat</span>
+                        </td>
+
+                        <td class="webpage-column">
+                            <a href="https://collins.senate.gov/" target="_blank" class="candidate-link">Collins.Senate.Gov</a><br>
+                            <a href="https://en.wikipedia.org/wiki/Susan_Collins" target="_blank" class="candidate-link">Wikipedia/Collins</a><br>
+                            <a href="https://www.govtrack.us/congress/members/susan_collins/300025" target="_blank" class="candidate-link">GovTrack.Us/Collins</a>
+                        </td>
+                    </tr>
+                    <!-- 50% width centered Yellow line -->
+                    <tr class="yellow-separator-gradient-50">
+                        <td colspan="4"></td>
+                    </tr>
+                    <tr>
+                        <td class="vote-column">
+                            <input type="number" min="0" max="100" class="vote-input" id="king-vote" name="king-vote">
+                        </td>
+                        <td class="name-column">
+                            <span class="candidate-name"><u>Angus King</u><br><small>(Senator)</small></span>
+                        </td>
+                        <td class="party-column">
+                            <span class="party-affiliation">Independent</span>
+                        </td>
+                        <td class="webpage-column">
+                            <a href="https://king.senate.gov/" target="_blank" class="candidate-link">King.Senate.Gov</a><br>
+                            <a href="https://en.wikipedia.org/wiki/Angus_King" target="_blank" class="candidate-link">Wikipedia/King</a><br>
+                            <a href="https://www.govtrack.us/congress/members/angus_king/412545" target="_blank" class="candidate-link">GovTrack.Us/King</a>
+                        </td>
+                    </tr>
+
+                    <!-- Custom combinations -->
+                    <!-- 50% width centered -->
+                    <tr class="separator-gradient-50">
+                        <td colspan="4"></td>
+                    </tr>
+
+                    <tr class="red-separator-90">
+                        <td colspan="4"></td>
+                    </tr>
+
+                    <!-- New Hampshire -->
+                    <tr class="state-header">
+                        <td colspan="4"><u>New Hampshire</u></td>
+                    </tr>
+
+                    <tr>
+                        <td class="vote-column">
+                            <input type="number" min="0" max="100" class="vote-input" id="pappas-vote" name="pappas-vote">
+                        </td>
+                        <td class="name-column">
+                            <span class="candidate-name"><u>Chris Pappas</u><br><small>(House District 1)</small></span>
+                        </td>
+                        <td class="party-column">
+                            <span class="party-affiliation">Democrat</span>
+                        </td>
+                        <td class="webpage-column">
+                            <a href="https://pappas.house.gov/" target="_blank" class="candidate-link">Pappas.House.Gov</a><br>
+                            <a href="https://www.govtrack.us/congress/members/chris_pappas/412795" target="_blank" class="candidate-link">GovTrack.Us/Pappas</a>
+                        </td>
+                    </tr>
+
+                    <!-- 50% width centered Yellow line -->
+                    <tr class="yellow-separator-gradient-50">
+                        <td colspan="4"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="vote-column">
+                            <input type="number" min="0" max="100" class="vote-input" id="goodlander-vote" name="goodlander-vote">
+                        </td>
+                        <td class="name-column">
+                            <span class="candidate-name"><u>Maggie Goodlander</u><br><small>(House District 2)</small></span>
+                        </td>
+                        <td class="party-column">
+                            <span class="party-affiliation">Democrat</span>
+                        </td>
+                        <td class="webpage-column">
+                            <a href="https://goodlander.house.gov/" target="_blank" class="candidate-link">Goodlander.House.Gov</a><br>
+                            <a href="https://www.govtrack.us/congress/members/maggie_goodlander/457007" target="_blank" class="candidate-link">GovTrack.Us/Goodlander</a>
+                        </td>
+                    </tr>
+
+                    <!-- 50% width Red centered separators -->
+                    <tr class="red-separator-gradient-50">
+                        <td colspan="4"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="vote-column">
+                            <input type="number" min="0" max="100" class="vote-input" id="shaheen-vote" name="shaheen-vote">
+                        </td>
+                        <td class="name-column">
+                            <span class="candidate-name"><u>Jeanne Shaheen</u><br><small>(Senator)</small></span>
+                        </td>
+                        <td class="party-column">
+                            <span class="party-affiliation">Democrat</span>
+                        </td>
+                        <td class="webpage-column">
+                            <a href="https://shaheen.senate.gov/" target="_blank" class="candidate-link">Shaheen.Senate.Gov</a><br>
+                            <a href="https://en.wikipedia.org/wiki/Maggie_Hassan" target="_blank" class="candidate-link">Wikipedia/Shaheen</a><br>
+                            <a href="https://www.govtrack.us/congress/members/jeanne_shaheen/412323" target="_blank" class="candidate-link">GovTrack.Us/Shaheen</a>
+                        </td>
+                    </tr>
+
+                    <!-- 50% width centered Yellow line -->
+                    <tr class="yellow-separator-gradient-50">
+                        <td colspan="4"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="vote-column">
+                            <input type="number" min="0" max="100" class="vote-input" id="hassan-vote" name="hassan-vote">
+                        </td>
+                        <td class="name-column">
+                            <span class="candidate-name"><u>Maggie Hassan</u><br><small>(Senator)</small></span>
+                        </td>
+                        <td class="party-column">
+                            <span class="party-affiliation">Democrat</span>
+                        </td>
+                        <td class="webpage-column">
+                            <a href="https://hassan.senate.gov/" target="_blank" class="candidate-link">Hassan.Senate.Gov</a><br>
+                            <a href="https://en.wikipedia.org/wiki/Angus_hassan" target="_blank" class="candidate-link">Wikipedia/Hassan</a><br>
+                            <a href="https://www.govtrack.us/congress/members/margaret_hassan/412680" target="_blank" class="candidate-link">GovTrack.Us/Hassan</a>
+                        </td>
+                    </tr>
+
+                    <tr class="red-separator-90">
+                        <td colspan="4"></td>
+                    </tr>
+
+                    <!-- Connecticut -->
+                    <tr class="state-header">
+                        <td colspan="4"><u>Connecticut</u></td>
+                    </tr>
+
+                    <tr>
+                        <td class="vote-column">
+                            <input type="number" min="0" max="100" class="vote-input" id="larson-vote" name="larson-vote">
+                        </td>
+                        <td class="name-column">
+                            <span class="candidate-name"><u>John Larson</u><br><small>(House District 1)</small></span>
+                        </td>
+                        <td class="party-column">
+                            <span class="party-affiliation">Democrat</span>
+                        </td>
+                        <td class="webpage-column">
+                            <a href="https://larson.house.gov/" target="_blank" class="candidate-link">Larson.House.Gov</a><br>
+                            <a href="https://www.govtrack.us/congress/members/john_larson/400233" target="_blank" class="candidate-link">GovTrack.Us/Larson</a>
+                        </td>
+                    </tr>
+
+                    <!-- 50% width centered Yellow line -->
+                    <tr class="yellow-separator-gradient-50">
+                        <td colspan="4"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="vote-column">
+                            <input type="number" min="0" max="100" class="vote-input" id="courtney-vote" name="courtney-vote">
+                        </td>
+                        <td class="name-column">
+                            <span class="candidate-name"><u>Joe Courtney</u><br><small>(House District 2)</small></span>
+                        </td>
+                        <td class="party-column">
+                            <span class="party-affiliation">Democrat</span>
+                        </td>
+                        <td class="webpage-column">
+                            <a href="https://courtney.house.gov/" target="_blank" class="candidate-link">Courtney.House.Gov</a><br>
+                            <a href="https://www.govtrack.us/congress/members/joe_courtney/412193" target="_blank" class="candidate-link">GovTrack.Us/Courtney</a>
+                        </td>
+                    </tr>
+
+                    <!-- 50% width centered Yellow line -->
+                    <tr class="yellow-separator-gradient-50">
+                        <td colspan="4"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="vote-column">
+                            <input type="number" min="0" max="100" class="vote-input" id="delauro-vote" name="delauro-vote">
+                        </td>
+                        <td class="name-column">
+                            <span class="candidate-name"><u>Rosa DeLauro</u><br><small>(House District 3)</small></span>
+                        </td>
+                        <td class="party-column">
+                            <span class="party-affiliation">Democrat</span>
+                        </td>
+                        <td class="webpage-column">
+                            <a href="https://delauro.house.gov/" target="_blank" class="candidate-link">DeLauro.House.Gov</a><br>
+                            <a href="https://www.govtrack.us/congress/members/rosa_delauro/400103" target="_blank" class="candidate-link">GovTrack.Us/DeLauro</a>
+                        </td>
+                    </tr>
+
+                    <!-- 50% width centered Yellow line -->
+                    <tr class="yellow-separator-gradient-50">
+                        <td colspan="4"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="vote-column">
+                            <input type="number" min="0" max="100" class="vote-input" id="himes-vote" name="himes-vote">
+                        </td>
+                        <td class="name-column">
+                            <span class="candidate-name"><u>Jim Himes</u><br><small>(House District 4)</small></span>
+                        </td>
+                        <td class="party-column">
+                            <span class="party-affiliation">Democrat</span>
+                        </td>
+                        <td class="webpage-column">
+                            <a href="https://himes.house.gov/" target="_blank" class="candidate-link">Himes.House.Gov</a><br>
+                            <a href="https://www.govtrack.us/congress/members/james_himes/412282" target="_blank" class="candidate-link">GovTrack.Us/Himes</a>
+                        </td>
+                    </tr>
+
+                    <!-- 50% width centered Yellow line -->
+                    <tr class="yellow-separator-gradient-50">
+                        <td colspan="4"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="vote-column">
+                            <input type="number" min="0" max="100" class="vote-input" id="hayes-vote" name="hayes-vote">
+                        </td>
+                        <td class="name-column">
+                            <span class="candidate-name"><u>Jahana Hayes</u><br><small>(House District 5)</small></span>
+                        </td>
+                        <td class="party-column">
+                            <span class="party-affiliation">Democrat</span>
+                        </td>
+                        <td class="webpage-column">
+                            <a href="https://hayes.house.gov/" target="_blank" class="candidate-link">Hayes.House.Gov</a><br>
+                            <a href="https://www.govtrack.us/congress/members/jahana_hayes/412763" target="_blank" class="candidate-link">GovTrack.Us/Hayes</a>
+                        </td>
+                    </tr>
+
+                    <!-- 50% width Red centered separators -->
+                    <tr class="red-separator-gradient-50">
+                        <td colspan="4"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="vote-column">
+                            <input type="number" min="0" max="100" class="vote-input" id="blumenthal-vote" name="blumenthal-vote">
+                        </td>
+                        <td class="name-column">
+                            <span class="candidate-name"><u>Richard Blumenthal</u><br><small>(Senator)</small></span>
+                        </td>
+                        <td class="party-column">
+                            <span class="party-affiliation">Democrat</span>
+                        </td>
+                        <td class="webpage-column">
+                            <a href="https://blumenthal.senate.gov/" target="_blank" class="candidate-link">Blumenthal.Senate.Gov</a><br>
+                            <a href="https://en.wikipedia.org/wiki/Richard_Blumenthal" target="_blank" class="candidate-link">Wikipedia/Blumenthal</a><br>
+                            <a href="https://www.govtrack.us/congress/members/richard_blumenthal/412490" target="_blank" class="candidate-link">GovTrack.Us/Blumenthal</a>
+                        </td>
+                    </tr>
+
+                    <!-- 50% width centered Yellow line -->
+                    <tr class="yellow-separator-gradient-50">
+                        <td colspan="4"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="vote-column">
+                            <input type="number" min="0" max="100" class="vote-input" id="murphy-vote" name="murphy-vote">
+                        </td>
+                        <td class="name-column">
+                            <span class="candidate-name"><u>Chris Murphy</u><br><small>(Senator)</small></span>
+                        </td>
+                        <td class="party-column">
+                            <span class="party-affiliation">Democrat</span>
+                        </td>
+                        <td class="webpage-column">
+                            <a href="https://www.murphy.senate.gov/" target="_blank" class="candidate-link">Murphy.Senate.Gov</a><br>
+                            <a href="https://en.wikipedia.org/wiki/Chris_Murphy" target="_blank" class="candidate-link">Wikipedia/Murphy</a><br>
+                            <a href="https://www.govtrack.us/congress/members/christopher_murphy/412194" target="_blank" class="candidate-link">GovTrack.Us/Murphy</a>
+                        </td>
+                    </tr>
+
+                    <tr class="red-separator-90">
+                        <td colspan="4"></td>
+                    </tr>
+
+                    <!-- Massachusetts -->
+                    <tr class="state-header">
+                        <td colspan="4"><u>Massachusetts</u></td>
+                    </tr>
+
+                    <tr>
+                        <td class="vote-column">
+                            <input type="number" min="0" max="100" class="vote-input" id="neal-vote" name="neal-vote">
+                        </td>
+                        <td class="name-column">
+                            <span class="candidate-name"><u>Richard Neal</u><br><small>(House District 1)</small></span>
+                        </td>
+                        <td class="party-column">
+                            <span class="party-affiliation">Democrat</span>
+                        </td>
+                        <td class="webpage-column">
+                            <a href="https://neal.house.gov/" target="_blank" class="candidate-link">Neal.House.Gov</a><br>
+                            <a href="https://www.govtrack.us/congress/members/richard_neal/400291" target="_blank" class="candidate-link">GovTrack.Us/Neal</a>
+                        </td>
+                    </tr>
+
+                    <!-- 50% width centered Yellow line -->
+                    <tr class="yellow-separator-gradient-50">
+                        <td colspan="4"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="vote-column">
+                            <input type="number" min="0" max="100" class="vote-input" id="mcgovern-vote" name="mcgovern-vote">
+                        </td>
+                        <td class="name-column">
+                            <span class="candidate-name"><u>James McGovern</u><br><small>(House District 2)</small></span>
+                        </td>
+                        <td class="party-column">
+                            <span class="party-affiliation">Democrat</span>
+                        </td>
+                        <td class="webpage-column">
+                            <a href="https://mcgovern.house.gov/" target="_blank" class="candidate-link">McGovern.House.Gov</a><br>
+                            <a href="https://www.govtrack.us/congress/members/james_mcgovern/400263" target="_blank" class="candidate-link">GovTrack.Us/McGovern</a>
+                        </td>
+                    </tr>
+
+                    <!-- 50% width centered Yellow line -->
+                    <tr class="yellow-separator-gradient-50">
+                        <td colspan="4"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="vote-column">
+                            <input type="number" min="0" max="100" class="vote-input" id="trahan-vote" name="trahan-vote">
+                        </td>
+                        <td class="name-column">
+                            <span class="candidate-name"><u>Lori Trahan</u><br><small>(House District 3)</small></span>
+                        </td>
+                        <td class="party-column">
+                            <span class="party-affiliation">Democrat</span>
+                        </td>
+                        <td class="webpage-column">
+                            <a href="https://trahan.house.gov/" target="_blank" class="candidate-link">Trahan.House.Gov</a><br>
+                            <a href="https://www.govtrack.us/congress/members/lori_trahan/412781" target="_blank" class="candidate-link">GovTrack.Us/Trahan</a>
+                        </td>
+                    </tr>
+
+                    <!-- 50% width centered Yellow line -->
+                    <tr class="yellow-separator-gradient-50">
+                        <td colspan="4"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="vote-column">
+                            <input type="number" min="0" max="100" class="vote-input" id="auchincloss-vote" name="auchincloss-vote">
+                        </td>
+                        <td class="name-column">
+                            <span class="candidate-name"><u>Jake Auchincloss</u><br><small>(House District 4)</small></span>
+                        </td>
+                        <td class="party-column">
+                            <span class="party-affiliation">Democrat</span>
+                        </td>
+                        <td class="webpage-column">
+                            <a href="https://auchincloss.house.gov/" target="_blank" class="candidate-link">Auchincloss.House.Gov</a><br>
+                            <a href="https://www.govtrack.us/congress/members/jake_auchincloss/456825" target="_blank" class="candidate-link">GovTrack.Us/Auchincloss</a>
+                        </td>
+                    </tr>
+
+                    <!-- 50% width centered Yellow line -->
+                    <tr class="yellow-separator-gradient-50">
+                        <td colspan="4"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="vote-column">
+                            <input type="number" min="0" max="100" class="vote-input" id="clark-vote" name="clark-vote">
+                        </td>
+                        <td class="name-column">
+                            <span class="candidate-name"><u>Katherine Clark</u><br><small>(House District 5)</small></span>
+                        </td>
+                        <td class="party-column">
+                            <span class="party-affiliation">Democrat</span>
+                        </td>
+                        <td class="webpage-column">
+                            <a href="https://katherineclark.house.gov/" target="_blank" class="candidate-link">KatherineClark.House.Gov</a><br>
+                            <a href="https://www.govtrack.us/congress/members/katherine_clark/412600" target="_blank" class="candidate-link">GovTrack.Us/Clark</a>
+                        </td>
+                    </tr>
+
+                    <!-- 50% width centered Yellow line -->
+                    <tr class="yellow-separator-gradient-50">
+                        <td colspan="4"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="vote-column">
+                            <input type="number" min="0" max="100" class="vote-input" id="moulton-vote" name="moulton-vote">
+                        </td>
+                        <td class="name-column">
+                            <span class="candidate-name"><u>Seth Moulton</u><br><small>(House District 6)</small></span>
+                        </td>
+                        <td class="party-column">
+                            <span class="party-affiliation">Democrat</span>
+                        </td>
+                        <td class="webpage-column">
+                            <a href="https://moulton.house.gov/" target="_blank" class="candidate-link">Moulton.House.Gov</a><br>
+                            <a href="https://www.govtrack.us/congress/members/seth_moulton/412632" target="_blank" class="candidate-link">GovTrack.Us/Moulton</a>
+                        </td>
+                    </tr>
+
+                    <!-- 50% width centered Yellow line -->
+                    <tr class="yellow-separator-gradient-50">
+                        <td colspan="4"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="vote-column">
+                            <input type="number" min="0" max="100" class="vote-input" id="pressley-vote" name="pressley-vote">
+                        </td>
+                        <td class="name-column">
+                            <span class="candidate-name"><u>Ayanna Pressley</u><br><small>(House District 7)</small></span>
+                        </td>
+                        <td class="party-column">
+                            <span class="party-affiliation">Democrat</span>
+                        </td>
+                        <td class="webpage-column">
+                            <a href="https://pressley.house.gov/" target="_blank" class="candidate-link">Pressley.House.Gov</a><br>
+                            <a href="https://www.govtrack.us/congress/members/ayanna_pressley/412782" target="_blank" class="candidate-link">GovTrack.Us/Pressley</a>
+                        </td>
+                    </tr>
+
+                    <!-- 50% width centered Yellow line -->
+                    <tr class="yellow-separator-gradient-50">
+                        <td colspan="4"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="vote-column">
+                            <input type="number" min="0" max="100" class="vote-input" id="lynch-vote" name="lynch-vote">
+                        </td>
+                        <td class="name-column">
+                            <span class="candidate-name"><u>Stephen Lynch</u><br><small>(House District 8)</small></span>
+                        </td>
+                        <td class="party-column">
+                            <span class="party-affiliation">Democrat</span>
+                        </td>
+                        <td class="webpage-column">
+                            <a href="https://lynch.house.gov/" target="_blank" class="candidate-link">Lynch.House.Gov</a><br>
+                            <a href="https://www.govtrack.us/congress/members/stephen_lynch/400249" target="_blank" class="candidate-link">GovTrack.Us/Lynch</a>
+                        </td>
+                    </tr>
+
+                    <!-- 50% width centered Yellow line -->
+                    <tr class="yellow-separator-gradient-50">
+                        <td colspan="4"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="vote-column">
+                            <input type="number" min="0" max="100" class="vote-input" id="keating-vote" name="keating-vote">
+                        </td>
+                        <td class="name-column">
+                            <span class="candidate-name"><u>William Keating</u><br><small>(House District 9)</small></span>
+                        </td>
+                        <td class="party-column">
+                            <span class="party-affiliation">Democrat</span>
+                        </td>
+                        <td class="webpage-column">
+                            <a href="https://keating.house.gov/" target="_blank" class="candidate-link">Keating.House.Gov</a><br>
+                            <a href="https://www.govtrack.us/congress/members/william_keating/412435" target="_blank" class="candidate-link">GovTrack.Us/Keating</a>
+                        </td>
+                    </tr>
+
+                    <!-- 50% width Red centered separators -->
+                    <tr class="red-separator-gradient-50">
+                        <td colspan="4"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="vote-column">
+                            <input type="number" min="0" max="100" class="vote-input" id="warren-vote" name="warren-vote">
+                        </td>
+                        <td class="name-column">
+                            <span class="candidate-name"><u>Elizabeth Warren</u><br><small>(Senator)</small></span>
+                        </td>
+                        <td class="party-column">
+                            <span class="party-affiliation">Democrat</span>
+                        </td>
+                        <td class="webpage-column">
+                            <a href="https://warren.senate.gov/" target="_blank" class="candidate-link">Warren.Senate.Gov</a><br>
+                            <a href="https://en.wikipedia.org/wiki/Elizabeth_Warren" target="_blank" class="candidate-link">Wikipedia/Warren</a><br>
+                            <a href="https://www.govtrack.us/congress/members/elizabeth_warren/412542" target="_blank" class="candidate-link">GovTrack.Us/Warren</a>
+                        </td>
+                    </tr>
+
+                    <!-- 50% width centered Yellow line -->
+                    <tr class="yellow-separator-gradient-50">
+                        <td colspan="4"></td>
+                    </tr>
+
+                    <tr>
+                        <td class="vote-column">
+                            <input type="number" min="0" max="100" class="vote-input" id="markey-vote" name="markey-vote">
+                        </td>
+                        <td class="name-column">
+                            <span class="candidate-name"><u>Ed Markey</u><br><small>(Senator)</small></span>
+                        </td>
+                        <td class="party-column">
+                            <span class="party-affiliation">Democrat</span>
+                        </td>
+                        <td class="webpage-column">
+                            <a href="https://www.markey.senate.gov/" target="_blank" class="candidate-link">Markey.Senate.Gov</a><br>
+                            <a href="https://en.wikipedia.org/wiki/Ed_Markey" target="_blank" class="candidate-link">Wikipedia/Markey</a><br>
+                            <a href="https://www.govtrack.us/congress/members/edward_markey/400253" target="_blank" class="candidate-link">GovTrack.Us/Markey</a>
+                        </td>
+                    </tr>
+
+                    <tr class="red-separator">
+                        <td colspan="4"></td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+            <div class="submit-section">
+                <button type="submit">Submit Ballot</button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-bottom">
+            <p><u>Common-Law Republic, U.S.A.</u>; <u>Empowering Self-Governing Communities</u>.</p>
+            <p>With the help of many others; this entire project, as presented thru this web-page,<br>
+            has been engineered, by: Charles Stewart, of Coleman Texas. ... Last up-dated: September-2025.</p>
+        </div>
+    </footer>
+</body>
+</html>
+

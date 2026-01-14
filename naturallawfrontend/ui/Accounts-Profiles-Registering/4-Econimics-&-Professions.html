@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>4-Economics-Trade-Commerce-SocialValueContributing-Profile</title>
+<style>
+/* Using the existing CSS variables and styles from your code */
+:root {
+--primary-dark: #000000;
+--secondary-dark: #111111;
+--tertiary-dark: #1a1a1a;
+--accent-gold: #f5d442;
+--accent-gold-hover: #ffe97f;
+--text-light: #ffffcc;
+--text-white: #fefefe;
+--highlight-pink: #ff33e3;
+--border-color: #444;
+--shadow-color: rgba(255, 215, 0, 0.2);
+}
+
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body {
+margin: 0;
+padding: 0;
+font-family: "Times New Roman", Times, serif;
+background-color: var(--primary-dark);
+color: var(--text-light);
+line-height: 1.6;
+}
+
+.container {
+max-width: 800px;
+margin: 0 auto;
+padding: 2rem;
+}
+
+.registration-form {
+background-color: var(--secondary-dark);
+padding: 2rem;
+border-radius: 12px;
+box-shadow: 0 4px 10px var(--shadow-color);
+border: 1px solid var(--border-color);
+}
+
+.form-title {
+color: var(--accent-gold);
+text-align: center;
+margin-bottom: 2rem;
+font-size: 2rem;
+}
+
+.form-section {
+margin-bottom: 2rem;
+}
+
+.form-section h3 {
+color: var(--accent-gold);
+margin-bottom: 1rem;
+font-size: 1.3rem;
+}
+
+.form-group {
+margin-bottom: 1.5rem;
+}
+
+.form-group label {
+display: block;
+margin-bottom: 0.5rem;
+color: var(--text-light);
+font-weight: bold;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+width: 100%;
+padding: 0.8rem;
+background-color: var(--tertiary-dark);
+border: 1px solid var(--border-color);
+border-radius: 4px;
+color: var(--text-light);
+font-size: 1rem;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+outline: none;
+border-color: var(--accent-gold);
+box-shadow: 0 0 5px var(--shadow-color);
+}
+
+.checkbox-group {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+gap: 0.5rem;
+margin-top: 0.5rem;
+}
+
+.checkbox-item {
+display: flex;
+align-items: center;
+padding: 0.5rem;
+background-color: var(--tertiary-dark);
+border-radius: 4px;
+}
+
+.checkbox-item input[type="checkbox"] {
+width: auto;
+margin-right: 0.5rem;
+}
+
+.checkbox-item label {
+margin-bottom: 0;
+font-weight: normal;
+cursor: pointer;
+}
+
+.radio-group {
+display: flex;
+flex-direction: column;
+gap: 0.5rem;
+margin-top: 0.5rem;
+}
+
+.radio-item {
+display: flex;
+align-items: center;
+padding: 0.5rem;
+background-color: var(--tertiary-dark);
+border-radius: 4px;
+}
+
+.radio-item input[type="radio"] {
+width: auto;
+margin-right: 0.5rem;
+}
+
+.radio-item label {
+margin-bottom: 0;
+font-weight: normal;
+cursor: pointer;
+}
+
+.submit-btn {
+background-color: var(--accent-gold);
+color: var(--primary-dark);
+padding: 1rem 2rem;
+border: none;
+border-radius: 4px;
+font-size: 1.1rem;
+font-weight: bold;
+cursor: pointer;
+width: 100%;
+transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+background-color: var(--accent-gold-hover);
+}
+
+.note {
+background-color: var(--tertiary-dark);
+padding: 1rem;
+border-radius: 4px;
+border-left: 4px solid var(--accent-gold);
+margin-bottom: 1.5rem;
+font-style: italic;
+}
+
+@media screen and (max-width: 768px) {
+.container {
+padding: 1rem;
+}
+.checkbox-group {
+grid-template-columns: 1fr;
+}
+}
+</style>
+  <style>
+    /* Root Variables and Basic Reset */
+    :root {
+      --primary-dark: #000000;
+      --secondary-dark: #111111;
+      --tertiary-dark: #1a1a1a;
+      --accent-gold: #f5d442;
+      --accent-gold-hover: #ffe97f;
+      --text-light: #ffffcc;
+      --text-white: #fefefe;
+      --highlight-pink: #ff33e3;
+      --border-color: #444;
+      --shadow-color: rgba(255, 215, 0, 0.2);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Times New Roman", Times, serif;  /* Changed from "Segoe UI" */
+    background-color: var(--primary-dark);
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+    /* Typography */
+    h1, h2, h3, h4, h5, h6 {
+      color: var(--accent-gold);
+      margin-bottom: 1rem;
+    }
+
+    a {
+      color: var(--accent-gold);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      color: var(--accent-gold-hover);
+    }
+
+    /* Header Styles */
+    .main-header {
+      background-color: var(--primary-dark);
+      border-bottom: 2px solid var(--accent-gold);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .header-title {
+    text-align: center;
+    padding: 1rem 0;    /* Reduced from 1.5rem to 0.5rem */
+}
+
+    .header-title h1 {
+      font-size: 2.7rem;
+      margin: 0;
+        color: #ffffff;   /* Changed to white, overriding the default gold color */
+    }
+
+    /* Navigation Styles */
+.topnav {
+    background-color: var(--secondary-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.0rem 0;    /* Reduced from 0.5rem to 0rem */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+      margin: 0 0.5rem;
+    }
+
+    .dropbtn {
+      background-color: transparent;
+      color: var(--accent-gold);
+      padding: 0.8rem 1.2rem;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    .dropbtn:hover {
+      color: var(--accent-gold-hover);
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: var(--tertiary-dark);
+      min-width: 200px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+      z-index: 1;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+    }
+
+    .dropdown-content a {
+      color: var(--text-light);
+      padding: 12px 16px;
+      display: block;
+      text-align: left;
+    }
+
+.dropdown-content .long-item {
+    white-space: normal;
+    line-height: 1.2;
+    padding: 8px 16px;
+}
+
+    .dropdown-content a:hover {
+      background-color: var(--secondary-dark);
+      color: var(--accent-gold);
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    /* Main Container Styles */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: .1rem;    /* Reduced from 2rem */
+    }
+
+    /* Content Section Styles */
+ .content-section {
+    background-color: var(--secondary-dark);
+    margin: 0.1rem 0;
+    padding: 0.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px var(--shadow-color);
+    border: 1px solid var(--border-color);
+}
+
+    /* Front Page Specific Styles */
+    .welcome-content {
+      padding: .1rem;   /* Reduced from 3rem */
+    }
+
+.welcome-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0;  /* Controls spacing between lines */
+    padding-top: 0rem;     /* minimal top space */
+    padding-bottom: 1rem;   /* larger bottom space */
+}
+
+
+.welcome-line {
+    font-size: 1.8rem;
+    color: var(--accent-gold);
+    font-weight: bold;
+    line-height: 1.2;  /* Tighter line spacing */
+    margin: 0;
+    padding: 0;
+}
+
+.welcome-text {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    font-weight: 500;
+    line-height: 1.2;
+    margin: 0;
+    padding: 0;
+}
+
+.welcome-block > div:nth-child(2) {
+    margin-bottom: 0.5rem;  /* Small space before the smaller text */
+}
+
+/* Map Styles */
+.map-container {
+    width: 100%;
+    overflow: hidden;
+    padding: 0.5rem 0;    /* Reduced from 1rem */
+    margin-bottom: 0.5rem; /* Add this to reduce space before footer */
+}
+
+.responsive-map {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 8px;  /* Optional: adds slightly rounded corners */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);  /* Optional: adds subtle shadow */
+}
+
+/* Optional: Add hover effect */
+.responsive-map:hover {
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.2);
+    transition: box-shadow 0.3s ease;
+}
+
+@media screen and (max-width: 768px) {
+    .map-container {
+        padding: 0.5rem 0;
+    }
+    
+    .responsive-map {
+        width: 100%;
+    }
+}
+
+    .registration-cta {
+      padding: 2rem;
+    }
+
+    .registration-cta h3 {
+      font-size: 1.6rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .registration-cta p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+    }
+
+/* Footer Styles */
+.main-footer {
+    background-color: var(--secondary-dark);
+    padding: 1rem;          /* Reduced padding */
+    margin-top: 1rem;       /* Reduced top margin */
+    border-top: 2px solid var(--border-color);
+}
+
+.footer-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: block;
+}
+
+.footer-section {
+    padding: 0.2rem;        /* Reduced padding */
+    margin-bottom: 0.2rem;  /* Reduced margin */
+    text-align: center;
+}
+
+.footer-section p {
+    margin-bottom: 0.2rem;
+    line-height: 1.4;
+    max-width: 800px;     /* Add this to control text width */
+    margin-left: auto;    /* Center the contained text */
+    margin-right: auto;
+}
+
+.footer-section p.mt-1 {
+    margin-top: 0.2rem;     /* Reduced margin for paragraphs with mt-1 class */
+}
+
+.footer-section:hover {
+    background-color: var(--tertiary-dark);
+    transition: background-color 0.3s ease;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 0.5rem;    /* Reduced padding */
+    margin-top: 0.5rem;     /* Reduced margin */
+    border-top: 1px solid var(--border-color);
+}
+
+    /* Utility Classes */
+    .text-center {
+      text-align: center;
+    }
+
+    .mt-1 { margin-top: 1rem; }
+    .mt-2 { margin-top: 2rem; }
+
+    /* Responsive Design */
+    @media screen and (max-width: 768px) {
+      .topnav {
+        flex-direction: column;
+        padding: 0;
+      }
+
+      .dropdown {
+        width: 100%;
+        margin: 0;
+      }
+
+      .dropbtn {
+        width: 100%;
+        padding: 1rem;
+      }
+
+      .dropdown-content {
+        width: 100%;
+        position: relative;
+      }
+
+      .container {
+        padding: 1rem;
+      }
+
+      .content-section {
+        padding: 1rem;
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-title">
+            <h1><u>Common-Law Republic</u>; <u>U.S.A.</u>.</h1>
+        </div>
+
+        <nav class="topnav">
+            <div class="dropdown">
+                <button class="dropbtn">Home-Page</button>
+                <div class="dropdown-content">
+                    <a href="index.html">Home Page</a>
+                    <a href="./BriefGuidelines-PreferentialVotingBallot-Generic-Edit3.pdf">Ballot Using Instructions</a>
+                    <a href="USA-LocalJurisdictions/OrganicHierarchiesUSA-V4.2.pdf">Social-Organizing Under Constitutional "Organic Hierarchies"</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Register;
+                  or: Log-In.</button>
+                <div class="dropdown-content">
+                    <a href="Accounts-Profiles-Registering/NewUsers-Registration.html">Register</a>
+                    <a href="./Accounts-Profiles-Registering/Login.html">Login</a>
+                    <a href="Accounts-Profiles-Registering/ProfileIndexManagement.html">Different User-Account Profile-Pages; Explained</a>
+                </div>
+            </div>
+
+        <nav class="topnav">
+            <div class="dropdown">
+                <button class="dropbtn">Governing-Bodies-USA</button>
+                <div class="dropdown-content">
+                    <a href="./USA-GoverningBodies/ExecutiveDepartment-Prez/ExcDpt-SubCategories-Index&List">ExecutiveDepartment-SubDepartments-Agencies-Ballots-Index&List</a>
+                    <a href="./USA-NationalIssues/JudicialDepartment/JudicialIndex.html">Judicial-Department</a>
+                    <a href="./USA-NationalIssues/Legislature-HouseReps/Leg-HRepsIndex.html">Legislature-HouseReps</a>
+                    <a href="./USA-NationalIssues/Legislature-Senate/Leg-Senate.html">Legislature-Senate</a>
+                    <a href="./USA-NationalIssues/Treasury/TreasuryIndex.html">Treasury</a>
+                    <a href="./USA-NationalIssues/SecretaryofState/SecofStateIndex.html">Secretary-of-State</a>
+                    <a href="./USA-NationalIssues/Z-Agencies/Agencies.html">Z-Agencies-CIA-DOJ-FBI</a>                                                            
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Local Community Organizing</button>
+                <div class="dropdown-content"style="text-align:center;">
+                    <a href="#">Residence & Geographical-Location</a>
+                    <p><u>USA Super-States</u>:</p>
+                            <a href="./USA-LocalJurisdictions/01-NewEngland-SS/NewEngland-SS.html" value="usa-01">USA-01: New-England</a>
+                            <a href="./USA-LocalJurisdictions/02-NewYork-SS/NewYork-SS.html" value="usa-02">USA-02: New-York</a>
+                            <a href="./USA-LocalJurisdictions/03-Jersey-Penn-SS/JerseyPenn-SS.html" value="usa-03">USA-03: Jersey-Penn</a>
+                            <a href="./USA-LocalJurisdictions/04-GreatLakes-SS/GreatLakes-SS.html" value="usa-04">USA-04: Great-Lakes</a>
+                            <a href="./USA-LocalJurisdictions/05-VirginiaCarolins-SS/Virginia-Carolina-SS.html" value="usa-05">USA-05: Virginia-Carolina</a>
+                            <a href="./USA-LocalJurisdictions/07-MississippiValley-SS/MississippiValley-SS.html" value="usa-06">USA-06: Mississippi-Valley</a>
+                            <a href="./USA-LocalJurisdictions/06-FloridaGeorgia-SS/FloridaGeorgia-SS.html" value="usa-07">USA-07: Florida-Georgia</a>
+                            <a href="./USA-LocalJurisdictions/08-WestGreatLakes-SS/WestreatLakes-SS.html" value="usa-08">USA-08: West-Great-Lakes</a>
+                            <a href="./USA-LocalJurisdictions/09-Texas-SS/Texas-SS.html" value="usa-09">USA-09: Texas</a>
+                            <a href="./USA-LocalJurisdictions/10-SouthWest-SS/SouthWest-SS.html" value="usa-10">USA-10: South-West</a>
+                            <a href="./USA-LocalJurisdictions/11-PacificNW-SS/PacificNW-SS.html" value="usa-11">USA-11: Pacific-NW</a>
+                            <a href="./USA-LocalJurisdictions/12-California-SS/California-SS.html"value="usa-12">USA-12: California</a>
+                            <p><u>World Regions</u>:</p>
+                            <a href="../../WorldJurisdictions/01-NorthAmerica-Canada/NorthAmerica-Canada.html" value="world-01">World-01: North-America Canada</a>
+                            <a href="../../WorldJurisdictions/02-WesternEurope/WesternEurope.html" value="world-02">World-02: Western-Europe</a>
+                            <a href="../../WorldJurisdictions/03-PacificOcean/PacificOcean.html" value="world-03">World-03: Pacific-Ocean</a>
+                            <a href="../../WorldJurisdictions/04-SouthEastAsia/SouthEastAsia.html" value="world-04">World-04: South-East Asia</a>
+                            <a href="../../WorldJurisdictions/05-NorthAsia-&-EasternEurope/NorthAsia-&-EasternEurope.html" value="world-05">World-05: Northern-Asia & Eastern-Europe</a>
+                            <a href="../../WorldJurisdictions/06-Central-&SouthAmerica/Central&SouthAmerica.html" value="world-06">World-06: Central-&-South-America</a>
+                            <a href="../../WorldJurisdictions/07-EasrernMediteranean&NorthAfrica/EasternMediteranean-&-NorthAfrica.html" value="world-07">World-07: Eastern-Mediterranean & North-Africa</a>
+                            <a href="../../WorldJurisdictions/08-India/India.html" value="world-08">World-08: India</a>
+                            <a href="../../WorldJurisdictions/09-South&CentralAfrica/South&CentralAfrica.html" value="world-09">World-09: South-&-Central Africa</a>
+                            <a href="../../WorldJurisdictions/10-China/China.html" value="world-10">World-10: China</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Private/Special/Ideological/Religious Organizing</button>
+                <div class="dropdown-content">
+                    <a href="./PrivateSpecialReligiousCommunities/1-Religous-&-Spiritual-Communities/SpiritualIndex.html">Religious & Spiritual Communities</a>
+                    <a href="./PrivateSpecialReligiousCommunities/2-Political-Parties/PoliticalParties.html">Political Parties</a>
+                    <a href="./PrivateSpecialReligiousCommunities/3-Business&Financial-Communities&Corporations/Biz&Finances.html">Business & Financial Communities & Corporations</a>
+                    <a href="./PrivateSpecialReligiousCommunities/4-Trade-Unions/TradeUnions.html">Trade Unions</a>
+                    <a href="./PrivateSpecialReligiousCommunities/5-FoodProduction&Distribution-Communities/FoodProduction.html">Food Production & Distribution Communities</a>
+                    <a href="./PrivateSpecialReligiousCommunities/6-EnvironmentalActivist-Communities/EnvironmentActivism.html">Environmental Activist Communities</a>
+                    <a href="./PrivateSpecialReligiousCommunities/7-HealthActivist-Communities/HealthActivism.html">Health Activist Communities</a>
+                    <a href="./PrivateSpecialReligiousCommunities/8-DNA-Genetic-Racial-Bloodlines-Communities/GeneticHeritage.html">DNA, Genetic, Racial, Blood-line, & Ethnic Communities</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Support</button>
+                <div class="dropdown-content">
+                    <a href="./Support/Support.html">Support-Help-Contacts</a>                </div>
+            </div>
+        </nav>
+    </header>
+<div class="container">
+    <form class="registration-form" action="#" method="POST">
+        <h2 class="form-title"><u>4: Economics, Trade, Commerce;<br> 
+            & Social-Value Contributing</u>; <u>Users-Profile</u>:</h2>
+        <div class="note">
+            <p>This registration-page, is just one among 
+                a larger-number of user-profile pages, whch we have constructed, 
+                in our attempts to more efficiently empower each & all of our CLR-Community-Members.<br>
+                For more effective "Community-Organizing Purposes"; this specific page 
+                is designed to help in Identifying Your more specific 
+                "<u>Economic Beliefs</u>, <u>Trading/Barter Social-Value Contributing 
+                Capabilities</u>, & <u>Capacity to Interact Honorably Through 
+                well-settled Commercial-Transaction Procedures</u>".<br>
+                By default; your entire data profile here is kept completely private; 
+                but, you may mark portions of it, or all of it, to be shared; 
+                either publicly; or only with your own chosen smaller communities 
+                with whom you have of developed your own higher-levels of "Trust".<br>
+                This below list of categories & questions is presently quite short,
+                & we expected it to expand greatly soon; with perhaps much of it 
+                being moved out in-to a Separate Ballot style of page 
+                for users to fill out.<br>
+                (<u>Please Remove All Itallics</u>)</p>
+        </div>
+
+<div class="instructions">
+    <h3><u>Economic Capacities Profile</u>:</h3>
+
+        <div class="form-group">
+            <label>Under the presumption, that,
+            "all people are capable of contributing some form of economic-value
+            to the society in which they reside";<br>
+            <u>Are You Willing to Affirm</u>, that,
+            <u>You are Willing to Deliver Services &/or Goods</u> to other people,
+            & which you might be reasonably capable of producing?</label>
+            <div class="radio-group">
+                <div class="radio-item">
+                    <input type="radio" id="deliverGoods_yes" name="deliverGoods" value="yes">
+                    <label for="deliverGoods_yes">Yes</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" id="deliverGoods_notDecided" name="deliverGoods" value="not-decided">
+                    <label for="deliverGoods_notDecided">Not Decided</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" id="deliverGoods_indifferent" name="deliverGoods" value="indifferent">
+                    <label for="deliverGoods_indifferent">Indifferent</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" id="deliverGoods_no" name="deliverGoods" value="no">
+                    <label for="deliverGoods_no">No</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label><u>Are You Willing to Produce</u> "<u>Commercial Instruments</u>",
+            (either in paper, or electronically), where-in, <u>You Promise to Deliver</u>,
+            as some point in time in the future (which is convenient for you),
+            <u>Some Form of Economically-Valuable Goods or Servces</u>,
+            which you might be reasonably capable of producing?</label>
+            <div class="radio-group">
+                <div class="radio-item">
+                    <input type="radio" id="commercialInstruments_yes" name="commercialInstruments" value="yes">
+                    <label for="commercialInstruments_yes">Yes</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" id="commercialInstruments_notDecided" name="commercialInstruments" value="not-decided">
+                    <label for="commercialInstruments_notDecided">Not Decided</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" id="commercialInstruments_indifferent" name="commercialInstruments" value="indifferent">
+                    <label for="commercialInstruments_indifferent">Indifferent</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" id="commercialInstruments_no" name="commercialInstruments" value="no">
+                    <label for="commercialInstruments_no">No</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Are You Capable of "<u>Delivering Silver-Coins</u>",
+            to People From Whom You have Received Goods &/or Services,
+            &, to whom, You have Promised to Deliver such "Silver-Coins" to them?</label>
+            <div class="radio-group">
+                <div class="radio-item">
+                    <input type="radio" id="silverCoins_yes" name="silverCoins" value="yes">
+                    <label for="silverCoins_yes">Yes</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" id="silverCoins_notDecided" name="silverCoins" value="not-decided">
+                    <label for="silverCoins_notDecided">Not Decided</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" id="silverCoins_indifferent" name="silverCoins" value="indifferent">
+                    <label for="silverCoins_indifferent">Indifferent</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" id="silverCoins_no" name="silverCoins" value="no">
+                    <label for="silverCoins_no">No</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Are You Capable of "<u>Delivering Gold-Coins</u>",
+            to People From Whom You have Received Goods &/or Services,
+            &, to whom, You have Promised to Deliver such "Gold-Coins" to them?</label>
+            <div class="radio-group">
+                <div class="radio-item">
+                    <input type="radio" id="goldCoins_yes" name="goldCoins" value="yes">
+                    <label for="goldCoins_yes">Yes</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" id="goldCoins_notDecided" name="goldCoins" value="not-decided">
+                    <label for="goldCoins_notDecided">Not Decided</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" id="goldCoins_indifferent" name="goldCoins" value="indifferent">
+                    <label for="goldCoins_indifferent">Indifferent</label>
+                </div>
+                <div class="radio-item">
+                    <input type="radio" id="goldCoins_no" name="goldCoins" value="no">
+                    <label for="goldCoins_no">No</label>
+                </div>
+            </div>
+        </div>
+
+            
+
+        <div class="form-section">
+            <h3><u>Economic Beliefs Profile</u>:</h3>
+
+            <div class="form-group">
+                <label>Do You Believe, that, Present Governmental Economic-Policies in
+                the USA, are being run in manners which are fully Fair & Honorable & Honest,
+                & which do Not Work Any Un-Justified Oppression over
+                any Poorer Classes of People?</label>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <input type="radio" id="currentPoliticalStructure_yes" name="currentPoliticalStructure" value="yes">
+                        <label for="currentPoliticalStructure_yes">Yes</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="currentPoliticalStructure_notDecided" name="currentPoliticalStructure" value="not-decided">
+                        <label for="currentPoliticalStructure_notDecided">Not Decided</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="currentPoliticalStructure_indifferent" name="currentPoliticalStructure" value="indifferent">
+                        <label for="currentPoliticalStructure_indifferent">Indifferent</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="currentPoliticalStructure_no" name="currentPoliticalStructure" value="no">
+                        <label for="currentPoliticalStructure_no">No</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Do you believe, that, the Proper Definition of the word "Capitalism",
+                at its fundamental & original level usage, is a "Good Word",
+                basically similar to the concept of "Free Markets"; &, that, it is Not
+                Properly Defined as a System of Economic-Oppression of Poor-People?</label>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <input type="radio" id="capitalism_yes" name="capitalism" value="yes">
+                        <label for="capitalism_yes">Yes</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="capitalism_notDecided" name="capitalism" value="not-decided">
+                        <label for="capitalism_notDecided">Not Decided</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="capitalism_indifferent" name="capitalism" value="indifferent">
+                        <label for="capitalism_indifferent">Indifferent</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="capitalism_no" name="capitalism" value="no">
+                        <label for="capitalism_no">No</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>When People have been Lawfully & Righteously Convicted of
+                having Committed Serious Crimes against other real people;
+                do you Approve of Allowing Juries to Unanimously Adjudicate them
+                to be Sentenced to some form of "Slavery",
+                under which they can be bought & sold
+                similarly as a piece of property?</label>
+                <div class="radio-group">
+                    <div class="radio-item">
+                        <input type="radio" id="slavery_yes" name="slavery" value="yes">
+                        <label for="slavery_yes">Yes</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="slavery_notDecided" name="slavery" value="not-decided">
+                        <label for="slavery_notDecided">Not Decided</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="slavery_indifferent" name="slavery" value="indifferent">
+                        <label for="slavery_indifferent">Indifferent</label>
+                    </div>
+                    <div class="radio-item">
+                        <input type="radio" id="slavery_no" name="slavery" value="no">
+                        <label for="slavery_no">No</label>
+                    </div>
+                </div>
+            </div>
+</div><br>
+
+        <div class="form-section">
+            <h3><u>Tradeable Skills & Professions Listing Profile</u>:</h3>
+            
+            <div class="form-group">
+                <label for="goodsServices">List here the <u>Goods &/or Services
+                    which you might be reasonably capable of producing</u>,
+                    for the betterment of your larger communities (separate with commas):</label>
+                <input type="text" id="goodsServices" name="goodsServices"
+                placeholder="like: Farm Produce, Computer-Coding, Legal-Counsel, Conspiracy-Research; etc.">
+            </div>
+
+            <div class="form-group">
+                <label for="affiliations">List here all <u>Trade-Unions or
+                    Professional-Associations with which you are or have been a Member</u> (separate with commas):</label>
+                <input type="text" id="affiliations" name="affiliations"
+                placeholder="Specify here your Trade-Unions or Professional-Associations">
+            </div>
+
+            <div class="form-group">
+                <label for="supportAltEcon">Level of Support of
+                    Alternative Economic Community Organizing & Participation</label>
+                <select id="supportAltEcon" name="supportAltEcon">
+                    <option value="">Select level...</option>
+                    <option value="very-active">Extremely Supportive</option>
+                    <option value="moderately-active">Reliably Supportive</option>
+                    <option value="occasionally-active">Generally Supportive</option>
+                    <option value="cultural">Cautiously Supportive</option>
+                    <option value="studying">Apprehensive</option>
+                    <option value="inactive">I Hate This Proposition</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h3><u>Supported Economic Activities</u></h3>
+
+            <div class="form-group">
+                <label for="supportAltComm">Level of Support for Community Organizing &
+                    Constitutional-Law Research Designed to Produce Fundamental Improvements
+                    In Accountability of Public-Servants to the Common-People, Non-Violently.</label>
+                <select id="supportAltComm" name="supportAltComm">
+                    <option value="">Select level...</option>
+                    <option value="very-active">Extremely Supportive</option>
+                    <option value="moderately-active">Reliably Supportive</option>
+                    <option value="occasionally-active">Generally Supportive</option>
+                    <option value="cultural">Cautiously Supportive</option>
+                    <option value="studying">Apprehensive</option>
+                    <option value="inactive">I Hate This Proposition</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h3>Additional Information</h3>
+            
+            <div class="form-group">
+                <label for="additionalInfo">Additional Comments or Information</label>
+                <textarea id="additionalInfo" name="additionalInfo" rows="4" placeholder="Here share additional information about your economic beliefs or community interests..."></textarea>
+            </div>
+        </div>
+
+            <div style="text-align: center; margin-top: 2rem;">
+                <button type="submit" class="submit-btn"
+                style="width: auto; min-width: 200px;">
+                Up-Date This Profile-Page.</button>
+    </form>
+</div>
+
+<script src="economics-form-handler.js"></script>
+</body>
+</html>

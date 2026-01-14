@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NewUsers-RegistrationForm-CLR</title>
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<style>
+ :root {
+      --primary-dark: #000000;
+      --secondary-dark: #111111;
+      --tertiary-dark: #1a1a1a;
+      --accent-gold: #f5d442;
+      --accent-gold-hover: #ffe97f;
+      --text-light: #ffffcc;
+      --text-white: #fefefe;
+      --highlight-pink: #ff33e3;
+      --border-color: #444;
+      --shadow-color: rgba(255, 215, 0, 0.2);
+    }
+
+    select:disabled {
+    background-color: #444;
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Times New Roman", Times, serif;  /* Changed from "Segoe UI" */
+    background-color: var(--primary-dark);
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+    /* Typography */
+    h1, h2, h3, h4, h5, h6 {
+      color: var(--accent-gold);
+      margin-bottom: 1rem;
+    }
+
+    a {
+      color: var(--accent-gold);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      color: var(--accent-gold-hover);
+    }
+
+    /* Header Styles */
+    .main-header {
+      background-color: var(--primary-dark);
+      border-bottom: 2px solid var(--accent-gold);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .header-title {
+    text-align: center;
+    padding: 1rem 0;    /* Reduced from 1.5rem to 0.5rem */
+}
+
+    .header-title h1 {
+      font-size: 2.7rem;
+      margin: 0;
+        color: #ffffff;   /* Changed to white, overriding the default gold color */
+    }
+
+    /* Navigation Styles */
+.topnav {
+    background-color: var(--secondary-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.0rem 0;    /* Reduced from 0.5rem to 0rem */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+.topnav {
+    background-color: var(--secondary-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.0rem 0;    /* Reduced from 0.5rem to 0rem */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+      margin: 0 0.5rem;
+    }
+
+    .dropbtn {
+      background-color: transparent;
+      color: var(--accent-gold);
+      padding: 0.8rem 1.2rem;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    .dropbtn:hover {
+      color: var(--accent-gold-hover);
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: var(--tertiary-dark);
+      min-width: 200px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+      z-index: 1;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+    }
+
+    .dropdown-content a {
+      color: var(--text-light);
+      padding: 12px 16px;
+      display: block;
+      text-align: left;
+    }
+
+.dropdown-content .long-item {
+    white-space: normal;
+    line-height: 1.2;
+    padding: 8px 16px;
+}
+
+    .dropdown-content a:hover {
+      background-color: var(--secondary-dark);
+      color: var(--accent-gold);
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    /* Main Container Styles */
+
+ @media screen and (max-width: 768px) {
+      .topnav {
+        flex-direction: column;
+        padding: 0;
+      }
+
+      .dropdown {
+        width: 100%;
+        margin: 0;
+      }
+
+      .dropbtn {
+        width: 100%;
+        padding: 1rem;
+      }
+
+      .dropdown-content {
+        width: 100%;
+        position: relative;
+      }
+
+      .container {
+        padding: 1rem;
+      }
+
+      .content-section {
+        padding: 1rem;
+      }
+    }
+
+/* Registration Page Styles */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.registration-section {
+    background-color: var(--secondary-dark);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px var(--shadow-color);
+ font-size: 1.1rem;
+    border: 1px solid var(--border-color);
+}
+
+.registration-section h2 {
+    color: var(--accent-gold);
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2.5rem
+}
+
+.status-message, .form-intro, .form-note, .level-info, .anonymous-note {
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.admin-note {
+    color: var(--accent-gold);
+    font-size: 0.9rem;
+    margin: 1rem 0;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--accent-gold);
+}
+
+.input-note {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-light);
+}
+
+.registration-form input, 
+.registration-form select {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: var(--tertiary-dark);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    color: var(--text-light);
+    font-family: inherit;
+}
+
+.registration-form input:focus, 
+.registration-form select:focus {
+    outline: none;
+    border-color: var(--accent-gold);
+    box-shadow: 0 0 5px var(--shadow-color);
+}
+
+.submit-btn {
+    background-color: var(--accent-gold);
+    color: var(--primary-dark);
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: block;
+    margin: 2rem auto 0;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: var(--accent-gold-hover);
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+    
+    .registration-section {
+        padding: 1rem;
+    }
+
+.clear-btn {
+    background-color: var(--tertiary-dark);
+    color: var(--text-light);
+    border: 1px solid var(--border-color);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.clear-btn:hover {
+    background-color: var(--secondary-dark);
+    border-color: var(--accent-gold);
+}
+}
+    /* Footer Styles */
+        footer {
+            margin-top: 4rem;
+            padding: 1rem;
+            background-color: var(--secondary-dark);
+            color: var(--text-light);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+</style>
+</head>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+<body>
+    <header class="main-header">
+    <div class="header-title">
+      <h1><u>Common-Law Republic</u>; <u>U.S.A.</u>.</h1>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="topnav">
+      <div class="dropdown">
+        <button class="dropbtn">Home.</button>
+        <div class="dropdown-content">
+          <a href="index.html">Main Page</a>
+          <a href="#">CommonLaw-Republic Governing-Modal Explained.</a>
+          <a href="#">Political Voting & Elections Process Explained.</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="dropbtn">Register, or Log-In.</button>
+        <div class="dropdown-content">
+          <a href="NewUsers-Registration.html">Register</a>
+          <a href="Login.html">Login</a>
+          <a href="AccountProfiles-Management-Index.html">Profile</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="dropbtn">Local Community Organizing.</button>
+        <div class="dropdown-content">
+          <a href="#">Local Communities</a>
+          <a href="#">Members Directory</a>
+          <a href="#">Events</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="dropbtn">Private/Special/Religious Organizing.</button>
+        <div class="dropdown-content">
+          <a href="#">Religious Communities</a>
+          <a href="#">Political Parties</a>
+          <a href="#">Economics Research Communities</a>
+          <a href="#">Trade Unions</a>
+          <a href="#">Agriculture & Food-Production Communities</a>
+          <a href="#">Environmental Activists</a>
+          <a href="#">Health Activists</a>
+          <a href="#">Conspiracy Research Communities</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="dropbtn">Support.</button>
+        <div class="dropdown-content">
+          <a href="#">Help Center</a>
+          <a href="#">Contact Us</a>
+          <a href="#">FAQ</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+ <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+  <!-- Add this inside the body tag, after the header -->
+<main class="container">
+    <div class="registration-section">
+        <h2><u>New-Users Registration-Form</u>:</h2>    
+        <div class="status-message">
+            <p>Presently, <u>Our Computer Is Recognizing You As</u> an "<u>Un-Registered Non-User</u>"".</p>
+            <p>If you "Already Have An Account" with us; then, just: <a href="./Login.html">Login Here.</a></p>
+        </div>
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+
+        <div class="form-intro">
+            <p>To get this entire "Registration Process" started,<br>
+               we here <u>Only Require the Following Four Very Simple Data-Entries</u> from you;<br>
+               as follows:</p>
+        </div>
+
+        <form class="registration-form" method="POST" id="registrationForm">
+            <div class="form-group">
+                <label>1: Please here Enter <u>Your Main "Email-Address</u>":</label>
+                <input type="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label>2: Please here Choose & Enter a your own self-chosen "<u>Password</u>";</label>
+                <p class="input-note">(We allow for short & insecure passwords, it is your risk, & you can re-set it later):</p>
+                <input type="password" name="password" required>
+            </div>
+
+            <div class="form-group">
+                <label>3: Please here Choose & Enter a your own self-chosen "<u>User-Name</u>":</label>
+                <input type="text" name="name" required>
+            </div>
+
+            <div class="form-group">
+    <label>4: <u>The Only Other Step to Complete</u> here, is, to: 
+      "<u>Select</u>" from the following Pull-Down Menu, 
+      <u>One of the following 22 Geographical Locations</u>, 
+      which Best Describes <u>Your Present "Home Geographical-Location</u>":<br>
+      (These Geographical Locations are Illustrated for the USA, 
+      on the Map on our CLR-Front-Page)</label>
+<div class="form-group">
+    <label>Select Your Region:</label>
+    <select id="region" name="region">
+        <option value="">Select Region</option>
+        <optgroup label="USA Regions">
+            <option value="usa-01">USA-01: New-England</option>
+            <option value="usa-02">USA-02: New-York</option>
+            <option value="usa-03">USA-03: Jersey-Penn</option>
+            <option value="usa-04">USA-04: Great-Lakes</option>
+            <option value="usa-05">USA-05: Virginia-Carolina</option>
+            <option value="usa-06">USA-06: Mississippi-Valley</option>
+            <option value="usa-07">USA-07: Florida-Georgia</option>
+            <option value="usa-08">USA-08: West-Great-Lakes</option>
+            <option value="usa-09">USA-09: Texas</option>
+            <option value="usa-10">USA-10: South-West</option>
+            <option value="usa-11">USA-11: Pacific-NW</option>
+            <option value="usa-12">USA-12: California</option>
+        </optgroup>
+        <optgroup label="World Regions">
+            <option value="world-01">World-01: North-America Canada</option>
+            <option value="world-02">World-02: Western-Europe</option>
+            <option value="world-03">World-03: Pacific-Ocean</option>
+            <option value="world-04">World-04: South-East Asia</option>
+            <option value="world-05">World-05: Northern-Asia & Eastern-Europe</option>
+            <option value="world-06">World-06: Central-&-South-America</option>
+            <option value="world-07">World-07: Eastern-Mediterranean & North-Africa</option>
+            <option value="world-08">World-08: India</option>
+            <option value="world-09">World-09: South-&-Central Africa</option>
+            <option value="world-10">World-10: China</option>
+        </optgroup>
+    </select>
+</div>
+
+            <div class="form-note">
+                <p><u>That Is It</u>!<br>
+                    Our Computer here is programmed next to immediately Send to you, 
+                    a "Confirmation Email", after you mouse-click on our below "Submit" Button. 
+                In that Email, you will be asked to "<u>Reply To Confirm Your Email-Address</u>"; 
+                & Once We Have That Reply from you, 
+                <u>You Will Be Properly Registered In Our Data-Base</u>.</p>
+            </div>
+
+            <div class="level-info">
+                <p>This is All of the Data which we need to get you "Minimally Registered",
+                    as a "Lower-Level-User" in our Community here. 
+                    We encourage you, that, after you have so become properly Registered 
+                    as one of our "Lower-Level-Users", then please <u>Provide Additional Information 
+                    about your-self</u>; & there-by, <u>You Can Quickly & Easily Progress to 
+                    any One Of Our Numerous other "Higher-Level-User" Accounts</u>.</p>
+            </div>
+
+            <div class="anonymous-note">
+                <p>("Completely Un-Registered & Anonymous Users" are Only Allowed to
+                    Browse Most of our Web-Pages; but, 
+                    & they will not be allowed to view much of our more sensitive data.)</p>
+            </div>
+
+            <button type="submit" class="submit-btn" id="registerForm">Create User-Profile.</button>
+        </form>
+    </div>
+      <!-- Footer Section -->
+     <footer>
+        <div class="footer-bottom">
+            <p><u>Common-Law Republic, U.S.A.</u>; <u>Empowering Self-Governing Communities</u>.<br>
+                With the help of many others; this entire project, as presented thru this web-page,<br>
+                has been engineered, by: Charles Stewart, of Coleman Texas. ... Last up-dated: June-2025.</p>
+        </div>
+    </footer>
+    
+</main>
+
+<script type="module">
+  import { handleRegistrationSubmit } from './Registration.js';
+
+  document.addEventListener("DOMContentLoaded", () => {
+    // Attach to the form with id="registrationForm"
+    const form = document.getElementById('registrationForm');
+    if (form) {
+      form.addEventListener('submit', handleRegistrationSubmit);
+    }
+  });
+</script>
+
+
+</body>
+</html>

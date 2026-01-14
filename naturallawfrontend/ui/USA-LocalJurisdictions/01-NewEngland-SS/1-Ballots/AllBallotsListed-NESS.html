@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ballots-All-Listed&Indexed-NewEngland-SS-CLR</title>
+    <style>
+        /* Keep only essential CSS for header/navigation */
+        :root {
+            --primary-dark: #000000;
+            --secondary-dark: #111111;
+            --tertiary-dark: #1a1a1a;
+            --accent-gold: #f5d442;
+            --accent-gold-hover: #ffe97f;
+            --text-light: #ffffcc;
+            --border-color: #444;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: "Times New Roman", Times, serif;
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Header and Navigation CSS (keep as-is since it's complex) */
+        .main-header {
+            background-color: var(--primary-dark);
+            border-bottom: 2px solid var(--accent-gold);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .header-title { text-align: center; padding: 1rem 0; }
+        .header-title h1 { font-size: 3.2rem; margin: 0; color: #ffffff; }
+        .topnav {
+            background-color: var(--secondary-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .dropdown { position: relative; display: inline-block; margin: 0 0.5rem; }
+        .dropbtn {
+            background-color: transparent;
+            color: var(--accent-gold);
+            padding: 0.8rem 1.2rem;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .dropbtn:hover { color: var(--accent-gold-hover); }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--tertiary-dark);
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+            z-index: 1;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+        }
+        .dropdown-content a {
+            color: var(--text-light);
+            padding: 14px 18px;
+            display: block;
+            text-align: left;
+            font-size: 1.05rem;
+        }
+        .dropdown-content a:hover {
+            background-color: var(--secondary-dark);
+            color: var(--accent-gold);
+        }
+        .dropdown:hover .dropdown-content { display: block; }
+
+        /* Simple footer styling */
+        .main-footer {
+            background-color: var(--secondary-dark);
+            padding: 1rem;
+            margin-top: 2rem;
+            border-top: 2px solid var(--border-color);
+            text-align: center;
+        }
+
+        /* Mobile responsiveness for navigation */
+        @media screen and (max-width: 768px) {
+            .topnav { flex-direction: column; }
+            .dropdown { width: 100%; margin: 0; }
+            .dropbtn { width: 100%; padding: 1rem; }
+            .dropdown-content { width: 100%; position: relative; }
+            .header-title h1 { font-size: 2.4rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-title">
+            <h1><u>Common-Law Republic</u>; <u>U.S.A.</u>.</h1>
+        </div>
+        <nav class="topnav">
+            <div class="dropdown">
+                <button class="dropbtn">Home Page.</button>
+                <div class="dropdown-content">
+                    <a href="../../index.html">Home Page.</a>
+                    <a href="../../Z-ReferenceDocuments/BriefGuidelines-PreferentialVotingBallot-Generic-Edit3.pdf">Using Ballots; Instructions.</a>
+                    <a href="../../Z-ReferenceDocuments/OrganicHierarchiesUSA-V4.2.pdf">Social-Organizing Under Constitutional "Organic Hierarchies".</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Register; or: Log-In.</button>
+                <div class="dropdown-content">
+                    <a href="../../Accounts-Profiles-Registering/NewUsers-Registration.html">Register</a>
+                    <a href="../../Accounts-Profiles-Registering/Login.html">Login</a>
+                    <a href="../../Accounts-Profiles-Registering/AccountProfiles-Management-Index.html">AccountProfiles-Management-Index</a>
+                    <a href="../../Accounts-Profiles-Registering/Subscribe-EmailList.html">Subscribe To Email-List</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">National Civil-Government; Political-Activism.</button>
+                <div class="dropdown-content">
+                    <a href="../../USA-GoverningBodies/Executive-Department-SubDepartments-Agencies/ExcDpt-SubDepartments&Agencies-Listed.html">Executive-Department;<br>Sub-Departments, & Agencies.</a>
+                    <a href="../../USA-GoverningBodies/JudicialDepartment/JudicialIndex.html">Judicial-Department.</a>
+                    <a href="../../USA-GoverningBodies/Legislature-HouseReps/Leg-HRepsIndex.html">Legislature: House Representatives.</a>
+                    <a href="../../USA-GoverningBodies/Legislature-Senate/Leg-Senate.html">Legislature; Senate.</a> 
+                    <a href="../../USA-GoverningBodies/Ballots-Index.html"><u>Ballots</u>.</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Local Civil-Governments; Political-Activism.</button>
+                <div class="dropdown-content" style="text-align:center;">
+                    <a href="../../USA-LocalJurisdictions/01-NewEngland-SS/NewEngland-SS.html" value="usa-01">01: New-England</a>
+                    <a href="../../USA-LocalJurisdictions/02-NewYork-SS/NewYork-SS.html" value="usa-02">02: New-York</a>
+                    <a href="../../USA-LocalJurisdictions/03-Jersey-Penn-SS/JerseyPenn-SS.html" value="usa-03">03: Jersey-Penn</a>
+                    <a href="../../USA-LocalJurisdictions/04-GreatLakes-SS/GreatLakes-SS.html" value="usa-04">04: Great-Lakes</a>
+                    <a href="../../USA-LocalJurisdictions/05-VirginiaCarolina-SS/Virginia-Carolina-SS.html" value="usa-05">05: Virginia-Carolina</a>
+                    <a href="../../USA-LocalJurisdictions/06-FloridaGeorgia-SS/FloridaGeorgia-SS.html" value="usa-07">06: Florida-Georgia</a>
+                    <a href="../../USA-LocalJurisdictions/07-MississippiValley-SS/MississippiValley-SS.html" value="usa-06">07: Mississippi-Valley</a>
+                    <a href="../../USA-LocalJurisdictions/08-NorthCentralPlains-SS/NorthCentralPlains-SS.html" value="usa-08">08: NorthCentral-Plains</a>
+                    <a href="../../USA-LocalJurisdictions/09-Texas-SS/Texas-SS.html" value="usa-09">09: Texas</a>
+                    <a href="../../USA-LocalJurisdictions/10-SouthWest-SS/SouthWest-SS.html" value="usa-10">10: South-West</a>
+                    <a href="../../USA-LocalJurisdictions/11-PacificNW-SS/PacificNW-SS.html" value="usa-11">11: Pacific-NW</a>
+                    <a href="../../USA-LocalJurisdictions/12-California-SS/California-SS.html" value="usa-12">12: California</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">EveryThing Else:</button>
+                <div class="dropdown-content">
+                    <a href="../../EveryThing-Else/1-Political-Parties/PoliticalParties.html">Political Parties.</a>
+                    <a href="../../EveryThing-Else/2-Religous-&-Spiritual-Communities/SpiritualIndex.html">Religious & Spiritual Communities.</a>
+                    <a href="../../EveryThing-Else/3-Business&Financial-Communities&Corporations/Biz&Finances.html">Business & Financial Communities & Corporations.</a>
+                    <a href="../../EveryThing-Else/4-DNA-Genetic-Racial-Communities/GeneticCommunities.html">DNA, Genetic, Racial, Communities.</a>
+                    <a href="../../EveryThing-Else/5-World-Communities-OutsideOfUSA/World-Communities-Index.html">World-Communities.</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Support.</button>
+                <div class="dropdown-content">
+                    <a href="../../Support/Support.html">Support-Help-Contacts</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main content using simplified centering approach -->
+    <main>
+        <center>
+            <h2 style="color: #f5d442; font-size: 2.35rem; margin: 2rem 1rem;">
+                <u>CLR-Super-State</u>, of: <u>New-England</u>:<br> 
+                <u>Ballots</u>; <u>All Listed & Indexed</u>,<br>
+                For Quick & Easy Voting On All Generally Related NE-SS Issues.
+            </h2>
+
+            <div style="max-width: 1000px; padding: 2rem; font-size: 1.4rem;">
+                
+                <!-- Legislative Branch Section -->
+                <h3 style="color: #f5d442; font-size: 2rem; margin: 2rem 0 1rem 0;">
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<br>
+                    <u>Legislative Branch</u>:
+                </h3>
+
+                <div style="background-color: #111111; padding: 2rem; margin: 1rem 0; border-radius: 8px; border: 2px solid #444;">
+                    <p style="margin-bottom: 1.5rem; line-height: 1.8;">
+                        <a href="./NESS-Ballot-US-HouseRepresentatives-VotesOfConfidence.html" 
+                           style="color: #f5d442; text-decoration: none; font-size: 1.3rem;">
+                            <u>1: Ballot Listing All NE-SS House-Representatives</u> in our USA-Civil-Government:
+                        </a>
+                    </p>
+
+                    <p style="margin-bottom: 1.5rem; line-height: 1.8;">
+                        <a href="./NESS-Ballot-US-Senators-VotesOfConfidence.html" 
+                           style="color: #f5d442; text-decoration: none; font-size: 1.3rem;">
+                            <u>2: Ballot Listing All NE-SS Senators</u> in our USA-Civil-Government:
+                        </a>
+                    </p>
+
+                    <p style="margin-bottom: 0; line-height: 1.8;">
+                        <a href="./NESS-Ballot-USLegislators-All-VotesOfConfidence.html" 
+                           style="color: #f5d442; text-decoration: none; font-size: 1.3rem;">
+                            <u>3: Ballot Listing All NE-SS Legislators in Both Houses</u> in our USA-Civil-Government:
+                        </a>
+                    </p>
+                </div>
+
+                <!-- Judicial Branch Section -->
+                <h3 style="color: #f5d442; font-size: 2rem; margin: 2rem 0 1rem 0;">
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<br>
+                    <u>Judicial Branch</u>:
+                </h3>
+
+                <div style="background-color: #111111; padding: 2rem; margin: 1rem 0; border-radius: 8px; border: 2px solid #444;">
+                    <p style="margin-bottom: 1.5rem; line-height: 1.8; font-size: 1.3rem;">
+                        <u>1: Ballot Listing All District-Judges</u> in our USA-Civil-Government's NE-SS Courts:
+                    </p>
+                    <p style="margin-bottom: 1.5rem; line-height: 1.8; font-size: 1.3rem;">
+                        <u>2: Ballot Listing All Circuit-Judges</u> in our USA-Civil-Government's NE-SS Courts:
+                    </p>
+                    <p style="margin-bottom: 1.5rem; line-height: 1.8; font-size: 1.3rem;">
+                        <u>3: Ballot Listing All Clerks & Other Officers</u> in our USA-Civil-Government's NE-SS Courts:
+                    </p>
+                    <p style="margin-bottom: 0; line-height: 1.8; font-size: 1.3rem;">
+                        <u>4: Ballot Listing All Court-Cases</u> Pending in our USA-Civil-Government's NE-SS Courts:
+                    </p>
+                </div>
+
+                <!-- Executive Branch Section -->
+                <h3 style="color: #f5d442; font-size: 2rem; margin: 2rem 0 1rem 0;">
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<br>
+                    <u>Executive Branch</u>:
+                </h3>
+
+                <div style="background-color: #111111; padding: 2rem; margin: 1rem 0; border-radius: 8px; border: 2px solid #444;">
+                    <p style="margin-bottom: 1.5rem; line-height: 1.8; font-size: 1.3rem;">
+                        <u>1: Ballot Listing All Executive-Officers</u> Operating within our NE-SS,<br>
+                        & Under Authority Claimed to be Legitimately Delegated From our USA-Civil-Government:
+                    </p>
+                    <p style="margin-bottom: 1.5rem; line-height: 1.8; font-size: 1.3rem;">
+                        <u>2: Ballot Listing All Executive-Agents</u> Operating within our NE-SS,<br>
+                        & Under Authority Claimed to be Legitimately Delegated From our USA-Civil-Government:
+                    </p>
+                    <p style="margin-bottom: 0; line-height: 1.8; font-size: 1.3rem;">
+                        <u>3: Ballot Listing All Executive-Actions</u> Occurring within our NE-SS,<br>
+                        & Under Authority Claimed to be Legitimately Delegated From our USA-Civil-Government:
+                    </p>
+                </div>
+
+            </div>
+        </center>
+    </main>
+
+    <footer class="main-footer">
+        <p style="font-size: 1.4rem; margin-bottom: 0.5rem;">
+            <u>Common-Law Republic, U.S.A.</u>; <u>Empowering Self-Governing Communities</u>.
+        </p>
+        <p style="font-size: 1.2rem;">
+            With the help of many others; this entire project, as presented thru this web-page,<br>
+            has been engineered, by: Charles Stewart, of Coleman Texas. ... Last up-dated: September-2025.
+        </p>
+    </footer>
+</body>
+</html>

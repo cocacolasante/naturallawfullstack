@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ballot-VoteOfConfidence-USLegislators-NewEnglandSSCLR</title>
+    <style>
+        :root {
+            --primary-dark: #000000;
+            --secondary-dark: #111111;
+            --tertiary-dark: #1a1a1a;
+            --accent-gold: #f5d442;
+            --accent-gold-hover: #ffe97f;
+            --text-light: #ffffcc;
+            --text-white: #fefefe;
+            --highlight-pink: #ff33e3;
+            --border-color: #444;
+            --shadow-color: rgba(255, 215, 0, 0.2);
+            --separator-yellow: #ffd700;
+            --separator-red: #ff4444;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Times New Roman", Times, serif;
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            font-size: 1.38rem;
+        }
+        h1, h2, h3, h4, h5, h6 { color: var(--accent-gold); margin-bottom: 1rem; }
+        h2 { text-align: center; font-size: 2.35rem; margin-bottom: 0.5rem; }
+        a {
+            color: var(--accent-gold);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        a:hover { color: var(--accent-gold-hover); }
+        p { font-size: 1.61rem; margin-bottom: 1rem; }
+        .main-header {
+            background-color: var(--primary-dark);
+            border-bottom: 2px solid var(--accent-gold);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .header-title { text-align: center; padding: 1rem 0; }
+        .header-title h1 { font-size: 3.2rem; margin: 0; color: #ffffff; }
+        .topnav {
+            background-color: var(--secondary-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .dropdown { position: relative; display: inline-block; margin: 0 0.5rem; }
+        .dropbtn {
+            background-color: transparent;
+            color: var(--accent-gold);
+            padding: 0.8rem 1.2rem;
+            font-size: 1.1rem;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .dropbtn:hover { color: var(--accent-gold-hover); }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--tertiary-dark);
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+            z-index: 1;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+        }
+        .dropdown-content a {
+            color: var(--text-light);
+            padding: 14px 18px;
+            display: block;
+            text-align: left;
+            font-size: 1.05rem;
+        }
+        .dropdown-content .long-item {
+            white-space: normal;
+            line-height: 1.2;
+            padding: 10px 18px;
+        }
+        .dropdown-content a:hover {
+            background-color: var(--secondary-dark);
+            color: var(--accent-gold);
+        }
+        .dropdown:hover .dropdown-content { display: block; }
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem 1rem 1rem;
+            text-align: center;
+        }
+        .ballot-section {
+            background-color: var(--secondary-dark);
+            margin: 2rem auto;
+            padding: 2rem 1rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px var(--shadow-color);
+            border: 6px solid var(--border-color);
+            max-width: 1000px;
+        }
+        .ballot-header {
+            background-color: var(--tertiary-dark);
+            color: var(--accent-gold);
+            padding: 1rem;
+            margin: -2rem -1rem 2rem -1rem;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            border-bottom: 3px solid var(--separator-red);
+            text-align: center;
+        }
+        .ballot-header h4 { font-size: 1.8rem; margin: 0; }
+        .instructions {
+            background-color: var(--tertiary-dark);
+            padding: 1.5rem;
+            margin: 2rem auto;
+            border-radius: 8px;
+            text-align: center;
+            line-height: 1.4;
+            font-size: 1.4rem;
+            max-width: 800px;
+        }
+        .instructions h3 { margin-bottom: 1rem; font-size: 2.5rem; }
+        .instructions p { margin-bottom: 0.8rem; font-size: 1.4rem; }
+        .instructions p:last-of-type { margin-bottom: 0; }
+
+        /* Ballot Table Styles */
+        .ballot-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        .ballot-table th {
+            background-color: var(--tertiary-dark);
+            color: var(--accent-gold);
+            padding: 12px 8px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.3rem;
+            border-bottom: 2px solid var(--separator-red);
+        }
+        .ballot-table td {
+            padding: 10px 8px;
+            border-bottom: 0px solid var(--separator-red);
+            text-align: left;
+            vertical-align: middle;
+        }
+        .state-header td {
+            background: transparent !important;
+            font-weight: 400 !important;  
+            text-align: left !important;
+            font-size: 1.2em;
+            color: #FF6B6B !important;
+            padding: 12px 8px !important;
+            border-top: 3px solid #FF6B6B !important;
+            border-bottom: 1px solid #FFD700 !important;
+        }
+        .vote-column { width: 12%; text-align: center; }
+        .name-column { width: 30%; }
+        .party-column { width: 15%; text-align: center; }
+        .webpage-column { width: 43%; }
+        .vote-input {
+            width: 70px;
+            text-align: center;
+            padding: 0.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+        .candidate-name { font-weight: bold; color: var(--accent-gold); }
+        .party-affiliation { color: var(--accent-gold); }
+        .candidate-link {
+            color: var(--accent-gold);
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 2px;
+        }
+        .candidate-link:hover { color: var(--accent-gold-hover); }
+        .submit-section {
+            margin-top: 3rem;
+            text-align: center;
+        }
+        .submit-section button {
+            background-color: var(--accent-gold);
+            color: var(--primary-dark);
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+        .submit-section button:hover {
+            background-color: var(--accent-gold-hover);
+            transform: scale(1.02);
+        }
+        .main-footer {
+            background-color: var(--secondary-dark);
+            padding: 1rem;
+            margin-top: 2rem;
+            border-top: 2px solid var(--border-color);
+        }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 0.5rem;
+            margin-top: 0.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+        .footer-bottom p { font-size: 1.4rem; }
+        @media screen and (max-width: 768px) {
+            body { font-size: 1.1rem; }
+            .topnav { flex-direction: column; padding: 0; }
+            .dropdown { width: 100%; margin: 0; }
+            .dropbtn { width: 100%; padding: 1rem; font-size: 1.05rem; }
+            .dropdown-content { width: 100%; position: relative; }
+            .main-content { padding: 1rem; }
+            .ballot-section { padding: 1rem 0.5rem; }
+            .ballot-table th,
+            .ballot-table td { padding: 8px 4px; font-size: 0.9rem; }
+            .vote-input { width: 50px; font-size: 0.9rem; }
+            .header-title h1 { font-size: 2.4rem; }
+            h2 { font-size: 1.9rem; }
+            .instructions { font-size: 1.1rem; padding: 1rem; }
+            .footer-bottom p { font-size: 1.2rem; }
+            .candidate-link { font-size: 0.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-title">
+            <h1><u>Common-Law Republic</u>; <u>U.S.A.</u>.</h1>
+        </div>
+        <nav class="topnav">
+            <!-- Navigation dropdowns go here -->
+        </nav>
+    </header>
+    <main class="main-content">
+        <h2><u>CLR-Super-State</u>, of: <u>New-England</u>:<br> 
+        <u>Ballot</u>: <u>Votes-of-Confidence Listing</u>; <u>US-Legislators</u>.</h2>
+        <div class="instructions">
+            <h3><u>Instructions</u>:</h3>
+            <p><u>Registered Users in our Common-Law Republic Community should</u>:<br>
+            <u>Insert Numbers Closer to 100 for Preferred Candidates</u>; &:<br>
+            <u>Insert Numbers Closer to Zero for Opposed Candidates</u>.</p>
+            <p>(More detailed instructions are available under the "Home" tab of our main CLR web-page.)</p>
+        </div>
+        <div class="ballot-section">
+            <div class="ballot-header">
+                <h4><u>New-England's Present Delegates</u> To:<br>
+                <u>USA Civil-Government Congressional-Offices</u>, <u>Listed As Follows</u>:</h4>
+            </div>
+            <table class="ballot-table">
+                <thead>
+                    <tr>
+                        <th class="vote-column">Ranked-Vote</th>
+                        <th class="name-column">Name</th>
+                        <th class="party-column">Party</th>
+                        <th class="webpage-column">Web-Pages</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Separator row: 90% width, thick red -->
+                    <tr>
+                        <td colspan="4" style="padding:0; border:none; background:none;">
+                            <hr style="margin:0 auto; border:none; height:3px; width:90%; background:#DC143C;">
+                        </td>
+                    </tr>
+                    <!-- Vermont -->
+                    <tr class="state-header">
+                        <td colspan="4"><u>Vermont</u></td>
+                    </tr>
+                    <tr>
+                        <td class="vote-column"><input type="number" min="0" max="100" class="vote-input" id="balint-vote" name="balint-vote"></td>
+                        <td class="name-column"><span class="candidate-name"><u>Becca Balint</u><br><small>(House District 1)</small></span></td>
+                        <td class="party-column"><span class="party-affiliation">Democrat</span></td>
+                        <td class="webpage-column">
+                            <a href="https://balint.house.gov/" target="_blank" class="candidate-link">House.Gov/Balint</a><br>
+                            <a href="https://en.wikipedia.org/wiki/Becca_Balint" target="_blank" class="candidate-link">Wikipedia.Org/Balint</a><br>
+                            <a href="https://www.govtrack.us/congress/members/becca_balint/456948" target="_blank" class="candidate-link">GovTrack.Us/Balint</a>
+                        </td>
+                    </tr>
+                    <!-- Separator row: 50% width, medium red -->
+                    <tr>
+                        <td colspan="4" style="padding:0; border:none; background:none;">
+                            <hr style="margin:0 auto; border:none; height:2px; width:50%; background:#DC143C;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="vote-column"><input type="number" min="0" max="100" class="vote-input" id="sanders-vote" name="sanders-vote"></td>
+                        <td class="name-column"><span class="candidate-name"><u>Bernie Sanders</u><br><small>(Senator)</small></span></td>
+                        <td class="party-column"><span class="party-affiliation">Independent</span></td>
+                        <td class="webpage-column">
+                            <a href="https://sanders.senate.gov/" target="_blank" class="candidate-link">Sanders.Senate.Gov</a><br>
+                            <a href="https://en.wikipedia.org/wiki/Bernie_Sanders" target="_blank" class="candidate-link">Wikipedia/Sanders</a><br>
+                            <a href="https://www.govtrack.us/congress/members/bernard_sanders/400357" target="_blank" class="candidate-link">GovTrack.Us/Sanders</a>
+                        </td>
+                    </tr>
+                    <!-- Separator row: 50% width, thin yellow -->
+                    <tr>
+                        <td colspan="4" style="padding:0; border:none; background:none;">
+                            <hr style="margin:0 auto; border:none; height:1px; width:50%; background:#FFD700;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="vote-column"><input type="number" min="0" max="100" class="vote-input" id="welch-vote" name="welch-vote"></td>
+                        <td class="name-column"><span class="candidate-name"><u>Peter Welch</u><br><small>(Senator)</small></span></td>
+                        <td class="party-column"><span class="party-affiliation">Democrat</span></td>
+                        <td class="webpage-column">
+                            <a href="https://welch.senate.gov/" target="_blank" class="candidate-link">Welch.Senate.Gov</a><br>
+                            <a href="https://en.wikipedia.org/wiki/Peter_Welch" target="_blank" class="candidate-link">Wikipedia/Welch</a><br>
+                            <a href="https://www.govtrack.us/congress/members/peter_welch/412239" target="_blank" class="candidate-link">GovTrack.Us/Welch</a>
+                        </td>
+                    </tr>
+                    <!-- Separator row: 90% width, thick red -->
+                    <tr>
+                        <td colspan="4" style="padding:0; border:none; background:none;">
+                            <hr style="margin:0 auto; border:none; height:3px; width:90%; background:#DC143C;">
+                        </td>
+                    </tr>
+                    <!-- ...repeat for each state/candidate, using the above pattern for separators... -->
+                </tbody>
+            </table>
+            <div class="submit-section">
+                <button type="submit">Submit Ballot</button>
+            </div>
+        </div>
+    </main>
+    <footer class="main-footer">
+        <div class="footer-bottom">
+            <p><u>Common-Law Republic, U.S.A.</u>; <u>Empowering Self-Governing Communities</u>.</p>
+            <p>With the help of many others; this entire project, as presented thru this web-page,<br>
+            has been engineered, by: Charles Stewart, of Coleman Texas. ... Last up-dated: September-2025.</p>
+        </div>
+    </footer>
+</body>
+</html>

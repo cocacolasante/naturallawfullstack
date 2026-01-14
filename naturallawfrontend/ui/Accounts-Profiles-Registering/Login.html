@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - Common-Law Republic U.S.A.</title>
+  <style>
+  /* Root Variables and Basic Reset */
+  :root {
+    --primary-dark: #000000;
+    --secondary-dark: #111111;
+    --tertiary-dark: #1a1a1a;
+    --accent-gold: #f5d442;
+    --accent-gold-hover: #ffe97f;
+    --text-light: #ffffcc;
+    --text-white: #fefefe;
+    --highlight-pink: #ff33e3;
+    --border-color: #444;
+    --shadow-color: rgba(255, 215, 0, 0.2);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    margin:0; padding:0;
+    font-family:"Times New Roman", Times, serif;
+    background-color:var(--primary-dark); color:var(--text-light); line-height:1.6;
+  }
+  h1,h2,h3,h4,h5,h6 { color:var(--accent-gold); margin-bottom:1rem; }
+  a { color:var(--accent-gold); text-decoration:none; transition:color .3s ease; }
+  a:hover { color:var(--accent-gold-hover); }
+  .main-header { background-color:var(--primary-dark); border-bottom:2px solid var(--accent-gold); box-shadow:0 2px 4px rgba(0,0,0,.5); }
+  .header-title { text-align:center; padding:1rem 0; }
+  .header-title h1 { font-size:2.7rem; margin:0; color:#fff; }
+
+  .topnav { background-color:var(--secondary-dark); display:flex; justify-content:center; align-items:center; padding:0; position:sticky; top:0; z-index:1000; }
+  .dropdown { position:relative; display:inline-block; margin:0 .5rem; }
+  .dropbtn { background:transparent; color:var(--accent-gold); padding:.8rem 1.2rem; font-size:1rem; border:none; cursor:pointer; font-weight:bold; transition:color .3s ease; }
+  .dropbtn:hover { color:var(--accent-gold-hover); }
+  .dropdown-content { display:none; position:absolute; background-color:var(--tertiary-dark); min-width:200px; box-shadow:0 8px 16px rgba(0,0,0,.4); z-index:1; border:1px solid var(--border-color); border-radius:4px; }
+  .dropdown-content a { color:var(--text-light); padding:12px 16px; display:block; text-align:left; }
+  .dropdown-content .long-item { white-space:normal; line-height:1.2; padding:8px 16px; }
+  .dropdown-content a:hover { background-color:var(--secondary-dark); color:var(--accent-gold); }
+  .dropdown:hover .dropdown-content { display:block; }
+
+  .container { max-width:1000px; margin:0 auto; padding:.1rem; }
+  .content-section { background-color:var(--secondary-dark); margin:.1rem 0; padding:.5rem; border-radius:12px; box-shadow:0 4px 10px var(--shadow-color); border:1px solid var(--border-color); }
+
+  .login-container { max-width:500px; margin:2rem auto; padding:2rem; }
+  .login-form { background-color:var(--secondary-dark); padding:2rem; border-radius:12px; box-shadow:0 4px 10px var(--shadow-color); border:1px solid var(--border-color); }
+  .login-title { color:var(--accent-gold); text-align:center; margin-bottom:2rem; font-size:2rem; }
+  .form-group { margin-bottom:1.5rem; }
+  .form-group label { display:block; margin-bottom:.5rem; color:var(--text-light); font-weight:bold; }
+  .form-group input { width:100%; padding:.8rem; background-color:var(--tertiary-dark); border:1px solid var(--border-color); border-radius:4px; color:var(--text-light); font-size:1rem; }
+  .form-group input:focus { outline:none; border-color:var(--accent-gold); box-shadow:0 0 5px var(--shadow-color); }
+
+  .remember-me { display:flex; align-items:center; margin-bottom:1.5rem; }
+  .remember-me input { margin-right:.5rem; }
+
+  .login-btn { background-color:var(--accent-gold); color:var(--primary-dark); padding:1rem 2rem; border:none; border-radius:4px; font-size:1.1rem; font-weight:bold; cursor:pointer; width:100%; transition:background-color .3s ease; }
+  .login-btn:hover { background-color:var(--accent-gold-hover); }
+  .login-btn[disabled] { opacity:.7; cursor:not-allowed; }
+
+  .login-footer { margin-top:1.5rem; text-align:center; }
+  .login-footer a { color:var(--accent-gold); }
+  .login-footer a:hover { color:var(--accent-gold-hover); text-decoration:underline; }
+
+  .login-divider { display:flex; align-items:center; margin:1.5rem 0; }
+  .login-divider:before,.login-divider:after { content:""; flex:1; border-bottom:1px solid var(--border-color); }
+  .login-divider span { padding:0 10px; color:var(--text-light); font-size:.9rem; }
+
+  .note { background-color:var(--tertiary-dark); padding:1rem; border-radius:4px; border-left:4px solid var(--accent-gold); margin-bottom:1.5rem; font-style:italic; }
+
+  .alert { margin-top:1rem; padding:.75rem 1rem; border:1px solid var(--border-color); border-radius:6px; background:var(--tertiary-dark); }
+  .alert.error { border-color:#a33; }
+  .alert.success { border-color:#3a3; }
+
+  .main-footer { background-color:var(--secondary-dark); padding:1rem; margin-top:1rem; border-top:2px solid var(--border-color); }
+  .footer-content { max-width:1000px; margin:0 auto; display:block; }
+  .footer-section { padding:.2rem; margin-bottom:.2rem; text-align:center; }
+  .footer-section p { margin-bottom:.2rem; line-height:1.4; max-width:800px; margin-left:auto; margin-right:auto; }
+  .footer-section p.mt-1 { margin-top:.2rem; }
+  .footer-section:hover { background-color:var(--tertiary-dark); transition:background-color .3s ease; }
+  .footer-bottom { text-align:center; padding-top:.5rem; margin-top:.5rem; border-top:1px solid var(--border-color); }
+
+  .text-center { text-align:center; }
+  .mt-1 { margin-top:1rem; }
+  .mt-2 { margin-top:2rem; }
+
+  @media screen and (max-width:768px){
+    .topnav{ flex-direction:column; padding:0; }
+    .dropdown{ width:100%; margin:0; }
+    .dropbtn{ width:100%; padding:1rem; }
+    .dropdown-content{ width:100%; position:relative; }
+    .container{ padding:1rem; }
+    .content-section{ padding:1rem; }
+    .login-container{ padding:1rem; }
+  }
+  </style>
+</head>
+<body>
+  <header class="main-header">
+    <div class="header-title">
+      <h1><u>Common-Law Republic</u>; <u>U.S.A.</u>.</h1>
+    </div>
+
+    <nav class="topnav">
+      <div class="dropdown">
+        <button class="dropbtn">Home-Page</button>
+        <div class="dropdown-content">
+          <a href="index.html">Home Page</a>
+          <a href="USA-LocalJurisdictions/OrganicHierarchiesUSA-V4.2.pdf">Social-Organizing Under Constitutional "Organic Hierarchies"</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="dropbtn">Register; or: Log-In.</button>
+        <div class="dropdown-content">
+          <a href="./Accounts-Profiles-Registering/NewUsers-Registration.html">Register</a>
+          <a href="./Accounts-Profiles-Registering/Login.html">Login</a>
+          <a href="./Accounts-Profiles-Registering/ProfileIndexManagement.html">Different User-Account Profile-Pages; Explained</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="dropbtn">USA-National-Categories-Index</button>
+        <div class="dropdown-content">
+          <a href="./USA-NationalIssues/NationalCategories-Index.html">USA-National-Categories-Index</a>
+          <a href="./USA-NationalIssues/ExecutiveDepartment-Prez/index.html">Executive-Department-Prez</a>
+          <a href="./USA-NationalIssues/JudicialDepartment/JudicialIndex.html">Judicial-Department</a>
+          <a href="./USA-NationalIssues/Legislature-HouseReps/Leg-HRepsIndex.html">Legislature-HouseReps</a>
+          <a href="./USA-NationalIssues/Legislature-Senate/Leg-Senate.html">Legislature-Senate</a>
+          <a href="./USA-NationalIssues/Treasury/TreasuryIndex.html">Treasury</a>
+          <a href="./USA-NationalIssues/SecretaryofState/SecofStateIndex.html">Secretary-of-State</a>
+          <a href="./USA-NationalIssues/Z-Agencies/Agencies.html">Z-Agencies-CIA-DOJ-FBI</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="dropbtn">Local Community Organizing</button>
+        <div class="dropdown-content" style="text-align:center;">
+          <a href="#">Residence & Geographical-Location</a>
+          <p><u>USA Super-States</u>:</p>
+          <a href="./USA-LocalJurisdictions/01-NewEngland-SS/NewEngland-SS.html" value="usa-01">USA-01: New-England</a>
+          <a href="./USA-LocalJurisdictions/02-NewYork-SS/NewYork-SS.html" value="usa-02">USA-02: New-York</a>
+          <a href="./USA-LocalJurisdictions/03-Jersey-Penn-SS/JerseyPenn-SS.html" value="usa-03">USA-03: Jersey-Penn</a>
+          <a href="./USA-LocalJurisdictions/04-GreatLakes-SS/GreatLakes-SS.html" value="usa-04">USA-04: Great-Lakes</a>
+          <a href="./USA-LocalJurisdictions/05-VirginiaCarolins-SS/Virginia-Carolina-SS.html" value="usa-05">USA-05: Virginia-Carolina</a>
+          <a href="./USA-LocalJurisdictions/07-MississippiValley-SS/MississippiValley-SS.html" value="usa-06">USA-06: Mississippi-Valley</a>
+          <a href="./USA-LocalJurisdictions/06-FloridaGeorgia-SS/FloridaGeorgia-SS.html" value="usa-07">USA-07: Florida-Georgia</a>
+          <a href="./USA-LocalJurisdictions/08-WestGreatLakes-SS/WestreatLakes-SS.html" value="usa-08">USA-08: West-Great-Lakes</a>
+          <a href="./USA-LocalJurisdictions/09-Texas-SS/Texas-SS.html" value="usa-09">USA-09: Texas</a>
+          <a href="./USA-LocalJurisdictions/10-SouthWest-SS/SouthWest-SS.html" value="usa-10">USA-10: South-West</a>
+          <a href="./USA-LocalJurisdictions/11-PacificNW-SS/PacificNW-SS.html" value="usa-11">USA-11: Pacific-NW</a>
+          <a href="./USA-LocalJurisdictions/12-California-SS/California-SS.html" value="usa-12">USA-12: California</a>
+          <p><u>World Regions</u>:</p>
+          <a href="../../WorldJurisdictions/01-NorthAmerica-Canada/NorthAmerica-Canada.html" value="world-01">World-01: North-America Canada</a>
+          <a href="../../WorldJurisdictions/02-WesternEurope/WesternEurope.html" value="world-02">World-02: Western-Europe</a>
+          <a href="../../WorldJurisdictions/03-PacificOcean/PacificOcean.html" value="world-03">World-03: Pacific-Ocean</a>
+          <a href="../../WorldJurisdictions/04-SouthEastAsia/SouthEastAsia.html" value="world-04">World-04: South-East Asia</a>
+          <a href="../../WorldJurisdictions/05-NorthAsia-&-EasternEurope/NorthAsia-&-EasternEurope.html" value="world-05">World-05: Northern-Asia & Eastern-Europe</a>
+          <a href="../../WorldJurisdictions/06-Central-&SouthAmerica/Central&SouthAmerica.html" value="world-06">World-06: Central-&-South-America</a>
+          <a href="../../WorldJurisdictions/07-EasrernMediteranean&NorthAfrica/EasternMediteranean-&-NorthAfrica.html" value="world-07">World-07: Eastern-Mediterranean & North-Africa</a>
+          <a href="../../WorldJurisdictions/08-India/India.html" value="world-08">World-08: India</a>
+          <a href="../../WorldJurisdictions/09-South&CentralAfrica/South&CentralAfrica.html" value="world-09">World-09: South-&-Central Africa</a>
+          <a href="../../WorldJurisdictions/10-China/China.html" value="world-10">World-10: China</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="dropbtn">Private/Special/Ideological/Religious Organizing</button>
+        <div class="dropdown-content">
+          <a href="./PrivateSpecialReligiousCommunities/1-Religous-&-Spiritual-Communities/SpiritualIndex.html">Religious & Spiritual Communities</a>
+          <a href="./PrivateSpecialReligiousCommunities/2-Political-Parties/PoliticalParties.html">Political Parties</a>
+          <a href="./PrivateSpecialReligiousCommunities/3-Business&Financial-Communities&Corporations/Biz&Finances.html">Business & Financial Communities & Corporations</a>
+          <a href="./PrivateSpecialReligiousCommunities/4-Trade-Unions/TradeUnions.html">Trade Unions</a>
+          <a href="./PrivateSpecialReligiousCommunities/5-FoodProduction&Distribution-Communities/FoodProduction.html">Food Production & Distribution Communities</a>
+          <a href="./PrivateSpecialReligiousCommunities/6-EnvironmentalActivist-Communities/EnvironmentActivism.html">Environmental Activist Communities</a>
+          <a href="./PrivateSpecialReligiousCommunities/7-HealthActivist-Communities/HealthActivism.html">Health Activist Communities</a>
+          <a href="./PrivateSpecialReligiousCommunities/8-DNA-Genetic-Racial-Bloodlines-Communities/GeneticHeritage.html">DNA, Genetic, Racial, Blood-line, & Ethnic Communities</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="dropbtn">Support</button>
+        <div class="dropdown-content">
+          <a href="./Support/Support.html">Support-Help-Contacts</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="login-container">
+    <form id="loginForm" class="login-form" novalidate>
+      <h2 class="login-title">Log In to Your Account</h2>
+
+      <div class="note">
+        <p>Welcome back! Please log in to access your Common-Law Republic account and participate in community organizing.</p>
+      </div>
+
+      <div class="form-group">
+        <label for="username">Username or Email Address</label>
+        <input type="text" id="username" name="username" autocomplete="username" required />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" autocomplete="current-password" required />
+      </div>
+
+      <div class="remember-me">
+        <input type="checkbox" id="remember" name="remember" />
+        <label for="remember">Remember me on this device</label>
+      </div>
+
+      <button id="loginBtn" type="submit" class="login-btn">Log In</button>
+
+      <div id="message" class="alert error" style="display:none;"></div>
+
+      <div class="login-footer">
+        <p><a href="#">Forgot your password?</a></p>
+        <p class="mt-1">Don't have an account? <a href="Accounts-Profiles-Registering/NewUsers-Registration.html">Register now</a></p>
+      </div>
+    </form>
+  </div>
+
+  <footer class="main-footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <p>Common-Law Republic U.S.A. - A platform for constitutional governance and community organizing</p>
+        <p class="mt-1">© 2023 Common-Law Republic. All rights reserved.</p>
+      </div>
+      <div class="footer-bottom">
+        <p>Privacy Policy | Terms of Service | Contact Us</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Point this at your API host as needed.
+    // If your backend runs on a different host/port in prod, update this.
+    const API_BASE = "http://localhost:8080/api/v1";
+    const LOGIN_URL = API_BASE + "/auth/login";
+
+    const form = document.getElementById("loginForm");
+    const btn = document.getElementById("loginBtn");
+    const msg = document.getElementById("message");
+
+    function showMessage(text, type = "error") {
+      msg.textContent = text;
+      msg.className = "alert " + type;
+      msg.style.display = "block";
+    }
+
+    function clearMessage() {
+      msg.style.display = "none";
+      msg.textContent = "";
+    }
+
+    function isLikelyEmail(value) {
+      return value.includes("@");
+    }
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      clearMessage();
+
+      const usernameOrEmail = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value;
+
+      if (!isLikelyEmail(usernameOrEmail)) {
+        showMessage("Please log in with the email address you registered with.");
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = "Logging in...";
+
+      try {
+        const res = await fetch(LOGIN_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          // No credentials included; we use JWT from response instead of cookies
+          body: JSON.stringify({
+            email: usernameOrEmail,
+            password: password
+          })
+        });
+
+        const data = await res.json().catch(() => ({}));
+
+        if (!res.ok) {
+          const detail = data && data.error ? `: ${data.error}` : "";
+          throw new Error(`Login failed${detail}`);
+        }
+
+        // Expecting { token, user }
+        if (!data.token) {
+          throw new Error("No token returned from server.");
+        }
+
+        // Persist session
+        const remember = document.getElementById("remember").checked;
+        // Use localStorage for "remember me", sessionStorage otherwise
+        const storage = remember ? window.localStorage : window.sessionStorage;
+        storage.setItem("authToken", data.token);
+        if (data.user) storage.setItem("authUser", JSON.stringify(data.user));
+
+        // Optional: set a global flag so other pages can attach the Authorization header
+        // Redirect to profile or home
+        showMessage("Login successful. Redirecting...", "success");
+        // Adjust this path to your desired post-login page:
+        window.location.href = "AccountProfiles-Management-Index.html";
+      } catch (err) {
+        showMessage(err.message || "Unable to log in. Please try again.");
+      } finally {
+        btn.disabled = false;
+        btn.textContent = "Log In";
+      }
+    });
+
+    // Example helper you can reuse in other pages to attach the bearer token:
+    window.getAuthHeader = function() {
+      const token = localStorage.getItem("authToken") || sessionStorage.getItem("authToken");
+      return token ? { "Authorization": "Bearer " + token } : {};
+    };
+  </script>
+</body>
+</html>

@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>5-Spiritual&Religious-Beliefs-UserProfile.html</title>
+<style>
+/* Using the existing CSS variables and styles from your code */
+:root {
+--primary-dark: #000000;
+--secondary-dark: #111111;
+--tertiary-dark: #1a1a1a;
+--accent-gold: #f5d442;
+--accent-gold-hover: #ffe97f;
+--text-light: #ffffcc;
+--text-white: #fefefe;
+--highlight-pink: #ff33e3;
+--border-color: #444;
+--shadow-color: rgba(255, 215, 0, 0.2);
+}
+
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body {
+margin: 0;
+padding: 0;
+font-family: "Times New Roman", Times, serif;
+background-color: var(--primary-dark);
+color: var(--text-light);
+line-height: 1.6;
+}
+
+.container {
+max-width: 800px;
+margin: 0 auto;
+padding: 2rem;
+}
+
+.registration-form {
+background-color: var(--secondary-dark);
+padding: 2rem;
+border-radius: 12px;
+box-shadow: 0 4px 10px var(--shadow-color);
+border: 1px solid var(--border-color);
+}
+
+.form-title {
+color: var(--accent-gold);
+text-align: center;
+margin-bottom: 2rem;
+font-size: 2rem;
+}
+
+.form-section {
+margin-bottom: 2rem;
+}
+
+.form-section h3 {
+color: var(--accent-gold);
+margin-bottom: 1rem;
+font-size: 1.3rem;
+}
+
+.form-group {
+margin-bottom: 1.5rem;
+}
+
+.form-group label {
+display: block;
+margin-bottom: 0.5rem;
+color: var(--text-light);
+font-weight: bold;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+width: 100%;
+padding: 0.8rem;
+background-color: var(--tertiary-dark);
+border: 1px solid var(--border-color);
+border-radius: 4px;
+color: var(--text-light);
+font-size: 1rem;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+outline: none;
+border-color: var(--accent-gold);
+box-shadow: 0 0 5px var(--shadow-color);
+}
+
+.checkbox-group {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+gap: 0.5rem;
+margin-top: 0.5rem;
+}
+
+.checkbox-item {
+display: flex;
+align-items: center;
+padding: 0.5rem;
+background-color: var(--tertiary-dark);
+border-radius: 4px;
+}
+
+.checkbox-item input[type="checkbox"] {
+width: auto;
+margin-right: 0.5rem;
+}
+
+.checkbox-item label {
+margin-bottom: 0;
+font-weight: normal;
+cursor: pointer;
+}
+
+.radio-group {
+display: flex;
+flex-direction: column;
+gap: 0.5rem;
+margin-top: 0.5rem;
+}
+
+.radio-item {
+display: flex;
+align-items: center;
+padding: 0.5rem;
+background-color: var(--tertiary-dark);
+border-radius: 4px;
+}
+
+.radio-item input[type="radio"] {
+width: auto;
+margin-right: 0.5rem;
+}
+
+.radio-item label {
+margin-bottom: 0;
+font-weight: normal;
+cursor: pointer;
+}
+.btn-div{
+    margin:auto;
+}
+.submit-btn {
+            background-color: var(--accent-gold);
+            color: var(--primary-dark);
+            border: none;
+            padding: 0.8rem 1.6rem;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+}
+
+.submit-btn:hover {
+background-color: var(--accent-gold-hover);
+}
+
+.note {
+background-color: var(--tertiary-dark);
+padding: 1rem;
+border-radius: 4px;
+border-left: 4px solid var(--accent-gold);
+margin-bottom: 1.5rem;
+font-style: italic;
+}
+
+@media screen and (max-width: 768px) {
+.container {
+padding: 1rem;
+}
+.checkbox-group {
+grid-template-columns: 1fr;
+}
+}
+</style>
+  <style>
+    /* Root Variables and Basic Reset */
+    :root {
+      --primary-dark: #000000;
+      --secondary-dark: #111111;
+      --tertiary-dark: #1a1a1a;
+      --accent-gold: #f5d442;
+      --accent-gold-hover: #ffe97f;
+      --text-light: #ffffcc;
+      --text-white: #fefefe;
+      --highlight-pink: #ff33e3;
+      --border-color: #444;
+      --shadow-color: rgba(255, 215, 0, 0.2);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Times New Roman", Times, serif;  /* Changed from "Segoe UI" */
+    background-color: var(--primary-dark);
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+    /* Typography */
+    h1, h2, h3, h4, h5, h6 {
+      color: var(--accent-gold);
+      margin-bottom: 1rem;
+    }
+
+    a {
+      color: var(--accent-gold);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      color: var(--accent-gold-hover);
+    }
+
+    /* Header Styles */
+    .main-header {
+      background-color: var(--primary-dark);
+      border-bottom: 2px solid var(--accent-gold);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .header-title {
+    text-align: center;
+    padding: 1rem 0;    /* Reduced from 1.5rem to 0.5rem */
+}
+
+    .header-title h1 {
+      font-size: 2.7rem;
+      margin: 0;
+        color: #ffffff;   /* Changed to white, overriding the default gold color */
+    }
+
+    /* Navigation Styles */
+.topnav {
+    background-color: var(--secondary-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.0rem 0;    /* Reduced from 0.5rem to 0rem */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+      margin: 0 0.5rem;
+    }
+
+    .dropbtn {
+      background-color: transparent;
+      color: var(--accent-gold);
+      padding: 0.8rem 1.2rem;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    .dropbtn:hover {
+      color: var(--accent-gold-hover);
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: var(--tertiary-dark);
+      min-width: 200px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+      z-index: 1;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+    }
+
+    .dropdown-content a {
+      color: var(--text-light);
+      padding: 12px 16px;
+      display: block;
+      text-align: left;
+    }
+
+.dropdown-content .long-item {
+    white-space: normal;
+    line-height: 1.2;
+    padding: 8px 16px;
+}
+
+    .dropdown-content a:hover {
+      background-color: var(--secondary-dark);
+      color: var(--accent-gold);
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    /* Main Container Styles */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: .1rem;    /* Reduced from 2rem */
+    }
+
+    /* Content Section Styles */
+ .content-section {
+    background-color: var(--secondary-dark);
+    margin: 0.1rem 0;
+    padding: 0.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px var(--shadow-color);
+    border: 1px solid var(--border-color);
+}
+
+    /* Front Page Specific Styles */
+    .welcome-content {
+      padding: .1rem;   /* Reduced from 3rem */
+    }
+
+.welcome-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0;  /* Controls spacing between lines */
+    padding-top: 0rem;     /* minimal top space */
+    padding-bottom: 1rem;   /* larger bottom space */
+}
+
+
+.welcome-line {
+    font-size: 1.8rem;
+    color: var(--accent-gold);
+    font-weight: bold;
+    line-height: 1.2;  /* Tighter line spacing */
+    margin: 0;
+    padding: 0;
+}
+
+.welcome-text {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    font-weight: 500;
+    line-height: 1.2;
+    margin: 0;
+    padding: 0;
+}
+
+.welcome-block > div:nth-child(2) {
+    margin-bottom: 0.5rem;  /* Small space before the smaller text */
+}
+
+/* Map Styles */
+.map-container {
+    width: 100%;
+    overflow: hidden;
+    padding: 0.5rem 0;    /* Reduced from 1rem */
+    margin-bottom: 0.5rem; /* Add this to reduce space before footer */
+}
+
+.responsive-map {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 8px;  /* Optional: adds slightly rounded corners */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);  /* Optional: adds subtle shadow */
+}
+
+/* Optional: Add hover effect */
+.responsive-map:hover {
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.2);
+    transition: box-shadow 0.3s ease;
+}
+
+@media screen and (max-width: 768px) {
+    .map-container {
+        padding: 0.5rem 0;
+    }
+    
+    .responsive-map {
+        width: 100%;
+    }
+}
+
+    .registration-cta {
+      padding: 2rem;
+    }
+
+    .registration-cta h3 {
+      font-size: 1.6rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .registration-cta p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+    }
+
+/* Footer Styles */
+.main-footer {
+    background-color: var(--secondary-dark);
+    padding: 1rem;          /* Reduced padding */
+    margin-top: 1rem;       /* Reduced top margin */
+    border-top: 2px solid var(--border-color);
+}
+
+.footer-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: block;
+}
+
+.footer-section {
+    padding: 0.2rem;        /* Reduced padding */
+    margin-bottom: 0.2rem;  /* Reduced margin */
+    text-align: center;
+}
+
+.footer-section p {
+    margin-bottom: 0.2rem;
+    line-height: 1.4;
+    max-width: 800px;     /* Add this to control text width */
+    margin-left: auto;    /* Center the contained text */
+    margin-right: auto;
+}
+
+.footer-section p.mt-1 {
+    margin-top: 0.2rem;     /* Reduced margin for paragraphs with mt-1 class */
+}
+
+.footer-section:hover {
+    background-color: var(--tertiary-dark);
+    transition: background-color 0.3s ease;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 0.5rem;    /* Reduced padding */
+    margin-top: 0.5rem;     /* Reduced margin */
+    border-top: 1px solid var(--border-color);
+}
+
+    /* Utility Classes */
+    .text-center {
+      text-align: center;
+    }
+
+    .mt-1 { margin-top: 1rem; }
+    .mt-2 { margin-top: 2rem; }
+
+    /* Responsive Design */
+    @media screen and (max-width: 768px) {
+      .topnav {
+        flex-direction: column;
+        padding: 0;
+      }
+
+      .dropdown {
+        width: 100%;
+        margin: 0;
+      }
+
+      .dropbtn {
+        width: 100%;
+        padding: 1rem;
+      }
+
+      .dropdown-content {
+        width: 100%;
+        position: relative;
+      }
+
+      .container {
+        padding: 1rem;
+      }
+
+      .content-section {
+        padding: 1rem;
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-title">
+            <h1><u>Common-Law Republic</u>; <u>U.S.A.</u>.</h1>
+        </div>
+
+        <nav class="topnav">
+            <div class="dropdown">
+                <button class="dropbtn">Home-Page</button>
+                <div class="dropdown-content">
+                    <a href="index.html">Home Page</a>
+                    <a href="./BriefGuidelines-PreferentialVotingBallot-Generic-Edit3.pdf">Ballot Using Instructions</a>
+                    <a href="USA-LocalJurisdictions/OrganicHierarchiesUSA-V4.2.pdf">Social-Organizing Under Constitutional "Organic Hierarchies"</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Register;
+                  or: Log-In.</button>
+                <div class="dropdown-content">
+                    <a href="Accounts-Profiles-Registering/NewUsers-Registration.html">Register</a>
+                    <a href="./Accounts-Profiles-Registering/Login.html">Login</a>
+                    <a href="Accounts-Profiles-Registering/ProfileIndexManagement.html">Different User-Account Profile-Pages; Explained</a>
+                </div>
+            </div>
+
+        <nav class="topnav">
+            <div class="dropdown">
+                <button class="dropbtn">Governing-Bodies-USA</button>
+                <div class="dropdown-content">
+                    <a href="./USA-GoverningBodies/ExecutiveDepartment-Prez/ExcDpt-SubCategories-Index&List">ExecutiveDepartment-SubDepartments-Agencies-Ballots-Index&List</a>
+                    <a href="./USA-NationalIssues/JudicialDepartment/JudicialIndex.html">Judicial-Department</a>
+                    <a href="./USA-NationalIssues/Legislature-HouseReps/Leg-HRepsIndex.html">Legislature-HouseReps</a>
+                    <a href="./USA-NationalIssues/Legislature-Senate/Leg-Senate.html">Legislature-Senate</a>
+                    <a href="./USA-NationalIssues/Treasury/TreasuryIndex.html">Treasury</a>
+                    <a href="./USA-NationalIssues/SecretaryofState/SecofStateIndex.html">Secretary-of-State</a>
+                    <a href="./USA-NationalIssues/Z-Agencies/Agencies.html">Z-Agencies-CIA-DOJ-FBI</a>                                                            
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Local Community Organizing</button>
+                <div class="dropdown-content"style="text-align:center;">
+                    <a href="#">Residence & Geographical-Location</a>
+                    <p><u>USA Super-States</u>:</p>
+                            <a href="./USA-LocalJurisdictions/01-NewEngland-SS/NewEngland-SS.html" value="usa-01">USA-01: New-England</a>
+                            <a href="./USA-LocalJurisdictions/02-NewYork-SS/NewYork-SS.html" value="usa-02">USA-02: New-York</a>
+                            <a href="./USA-LocalJurisdictions/03-Jersey-Penn-SS/JerseyPenn-SS.html" value="usa-03">USA-03: Jersey-Penn</a>
+                            <a href="./USA-LocalJurisdictions/04-GreatLakes-SS/GreatLakes-SS.html" value="usa-04">USA-04: Great-Lakes</a>
+                            <a href="./USA-LocalJurisdictions/05-VirginiaCarolins-SS/Virginia-Carolina-SS.html" value="usa-05">USA-05: Virginia-Carolina</a>
+                            <a href="./USA-LocalJurisdictions/07-MississippiValley-SS/MississippiValley-SS.html" value="usa-06">USA-06: Mississippi-Valley</a>
+                            <a href="./USA-LocalJurisdictions/06-FloridaGeorgia-SS/FloridaGeorgia-SS.html" value="usa-07">USA-07: Florida-Georgia</a>
+                            <a href="./USA-LocalJurisdictions/08-WestGreatLakes-SS/WestreatLakes-SS.html" value="usa-08">USA-08: West-Great-Lakes</a>
+                            <a href="./USA-LocalJurisdictions/09-Texas-SS/Texas-SS.html" value="usa-09">USA-09: Texas</a>
+                            <a href="./USA-LocalJurisdictions/10-SouthWest-SS/SouthWest-SS.html" value="usa-10">USA-10: South-West</a>
+                            <a href="./USA-LocalJurisdictions/11-PacificNW-SS/PacificNW-SS.html" value="usa-11">USA-11: Pacific-NW</a>
+                            <a href="./USA-LocalJurisdictions/12-California-SS/California-SS.html"value="usa-12">USA-12: California</a>
+                            <p><u>World Regions</u>:</p>
+                            <a href="../../WorldJurisdictions/01-NorthAmerica-Canada/NorthAmerica-Canada.html" value="world-01">World-01: North-America Canada</a>
+                            <a href="../../WorldJurisdictions/02-WesternEurope/WesternEurope.html" value="world-02">World-02: Western-Europe</a>
+                            <a href="../../WorldJurisdictions/03-PacificOcean/PacificOcean.html" value="world-03">World-03: Pacific-Ocean</a>
+                            <a href="../../WorldJurisdictions/04-SouthEastAsia/SouthEastAsia.html" value="world-04">World-04: South-East Asia</a>
+                            <a href="../../WorldJurisdictions/05-NorthAsia-&-EasternEurope/NorthAsia-&-EasternEurope.html" value="world-05">World-05: Northern-Asia & Eastern-Europe</a>
+                            <a href="../../WorldJurisdictions/06-Central-&SouthAmerica/Central&SouthAmerica.html" value="world-06">World-06: Central-&-South-America</a>
+                            <a href="../../WorldJurisdictions/07-EasrernMediteranean&NorthAfrica/EasternMediteranean-&-NorthAfrica.html" value="world-07">World-07: Eastern-Mediterranean & North-Africa</a>
+                            <a href="../../WorldJurisdictions/08-India/India.html" value="world-08">World-08: India</a>
+                            <a href="../../WorldJurisdictions/09-South&CentralAfrica/South&CentralAfrica.html" value="world-09">World-09: South-&-Central Africa</a>
+                            <a href="../../WorldJurisdictions/10-China/China.html" value="world-10">World-10: China</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Private/Special/Ideological/Religious Organizing</button>
+                <div class="dropdown-content">
+                    <a href="./PrivateSpecialReligiousCommunities/1-Religous-&-Spiritual-Communities/SpiritualIndex.html">Religious & Spiritual Communities</a>
+                    <a href="./PrivateSpecialReligiousCommunities/2-Political-Parties/PoliticalParties.html">Political Parties</a>
+                    <a href="./PrivateSpecialReligiousCommunities/3-Business&Financial-Communities&Corporations/Biz&Finances.html">Business & Financial Communities & Corporations</a>
+                    <a href="./PrivateSpecialReligiousCommunities/4-Trade-Unions/TradeUnions.html">Trade Unions</a>
+                    <a href="./PrivateSpecialReligiousCommunities/5-FoodProduction&Distribution-Communities/FoodProduction.html">Food Production & Distribution Communities</a>
+                    <a href="./PrivateSpecialReligiousCommunities/6-EnvironmentalActivist-Communities/EnvironmentActivism.html">Environmental Activist Communities</a>
+                    <a href="./PrivateSpecialReligiousCommunities/7-HealthActivist-Communities/HealthActivism.html">Health Activist Communities</a>
+                    <a href="./PrivateSpecialReligiousCommunities/8-DNA-Genetic-Racial-Bloodlines-Communities/GeneticHeritage.html">DNA, Genetic, Racial, Blood-line, & Ethnic Communities</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Support</button>
+                <div class="dropdown-content">
+                    <a href="./Support/Support.html">Support-Help-Contacts</a>                </div>
+            </div>
+        </nav>
+    </header>
+<div class="container">
+    <form class="registration-form" action="#" method="POST">
+        <h2 class="form-title"><u>Spiritual & Religious Beliefs</u>; <u>Users-Profile</u>:</h2>
+        <div class="note">
+            <p>This registration-page, is just one among 
+                a larger-number of user-profile pages, whch we have constructed, 
+                in our attempts to more efficiently empower each & all of our CLR-Community-Members.<br>
+                For more effective "Community-Organizing Purposes"; this specific page 
+                is designed to help in Identifying Your more specific Spiritual & Religious Beliefs.<br>
+                You also may mark specific portions of this data 
+                to be kept at different levels of privacy; & there-by, 
+                designate such specific data to be shared only with 
+                those smaller communities among whom you have of decided 
+                to grant higher-levels of your own personal "Trust".</p>
+        </div>
+
+        <div class="form-section">
+            <h3><u>Spiritual & Religious Beliefs Profile</u>:</h3>
+            <p style="margin-bottom: 1rem; font-size: 0.9rem;">
+                Spiritual & Religious Communities are 
+                here-in Listed in "No Particular Order"<br>
+                but, that likely will change as this effort gains more maturity.</p>
+
+<div class="instructions">
+    <h3><u>Instructions</u>:</h3>
+    Users here should: <u>Insert Numbers Closer to 100 next to 
+    Spiritual &/or Religious Communities with whom they Closely Identify</u>; &: 
+    <u>Insert Numbers Closer to Zero for Religious Communities 
+    with whom they find Serious Difficulties</u>.<br>
+    <p>(More detailed instructions are available under 
+        the "Home" tab of our main CLR web-page.)</p>
+</div><br>
+            <div class="radio-group">
+                <div class="radio-item">
+                    <input type="radio" id="folk" name="primaryReligion" value="folk">
+                    <label for="folk">Folk Religions (including Native Americans & similar worldwide traditions)</label>
+                </div>
+                
+                <div class="radio-item">
+                    <input type="radio" id="hinduism" name="primaryReligion" value="hinduism">
+                    <label for="hinduism">Hinduism</label>
+                </div>
+                
+                <div class="radio-item">
+                    <input type="radio" id="buddhism" name="primaryReligion" value="buddhism">
+                    <label for="buddhism">Buddhism</label>
+                </div>
+                
+                <div class="radio-item">
+                    <input type="radio" id="islam-sunni" name="primaryReligion" value="islam-sunni">
+                    <label for="islam-sunni">Islam Sunni</label>
+                </div>
+                
+                <div class="radio-item">
+                    <input type="radio" id="islam-shiah" name="primaryReligion" value="islam-shiah">
+                    <label for="islam-shiah">Islam Shiah</label>
+                </div>
+                
+                <div class="radio-item">
+                    <input type="radio" id="roman-catholic" name="primaryReligion" value="roman-catholic">
+                    <label for="roman-catholic">Roman Catholicism (including sub-denominations such as Jesuits)</label>
+                </div>
+                
+                <div class="radio-item">
+                    <input type="radio" id="church-england" name="primaryReligion" value="church-england">
+                    <label for="church-england">Church of England (including sub-denominations such as Free-Masonry)</label>
+                </div>
+                
+                <div class="radio-item">
+                    <input type="radio" id="rabbinical-judaism" name="primaryReligion" value="rabbinical-judaism">
+                    <label for="rabbinical-judaism">Rabbinical Judaism</label>
+                </div>
+                
+                <div class="radio-item">
+                    <input type="radio" id="lutheran" name="primaryReligion" value="lutheran">
+                    <label for="lutheran">Lutheran</label>
+                </div>
+                
+                <div class="radio-item">
+                    <input type="radio" id="baptist" name="primaryReligion" value="baptist">
+                    <label for="baptist">Baptist</label>
+                </div>
+                
+                <div class="radio-item">
+                    <input type="radio" id="jehovahs-witnesses" name="primaryReligion" value="jehovahs-witnesses">
+                    <label for="jehovahs-witnesses">Jehovah's Witnesses</label>
+                </div>
+                
+                <div class="radio-item">
+                    <input type="radio" id="lds-mormon" name="primaryReligion" value="lds-mormon">
+                    <label for="lds-mormon">Church of Latter-Day Saints (Mormons)</label>
+                </div>
+                
+                <div class="radio-item">
+                    <input type="radio" id="other" name="primaryReligion" value="other">
+                    <label for="other">Other (please specify below)</label>
+                </div>
+                
+                <div class="radio-item">
+                    <input type="radio" id="none" name="primaryReligion" value="none">
+                    <label for="none">No Religious Affiliation</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h3>Specific Details</h3>
+            
+            <div class="form-group">
+                <label for="denomination">Specific Denomination/Sect (if applicable)</label>
+                <input type="text" id="denomination" name="denomination" placeholder="e.g., Southern Baptist, Orthodox Judaism, Tibetan Buddhism, etc.">
+            </div>
+            
+            <div class="form-group">
+                <label for="otherReligion">Other Religious/Spiritual Traditions (if selected "Other" above)</label>
+                <input type="text" id="otherReligion" name="otherReligion" placeholder="Please specify your religious/spiritual tradition">
+            </div>
+            
+            <div class="form-group">
+                <label for="practiceLevel">Level of Practice/Observance</label>
+                <select id="practiceLevel" name="practiceLevel">
+                    <option value="">Select level...</option>
+                    <option value="very-active">Very Active/Devout</option>
+                    <option value="moderately-active">Moderately Active</option>
+                    <option value="occasionally-active">Occasionally Active</option>
+                    <option value="cultural">Cultural/Heritage Connection</option>
+                    <option value="studying">Currently Studying/Exploring</option>
+                    <option value="inactive">Inactive but Affiliated</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h3>Community Interests</h3>
+            
+            <div class="form-group">
+                <label for="communityInterests">What type of religious/spiritual community activities interest you? (Check all that apply)</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="worship" name="communityInterests[]" value="worship">
+                        <label for="worship">Worship Services</label>
+                    </div>
+                    
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="study" name="communityInterests[]" value="study">
+                        <label for="study">Religious/Spiritual Study Groups</label>
+                    </div>
+                    
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="service" name="communityInterests[]" value="service">
+                        <label for="service">Community Service</label>
+                    </div>
+                    
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="fellowship" name="communityInterests[]" value="fellowship">
+                        <label for="fellowship">Social Fellowship</label>
+                    </div>
+                    
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="education" name="communityInterests[]" value="education">
+                        <label for="education">Religious Education</label>
+                    </div>
+                    
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="interfaith" name="communityInterests[]" value="interfaith">
+                        <label for="interfaith">Interfaith Dialogue</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h3>Additional Information</h3>
+            
+            <div class="form-group">
+                <label for="additionalInfo">Additional Comments or Information</label>
+                <textarea id="additionalInfo" name="additionalInfo" rows="4" placeholder="Please share any additional information about your religious/spiritual beliefs or community interests..."></textarea>
+            </div>
+        </div>
+<div style="text-align: center; margin-top: 2rem;">
+    <button type="submit" class="submit-btn" style="width: auto; min-width: 200px;">Up-Date This Profile-Page.</button>
+</div>
+
+    </form>
+</div>
+<script>
+(() => {
+  // ===== Config =====
+  const API_BASE = (document.body.dataset.apiBase || '').replace(/\/+$/, '') || '/api/v1';
+  const ENDPOINT = `${API_BASE}/profile/religious`; // matches your existing backend
+
+  // ===== Utilities =====
+  const $ = (sel, root = document) => root.querySelector(sel);
+  const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+
+  function getAuthToken() {
+    return (
+      localStorage.getItem('authToken') ||
+      localStorage.getItem('token') ||
+      localStorage.getItem('jwt') ||
+      ''
+    );
+  }
+
+  async function authedFetch(url, options = {}) {
+    const token = getAuthToken();
+    if (!token) throw new Error('No auth token found (authToken/token/jwt in localStorage).');
+    const headers = new Headers(options.headers || {});
+    if (!(options.body instanceof FormData)) headers.set('Content-Type', 'application/json');
+    headers.set('Authorization', `Bearer ${token}`);
+    return fetch(url, { ...options, headers });
+  }
+
+  function toast(msg, isError = false) {
+    let el = document.getElementById('relig-toast');
+    if (!el) {
+      el = document.createElement('div');
+      el.id = 'relig-toast';
+      Object.assign(el.style, {
+        position: 'fixed', left: '50%', top: '20px', transform: 'translateX(-50%)',
+        zIndex: 99999, padding: '10px 14px', borderRadius: '8px',
+        boxShadow: '0 2px 8px rgba(0,0,0,.4)', fontWeight: 'bold', color: '#fff'
+      });
+      document.body.appendChild(el);
+    }
+    el.textContent = msg;
+    el.style.background = isError ? '#7a1f1f' : '#2a4';
+    clearTimeout(el._t);
+    el.style.display = 'block';
+    el._t = setTimeout(() => (el.style.display = 'none'), 4000);
+  }
+
+  // Map UI practiceLevel ↔ numeric 0–10 expected by backend (supporting_religion)
+  const PRACTICE_TO_SCORE = {
+    'very-active': 9,
+    'moderately-active': 7,
+    'occasionally-active': 5,
+    'cultural': 4,
+    'studying': 3,
+    'inactive': 1
+  };
+  function scoreToPracticeLevel(score) {
+    if (score == null) return '';
+    // snap to nearest bucket
+    const pairs = Object.entries(PRACTICE_TO_SCORE);
+    let best = ['', Infinity];
+    for (const [k, v] of pairs) {
+      const d = Math.abs((+score || 0) - v);
+      if (d < best[1]) best = [k, d];
+    }
+    return best[0];
+  }
+
+  // Known radio values in the form
+  const KNOWN_RELIGIONS = new Set([
+    'folk','hinduism','buddhism','islam-sunni','islam-shiah',
+    'roman-catholic','church-england','rabbinical-judaism','lutheran',
+    'baptist','jehovahs-witnesses','lds-mormon','other','none'
+  ]);
+
+  function collectPayload() {
+    const selectedRadio = $('input[name="primaryReligion"]:checked');
+    let religion = selectedRadio ? selectedRadio.value : '';
+
+    // If "other" selected, use free text; also append denomination if provided
+    const other = $('#otherReligion')?.value?.trim() || '';
+    const denom = $('#denomination')?.value?.trim() || '';
+
+    // Compose religion string for backend (single text field)
+    if (religion === 'other') {
+      religion = other || 'other';
+    }
+    if (denom) {
+      // preserve base + denomination
+      religion = religion ? `${religion} - ${denom}` : denom;
+    }
+
+    const practiceLevel = $('#practiceLevel')?.value || '';
+    const supporting_religion = PRACTICE_TO_SCORE[practiceLevel] ?? null;
+
+    // Array of selected interests maps to religious_services_types (string[])
+    const services = $$('input[name="communityInterests[]"]:checked').map(cb => cb.value);
+
+    // NOTE: backend structure supports: religion (string), supporting_religion (0-10), religious_services_types (text[])
+    return {
+      religion: religion || '',
+      supporting_religion, // number or null
+      religious_services_types: services
+    };
+  }
+
+  function prefillForm(api) {
+    if (!api || typeof api !== 'object') return;
+
+    // religion: try to match one of the radios; if not, set "other" and fill otherReligion
+    const rel = String(api.religion ?? '').trim();
+    let baseRel = rel;
+    let denom = '';
+
+    // If composed like "roman-catholic - Jesuits", split on first " - "
+    const splitIdx = rel.indexOf(' - ');
+    if (splitIdx !== -1) {
+      baseRel = rel.slice(0, splitIdx);
+      denom = rel.slice(splitIdx + 3);
+    }
+
+    // If the base value isn't one of the radio values, treat as "other"
+    const radioValue = KNOWN_RELIGIONS.has(baseRel) ? baseRel : 'other';
+    const radio = document.querySelector(`input[name="primaryReligion"][value="${radioValue}"]`);
+    if (radio) radio.checked = true;
+
+    if (radioValue === 'other') {
+      if ($('#otherReligion')) $('#otherReligion').value = rel || '';
+    }
+    if (denom && $('#denomination')) $('#denomination').value = denom;
+
+    // supporting_religion → practiceLevel select
+    const practice = scoreToPracticeLevel(api.supporting_religion);
+    if ($('#practiceLevel')) $('#practiceLevel').value = practice;
+
+    // religious_services_types → checkboxes
+    const types = Array.isArray(api.religious_services_types) ? api.religious_services_types : [];
+    types.forEach(val => {
+      const cb = document.querySelector(`input[name="communityInterests[]"][value="${val}"]`);
+      if (cb) cb.checked = true;
+    });
+  }
+
+  async function safeJson(res) {
+    try { return await res.json(); } catch { return null; }
+  }
+
+  async function loadExisting() {
+    try {
+      const res = await authedFetch(ENDPOINT, { method: 'GET' });
+      if (res.status === 404) return; // nothing yet
+      if (!res.ok) return;
+      const data = await res.json();
+      prefillForm(data);
+    } catch (e) {
+      if (/No auth token/i.test(String(e?.message))) toast(e.message, true);
+    }
+  }
+
+  async function submitHandler(e) {
+    e.preventDefault();
+    const payload = collectPayload();
+
+    try {
+      // Try update first
+      let res = await authedFetch(ENDPOINT, {
+        method: 'PUT',
+        body: JSON.stringify(payload)
+      });
+
+      if (res.status === 404) {
+        // Create if none exists
+        res = await authedFetch(ENDPOINT, {
+          method: 'POST',
+          body: JSON.stringify(payload)
+        });
+      }
+
+      if (res.status === 401) {
+        toast('Unauthorized. Please log in again.', true);
+        return;
+      }
+
+      if (!res.ok) {
+        const err = await safeJson(res);
+        throw new Error(err?.error || `Request failed (${res.status})`);
+      }
+
+      toast('Religious profile saved.');
+    } catch (err) {
+      toast(`Save failed: ${err.message}`, true);
+    }
+  }
+
+  const form = document.querySelector('form.registration-form');
+  if (!form) return;
+  form.addEventListener('submit', submitHandler);
+  loadExisting();
+})();
+</script>
+
+</body>
+</html>

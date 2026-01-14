@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Religious & Spiritual Beliefs Information - Common-Law Republic U.S.A.</title>
+<style>
+/* Using the existing CSS variables and styles from your code */
+:root {
+--primary-dark: #000000;
+--secondary-dark: #111111;
+--tertiary-dark: #1a1a1a;
+--accent-gold: #f5d442;
+--accent-gold-hover: #ffe97f;
+--text-light: #ffffcc;
+--text-white: #fefefe;
+--highlight-pink: #ff33e3;
+--border-color: #444;
+--shadow-color: rgba(255, 215, 0, 0.2);
+}
+
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body {
+margin: 0;
+padding: 0;
+font-family: "Times New Roman", Times, serif;
+background-color: var(--primary-dark);
+color: var(--text-light);
+line-height: 1.6;
+}
+
+.container {
+max-width: 800px;
+margin: 0 auto;
+padding: 2rem;
+}
+
+.info-content {
+background-color: var(--secondary-dark);
+padding: 2rem;
+border-radius: 12px;
+box-shadow: 0 4px 10px var(--shadow-color);
+border: 1px solid var(--border-color);
+}
+
+.page-title {
+color: var(--accent-gold);
+text-align: center;
+margin-bottom: 2rem;
+font-size: 2rem;
+}
+
+.info-section {
+margin-bottom: 2rem;
+}
+
+.info-section h3 {
+color: var(--accent-gold);
+margin-bottom: 1rem;
+font-size: 1.3rem;
+}
+
+.info-intro {
+background-color: var(--tertiary-dark);
+padding: 1rem;
+border-radius: 4px;
+border-left: 4px solid var(--accent-gold);
+margin-bottom: 1.5rem;
+}
+
+.religion-list {
+list-style-type: none;
+}
+
+.religion-item {
+padding: 0.8rem;
+margin-bottom: 0.5rem;
+background-color: var(--tertiary-dark);
+border-radius: 4px;
+}
+
+.religion-item.separator {
+background-color: transparent;
+border-top: 1px dashed var(--border-color);
+padding: 0.5rem;
+margin: 1rem 0;
+text-align: center;
+}
+
+.back-btn {
+background-color: var(--accent-gold);
+color: var(--primary-dark);
+padding: 1rem 2rem;
+border: none;
+border-radius: 4px;
+font-size: 1.1rem;
+font-weight: bold;
+cursor: pointer;
+width: 100%;
+transition: background-color 0.3s ease;
+text-align: center;
+display: block;
+text-decoration: none;
+margin-top: 1rem;
+}
+
+.back-btn:hover {
+background-color: var(--accent-gold-hover);
+}
+
+@media screen and (max-width: 768px) {
+.container {
+padding: 1rem;
+}
+}
+</style>
+<style>
+/* Root Variables and Basic Reset */
+:root {
+--primary-dark: #000000;
+--secondary-dark: #111111;
+--tertiary-dark: #1a1a1a;
+--accent-gold: #f5d442;
+--accent-gold-hover: #ffe97f;
+--text-light: #ffffcc;
+--text-white: #fefefe;
+--highlight-pink: #ff33e3;
+--border-color: #444;
+--shadow-color: rgba(255, 215, 0, 0.2);
+}
+
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body {
+margin: 0;
+padding: 0;
+font-family: "Times New Roman", Times, serif; /* Changed from "Segoe UI" */
+background-color: var(--primary-dark);
+color: var(--text-light);
+line-height: 1.6;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+color: var(--accent-gold);
+margin-bottom: 1rem;
+}
+
+a {
+color: var(--accent-gold);
+text-decoration: none;
+transition: color 0.3s ease;
+}
+
+a:hover {
+color: var(--accent-gold-hover);
+}
+
+/* Header Styles */
+.main-header {
+background-color: var(--primary-dark);
+border-bottom: 2px solid var(--accent-gold);
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.header-title {
+text-align: center;
+padding: 1rem 0; /* Reduced from 1.5rem to 0.5rem */
+}
+
+.header-title h1 {
+font-size: 2.7rem;
+margin: 0;
+color: #ffffff; /* Changed to white, overriding the default gold color */
+}
+
+/* Navigation Styles */
+.topnav {
+background-color: var(--secondary-dark);
+display: flex;
+justify-content: center;
+align-items: center;
+padding: 0.0rem 0; /* Reduced from 0.5rem to 0rem */
+position: sticky;
+top: 0;
+z-index: 1000;
+}
+
+.dropdown {
+position: relative;
+display: inline-block;
+margin: 0 0.5rem;
+}
+
+.dropbtn {
+background-color: transparent;
+color: var(--accent-gold);
+padding: 0.8rem 1.2rem;
+font-size: 1rem;
+border: none;
+cursor: pointer;
+font-weight: bold;
+transition: color 0.3s ease;
+}
+
+.dropbtn:hover {
+color: var(--accent-gold-hover);
+}
+
+.dropdown-content {
+display: none;
+position: absolute;
+background-color: var(--tertiary-dark);
+min-width: 200px;
+box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+z-index: 1;
+border: 1px solid var(--border-color);
+border-radius: 4px;
+}
+
+.dropdown-content a {
+color: var(--text-light);
+padding: 12px 16px;
+display: block;
+text-align: left;
+}
+
+.dropdown-content .long-item {
+white-space: normal;
+line-height: 1.2;
+padding: 8px 16px;
+}
+
+.dropdown-content a:hover {
+background-color: var(--secondary-dark);
+color: var(--accent-gold);
+}
+
+.dropdown:hover .dropdown-content {
+display: block;
+}
+
+/* Main Container Styles */
+.container {
+max-width: 1000px;
+margin: 0 auto;
+padding: .1rem; /* Reduced from 2rem */
+}
+
+/* Content Section Styles */
+.content-section {
+background-color: var(--secondary-dark);
+margin: 0.1rem 0;
+padding: 0.5rem;
+border-radius: 12px;
+box-shadow: 0 4px 10px var(--shadow-color);
+border: 1px solid var(--border-color);
+}
+
+/* Front Page Specific Styles */
+.welcome-content {
+padding: .1rem; /* Reduced from 3rem */
+}
+
+.welcome-block {
+display: flex;
+flex-direction: column;
+gap: 0; /* Controls spacing between lines */
+padding-top: 0rem; /* minimal top space */
+padding-bottom: 1rem; /* larger bottom space */
+}
+
+
+.welcome-line {
+font-size: 1.8rem;
+color: var(--accent-gold);
+font-weight: bold;
+line-height: 1.2; /* Tighter line spacing */
+margin: 0;
+padding: 0;
+}
+
+.welcome-text {
+font-size: 1.2rem;
+color: var(--text-light);
+font-weight: 500;
+line-height: 1.2;
+margin: 0;
+padding: 0;
+}
+
+.welcome-block > div:nth-child(2) {
+margin-bottom: 0.5rem; /* Small space before the smaller text */
+}
+
+/* Map Styles */
+.map-container {
+width: 100%;
+overflow: hidden;
+padding: 0.5rem 0; /* Reduced from 1rem */
+margin-bottom: 0.5rem; /* Add this to reduce space before footer */
+}
+
+.responsive-map {
+max-width: 100%;
+height: auto;
+display: block;
+margin: 0 auto;
+border-radius: 8px; /* Optional: adds slightly rounded corners */
+box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* Optional: adds subtle shadow */
+}
+
+/* Optional: Add hover effect */
+.responsive-map:hover {
+box-shadow: 0 4px 12px rgba(255, 215, 0, 0.2);
+transition: box-shadow 0.3s ease;
+}
+
+@media screen and (max-width: 768px) {
+.map-container {
+padding: 0.5rem 0;
+}
+
+.responsive-map {
+width: 100%;
+}
+}
+
+.registration-cta {
+padding: 2rem;
+}
+
+.registration-cta h3 {
+font-size: 1.6rem;
+margin-bottom: 1.5rem;
+}
+
+.registration-cta p {
+font-size: 1.1rem;
+line-height: 1.8;
+}
+
+/* Footer Styles */
+.main-footer {
+background-color: var(--secondary-dark);
+padding: 1rem; /* Reduced padding */
+margin-top: 1rem; /* Reduced top margin */
+border-top: 2px solid var(--border-color);
+}
+
+.footer-content {
+max-width: 1000px;
+margin: 0 auto;
+display: block;
+}
+
+.footer-section {
+padding: 0.2rem; /* Reduced padding */
+margin-bottom: 0.2rem; /* Reduced margin */
+text-align: center;
+}
+
+.footer-section p {
+margin-bottom: 0.2rem;
+line-height: 1.4;
+max-width: 800px; /* Add this to control text width */
+margin-left: auto; /* Center the contained text */
+margin-right: auto;
+}
+
+.footer-section p.mt-1 {
+margin-top: 0.2rem; /* Reduced margin for paragraphs with mt-1 class */
+}
+
+.footer-section:hover {
+background-color: var(--tertiary-dark);
+transition: background-color 0.3s ease;
+}
+
+.footer-bottom {
+text-align: center;
+padding-top: 0.5rem; /* Reduced padding */
+margin-top: 0.5rem; /* Reduced margin */
+border-top: 1px solid var(--border-color);
+}
+
+/* Utility Classes */
+.text-center {
+text-align: center;
+}
+
+.mt-1 { margin-top: 1rem; }
+.mt-2 { margin-top: 2rem; }
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+.topnav {
+flex-direction: column;
+padding: 0;
+}
+
+.dropdown {
+width: 100%;
+margin: 0;
+}
+
+.dropbtn {
+width: 100%;
+padding: 1rem;
+}
+
+.dropdown-content {
+width: 100%;
+position: relative;
+}
+
+.container {
+padding: 1rem;
+}
+
+.content-section {
+padding: 1rem;
+}
+
+.footer-content {
+grid-template-columns: 1fr;
+}
+}
+</style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-title">
+            <h1><u>Common-Law Republic</u>; <u>U.S.A.</u>.</h1>
+        </div>
+
+        <nav class="topnav">
+            <div class="dropdown">
+                <button class="dropbtn">Home Page.</button>
+                <div class="dropdown-content">
+                    <a href="index.html">Home Page.</a>
+                    <a href="./BriefGuidelines-PreferentialVotingBallot-Generic-Edit3.pdf">Using Ballots; Instructions.</a>
+                    <a href="USA-LocalJurisdictions/OrganicHierarchiesUSA-V4.2.pdf">Social-Organizing Under Constitutional "Organic Hierarchies".</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Register; or: Log-In.</button>
+                <div class="dropdown-content">
+                    <a href="Accounts-Profiles-Registering/NewUsers-Registration.html">Register</a>
+                    <a href="./Accounts-Profiles-Registering/Login.html">Login</a>
+                    <a href="./Accounts-Profiles-Registering/AccountProfiles-Management-Index.html">AccountProfiles-Management-Index</a>
+                    <a href="./Accounts-Profiles-Registering/Subscribe-EmailList.html">Subscribe To Email-List</a>
+                    
+                </div>
+            </div>
+
+        <nav class="topnav">
+            <div class="dropdown">
+                <button class="dropbtn">National Civil-Government; Political-Activism.</button>
+                <div class="dropdown-content">
+                    <a href="./USA-GoverningBodies/Executive-Department-SubDepartments-Agencies/ExcDpt-SubDepartments&Agencies-Listed.html">Executive-Department;<br>
+                      Sub-Departments, & Agencies.</a>
+                    <a href="./USA-GoverningBodies/JudicialDepartment/JudicialIndex.html">Judicial-Department.</a>
+                    <a href="./USA-GoverningBodies/Legislature-HouseReps/Leg-HRepsIndex.html">Legislature: House Representatives.</a>
+                    <a href="./USA-GoverningBodies/Legislature-Senate/Leg-Senate.html">Legislature; Senate.</a> 
+                    <a href="./USA-GoverningBodies/Ballots-Index.html"><u>Ballots</u>.</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Local Civil-Governments; Political-Activism.</button>
+                <div class="dropdown-content"style="text-align:center;">
+                            <a href="./USA-LocalJurisdictions/01-NewEngland-SS/NewEngland-SS.html" value="usa-01">01: New-England</a>
+                            <a href="./USA-LocalJurisdictions/02-NewYork-SS/NewYork-SS.html" value="usa-02">02: New-York</a>
+                            <a href="./USA-LocalJurisdictions/03-Jersey-Penn-SS/JerseyPenn-SS.html" value="usa-03">03: Jersey-Penn</a>
+                            <a href="./USA-LocalJurisdictions/04-GreatLakes-SS/GreatLakes-SS.html" value="usa-04">04: Great-Lakes</a>
+                            <a href="./USA-LocalJurisdictions/05-VirginiaCarolins-SS/Virginia-Carolina-SS.html" value="usa-05">05: Virginia-Carolina</a>
+                            <a href="./USA-LocalJurisdictions/07-MississippiValley-SS/MississippiValley-SS.html" value="usa-06">06: Mississippi-Valley</a>
+                            <a href="./USA-LocalJurisdictions/06-FloridaGeorgia-SS/FloridaGeorgia-SS.html" value="usa-07">07: Florida-Georgia</a>
+                            <a href="./USA-LocalJurisdictions/08-WestGreatLakes-SS/WestreatLakes-SS.html" value="usa-08">08: West-Great-Lakes</a>
+                            <a href="./USA-LocalJurisdictions/09-Texas-SS/Texas-SS.html" value="usa-09">09: Texas</a>
+                            <a href="./USA-LocalJurisdictions/10-SouthWest-SS/SouthWest-SS.html" value="usa-10">10: South-West</a>
+                            <a href="./USA-LocalJurisdictions/11-PacificNW-SS/PacificNW-SS.html" value="usa-11">11: Pacific-NW</a>
+                            <a href="./USA-LocalJurisdictions/12-California-SS/California-SS.html"value="usa-12">12: California</a>
+                     </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">EveryThing Else:<div class="dropdown-content">
+                    <a href="./EveryThing-Else/">Everything-Else: Main-Index:</a>
+                    <a href="./EveryThing-Else/1-Political-Parties/PoliticalParties.html">Political Parties:</a>
+                    <a href="./EveryThing-Else/2-Religous-&-Spiritual-Communities/SpiritualIndex.html">Religious & Spiritual Communities:</a>
+                    <a href="./EveryThing-Else/3-Business&Financial-Communities&Corporations/Biz&Finances.html">Business & Financial Communities & Corporations:</a>
+                    <a href="./EveryThing-Else/4-DNA-Genetic-Racial-Bloodlines-Communities/GeneticHeritage.html">DNA, Genetic, Racial, Blood-line, & Ethnic Communities:</a>
+                    <a href="./EveryThing-Else/5-World-Communities-OutsideOfUSA/World-Communities-Index.html">World-Communities: Index.</a>
+                  </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Support.</button>
+                <div class="dropdown-content">
+                    <a href="./Support/Support.html">Support-Help-Contacts</a>                </div>
+            </div>
+        </nav>
+    </header>
+<div class="container">
+<div class="info-content">
+<h2 class="page-title"><u>Religious & Spiritual Communities Organizing</u>.</h2>
+
+<div class="info-intro">
+<p>This page provides a frame-work, with-in which, 
+  activists may work to <u>produce positive-changes</u>, 
+  as <u>with-in All Religious Organizations & other Spiritual Communities</u>  
+  which might be recognizable on this earth. 
+  By focusing efforts at more efficiently organizing from with-in 
+  each of these individual communities, this can reasonably be expected 
+  to facilitate more effective inter-faith dialogue 
+  & peace-keeping between all such communities.</p>
+</div>
+
+<div class="info-section">
+<h3><u>Major Religious Denominations</u>:</h3>
+<p style="margin-bottom: 1rem;">This listing is composed 
+  of what presently seem to be the most significantly-influential 
+  religious organizations on our modern earth;
+  but this list is starting-out rather small, 
+  & we welcome suggestions for adding additional names of groups to this list.</p>
+
+<ul class="religion-list">
+    <li class="religion-item">"Folk Religions"; including Native Americans, & Others similar & World-Wide.</li>
+    <li class="religion-item">Hinduism</li>
+    <li class="religion-item">Buddhism</li>
+    <li class="religion-item">Islam Sunni</li>
+    <li class="religion-item">Islam Shiah</li>
+    <li class="religion-item">"Roman Catholicism"; Including sub-denominations, 
+      such as the "Jesuits"; "Augustinians", "Franciscans", "Knights of Columbus", 
+      "Opus-Dei", "Latin-Mass Communities", "Liberation-Theology Adherents",
+      & "Social-Justice Communities".</li>
+    <li class="religion-item">"Church of England", including sub-denominations, 
+      such as "Free-Masonry", "Anglo-Catholicism", "Evangelicalism", 
+      & the "Charismatic Movement".</li>
+    <li class="religion-item">"Rabbinical Judaism"; including "Torah Obedient", 
+      & "Non-Torah" Factions</li>
+    <li class="religion-item">"Lutherians"</li>
+    <li class="religion-item">"Baptists"; including sub-denominations, 
+      such as "Southern Baptists", "American Baptists", "Progressive National Baptists", 
+    "Cooperative Baptists", "Independent Baptists", "National Baptists".</li>
+    <li class="religion-item">"Russian Orthodox Church"</li>
+    <li class="religion-item">"Greek Orthodox Church"</li>
+    <li class="religion-item">"Jehovah's Witnesses"</li>
+    <li class="religion-item">"Church of Latter-Day Saints", aka: "Mormons".</li>
+    <li class="religion-item">"Seventh-Day Adventists"</li>
+    <li class="religion-item">Methodists</li>
+    <li class="religion-item">Pentecostals</li>
+    <li class="religion-item">Amish</li>
+    <li class="religion-item">Mennonite</li>
+    <li class="religion-item">Supporters of the "Christian Trinity" Doctrine</li>
+    <li class="religion-item">Followers of Doctrines Established in the "Council of Nicea"</li>
+    <li class="religion-item">"Gnostics"; including "Christian" & "Non-Christian" sub-divisions</li>
+    <li class="religion-item">"Liberation Theology" &/or "Social Justice" Supporters.</li>
+</ul>
+</div>
+
+<div class="info-section">
+<h3><u>Community Participation</u>:</h3>
+<p>This effort recognizes the importance of good-faith activists working with-in 
+  religious & spiritual communities, in their reasonable efforts at 
+  promoting peace & social harmony. Here-under; activists are encouraged to:</p>
+
+<ul class="religion-list">
+    <li class="religion-item">Participate in religious/spiritual communities of their choice</li>
+    <li class="religion-item">Engage in interfaith dialogue to promote 
+      broader community peace & harmony</li>
+    <li class="religion-item">Respect the peaceful religious freedoms 
+      & practices of others</li>
+    <li class="religion-item">Make good-faith efforts at serving the best interests 
+      of all religiously organized communities</li>
+</ul>
+</div>
+
+<a href="./PrivateSpecialReligiousCommunities/1-Religous-&-Spiritual-Communities/SpiritualIndex.html" class="back-btn">Explore Religious Communities</a>
+</div>
+</div>
+
+</body>
+</html>
