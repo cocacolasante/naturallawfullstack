@@ -58,11 +58,24 @@ CREATE TABLE IF NOT EXISTS ballots (
     title VARCHAR(200) NOT NULL,
     description TEXT,
     category VARCHAR(100),
+    superstate VARCHAR(100),
+    state VARCHAR(100),
     creator_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     is_active BOOLEAN DEFAULT true,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+-- Add superstate and state columns if they don't exist (for existing databases)
+DO $$
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = 'ballots' AND column_name = 'superstate') THEN
+        ALTER TABLE ballots ADD COLUMN superstate VARCHAR(100);
+    END IF;
+    IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = 'ballots' AND column_name = 'state') THEN
+        ALTER TABLE ballots ADD COLUMN state VARCHAR(100);
+    END IF;
+END $$;
 
 -- Create ballot_items table
 CREATE TABLE IF NOT EXISTS ballot_items (
@@ -153,6 +166,9 @@ CREATE TABLE IF NOT EXISTS economic_info (
 
 -- Create indexes for better performance
 CREATE INDEX IF NOT EXISTS idx_ballots_creator_id ON ballots(creator_id);
+CREATE INDEX IF NOT EXISTS idx_ballots_superstate ON ballots(superstate);
+CREATE INDEX IF NOT EXISTS idx_ballots_state ON ballots(state);
+CREATE INDEX IF NOT EXISTS idx_ballots_category ON ballots(category);
 CREATE INDEX IF NOT EXISTS idx_ballot_items_ballot_id ON ballot_items(ballot_id);
 CREATE INDEX IF NOT EXISTS idx_votes_user_id ON votes(user_id);
 CREATE INDEX IF NOT EXISTS idx_votes_ballot_id ON votes(ballot_id);

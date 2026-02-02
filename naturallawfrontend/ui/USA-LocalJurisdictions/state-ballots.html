@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>State Ballots - Common-Law Republic</title>
+    <style>
+        :root {
+            --primary-dark: #000000;
+            --secondary-dark: #111111;
+            --tertiary-dark: #1a1a1a;
+            --accent-gold: #f5d442;
+            --accent-gold-hover: #ffe97f;
+            --text-light: #ffffcc;
+            --text-white: #fefefe;
+            --border-color: #444;
+            --shadow-color: rgba(255, 215, 0, 0.2);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: "Times New Roman", Times, serif;
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .main-header {
+            background-color: var(--primary-dark);
+            border-bottom: 2px solid var(--accent-gold);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .header-title {
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        .header-title h1 {
+            font-size: 2.7rem;
+            margin: 0;
+            color: #ffffff;
+        }
+
+        .topnav {
+            background-color: var(--secondary-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            margin: 0 0.5rem;
+        }
+
+        .dropbtn {
+            background-color: transparent;
+            color: var(--accent-gold);
+            padding: 0.8rem 1.2rem;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .dropbtn:hover { color: var(--accent-gold-hover); }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--tertiary-dark);
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+            z-index: 1;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+        }
+
+        .dropdown-content a {
+            color: var(--text-light);
+            padding: 12px 16px;
+            display: block;
+            text-align: left;
+        }
+
+        .dropdown-content a:hover {
+            background-color: var(--secondary-dark);
+            color: var(--accent-gold);
+        }
+
+        .dropdown:hover .dropdown-content { display: block; }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .content-section {
+            background-color: var(--secondary-dark);
+            margin: 0.5rem 0;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px var(--shadow-color);
+            border: 1px solid var(--border-color);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 1rem;
+            color: var(--accent-gold);
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            color: var(--accent-gold-hover);
+        }
+
+        .page-title {
+            text-align: center;
+            color: var(--accent-gold);
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .ballot-card {
+            background-color: var(--tertiary-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .ballot-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px var(--shadow-color);
+            border-color: var(--accent-gold);
+        }
+
+        .ballot-title {
+            font-size: 1.4rem;
+            color: var(--accent-gold);
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .ballot-description {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .ballot-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .ballot-date {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .ballot-status {
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .status-active {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .ballot-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-gold);
+            color: var(--primary-dark);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-gold-hover);
+            color: var(--primary-dark);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--accent-gold);
+            border: 1px solid var(--accent-gold);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--accent-gold);
+            color: var(--primary-dark);
+        }
+
+        .main-footer {
+            background-color: var(--secondary-dark);
+            padding: 1rem;
+            margin-top: 2rem;
+            border-top: 2px solid var(--border-color);
+            text-align: center;
+        }
+
+        .loading-state, .empty-state, .error-state {
+            text-align: center;
+            padding: 3rem;
+        }
+
+        @media screen and (max-width: 768px) {
+            .topnav {
+                flex-direction: column;
+                padding: 0;
+            }
+            .dropdown {
+                width: 100%;
+                margin: 0;
+            }
+            .dropbtn {
+                width: 100%;
+                padding: 1rem;
+            }
+            .dropdown-content {
+                width: 100%;
+                position: relative;
+            }
+            .container {
+                padding: 1rem;
+            }
+            .ballot-actions {
+                flex-direction: column;
+            }
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-title">
+            <h1><u>Common-Law Republic</u>; <u>U.S.A.</u>.</h1>
+        </div>
+
+        <nav class="topnav">
+            <div class="dropdown">
+                <button class="dropbtn">Home Page.</button>
+                <div class="dropdown-content">
+                    <a href="../index.html">Home Page.</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Register; or: Log-In.</button>
+                <div class="dropdown-content">
+                    <a href="../Accounts-Profiles-Registering/NewUsers-Registration.html">Register</a>
+                    <a href="../Accounts-Profiles-Registering/Login.html">Login</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Local Civil-Governments</button>
+                <div class="dropdown-content">
+                    <a href="./01-NewEngland-SS/NewEngland-SS.html">01: New-England</a>
+                    <a href="./02-NewYork-SS/NewYork-SS.html">02: New-York</a>
+                    <a href="./03-Jersey-Penn-SS/JerseyPenn-SS.html">03: Jersey-Penn</a>
+                    <a href="./04-GreatLakes-SS/GreatLakes-SS.html">04: Great-Lakes</a>
+                    <a href="./05-VirginiaCarolina-SS/VirginiaCarolina-SS.html">05: Virginia-Carolina</a>
+                    <a href="./06-FloridaGeorgia-SS/FloridaGeorgia-SS.html">06: Florida-Georgia</a>
+                    <a href="./07-MississippiValley-SS/MississippiValley-SS.html">07: Mississippi-Valley</a>
+                    <a href="./08-NorthCentralPlains-SS/NorthCentralPlains-SS.html">08: NorthCentral-Plains</a>
+                    <a href="./09-Texas-SS/Texas-SS.html">09: Texas</a>
+                    <a href="./10-SouthWest-SS/SouthWest-SS.html">10: South-West</a>
+                    <a href="./11-PacificNW-SS/PacificNW-SS.html">11: Pacific-NW</a>
+                    <a href="./12-California-SS/California-SS.html">12: California</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Support.</button>
+                <div class="dropdown-content">
+                    <a href="../Support/Support.html">Support-Help-Contacts</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="content-section">
+            <a href="#" id="backLink" class="back-link">&larr; Back to Super-State</a>
+
+            <h2 class="page-title" id="pageTitle">State Ballots</h2>
+            <p class="page-subtitle" id="pageSubtitle">View and vote on ballots for this state</p>
+
+            <!-- Loading State -->
+            <div id="loadingState" class="loading-state">
+                <p>Loading ballots...</p>
+            </div>
+
+            <!-- Error State -->
+            <div id="errorState" class="error-state" style="display: none;">
+                <p id="errorMessage" style="color: #ff6b6b;"></p>
+            </div>
+
+            <!-- Ballots Container -->
+            <div id="ballotsContainer" style="display: none;"></div>
+
+            <!-- Empty State -->
+            <div id="emptyState" class="empty-state" style="display: none;">
+                <p>No ballots available for this state at this time.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <p>&copy; 2025 Common-Law Republic, U.S.A. All rights reserved.</p>
+        <p>Empowering communities through democratic participation</p>
+    </footer>
+
+    <script>
+        // API Configuration
+        const API_BASE_URL = 'http://localhost:8080/api/v1';
+
+        // Get query parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const superstate = urlParams.get('superstate');
+        const state = urlParams.get('state');
+
+        // Superstate display names
+        const superstateNames = {
+            'new-england': 'New England Super-State',
+            'new-york': 'New York Super-State',
+            'jersey-penn': 'Jersey-Penn Super-State',
+            'great-lakes': 'Great Lakes Super-State',
+            'virginia-carolina': 'Virginia-Carolina Super-State',
+            'florida-georgia': 'Florida-Georgia Super-State',
+            'mississippi-valley': 'Mississippi Valley Super-State',
+            'north-central-plains': 'North Central Plains Super-State',
+            'texas': 'Texas Super-State',
+            'south-west': 'South-West Super-State',
+            'pacific-nw': 'Pacific NW Super-State',
+            'california': 'California Super-State'
+        };
+
+        // State display names
+        const stateNames = {
+            // New England
+            'vermont': 'Vermont',
+            'rhode-island': 'Rhode Island',
+            'maine': 'Maine',
+            'new-hampshire': 'New Hampshire',
+            'connecticut': 'Connecticut',
+            'massachusetts': 'Massachusetts',
+            // New York
+            'new-york-city': 'New York City',
+            'upstate-new-york': 'Upstate New York',
+            'long-island': 'Long Island',
+            'new-york': 'New York',
+            // Jersey-Penn
+            'washington-dc': 'Washington D.C.',
+            'delaware': 'Delaware',
+            'new-jersey': 'New Jersey',
+            'pennsylvania': 'Pennsylvania',
+            'maryland': 'Maryland',
+            // Great Lakes
+            'michigan': 'Michigan',
+            'ohio': 'Ohio',
+            'indiana': 'Indiana',
+            'kentucky': 'Kentucky',
+            // Virginia-Carolina
+            'virginia': 'Virginia',
+            'west-virginia': 'West Virginia',
+            'north-carolina': 'North Carolina',
+            'south-carolina': 'South Carolina',
+            // Florida-Georgia
+            'florida': 'Florida',
+            'georgia': 'Georgia',
+            // Mississippi Valley
+            'mississippi': 'Mississippi',
+            'arkansas': 'Arkansas',
+            'louisiana': 'Louisiana',
+            'alabama': 'Alabama',
+            'missouri': 'Missouri',
+            'tennessee': 'Tennessee',
+            // North Central Plains
+            'north-dakota': 'North Dakota',
+            'south-dakota': 'South Dakota',
+            'iowa': 'Iowa',
+            'minnesota': 'Minnesota',
+            'wisconsin': 'Wisconsin',
+            'illinois': 'Illinois',
+            // Texas
+            'texas': 'Texas',
+            // South-West
+            'nebraska': 'Nebraska',
+            'new-mexico': 'New Mexico',
+            'kansas': 'Kansas',
+            'oklahoma': 'Oklahoma',
+            'colorado': 'Colorado',
+            'arizona': 'Arizona',
+            // Pacific NW
+            'wyoming': 'Wyoming',
+            'alaska': 'Alaska',
+            'montana': 'Montana',
+            'hawaii': 'Hawaii',
+            'idaho': 'Idaho',
+            'nevada': 'Nevada',
+            'utah': 'Utah',
+            'oregon': 'Oregon',
+            'washington': 'Washington',
+            // California
+            'california': 'California'
+        };
+
+        // Superstate folder mapping for back links
+        const superstateFolders = {
+            'new-england': '01-NewEngland-SS',
+            'new-york': '02-NewYork-SS',
+            'jersey-penn': '03-Jersey-Penn-SS',
+            'great-lakes': '04-GreatLakes-SS',
+            'virginia-carolina': '05-VirginiaCarolina-SS',
+            'florida-georgia': '06-FloridaGeorgia-SS',
+            'mississippi-valley': '07-MississippiValley-SS',
+            'north-central-plains': '08-NorthCentralPlains-SS',
+            'texas': '09-Texas-SS',
+            'south-west': '10-SouthWest-SS',
+            'pacific-nw': '11-PacificNW-SS',
+            'california': '12-California-SS'
+        };
+
+        // Superstate main page names
+        const superstatePages = {
+            'new-england': 'NewEngland-SS.html',
+            'new-york': 'NewYork-SS.html',
+            'jersey-penn': 'JerseyPenn-SS.html',
+            'great-lakes': 'GreatLakes-SS.html',
+            'virginia-carolina': 'VirginiaCarolina-SS.html',
+            'florida-georgia': 'FloridaGeorgia-SS.html',
+            'mississippi-valley': 'MississippiValley-SS.html',
+            'north-central-plains': 'NorthCentralPlains-SS.html',
+            'texas': 'Texas-SS.html',
+            'south-west': 'SouthWest-SS.html',
+            'pacific-nw': 'PacificNW-SS.html',
+            'california': 'California-SS.html'
+        };
+
+        // DOM Elements
+        const loadingState = document.getElementById('loadingState');
+        const errorState = document.getElementById('errorState');
+        const errorMessage = document.getElementById('errorMessage');
+        const ballotsContainer = document.getElementById('ballotsContainer');
+        const emptyState = document.getElementById('emptyState');
+        const pageTitle = document.getElementById('pageTitle');
+        const pageSubtitle = document.getElementById('pageSubtitle');
+        const backLink = document.getElementById('backLink');
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            if (!superstate) {
+                showError('No superstate specified');
+                return;
+            }
+
+            // Set page title and subtitle
+            const stateName = stateNames[state] || state || 'All States';
+            const superstateName = superstateNames[superstate] || superstate;
+
+            if (state) {
+                pageTitle.textContent = `${stateName} Ballots`;
+                pageSubtitle.textContent = `Ballots for ${stateName} within the ${superstateName}`;
+            } else {
+                pageTitle.textContent = `${superstateName} Ballots`;
+                pageSubtitle.textContent = `All ballots within the ${superstateName}`;
+            }
+
+            // Update document title
+            document.title = `${stateName} Ballots - Common-Law Republic`;
+
+            // Set back link
+            const folder = superstateFolders[superstate] || superstate;
+            const page = superstatePages[superstate] || 'index.html';
+            backLink.href = `./${folder}/${page}`;
+
+            // Fetch ballots
+            fetchBallots();
+        });
+
+        async function fetchBallots() {
+            try {
+                let url = `${API_BASE_URL}/public/ballots?superstate=${encodeURIComponent(superstate)}`;
+                if (state) {
+                    url += `&state=${encodeURIComponent(state)}`;
+                }
+
+                const response = await fetch(url);
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const ballots = await response.json();
+
+                if (!ballots || ballots.length === 0) {
+                    showEmpty();
+                } else {
+                    displayBallots(ballots);
+                }
+
+            } catch (error) {
+                console.error('Error fetching ballots:', error);
+                showError('Failed to load ballots. Please try again later.');
+            }
+        }
+
+        function displayBallots(ballots) {
+            ballotsContainer.innerHTML = '';
+
+            ballots.forEach(ballot => {
+                const card = createBallotCard(ballot);
+                ballotsContainer.appendChild(card);
+            });
+
+            loadingState.style.display = 'none';
+            ballotsContainer.style.display = 'block';
+        }
+
+        function createBallotCard(ballot) {
+            const card = document.createElement('div');
+            card.className = 'ballot-card';
+
+            const createdDate = ballot.created_at ? new Date(ballot.created_at).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            }) : 'Date not available';
+
+            const isActive = ballot.is_active !== undefined ? ballot.is_active : true;
+            const statusClass = isActive ? 'status-active' : 'status-closed';
+            const statusText = isActive ? 'Active' : 'Closed';
+
+            card.innerHTML = `
+                <h3 class="ballot-title">${escapeHtml(ballot.title || 'Untitled Ballot')}</h3>
+                <p class="ballot-description">${escapeHtml(ballot.description || 'No description available.')}</p>
+                <div class="ballot-meta">
+                    <span class="ballot-date">Created: ${createdDate}</span>
+                    <span class="ballot-status ${statusClass}">${statusText}</span>
+                </div>
+                <div class="ballot-actions">
+                    <a href="./ballot-detail.html?id=${ballot.id}&superstate=${superstate}${state ? '&state=' + state : ''}" class="btn btn-primary">Vote Now</a>
+                    <a href="./ballot-results.html?id=${ballot.id}&superstate=${superstate}${state ? '&state=' + state : ''}" class="btn btn-secondary">View Results</a>
+                </div>
+            `;
+
+            return card;
+        }
+
+        function showError(message) {
+            loadingState.style.display = 'none';
+            errorMessage.textContent = message;
+            errorState.style.display = 'block';
+            ballotsContainer.style.display = 'none';
+            emptyState.style.display = 'none';
+        }
+
+        function showEmpty() {
+            loadingState.style.display = 'none';
+            errorState.style.display = 'none';
+            ballotsContainer.style.display = 'none';
+            emptyState.style.display = 'block';
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    </script>
+</body>
+</html>

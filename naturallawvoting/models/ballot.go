@@ -9,6 +9,8 @@ type Ballot struct {
 	Title       string    `json:"title" db:"title"`
 	Description string    `json:"description" db:"description"`
 	Category    string    `json:"category" db:"category"`
+	Superstate  string    `json:"superstate" db:"superstate"`
+	State       string    `json:"state" db:"state"`
 	CreatorID   int       `json:"creator_id" db:"creator_id"`
 	IsActive    bool      `json:"is_active" db:"is_active"`
 	CreatedAt   time.Time `json:"created_at" db:"created_at"`
@@ -36,6 +38,8 @@ type CreateBallotRequest struct {
 	Title       string                   `json:"title" binding:"required,min=1,max=200"`
 	Description string                   `json:"description" binding:"max=1000"`
 	Category    string                   `json:"category" binding:"max=100"`
+	Superstate  string                   `json:"superstate" binding:"max=100"`
+	State       string                   `json:"state" binding:"max=100"`
 	Items       []CreateBallotItemRequest `json:"items" binding:"required,min=2"`
 }
 

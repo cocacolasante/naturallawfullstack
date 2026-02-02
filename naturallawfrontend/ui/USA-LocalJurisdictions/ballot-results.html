@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ballot Results - Common-Law Republic</title>
+    <style>
+        :root {
+            --primary-dark: #000000;
+            --secondary-dark: #111111;
+            --tertiary-dark: #1a1a1a;
+            --accent-gold: #f5d442;
+            --accent-gold-hover: #ffe97f;
+            --text-light: #ffffcc;
+            --border-color: #444;
+            --shadow-color: rgba(255, 215, 0, 0.2);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: "Times New Roman", Times, serif;
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .main-header {
+            background-color: var(--primary-dark);
+            border-bottom: 2px solid var(--accent-gold);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .header-title {
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        .header-title h1 {
+            font-size: 2.7rem;
+            margin: 0;
+            color: #ffffff;
+        }
+
+        .topnav {
+            background-color: var(--secondary-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            margin: 0 0.5rem;
+        }
+
+        .dropbtn {
+            background-color: transparent;
+            color: var(--accent-gold);
+            padding: 0.8rem 1.2rem;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .dropbtn:hover { color: var(--accent-gold-hover); }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--tertiary-dark);
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+            z-index: 1;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+        }
+
+        .dropdown-content a {
+            color: var(--text-light);
+            padding: 12px 16px;
+            display: block;
+            text-align: left;
+        }
+
+        .dropdown-content a:hover {
+            background-color: var(--secondary-dark);
+            color: var(--accent-gold);
+        }
+
+        .dropdown:hover .dropdown-content { display: block; }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .content-section {
+            background-color: var(--secondary-dark);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px var(--shadow-color);
+            border: 1px solid var(--border-color);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 1rem;
+            color: var(--accent-gold);
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            color: var(--accent-gold-hover);
+        }
+
+        .ballot-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .ballot-title {
+            font-size: 2rem;
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+        }
+
+        .ballot-description {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .results-section {
+            margin: 2rem 0;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--accent-gold);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .result-item {
+            background-color: var(--tertiary-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .result-title {
+            font-size: 1.2rem;
+            color: var(--accent-gold);
+            font-weight: bold;
+        }
+
+        .result-votes {
+            font-size: 1rem;
+            color: var(--text-light);
+            font-weight: bold;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 24px;
+            background-color: var(--primary-dark);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-gold), var(--accent-gold-hover));
+            border-radius: 12px;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 10px;
+            min-width: fit-content;
+        }
+
+        .progress-percentage {
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: var(--primary-dark);
+        }
+
+        .result-description {
+            color: #888;
+            font-size: 0.95rem;
+            margin-top: 0.5rem;
+        }
+
+        .total-votes {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1rem;
+            background-color: var(--tertiary-dark);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .total-votes-label {
+            font-size: 1rem;
+            color: #888;
+        }
+
+        .total-votes-number {
+            font-size: 2rem;
+            color: var(--accent-gold);
+            font-weight: bold;
+        }
+
+        .btn {
+            padding: 0.8rem 2rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-gold);
+            color: var(--primary-dark);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-gold-hover);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            justify-content: center;
+        }
+
+        .main-footer {
+            background-color: var(--secondary-dark);
+            padding: 1rem;
+            margin-top: 2rem;
+            border-top: 2px solid var(--border-color);
+            text-align: center;
+        }
+
+        .loading-state {
+            text-align: center;
+            padding: 3rem;
+        }
+
+        .message-error {
+            background-color: rgba(220, 53, 69, 0.2);
+            border: 1px solid #dc3545;
+            color: #ff6b6b;
+            padding: 1rem;
+            border-radius: 4px;
+        }
+
+        @media screen and (max-width: 768px) {
+            .topnav { flex-direction: column; padding: 0; }
+            .dropdown { width: 100%; margin: 0; }
+            .dropbtn { width: 100%; padding: 1rem; }
+            .dropdown-content { width: 100%; position: relative; }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-title">
+            <h1><u>Common-Law Republic</u>; <u>U.S.A.</u>.</h1>
+        </div>
+
+        <nav class="topnav">
+            <div class="dropdown">
+                <button class="dropbtn">Home Page.</button>
+                <div class="dropdown-content">
+                    <a href="../index.html">Home Page.</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Register; or: Log-In.</button>
+                <div class="dropdown-content">
+                    <a href="../Accounts-Profiles-Registering/NewUsers-Registration.html">Register</a>
+                    <a href="../Accounts-Profiles-Registering/Login.html">Login</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Support.</button>
+                <div class="dropdown-content">
+                    <a href="../Support/Support.html">Support-Help-Contacts</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="content-section">
+            <a href="#" id="backLink" class="back-link">&larr; Back to Ballots</a>
+
+            <div id="loadingState" class="loading-state">
+                <p>Loading ballot results...</p>
+            </div>
+
+            <div id="errorState" style="display: none;">
+                <div class="message-error">
+                    <p id="errorMessage"></p>
+                </div>
+            </div>
+
+            <div id="resultsContent" style="display: none;">
+                <div class="ballot-header">
+                    <h2 class="ballot-title" id="ballotTitle"></h2>
+                    <p class="ballot-description" id="ballotDescription"></p>
+                </div>
+
+                <div class="results-section">
+                    <h3 class="section-title">Voting Results</h3>
+                    <div id="resultsContainer"></div>
+
+                    <div class="total-votes">
+                        <span class="total-votes-label">Total Votes Cast</span>
+                        <div class="total-votes-number" id="totalVotes">0</div>
+                    </div>
+                </div>
+
+                <div class="btn-group">
+                    <a href="#" id="voteLink" class="btn btn-primary">Vote on This Ballot</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <p>&copy; 2025 Common-Law Republic, U.S.A. All rights reserved.</p>
+        <p>Empowering communities through democratic participation</p>
+    </footer>
+
+    <script>
+        const API_BASE_URL = 'http://localhost:8080/api/v1';
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const ballotId = urlParams.get('id');
+        const superstate = urlParams.get('superstate');
+        const state = urlParams.get('state');
+
+        document.addEventListener('DOMContentLoaded', function() {
+            if (!ballotId) {
+                showError('No ballot ID provided');
+                return;
+            }
+
+            // Set back link and vote link
+            let backUrl = `state-ballots.html?superstate=${superstate}`;
+            if (state) backUrl += `&state=${state}`;
+            document.getElementById('backLink').href = backUrl;
+            document.getElementById('voteLink').href = `ballot-detail.html?id=${ballotId}&superstate=${superstate}${state ? '&state=' + state : ''}`;
+
+            loadBallotResults();
+        });
+
+        async function loadBallotResults() {
+            try {
+                // Load ballot details first
+                const ballotResponse = await fetch(`${API_BASE_URL}/public/ballots/${ballotId}`);
+                if (!ballotResponse.ok) {
+                    throw new Error('Failed to load ballot details');
+                }
+                const ballot = await ballotResponse.json();
+
+                // Load results
+                const resultsResponse = await fetch(`${API_BASE_URL}/public/ballots/${ballotId}/results`);
+                if (!resultsResponse.ok) {
+                    throw new Error('Failed to load ballot results');
+                }
+                const results = await resultsResponse.json();
+
+                displayResults(ballot, results);
+
+            } catch (error) {
+                console.error('Error loading results:', error);
+                showError('Failed to load ballot results. Please try again later.');
+            }
+        }
+
+        function displayResults(ballot, results) {
+            document.getElementById('ballotTitle').textContent = ballot.title || 'Untitled Ballot';
+            document.getElementById('ballotDescription').textContent = ballot.description || 'No description available.';
+
+            document.title = `Results: ${ballot.title} - Common-Law Republic`;
+
+            const resultsContainer = document.getElementById('resultsContainer');
+            resultsContainer.innerHTML = '';
+
+            const resultsArray = results.results || [];
+            const totalVotes = results.total_votes || 0;
+
+            document.getElementById('totalVotes').textContent = totalVotes.toLocaleString();
+
+            resultsArray.forEach(result => {
+                const percentage = totalVotes > 0 ? ((result.vote_count / totalVotes) * 100).toFixed(1) : 0;
+
+                const resultItem = document.createElement('div');
+                resultItem.className = 'result-item';
+
+                resultItem.innerHTML = `
+                    <div class="result-header">
+                        <span class="result-title">${escapeHtml(result.option_title || 'Untitled Option')}</span>
+                        <span class="result-votes">${result.vote_count.toLocaleString()} votes</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: ${percentage}%;">
+                            <span class="progress-percentage">${percentage}%</span>
+                        </div>
+                    </div>
+                `;
+
+                resultsContainer.appendChild(resultItem);
+            });
+
+            document.getElementById('loadingState').style.display = 'none';
+            document.getElementById('resultsContent').style.display = 'block';
+        }
+
+        function showError(message) {
+            document.getElementById('loadingState').style.display = 'none';
+            document.getElementById('errorMessage').textContent = message;
+            document.getElementById('errorState').style.display = 'block';
+            document.getElementById('resultsContent').style.display = 'none';
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    </script>
+</body>
+</html>

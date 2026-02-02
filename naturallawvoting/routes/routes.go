@@ -52,6 +52,10 @@ func SetupRoutes(db *database.DB) *gin.Engine {
 			public.GET("/ballots", ballotHandler.GetAllBallots)
 			public.GET("/ballots/:id", ballotHandler.GetBallot)
 			public.GET("/ballots/:id/results", voteHandler.GetBallotResults)
+
+			// Superstate and state routes for local civil government
+			public.GET("/superstates", ballotHandler.GetSuperstates)
+			public.GET("/superstates/:superstate/states", ballotHandler.GetStates)
 		}
 
 		// Protected routes (authentication required)

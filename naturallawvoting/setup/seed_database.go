@@ -90,6 +90,25 @@ func ensureSchema(db *sql.DB) error {
 	if err != nil {
 		return fmt.Errorf("failed to add category column: %v", err)
 	}
+
+	// Add superstate column to ballots if it doesn't exist
+	_, err = db.Exec(`
+		ALTER TABLE ballots
+		ADD COLUMN IF NOT EXISTS superstate VARCHAR(100)
+	`)
+	if err != nil {
+		return fmt.Errorf("failed to add superstate column: %v", err)
+	}
+
+	// Add state column to ballots if it doesn't exist
+	_, err = db.Exec(`
+		ALTER TABLE ballots
+		ADD COLUMN IF NOT EXISTS state VARCHAR(100)
+	`)
+	if err != nil {
+		return fmt.Errorf("failed to add state column: %v", err)
+	}
+
 	log.Println("✓ Schema verified/updated")
 	return nil
 }
@@ -146,8 +165,11 @@ func seedBallots(db *sql.DB) error {
 		title       string
 		description string
 		category    string
+		superstate  string
+		state       string
 		isActive    bool
 	}{
+		// Federal/National level ballots
 		{
 			creatorID:   userID1,
 			title:       "Executive Branch Budget Priorities",
@@ -190,22 +212,227 @@ func seedBallots(db *sql.DB) error {
 			category:    "judicial",
 			isActive:    true,
 		},
+
+		// NEW ENGLAND SUPER STATE (NE SS) - Ballots
+		{
+			creatorID:   userID1,
+			title:       "Vermont State Representative Confidence Vote",
+			description: "Vote of confidence for Vermont's state representatives in the Common-Law Republic.",
+			category:    "local-civil",
+			superstate:  "new-england",
+			state:       "vermont",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID1,
+			title:       "Vermont Environmental Policy Initiative",
+			description: "Should Vermont prioritize renewable energy investment over the next decade?",
+			category:    "local-civil",
+			superstate:  "new-england",
+			state:       "vermont",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID2,
+			title:       "Rhode Island Coastal Protection Measures",
+			description: "Vote on proposed coastal protection and climate resilience measures for Rhode Island.",
+			category:    "local-civil",
+			superstate:  "new-england",
+			state:       "rhode-island",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID2,
+			title:       "Rhode Island Education Funding Reform",
+			description: "Proposed changes to education funding distribution in Rhode Island.",
+			category:    "local-civil",
+			superstate:  "new-england",
+			state:       "rhode-island",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID1,
+			title:       "Maine Fishing Rights Protection",
+			description: "Should Maine strengthen protections for local fishing communities?",
+			category:    "local-civil",
+			superstate:  "new-england",
+			state:       "maine",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID2,
+			title:       "New Hampshire Tax Policy Reform",
+			description: "Vote on proposed changes to New Hampshire's state tax structure.",
+			category:    "local-civil",
+			superstate:  "new-england",
+			state:       "new-hampshire",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID1,
+			title:       "Connecticut Infrastructure Investment",
+			description: "Major infrastructure investment priorities for Connecticut's transportation system.",
+			category:    "local-civil",
+			superstate:  "new-england",
+			state:       "connecticut",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID2,
+			title:       "Massachusetts Healthcare Expansion",
+			description: "Should Massachusetts expand its state healthcare program?",
+			category:    "local-civil",
+			superstate:  "new-england",
+			state:       "massachusetts",
+			isActive:    true,
+		},
+
+		// NEW YORK SUPER STATE Ballots
+		{
+			creatorID:   userID1,
+			title:       "New York City Transit Reform",
+			description: "Vote on proposed reforms to New York City's public transit system.",
+			category:    "local-civil",
+			superstate:  "new-york",
+			state:       "new-york-city",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID2,
+			title:       "Upstate New York Agricultural Support",
+			description: "Should New York increase support for upstate agricultural communities?",
+			category:    "local-civil",
+			superstate:  "new-york",
+			state:       "upstate-new-york",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID1,
+			title:       "Long Island Environmental Initiative",
+			description: "Vote on environmental protection measures for Long Island coastal areas.",
+			category:    "local-civil",
+			superstate:  "new-york",
+			state:       "long-island",
+			isActive:    true,
+		},
+
+		// JERSEY-PENN SUPER STATE Ballots
+		{
+			creatorID:   userID2,
+			title:       "New Jersey Shore Protection Act",
+			description: "Vote on enhanced protection measures for New Jersey's coastline.",
+			category:    "local-civil",
+			superstate:  "jersey-penn",
+			state:       "new-jersey",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID1,
+			title:       "New Jersey Transportation Funding",
+			description: "Should New Jersey increase funding for public transportation infrastructure?",
+			category:    "local-civil",
+			superstate:  "jersey-penn",
+			state:       "new-jersey",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID2,
+			title:       "Pennsylvania Energy Transition Plan",
+			description: "Vote on Pennsylvania's proposed transition to renewable energy sources.",
+			category:    "local-civil",
+			superstate:  "jersey-penn",
+			state:       "pennsylvania",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID1,
+			title:       "Pennsylvania Rural Development Initiative",
+			description: "Should Pennsylvania invest more in rural community development?",
+			category:    "local-civil",
+			superstate:  "jersey-penn",
+			state:       "pennsylvania",
+			isActive:    true,
+		},
+
+		// GREAT LAKES SUPER STATE Ballots
+		{
+			creatorID:   userID1,
+			title:       "Michigan Great Lakes Protection",
+			description: "Vote on enhanced protection measures for Great Lakes water quality.",
+			category:    "local-civil",
+			superstate:  "great-lakes",
+			state:       "michigan",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID2,
+			title:       "Ohio Manufacturing Renaissance",
+			description: "Should Ohio increase incentives for manufacturing sector growth?",
+			category:    "local-civil",
+			superstate:  "great-lakes",
+			state:       "ohio",
+			isActive:    true,
+		},
+
+		// TEXAS SUPER STATE Ballots
+		{
+			creatorID:   userID1,
+			title:       "Texas Energy Grid Independence",
+			description: "Vote on measures to strengthen Texas energy grid resilience.",
+			category:    "local-civil",
+			superstate:  "texas",
+			state:       "texas",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID2,
+			title:       "Texas Border Community Support",
+			description: "Should Texas increase funding for border community infrastructure?",
+			category:    "local-civil",
+			superstate:  "texas",
+			state:       "texas",
+			isActive:    true,
+		},
+
+		// CALIFORNIA SUPER STATE Ballots
+		{
+			creatorID:   userID1,
+			title:       "California Water Conservation Initiative",
+			description: "Vote on statewide water conservation and infrastructure measures.",
+			category:    "local-civil",
+			superstate:  "california",
+			state:       "california",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID2,
+			title:       "California Wildfire Prevention Funding",
+			description: "Should California increase funding for wildfire prevention and response?",
+			category:    "local-civil",
+			superstate:  "california",
+			state:       "california",
+			isActive:    true,
+		},
 	}
 
 	for _, ballot := range ballots {
 		query := `
-			INSERT INTO ballots (creator_id, title, description, category, is_active, created_at, updated_at)
-			VALUES ($1, $2, $3, $4, $5, $6, $7)
+			INSERT INTO ballots (creator_id, title, description, category, superstate, state, is_active, created_at, updated_at)
+			VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
 			ON CONFLICT DO NOTHING
 		`
 
 		now := time.Now()
-		_, err := db.Exec(query, ballot.creatorID, ballot.title, ballot.description, ballot.category, ballot.isActive, now, now)
+		_, err := db.Exec(query, ballot.creatorID, ballot.title, ballot.description, ballot.category, ballot.superstate, ballot.state, ballot.isActive, now, now)
 		if err != nil {
 			return fmt.Errorf("failed to insert ballot '%s': %v", ballot.title, err)
 		}
 
-		log.Printf("✓ Ballot created: %s (category: %s)", ballot.title, ballot.category)
+		if ballot.superstate != "" {
+			log.Printf("✓ Ballot created: %s (superstate: %s, state: %s)", ballot.title, ballot.superstate, ballot.state)
+		} else {
+			log.Printf("✓ Ballot created: %s (category: %s)", ballot.title, ballot.category)
+		}
 	}
 
 	return nil
@@ -220,6 +447,33 @@ func seedBallotItems(db *sql.DB) error {
 		"Senate Filibuster Reform",
 		"Department of Education Focus Areas",
 		"Supreme Court Term Limits",
+		// New England Super State
+		"Vermont State Representative Confidence Vote",
+		"Vermont Environmental Policy Initiative",
+		"Rhode Island Coastal Protection Measures",
+		"Rhode Island Education Funding Reform",
+		"Maine Fishing Rights Protection",
+		"New Hampshire Tax Policy Reform",
+		"Connecticut Infrastructure Investment",
+		"Massachusetts Healthcare Expansion",
+		// New York Super State
+		"New York City Transit Reform",
+		"Upstate New York Agricultural Support",
+		"Long Island Environmental Initiative",
+		// Jersey-Penn Super State
+		"New Jersey Shore Protection Act",
+		"New Jersey Transportation Funding",
+		"Pennsylvania Energy Transition Plan",
+		"Pennsylvania Rural Development Initiative",
+		// Great Lakes Super State
+		"Michigan Great Lakes Protection",
+		"Ohio Manufacturing Renaissance",
+		// Texas Super State
+		"Texas Energy Grid Independence",
+		"Texas Border Community Support",
+		// California Super State
+		"California Water Conservation Initiative",
+		"California Wildfire Prevention Funding",
 	}
 
 	ballotIDs := make(map[string]int)
@@ -227,7 +481,8 @@ func seedBallotItems(db *sql.DB) error {
 		var id int
 		err := db.QueryRow("SELECT id FROM ballots WHERE title = $1", title).Scan(&id)
 		if err != nil {
-			return fmt.Errorf("failed to get ballot ID for '%s': %v", title, err)
+			log.Printf("Warning: Could not find ballot '%s', skipping items", title)
+			continue
 		}
 		ballotIDs[title] = id
 	}
@@ -269,12 +524,119 @@ func seedBallotItems(db *sql.DB) error {
 		{"Supreme Court Term Limits", "Yes - 18 Year Terms", "Implement 18-year term limits for justices"},
 		{"Supreme Court Term Limits", "Yes - Different Term Length", "Implement term limits of a different duration"},
 		{"Supreme Court Term Limits", "No - Lifetime Appointments", "Maintain current lifetime appointment system"},
+
+		// =============== LOCAL CIVIL GOVERNMENT BALLOTS ===============
+
+		// Vermont State Representative Confidence Vote
+		{"Vermont State Representative Confidence Vote", "Full Confidence", "Express full confidence in state representatives"},
+		{"Vermont State Representative Confidence Vote", "Partial Confidence", "Express partial confidence with reservations"},
+		{"Vermont State Representative Confidence Vote", "No Confidence", "Express no confidence in state representatives"},
+
+		// Vermont Environmental Policy Initiative
+		{"Vermont Environmental Policy Initiative", "Yes - Prioritize Renewables", "Commit Vermont to 100% renewable energy by 2035"},
+		{"Vermont Environmental Policy Initiative", "Moderate Approach", "Balanced approach with gradual transition"},
+		{"Vermont Environmental Policy Initiative", "No - Maintain Current Policy", "Continue current energy policies"},
+
+		// Rhode Island Coastal Protection Measures
+		{"Rhode Island Coastal Protection Measures", "Comprehensive Protection Plan", "Full implementation of coastal protection measures"},
+		{"Rhode Island Coastal Protection Measures", "Targeted Protection", "Focus on highest-risk areas only"},
+		{"Rhode Island Coastal Protection Measures", "Study Further", "Commission additional studies before action"},
+
+		// Rhode Island Education Funding Reform
+		{"Rhode Island Education Funding Reform", "Increase State Funding", "Increase state share of education funding"},
+		{"Rhode Island Education Funding Reform", "Local Control", "Maintain local funding control"},
+		{"Rhode Island Education Funding Reform", "Hybrid Model", "Balance between state and local funding"},
+
+		// Maine Fishing Rights Protection
+		{"Maine Fishing Rights Protection", "Strong Protections", "Implement strong protections for local fishing communities"},
+		{"Maine Fishing Rights Protection", "Moderate Protections", "Balance fishing rights with broader interests"},
+		{"Maine Fishing Rights Protection", "Current Regulations", "Maintain current regulatory framework"},
+
+		// New Hampshire Tax Policy Reform
+		{"New Hampshire Tax Policy Reform", "No Income Tax", "Maintain New Hampshire's no income tax policy"},
+		{"New Hampshire Tax Policy Reform", "Modest Income Tax", "Introduce modest income tax to fund services"},
+		{"New Hampshire Tax Policy Reform", "Sales Tax Instead", "Implement sales tax as alternative revenue source"},
+
+		// Connecticut Infrastructure Investment
+		{"Connecticut Infrastructure Investment", "Rail Priority", "Prioritize commuter rail improvements"},
+		{"Connecticut Infrastructure Investment", "Highway Priority", "Focus on highway and bridge repairs"},
+		{"Connecticut Infrastructure Investment", "Balanced Approach", "Equal investment in all transportation modes"},
+
+		// Massachusetts Healthcare Expansion
+		{"Massachusetts Healthcare Expansion", "Universal Coverage", "Expand to cover all state residents"},
+		{"Massachusetts Healthcare Expansion", "Targeted Expansion", "Focus on uninsured and underinsured populations"},
+		{"Massachusetts Healthcare Expansion", "Private Market", "Encourage private market solutions"},
+
+		// New York City Transit Reform
+		{"New York City Transit Reform", "Major Investment", "Significant investment in modernization"},
+		{"New York City Transit Reform", "Incremental Improvements", "Gradual improvements to existing system"},
+		{"New York City Transit Reform", "Private Partnership", "Public-private partnerships for transit improvement"},
+
+		// Upstate New York Agricultural Support
+		{"Upstate New York Agricultural Support", "Increase Support", "Significantly increase agricultural subsidies"},
+		{"Upstate New York Agricultural Support", "Targeted Support", "Focus support on small and family farms"},
+		{"Upstate New York Agricultural Support", "Market Solutions", "Reduce subsidies, focus on market access"},
+
+		// Long Island Environmental Initiative
+		{"Long Island Environmental Initiative", "Full Protection", "Comprehensive coastal and environmental protection"},
+		{"Long Island Environmental Initiative", "Economic Balance", "Balance environmental and economic interests"},
+		{"Long Island Environmental Initiative", "Local Control", "Let local communities decide protection levels"},
+
+		// New Jersey Shore Protection Act
+		{"New Jersey Shore Protection Act", "Maximum Protection", "Implement strongest possible coastal protections"},
+		{"New Jersey Shore Protection Act", "Balanced Approach", "Balance protection with beach access and tourism"},
+		{"New Jersey Shore Protection Act", "Property Rights Focus", "Prioritize private property rights"},
+
+		// New Jersey Transportation Funding
+		{"New Jersey Transportation Funding", "Increase Funding", "Significantly increase transit funding"},
+		{"New Jersey Transportation Funding", "Moderate Increase", "Modest funding increase for critical projects"},
+		{"New Jersey Transportation Funding", "Efficiency Focus", "Improve efficiency before adding funding"},
+
+		// Pennsylvania Energy Transition Plan
+		{"Pennsylvania Energy Transition Plan", "Rapid Transition", "Fast transition to renewable energy"},
+		{"Pennsylvania Energy Transition Plan", "Gradual Transition", "Phased approach protecting energy jobs"},
+		{"Pennsylvania Energy Transition Plan", "Energy Independence", "Focus on domestic energy of all types"},
+
+		// Pennsylvania Rural Development Initiative
+		{"Pennsylvania Rural Development Initiative", "Major Investment", "Significant investment in rural infrastructure"},
+		{"Pennsylvania Rural Development Initiative", "Broadband Focus", "Prioritize rural broadband expansion"},
+		{"Pennsylvania Rural Development Initiative", "Agricultural Focus", "Focus on supporting agricultural communities"},
+
+		// Michigan Great Lakes Protection
+		{"Michigan Great Lakes Protection", "Strongest Protections", "Implement strictest water quality standards"},
+		{"Michigan Great Lakes Protection", "Balanced Protections", "Balance environmental and economic needs"},
+		{"Michigan Great Lakes Protection", "Current Standards", "Maintain current protection levels"},
+
+		// Ohio Manufacturing Renaissance
+		{"Ohio Manufacturing Renaissance", "Major Incentives", "Provide significant tax incentives for manufacturers"},
+		{"Ohio Manufacturing Renaissance", "Workforce Training", "Focus on workforce development and training"},
+		{"Ohio Manufacturing Renaissance", "Infrastructure Investment", "Invest in infrastructure to attract manufacturing"},
+
+		// Texas Energy Grid Independence
+		{"Texas Energy Grid Independence", "Full Independence", "Maintain complete energy grid independence"},
+		{"Texas Energy Grid Independence", "Limited Connections", "Allow limited connections with national grid"},
+		{"Texas Energy Grid Independence", "Hybrid Approach", "Independent operation with emergency connections"},
+
+		// Texas Border Community Support
+		{"Texas Border Community Support", "Major Funding", "Significant increase in border community funding"},
+		{"Texas Border Community Support", "Targeted Support", "Focus on specific infrastructure needs"},
+		{"Texas Border Community Support", "Federal Partnership", "Work with federal government on shared funding"},
+
+		// California Water Conservation Initiative
+		{"California Water Conservation Initiative", "Mandatory Conservation", "Implement mandatory water conservation measures"},
+		{"California Water Conservation Initiative", "Incentive-Based", "Focus on incentives for voluntary conservation"},
+		{"California Water Conservation Initiative", "Infrastructure Priority", "Prioritize water infrastructure investment"},
+
+		// California Wildfire Prevention Funding
+		{"California Wildfire Prevention Funding", "Major Increase", "Significantly increase prevention and response funding"},
+		{"California Wildfire Prevention Funding", "Forest Management", "Focus funding on forest management"},
+		{"California Wildfire Prevention Funding", "Community Protection", "Prioritize protecting communities over wildlands"},
 	}
 
 	for _, item := range ballotItems {
 		ballotID, ok := ballotIDs[item.ballotTitle]
 		if !ok {
-			return fmt.Errorf("ballot ID not found for '%s'", item.ballotTitle)
+			continue // Skip if ballot wasn't found
 		}
 
 		query := `
