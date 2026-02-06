@@ -169,7 +169,9 @@ func seedBallots(db *sql.DB) error {
 		state       string
 		isActive    bool
 	}{
-		// Federal/National level ballots
+		// ===============================================================
+		// FEDERAL/NATIONAL LEVEL BALLOTS
+		// ===============================================================
 		{
 			creatorID:   userID1,
 			title:       "Executive Branch Budget Priorities",
@@ -213,7 +215,10 @@ func seedBallots(db *sql.DB) error {
 			isActive:    true,
 		},
 
-		// NEW ENGLAND SUPER STATE (NE SS) - Ballots
+		// ===============================================================
+		// 01 - NEW ENGLAND SUPER STATE
+		// ===============================================================
+		// Vermont
 		{
 			creatorID:   userID1,
 			title:       "Vermont State Representative Confidence Vote",
@@ -232,6 +237,7 @@ func seedBallots(db *sql.DB) error {
 			state:       "vermont",
 			isActive:    true,
 		},
+		// Rhode Island
 		{
 			creatorID:   userID2,
 			title:       "Rhode Island Coastal Protection Measures",
@@ -250,6 +256,7 @@ func seedBallots(db *sql.DB) error {
 			state:       "rhode-island",
 			isActive:    true,
 		},
+		// Maine
 		{
 			creatorID:   userID1,
 			title:       "Maine Fishing Rights Protection",
@@ -261,6 +268,16 @@ func seedBallots(db *sql.DB) error {
 		},
 		{
 			creatorID:   userID2,
+			title:       "Maine Forest Conservation Act",
+			description: "Vote on expanding forest conservation areas in Maine.",
+			category:    "local-civil",
+			superstate:  "new-england",
+			state:       "maine",
+			isActive:    true,
+		},
+		// New Hampshire
+		{
+			creatorID:   userID2,
 			title:       "New Hampshire Tax Policy Reform",
 			description: "Vote on proposed changes to New Hampshire's state tax structure.",
 			category:    "local-civil",
@@ -268,6 +285,16 @@ func seedBallots(db *sql.DB) error {
 			state:       "new-hampshire",
 			isActive:    true,
 		},
+		{
+			creatorID:   userID1,
+			title:       "New Hampshire Tourism Development",
+			description: "Should New Hampshire invest more in tourism infrastructure?",
+			category:    "local-civil",
+			superstate:  "new-england",
+			state:       "new-hampshire",
+			isActive:    true,
+		},
+		// Connecticut
 		{
 			creatorID:   userID1,
 			title:       "Connecticut Infrastructure Investment",
@@ -279,6 +306,16 @@ func seedBallots(db *sql.DB) error {
 		},
 		{
 			creatorID:   userID2,
+			title:       "Connecticut Small Business Support",
+			description: "Should Connecticut expand tax credits for small businesses?",
+			category:    "local-civil",
+			superstate:  "new-england",
+			state:       "connecticut",
+			isActive:    true,
+		},
+		// Massachusetts
+		{
+			creatorID:   userID2,
 			title:       "Massachusetts Healthcare Expansion",
 			description: "Should Massachusetts expand its state healthcare program?",
 			category:    "local-civil",
@@ -286,8 +323,39 @@ func seedBallots(db *sql.DB) error {
 			state:       "massachusetts",
 			isActive:    true,
 		},
+		{
+			creatorID:   userID1,
+			title:       "Massachusetts Tech Innovation Fund",
+			description: "Vote on creating a state fund to support technology startups.",
+			category:    "local-civil",
+			superstate:  "new-england",
+			state:       "massachusetts",
+			isActive:    true,
+		},
 
-		// NEW YORK SUPER STATE Ballots
+		// ===============================================================
+		// 02 - NEW YORK SUPER STATE
+		// ===============================================================
+		// Long Island
+		{
+			creatorID:   userID1,
+			title:       "Long Island Environmental Initiative",
+			description: "Vote on environmental protection measures for Long Island coastal areas.",
+			category:    "local-civil",
+			superstate:  "new-york",
+			state:       "long-island",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID2,
+			title:       "Long Island Transportation Upgrade",
+			description: "Should Long Island expand commuter rail services?",
+			category:    "local-civil",
+			superstate:  "new-york",
+			state:       "long-island",
+			isActive:    true,
+		},
+		// New York City
 		{
 			creatorID:   userID1,
 			title:       "New York City Transit Reform",
@@ -299,6 +367,16 @@ func seedBallots(db *sql.DB) error {
 		},
 		{
 			creatorID:   userID2,
+			title:       "NYC Affordable Housing Initiative",
+			description: "Should NYC expand affordable housing programs?",
+			category:    "local-civil",
+			superstate:  "new-york",
+			state:       "new-york-city",
+			isActive:    true,
+		},
+		// Upstate New York
+		{
+			creatorID:   userID2,
 			title:       "Upstate New York Agricultural Support",
 			description: "Should New York increase support for upstate agricultural communities?",
 			category:    "local-civil",
@@ -308,15 +386,75 @@ func seedBallots(db *sql.DB) error {
 		},
 		{
 			creatorID:   userID1,
-			title:       "Long Island Environmental Initiative",
-			description: "Vote on environmental protection measures for Long Island coastal areas.",
+			title:       "Upstate NY Manufacturing Revival",
+			description: "Vote on incentives to revitalize upstate manufacturing.",
 			category:    "local-civil",
 			superstate:  "new-york",
-			state:       "long-island",
+			state:       "upstate-new-york",
 			isActive:    true,
 		},
 
-		// JERSEY-PENN SUPER STATE Ballots
+		// ===============================================================
+		// 03 - JERSEY-PENN SUPER STATE
+		// ===============================================================
+		// Washington DC
+		{
+			creatorID:   userID1,
+			title:       "DC Statehood Initiative",
+			description: "Vote on advancing DC statehood within the Common-Law Republic framework.",
+			category:    "local-civil",
+			superstate:  "jersey-penn",
+			state:       "washington-dc",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID2,
+			title:       "DC Public Safety Reform",
+			description: "Should DC implement new community-based public safety programs?",
+			category:    "local-civil",
+			superstate:  "jersey-penn",
+			state:       "washington-dc",
+			isActive:    true,
+		},
+		// Delaware
+		{
+			creatorID:   userID2,
+			title:       "Delaware Corporate Tax Reform",
+			description: "Vote on proposed changes to Delaware's corporate tax structure.",
+			category:    "local-civil",
+			superstate:  "jersey-penn",
+			state:       "delaware",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID1,
+			title:       "Delaware Coastal Resilience Plan",
+			description: "Should Delaware invest in coastal resilience infrastructure?",
+			category:    "local-civil",
+			superstate:  "jersey-penn",
+			state:       "delaware",
+			isActive:    true,
+		},
+		// Maryland
+		{
+			creatorID:   userID1,
+			title:       "Maryland Chesapeake Bay Protection",
+			description: "Vote on enhanced protection measures for the Chesapeake Bay.",
+			category:    "local-civil",
+			superstate:  "jersey-penn",
+			state:       "maryland",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID2,
+			title:       "Maryland Education Excellence",
+			description: "Should Maryland increase funding for public education?",
+			category:    "local-civil",
+			superstate:  "jersey-penn",
+			state:       "maryland",
+			isActive:    true,
+		},
+		// New Jersey
 		{
 			creatorID:   userID2,
 			title:       "New Jersey Shore Protection Act",
@@ -335,6 +473,7 @@ func seedBallots(db *sql.DB) error {
 			state:       "new-jersey",
 			isActive:    true,
 		},
+		// Pennsylvania
 		{
 			creatorID:   userID2,
 			title:       "Pennsylvania Energy Transition Plan",
@@ -354,7 +493,48 @@ func seedBallots(db *sql.DB) error {
 			isActive:    true,
 		},
 
-		// GREAT LAKES SUPER STATE Ballots
+		// ===============================================================
+		// 04 - GREAT LAKES SUPER STATE
+		// ===============================================================
+		// Kentucky
+		{
+			creatorID:   userID1,
+			title:       "Kentucky Coal Transition Fund",
+			description: "Vote on establishing a fund to support coal community transitions.",
+			category:    "local-civil",
+			superstate:  "great-lakes",
+			state:       "kentucky",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID2,
+			title:       "Kentucky Rural Healthcare Access",
+			description: "Should Kentucky expand rural healthcare facilities?",
+			category:    "local-civil",
+			superstate:  "great-lakes",
+			state:       "kentucky",
+			isActive:    true,
+		},
+		// Indiana
+		{
+			creatorID:   userID2,
+			title:       "Indiana Manufacturing Investment",
+			description: "Vote on incentives to attract manufacturing jobs to Indiana.",
+			category:    "local-civil",
+			superstate:  "great-lakes",
+			state:       "indiana",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID1,
+			title:       "Indiana Education Reform",
+			description: "Should Indiana reform its public school funding formula?",
+			category:    "local-civil",
+			superstate:  "great-lakes",
+			state:       "indiana",
+			isActive:    true,
+		},
+		// Michigan
 		{
 			creatorID:   userID1,
 			title:       "Michigan Great Lakes Protection",
@@ -366,6 +546,16 @@ func seedBallots(db *sql.DB) error {
 		},
 		{
 			creatorID:   userID2,
+			title:       "Michigan Auto Industry Support",
+			description: "Should Michigan increase support for electric vehicle manufacturing?",
+			category:    "local-civil",
+			superstate:  "great-lakes",
+			state:       "michigan",
+			isActive:    true,
+		},
+		// Ohio
+		{
+			creatorID:   userID2,
 			title:       "Ohio Manufacturing Renaissance",
 			description: "Should Ohio increase incentives for manufacturing sector growth?",
 			category:    "local-civil",
@@ -373,8 +563,378 @@ func seedBallots(db *sql.DB) error {
 			state:       "ohio",
 			isActive:    true,
 		},
+		{
+			creatorID:   userID1,
+			title:       "Ohio Infrastructure Modernization",
+			description: "Vote on a comprehensive infrastructure modernization plan for Ohio.",
+			category:    "local-civil",
+			superstate:  "great-lakes",
+			state:       "ohio",
+			isActive:    true,
+		},
 
-		// TEXAS SUPER STATE Ballots
+		// ===============================================================
+		// 05 - VIRGINIA-CAROLINA SUPER STATE
+		// ===============================================================
+		// West Virginia
+		{
+			creatorID:   userID1,
+			title:       "West Virginia Economic Diversification",
+			description: "Vote on initiatives to diversify West Virginia's economy.",
+			category:    "local-civil",
+			superstate:  "virginia-carolina",
+			state:       "west-virginia",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID2,
+			title:       "West Virginia Broadband Expansion",
+			description: "Should West Virginia invest in statewide broadband infrastructure?",
+			category:    "local-civil",
+			superstate:  "virginia-carolina",
+			state:       "west-virginia",
+			isActive:    true,
+		},
+		// Virginia
+		{
+			creatorID:   userID2,
+			title:       "Virginia Tech Corridor Development",
+			description: "Vote on expanding the Northern Virginia technology corridor.",
+			category:    "local-civil",
+			superstate:  "virginia-carolina",
+			state:       "virginia",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID1,
+			title:       "Virginia Historic Preservation",
+			description: "Should Virginia increase funding for historic preservation?",
+			category:    "local-civil",
+			superstate:  "virginia-carolina",
+			state:       "virginia",
+			isActive:    true,
+		},
+		// South Carolina
+		{
+			creatorID:   userID1,
+			title:       "South Carolina Tourism Investment",
+			description: "Vote on increasing investment in South Carolina tourism infrastructure.",
+			category:    "local-civil",
+			superstate:  "virginia-carolina",
+			state:       "south-carolina",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID2,
+			title:       "South Carolina Port Expansion",
+			description: "Should South Carolina expand its port facilities?",
+			category:    "local-civil",
+			superstate:  "virginia-carolina",
+			state:       "south-carolina",
+			isActive:    true,
+		},
+		// North Carolina
+		{
+			creatorID:   userID2,
+			title:       "North Carolina Research Triangle Growth",
+			description: "Vote on expanding the Research Triangle innovation ecosystem.",
+			category:    "local-civil",
+			superstate:  "virginia-carolina",
+			state:       "north-carolina",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID1,
+			title:       "North Carolina Coastal Management",
+			description: "Should North Carolina strengthen coastal management policies?",
+			category:    "local-civil",
+			superstate:  "virginia-carolina",
+			state:       "north-carolina",
+			isActive:    true,
+		},
+
+		// ===============================================================
+		// 06 - FLORIDA-GEORGIA SUPER STATE
+		// ===============================================================
+		// Georgia
+		{
+			creatorID:   userID1,
+			title:       "Georgia Agricultural Innovation",
+			description: "Vote on establishing an agricultural innovation center in Georgia.",
+			category:    "local-civil",
+			superstate:  "florida-georgia",
+			state:       "georgia",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID2,
+			title:       "Georgia Film Industry Expansion",
+			description: "Should Georgia expand tax incentives for film production?",
+			category:    "local-civil",
+			superstate:  "florida-georgia",
+			state:       "georgia",
+			isActive:    true,
+		},
+		// Florida
+		{
+			creatorID:   userID2,
+			title:       "Florida Hurricane Resilience Fund",
+			description: "Vote on creating a hurricane resilience infrastructure fund.",
+			category:    "local-civil",
+			superstate:  "florida-georgia",
+			state:       "florida",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID1,
+			title:       "Florida Everglades Restoration",
+			description: "Should Florida increase funding for Everglades restoration?",
+			category:    "local-civil",
+			superstate:  "florida-georgia",
+			state:       "florida",
+			isActive:    true,
+		},
+
+		// ===============================================================
+		// 07 - MISSISSIPPI VALLEY SUPER STATE
+		// ===============================================================
+		// Mississippi
+		{
+			creatorID:   userID1,
+			title:       "Mississippi Education Improvement",
+			description: "Vote on comprehensive education improvement initiatives.",
+			category:    "local-civil",
+			superstate:  "mississippi-valley",
+			state:       "mississippi",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID2,
+			title:       "Mississippi River Protection",
+			description: "Should Mississippi strengthen river protection measures?",
+			category:    "local-civil",
+			superstate:  "mississippi-valley",
+			state:       "mississippi",
+			isActive:    true,
+		},
+		// Arkansas
+		{
+			creatorID:   userID2,
+			title:       "Arkansas Small Business Growth",
+			description: "Vote on small business development incentives for Arkansas.",
+			category:    "local-civil",
+			superstate:  "mississippi-valley",
+			state:       "arkansas",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID1,
+			title:       "Arkansas Natural Resources Conservation",
+			description: "Should Arkansas expand natural resources conservation programs?",
+			category:    "local-civil",
+			superstate:  "mississippi-valley",
+			state:       "arkansas",
+			isActive:    true,
+		},
+		// Louisiana
+		{
+			creatorID:   userID1,
+			title:       "Louisiana Coastal Restoration",
+			description: "Vote on comprehensive coastal restoration funding.",
+			category:    "local-civil",
+			superstate:  "mississippi-valley",
+			state:       "louisiana",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID2,
+			title:       "Louisiana Energy Industry Transition",
+			description: "Should Louisiana support energy industry diversification?",
+			category:    "local-civil",
+			superstate:  "mississippi-valley",
+			state:       "louisiana",
+			isActive:    true,
+		},
+		// Alabama
+		{
+			creatorID:   userID2,
+			title:       "Alabama Aerospace Investment",
+			description: "Vote on expanding Alabama's aerospace industry.",
+			category:    "local-civil",
+			superstate:  "mississippi-valley",
+			state:       "alabama",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID1,
+			title:       "Alabama Infrastructure Improvement",
+			description: "Should Alabama prioritize rural infrastructure improvements?",
+			category:    "local-civil",
+			superstate:  "mississippi-valley",
+			state:       "alabama",
+			isActive:    true,
+		},
+		// Missouri
+		{
+			creatorID:   userID1,
+			title:       "Missouri Agricultural Support",
+			description: "Vote on enhanced support for Missouri family farms.",
+			category:    "local-civil",
+			superstate:  "mississippi-valley",
+			state:       "missouri",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID2,
+			title:       "Missouri River Basin Management",
+			description: "Should Missouri improve river basin flood management?",
+			category:    "local-civil",
+			superstate:  "mississippi-valley",
+			state:       "missouri",
+			isActive:    true,
+		},
+		// Tennessee
+		{
+			creatorID:   userID2,
+			title:       "Tennessee Music Industry Support",
+			description: "Vote on expanding support for Tennessee's music industry.",
+			category:    "local-civil",
+			superstate:  "mississippi-valley",
+			state:       "tennessee",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID1,
+			title:       "Tennessee Healthcare Access",
+			description: "Should Tennessee expand rural healthcare access programs?",
+			category:    "local-civil",
+			superstate:  "mississippi-valley",
+			state:       "tennessee",
+			isActive:    true,
+		},
+
+		// ===============================================================
+		// 08 - NORTH CENTRAL PLAINS SUPER STATE
+		// ===============================================================
+		// North Dakota
+		{
+			creatorID:   userID1,
+			title:       "North Dakota Energy Development",
+			description: "Vote on balanced energy development policies for North Dakota.",
+			category:    "local-civil",
+			superstate:  "north-central-plains",
+			state:       "north-dakota",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID2,
+			title:       "North Dakota Agricultural Innovation",
+			description: "Should North Dakota invest in agricultural technology research?",
+			category:    "local-civil",
+			superstate:  "north-central-plains",
+			state:       "north-dakota",
+			isActive:    true,
+		},
+		// South Dakota
+		{
+			creatorID:   userID2,
+			title:       "South Dakota Tourism Development",
+			description: "Vote on expanding tourism infrastructure in South Dakota.",
+			category:    "local-civil",
+			superstate:  "north-central-plains",
+			state:       "south-dakota",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID1,
+			title:       "South Dakota Tribal Relations",
+			description: "Should South Dakota strengthen tribal government partnerships?",
+			category:    "local-civil",
+			superstate:  "north-central-plains",
+			state:       "south-dakota",
+			isActive:    true,
+		},
+		// Iowa
+		{
+			creatorID:   userID1,
+			title:       "Iowa Renewable Energy Initiative",
+			description: "Vote on expanding Iowa's renewable energy programs.",
+			category:    "local-civil",
+			superstate:  "north-central-plains",
+			state:       "iowa",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID2,
+			title:       "Iowa Rural Broadband Expansion",
+			description: "Should Iowa invest in comprehensive rural broadband?",
+			category:    "local-civil",
+			superstate:  "north-central-plains",
+			state:       "iowa",
+			isActive:    true,
+		},
+		// Minnesota
+		{
+			creatorID:   userID2,
+			title:       "Minnesota Clean Water Initiative",
+			description: "Vote on comprehensive water quality protection measures.",
+			category:    "local-civil",
+			superstate:  "north-central-plains",
+			state:       "minnesota",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID1,
+			title:       "Minnesota Education Excellence",
+			description: "Should Minnesota increase public education funding?",
+			category:    "local-civil",
+			superstate:  "north-central-plains",
+			state:       "minnesota",
+			isActive:    true,
+		},
+		// Wisconsin
+		{
+			creatorID:   userID1,
+			title:       "Wisconsin Dairy Industry Support",
+			description: "Vote on support measures for Wisconsin's dairy industry.",
+			category:    "local-civil",
+			superstate:  "north-central-plains",
+			state:       "wisconsin",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID2,
+			title:       "Wisconsin Great Lakes Protection",
+			description: "Should Wisconsin strengthen Great Lakes water protections?",
+			category:    "local-civil",
+			superstate:  "north-central-plains",
+			state:       "wisconsin",
+			isActive:    true,
+		},
+		// Illinois
+		{
+			creatorID:   userID2,
+			title:       "Illinois Pension Reform",
+			description: "Vote on comprehensive pension system reform for Illinois.",
+			category:    "local-civil",
+			superstate:  "north-central-plains",
+			state:       "illinois",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID1,
+			title:       "Illinois Infrastructure Renewal",
+			description: "Should Illinois prioritize infrastructure renewal projects?",
+			category:    "local-civil",
+			superstate:  "north-central-plains",
+			state:       "illinois",
+			isActive:    true,
+		},
+
+		// ===============================================================
+		// 09 - TEXAS SUPER STATE
+		// ===============================================================
+		// Texas
 		{
 			creatorID:   userID1,
 			title:       "Texas Energy Grid Independence",
@@ -393,8 +953,322 @@ func seedBallots(db *sql.DB) error {
 			state:       "texas",
 			isActive:    true,
 		},
+		{
+			creatorID:   userID1,
+			title:       "Texas Water Resource Management",
+			description: "Vote on comprehensive water resource management plan.",
+			category:    "local-civil",
+			superstate:  "texas",
+			state:       "texas",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID2,
+			title:       "Texas Tech Industry Growth",
+			description: "Should Texas expand incentives for technology companies?",
+			category:    "local-civil",
+			superstate:  "texas",
+			state:       "texas",
+			isActive:    true,
+		},
 
-		// CALIFORNIA SUPER STATE Ballots
+		// ===============================================================
+		// 10 - SOUTH WEST SUPER STATE
+		// ===============================================================
+		// Nebraska
+		{
+			creatorID:   userID1,
+			title:       "Nebraska Agricultural Technology",
+			description: "Vote on agricultural technology innovation funding.",
+			category:    "local-civil",
+			superstate:  "south-west",
+			state:       "nebraska",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID2,
+			title:       "Nebraska Water Conservation",
+			description: "Should Nebraska strengthen water conservation measures?",
+			category:    "local-civil",
+			superstate:  "south-west",
+			state:       "nebraska",
+			isActive:    true,
+		},
+		// New Mexico
+		{
+			creatorID:   userID2,
+			title:       "New Mexico Renewable Energy",
+			description: "Vote on expanding New Mexico's renewable energy sector.",
+			category:    "local-civil",
+			superstate:  "south-west",
+			state:       "new-mexico",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID1,
+			title:       "New Mexico Cultural Preservation",
+			description: "Should New Mexico increase funding for cultural preservation?",
+			category:    "local-civil",
+			superstate:  "south-west",
+			state:       "new-mexico",
+			isActive:    true,
+		},
+		// Kansas
+		{
+			creatorID:   userID1,
+			title:       "Kansas Wind Energy Expansion",
+			description: "Vote on expanding wind energy infrastructure in Kansas.",
+			category:    "local-civil",
+			superstate:  "south-west",
+			state:       "kansas",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID2,
+			title:       "Kansas Rural Development",
+			description: "Should Kansas invest more in rural community development?",
+			category:    "local-civil",
+			superstate:  "south-west",
+			state:       "kansas",
+			isActive:    true,
+		},
+		// Oklahoma
+		{
+			creatorID:   userID2,
+			title:       "Oklahoma Energy Diversification",
+			description: "Vote on energy industry diversification initiatives.",
+			category:    "local-civil",
+			superstate:  "south-west",
+			state:       "oklahoma",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID1,
+			title:       "Oklahoma Tribal Partnership",
+			description: "Should Oklahoma strengthen economic partnerships with tribal nations?",
+			category:    "local-civil",
+			superstate:  "south-west",
+			state:       "oklahoma",
+			isActive:    true,
+		},
+		// Colorado
+		{
+			creatorID:   userID1,
+			title:       "Colorado Water Rights Management",
+			description: "Vote on comprehensive water rights management reform.",
+			category:    "local-civil",
+			superstate:  "south-west",
+			state:       "colorado",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID2,
+			title:       "Colorado Affordable Housing",
+			description: "Should Colorado expand affordable housing programs?",
+			category:    "local-civil",
+			superstate:  "south-west",
+			state:       "colorado",
+			isActive:    true,
+		},
+		// Arizona
+		{
+			creatorID:   userID2,
+			title:       "Arizona Water Conservation Plan",
+			description: "Vote on comprehensive water conservation measures for Arizona.",
+			category:    "local-civil",
+			superstate:  "south-west",
+			state:       "arizona",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID1,
+			title:       "Arizona Solar Energy Initiative",
+			description: "Should Arizona expand its solar energy infrastructure?",
+			category:    "local-civil",
+			superstate:  "south-west",
+			state:       "arizona",
+			isActive:    true,
+		},
+
+		// ===============================================================
+		// 11 - PACIFIC NW SUPER STATE
+		// ===============================================================
+		// Wyoming
+		{
+			creatorID:   userID1,
+			title:       "Wyoming Energy Transition",
+			description: "Vote on balanced energy transition policies for Wyoming.",
+			category:    "local-civil",
+			superstate:  "pacific-nw",
+			state:       "wyoming",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID2,
+			title:       "Wyoming Wildlife Conservation",
+			description: "Should Wyoming expand wildlife conservation programs?",
+			category:    "local-civil",
+			superstate:  "pacific-nw",
+			state:       "wyoming",
+			isActive:    true,
+		},
+		// Alaska
+		{
+			creatorID:   userID2,
+			title:       "Alaska Resource Development",
+			description: "Vote on balanced resource development policies for Alaska.",
+			category:    "local-civil",
+			superstate:  "pacific-nw",
+			state:       "alaska",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID1,
+			title:       "Alaska Native Community Support",
+			description: "Should Alaska increase support for Native community infrastructure?",
+			category:    "local-civil",
+			superstate:  "pacific-nw",
+			state:       "alaska",
+			isActive:    true,
+		},
+		// Montana
+		{
+			creatorID:   userID1,
+			title:       "Montana Public Lands Management",
+			description: "Vote on public lands management policies for Montana.",
+			category:    "local-civil",
+			superstate:  "pacific-nw",
+			state:       "montana",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID2,
+			title:       "Montana Agricultural Sustainability",
+			description: "Should Montana invest in sustainable agriculture programs?",
+			category:    "local-civil",
+			superstate:  "pacific-nw",
+			state:       "montana",
+			isActive:    true,
+		},
+		// Hawaii
+		{
+			creatorID:   userID2,
+			title:       "Hawaii Renewable Energy Target",
+			description: "Vote on Hawaii's path to 100% renewable energy.",
+			category:    "local-civil",
+			superstate:  "pacific-nw",
+			state:       "hawaii",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID1,
+			title:       "Hawaii Native Land Rights",
+			description: "Should Hawaii strengthen protections for Native Hawaiian lands?",
+			category:    "local-civil",
+			superstate:  "pacific-nw",
+			state:       "hawaii",
+			isActive:    true,
+		},
+		// Idaho
+		{
+			creatorID:   userID1,
+			title:       "Idaho Water Rights Reform",
+			description: "Vote on water rights reform measures for Idaho.",
+			category:    "local-civil",
+			superstate:  "pacific-nw",
+			state:       "idaho",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID2,
+			title:       "Idaho Tech Industry Growth",
+			description: "Should Idaho expand incentives for technology companies?",
+			category:    "local-civil",
+			superstate:  "pacific-nw",
+			state:       "idaho",
+			isActive:    true,
+		},
+		// Nevada
+		{
+			creatorID:   userID2,
+			title:       "Nevada Economic Diversification",
+			description: "Vote on economic diversification beyond gaming industry.",
+			category:    "local-civil",
+			superstate:  "pacific-nw",
+			state:       "nevada",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID1,
+			title:       "Nevada Renewable Energy Investment",
+			description: "Should Nevada increase investment in renewable energy?",
+			category:    "local-civil",
+			superstate:  "pacific-nw",
+			state:       "nevada",
+			isActive:    true,
+		},
+		// Utah
+		{
+			creatorID:   userID1,
+			title:       "Utah Public Lands Access",
+			description: "Vote on public lands access and management policies.",
+			category:    "local-civil",
+			superstate:  "pacific-nw",
+			state:       "utah",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID2,
+			title:       "Utah Air Quality Improvement",
+			description: "Should Utah invest more in air quality improvement?",
+			category:    "local-civil",
+			superstate:  "pacific-nw",
+			state:       "utah",
+			isActive:    true,
+		},
+		// Oregon
+		{
+			creatorID:   userID2,
+			title:       "Oregon Forest Management",
+			description: "Vote on sustainable forest management policies for Oregon.",
+			category:    "local-civil",
+			superstate:  "pacific-nw",
+			state:       "oregon",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID1,
+			title:       "Oregon Clean Energy Initiative",
+			description: "Should Oregon accelerate its clean energy transition?",
+			category:    "local-civil",
+			superstate:  "pacific-nw",
+			state:       "oregon",
+			isActive:    true,
+		},
+		// Washington
+		{
+			creatorID:   userID1,
+			title:       "Washington Tech Industry Support",
+			description: "Vote on support measures for Washington's technology sector.",
+			category:    "local-civil",
+			superstate:  "pacific-nw",
+			state:       "washington",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID2,
+			title:       "Washington Environmental Protection",
+			description: "Should Washington strengthen environmental protection laws?",
+			category:    "local-civil",
+			superstate:  "pacific-nw",
+			state:       "washington",
+			isActive:    true,
+		},
+
+		// ===============================================================
+		// 12 - CALIFORNIA SUPER STATE
+		// ===============================================================
+		// California
 		{
 			creatorID:   userID1,
 			title:       "California Water Conservation Initiative",
@@ -408,6 +1282,24 @@ func seedBallots(db *sql.DB) error {
 			creatorID:   userID2,
 			title:       "California Wildfire Prevention Funding",
 			description: "Should California increase funding for wildfire prevention and response?",
+			category:    "local-civil",
+			superstate:  "california",
+			state:       "california",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID1,
+			title:       "California Affordable Housing Crisis",
+			description: "Vote on comprehensive affordable housing solutions.",
+			category:    "local-civil",
+			superstate:  "california",
+			state:       "california",
+			isActive:    true,
+		},
+		{
+			creatorID:   userID2,
+			title:       "California High-Speed Rail Completion",
+			description: "Should California prioritize high-speed rail project completion?",
 			category:    "local-civil",
 			superstate:  "california",
 			state:       "california",
@@ -439,204 +1331,261 @@ func seedBallots(db *sql.DB) error {
 }
 
 func seedBallotItems(db *sql.DB) error {
-	// Get ballot IDs
-	ballotTitles := []string{
-		"Executive Branch Budget Priorities",
-		"Federal Court System Reform",
-		"House of Representatives Voting Rules",
-		"Senate Filibuster Reform",
-		"Department of Education Focus Areas",
-		"Supreme Court Term Limits",
-		// New England Super State
-		"Vermont State Representative Confidence Vote",
-		"Vermont Environmental Policy Initiative",
-		"Rhode Island Coastal Protection Measures",
-		"Rhode Island Education Funding Reform",
-		"Maine Fishing Rights Protection",
-		"New Hampshire Tax Policy Reform",
-		"Connecticut Infrastructure Investment",
-		"Massachusetts Healthcare Expansion",
-		// New York Super State
-		"New York City Transit Reform",
-		"Upstate New York Agricultural Support",
-		"Long Island Environmental Initiative",
-		// Jersey-Penn Super State
-		"New Jersey Shore Protection Act",
-		"New Jersey Transportation Funding",
-		"Pennsylvania Energy Transition Plan",
-		"Pennsylvania Rural Development Initiative",
-		// Great Lakes Super State
-		"Michigan Great Lakes Protection",
-		"Ohio Manufacturing Renaissance",
-		// Texas Super State
-		"Texas Energy Grid Independence",
-		"Texas Border Community Support",
-		// California Super State
-		"California Water Conservation Initiative",
-		"California Wildfire Prevention Funding",
+	// Get all ballot titles that need items
+	rows, err := db.Query("SELECT id, title FROM ballots")
+	if err != nil {
+		return fmt.Errorf("failed to query ballots: %v", err)
 	}
+	defer rows.Close()
 
 	ballotIDs := make(map[string]int)
-	for _, title := range ballotTitles {
+	for rows.Next() {
 		var id int
-		err := db.QueryRow("SELECT id FROM ballots WHERE title = $1", title).Scan(&id)
-		if err != nil {
-			log.Printf("Warning: Could not find ballot '%s', skipping items", title)
-			continue
+		var title string
+		if err := rows.Scan(&id, &title); err != nil {
+			return fmt.Errorf("failed to scan ballot: %v", err)
 		}
 		ballotIDs[title] = id
 	}
 
+	// Define ballot items for each ballot type
 	ballotItems := []struct {
 		ballotTitle string
 		title       string
 		description string
 	}{
-		// Executive Branch Budget Priorities
+		// Federal Ballots
 		{"Executive Branch Budget Priorities", "National Security", "Increase funding for defense and intelligence agencies"},
 		{"Executive Branch Budget Priorities", "Infrastructure", "Invest in roads, bridges, and public transportation"},
 		{"Executive Branch Budget Priorities", "Healthcare", "Expand healthcare programs and medical research"},
 		{"Executive Branch Budget Priorities", "Education", "Increase funding for public schools and student aid"},
 
-		// Federal Court System Reform
 		{"Federal Court System Reform", "Yes - Expand Courts", "Add more federal judges to reduce case backlogs"},
 		{"Federal Court System Reform", "No - Maintain Current System", "Keep the current number of federal judges"},
 		{"Federal Court System Reform", "Reform Case Management", "Improve efficiency without adding judges"},
 
-		// House of Representatives Voting Rules
 		{"House of Representatives Voting Rules", "Approve Proposed Changes", "Implement the new procedural rules"},
 		{"House of Representatives Voting Rules", "Reject Changes", "Keep current voting procedures"},
 		{"House of Representatives Voting Rules", "Modify and Revote", "Amend the proposal and vote again"},
 
-		// Senate Filibuster Reform
 		{"Senate Filibuster Reform", "Eliminate Filibuster", "Remove the filibuster rule entirely"},
 		{"Senate Filibuster Reform", "Require Talking Filibuster", "Senators must speak continuously to maintain filibuster"},
 		{"Senate Filibuster Reform", "Lower Threshold to 55 Votes", "Reduce cloture threshold from 60 to 55 votes"},
 		{"Senate Filibuster Reform", "Keep Current Rules", "Maintain 60-vote threshold requirement"},
 
-		// Department of Education Focus Areas
 		{"Department of Education Focus Areas", "STEM Education", "Prioritize science, technology, engineering, and math programs"},
 		{"Department of Education Focus Areas", "Vocational Training", "Expand career and technical education programs"},
 		{"Department of Education Focus Areas", "Student Debt Relief", "Focus on reducing student loan burden"},
 		{"Department of Education Focus Areas", "Early Childhood Education", "Invest in pre-K and kindergarten programs"},
 
-		// Supreme Court Term Limits
 		{"Supreme Court Term Limits", "Yes - 18 Year Terms", "Implement 18-year term limits for justices"},
 		{"Supreme Court Term Limits", "Yes - Different Term Length", "Implement term limits of a different duration"},
 		{"Supreme Court Term Limits", "No - Lifetime Appointments", "Maintain current lifetime appointment system"},
-
-		// =============== LOCAL CIVIL GOVERNMENT BALLOTS ===============
-
-		// Vermont State Representative Confidence Vote
-		{"Vermont State Representative Confidence Vote", "Full Confidence", "Express full confidence in state representatives"},
-		{"Vermont State Representative Confidence Vote", "Partial Confidence", "Express partial confidence with reservations"},
-		{"Vermont State Representative Confidence Vote", "No Confidence", "Express no confidence in state representatives"},
-
-		// Vermont Environmental Policy Initiative
-		{"Vermont Environmental Policy Initiative", "Yes - Prioritize Renewables", "Commit Vermont to 100% renewable energy by 2035"},
-		{"Vermont Environmental Policy Initiative", "Moderate Approach", "Balanced approach with gradual transition"},
-		{"Vermont Environmental Policy Initiative", "No - Maintain Current Policy", "Continue current energy policies"},
-
-		// Rhode Island Coastal Protection Measures
-		{"Rhode Island Coastal Protection Measures", "Comprehensive Protection Plan", "Full implementation of coastal protection measures"},
-		{"Rhode Island Coastal Protection Measures", "Targeted Protection", "Focus on highest-risk areas only"},
-		{"Rhode Island Coastal Protection Measures", "Study Further", "Commission additional studies before action"},
-
-		// Rhode Island Education Funding Reform
-		{"Rhode Island Education Funding Reform", "Increase State Funding", "Increase state share of education funding"},
-		{"Rhode Island Education Funding Reform", "Local Control", "Maintain local funding control"},
-		{"Rhode Island Education Funding Reform", "Hybrid Model", "Balance between state and local funding"},
-
-		// Maine Fishing Rights Protection
-		{"Maine Fishing Rights Protection", "Strong Protections", "Implement strong protections for local fishing communities"},
-		{"Maine Fishing Rights Protection", "Moderate Protections", "Balance fishing rights with broader interests"},
-		{"Maine Fishing Rights Protection", "Current Regulations", "Maintain current regulatory framework"},
-
-		// New Hampshire Tax Policy Reform
-		{"New Hampshire Tax Policy Reform", "No Income Tax", "Maintain New Hampshire's no income tax policy"},
-		{"New Hampshire Tax Policy Reform", "Modest Income Tax", "Introduce modest income tax to fund services"},
-		{"New Hampshire Tax Policy Reform", "Sales Tax Instead", "Implement sales tax as alternative revenue source"},
-
-		// Connecticut Infrastructure Investment
-		{"Connecticut Infrastructure Investment", "Rail Priority", "Prioritize commuter rail improvements"},
-		{"Connecticut Infrastructure Investment", "Highway Priority", "Focus on highway and bridge repairs"},
-		{"Connecticut Infrastructure Investment", "Balanced Approach", "Equal investment in all transportation modes"},
-
-		// Massachusetts Healthcare Expansion
-		{"Massachusetts Healthcare Expansion", "Universal Coverage", "Expand to cover all state residents"},
-		{"Massachusetts Healthcare Expansion", "Targeted Expansion", "Focus on uninsured and underinsured populations"},
-		{"Massachusetts Healthcare Expansion", "Private Market", "Encourage private market solutions"},
-
-		// New York City Transit Reform
-		{"New York City Transit Reform", "Major Investment", "Significant investment in modernization"},
-		{"New York City Transit Reform", "Incremental Improvements", "Gradual improvements to existing system"},
-		{"New York City Transit Reform", "Private Partnership", "Public-private partnerships for transit improvement"},
-
-		// Upstate New York Agricultural Support
-		{"Upstate New York Agricultural Support", "Increase Support", "Significantly increase agricultural subsidies"},
-		{"Upstate New York Agricultural Support", "Targeted Support", "Focus support on small and family farms"},
-		{"Upstate New York Agricultural Support", "Market Solutions", "Reduce subsidies, focus on market access"},
-
-		// Long Island Environmental Initiative
-		{"Long Island Environmental Initiative", "Full Protection", "Comprehensive coastal and environmental protection"},
-		{"Long Island Environmental Initiative", "Economic Balance", "Balance environmental and economic interests"},
-		{"Long Island Environmental Initiative", "Local Control", "Let local communities decide protection levels"},
-
-		// New Jersey Shore Protection Act
-		{"New Jersey Shore Protection Act", "Maximum Protection", "Implement strongest possible coastal protections"},
-		{"New Jersey Shore Protection Act", "Balanced Approach", "Balance protection with beach access and tourism"},
-		{"New Jersey Shore Protection Act", "Property Rights Focus", "Prioritize private property rights"},
-
-		// New Jersey Transportation Funding
-		{"New Jersey Transportation Funding", "Increase Funding", "Significantly increase transit funding"},
-		{"New Jersey Transportation Funding", "Moderate Increase", "Modest funding increase for critical projects"},
-		{"New Jersey Transportation Funding", "Efficiency Focus", "Improve efficiency before adding funding"},
-
-		// Pennsylvania Energy Transition Plan
-		{"Pennsylvania Energy Transition Plan", "Rapid Transition", "Fast transition to renewable energy"},
-		{"Pennsylvania Energy Transition Plan", "Gradual Transition", "Phased approach protecting energy jobs"},
-		{"Pennsylvania Energy Transition Plan", "Energy Independence", "Focus on domestic energy of all types"},
-
-		// Pennsylvania Rural Development Initiative
-		{"Pennsylvania Rural Development Initiative", "Major Investment", "Significant investment in rural infrastructure"},
-		{"Pennsylvania Rural Development Initiative", "Broadband Focus", "Prioritize rural broadband expansion"},
-		{"Pennsylvania Rural Development Initiative", "Agricultural Focus", "Focus on supporting agricultural communities"},
-
-		// Michigan Great Lakes Protection
-		{"Michigan Great Lakes Protection", "Strongest Protections", "Implement strictest water quality standards"},
-		{"Michigan Great Lakes Protection", "Balanced Protections", "Balance environmental and economic needs"},
-		{"Michigan Great Lakes Protection", "Current Standards", "Maintain current protection levels"},
-
-		// Ohio Manufacturing Renaissance
-		{"Ohio Manufacturing Renaissance", "Major Incentives", "Provide significant tax incentives for manufacturers"},
-		{"Ohio Manufacturing Renaissance", "Workforce Training", "Focus on workforce development and training"},
-		{"Ohio Manufacturing Renaissance", "Infrastructure Investment", "Invest in infrastructure to attract manufacturing"},
-
-		// Texas Energy Grid Independence
-		{"Texas Energy Grid Independence", "Full Independence", "Maintain complete energy grid independence"},
-		{"Texas Energy Grid Independence", "Limited Connections", "Allow limited connections with national grid"},
-		{"Texas Energy Grid Independence", "Hybrid Approach", "Independent operation with emergency connections"},
-
-		// Texas Border Community Support
-		{"Texas Border Community Support", "Major Funding", "Significant increase in border community funding"},
-		{"Texas Border Community Support", "Targeted Support", "Focus on specific infrastructure needs"},
-		{"Texas Border Community Support", "Federal Partnership", "Work with federal government on shared funding"},
-
-		// California Water Conservation Initiative
-		{"California Water Conservation Initiative", "Mandatory Conservation", "Implement mandatory water conservation measures"},
-		{"California Water Conservation Initiative", "Incentive-Based", "Focus on incentives for voluntary conservation"},
-		{"California Water Conservation Initiative", "Infrastructure Priority", "Prioritize water infrastructure investment"},
-
-		// California Wildfire Prevention Funding
-		{"California Wildfire Prevention Funding", "Major Increase", "Significantly increase prevention and response funding"},
-		{"California Wildfire Prevention Funding", "Forest Management", "Focus funding on forest management"},
-		{"California Wildfire Prevention Funding", "Community Protection", "Prioritize protecting communities over wildlands"},
 	}
 
+	// Generic options for state-level ballots
+	genericStateOptions := []struct {
+		suffix      string
+		options     []string
+		descriptions []string
+	}{
+		{
+			suffix:      "Confidence Vote",
+			options:     []string{"Full Confidence", "Partial Confidence", "No Confidence"},
+			descriptions: []string{"Express full confidence in representatives", "Express partial confidence with reservations", "Express no confidence in representatives"},
+		},
+		{
+			suffix:      "Initiative",
+			options:     []string{"Strongly Support", "Support with Modifications", "Oppose"},
+			descriptions: []string{"Fully support the proposed initiative", "Support with suggested modifications", "Oppose the initiative"},
+		},
+		{
+			suffix:      "Measures",
+			options:     []string{"Comprehensive Action", "Targeted Action", "Further Study"},
+			descriptions: []string{"Implement comprehensive protection measures", "Focus on highest-priority areas only", "Commission additional studies before action"},
+		},
+		{
+			suffix:      "Reform",
+			options:     []string{"Major Reform", "Moderate Reform", "Minimal Change"},
+			descriptions: []string{"Implement significant structural changes", "Make moderate adjustments to current system", "Keep mostly current structure with minor tweaks"},
+		},
+		{
+			suffix:      "Protection",
+			options:     []string{"Strong Protections", "Balanced Approach", "Current Standards"},
+			descriptions: []string{"Implement strongest possible protections", "Balance protection with economic interests", "Maintain current protection levels"},
+		},
+		{
+			suffix:      "Investment",
+			options:     []string{"Major Investment", "Moderate Investment", "Efficiency Focus"},
+			descriptions: []string{"Significant new investment in infrastructure", "Moderate funding increase for priority projects", "Focus on efficiency before new investment"},
+		},
+		{
+			suffix:      "Expansion",
+			options:     []string{"Full Expansion", "Targeted Expansion", "Maintain Current"},
+			descriptions: []string{"Expand programs to maximum coverage", "Focus expansion on underserved areas", "Maintain current program scope"},
+		},
+		{
+			suffix:      "Support",
+			options:     []string{"Increase Support", "Targeted Support", "Market Solutions"},
+			descriptions: []string{"Significantly increase government support", "Focus support on specific sectors", "Rely more on market-based solutions"},
+		},
+		{
+			suffix:      "Development",
+			options:     []string{"Accelerate Development", "Balanced Growth", "Sustainable Pace"},
+			descriptions: []string{"Accelerate development with major investment", "Balance growth with sustainability", "Maintain sustainable development pace"},
+		},
+		{
+			suffix:      "Plan",
+			options:     []string{"Comprehensive Plan", "Phased Approach", "Study First"},
+			descriptions: []string{"Implement comprehensive statewide plan", "Roll out in phases over time", "Conduct further study before implementation"},
+		},
+		{
+			suffix:      "Fund",
+			options:     []string{"Create Fund", "Expand Existing", "Private Partnership"},
+			descriptions: []string{"Create new dedicated state fund", "Expand existing funding mechanisms", "Partner with private sector"},
+		},
+		{
+			suffix:      "Act",
+			options:     []string{"Pass Act", "Amend Act", "Reject Act"},
+			descriptions: []string{"Pass the proposed act as written", "Amend the act with modifications", "Reject the proposed act"},
+		},
+		{
+			suffix:      "Transition",
+			options:     []string{"Rapid Transition", "Gradual Transition", "Status Quo"},
+			descriptions: []string{"Fast transition to new approach", "Phased transition over time", "Maintain current approach"},
+		},
+		{
+			suffix:      "Management",
+			options:     []string{"Enhanced Management", "Balanced Management", "Current Approach"},
+			descriptions: []string{"Implement enhanced management policies", "Balance multiple stakeholder interests", "Continue current management approach"},
+		},
+		{
+			suffix:      "Conservation",
+			options:     []string{"Strong Conservation", "Balanced Use", "Economic Priority"},
+			descriptions: []string{"Prioritize conservation over development", "Balance conservation and economic use", "Prioritize economic development"},
+		},
+		{
+			suffix:      "Access",
+			options:     []string{"Expand Access", "Targeted Access", "Current Access"},
+			descriptions: []string{"Significantly expand access statewide", "Target access expansion to underserved", "Maintain current access levels"},
+		},
+		{
+			suffix:      "Excellence",
+			options:     []string{"Major Investment", "Targeted Improvements", "Efficiency Focus"},
+			descriptions: []string{"Major investment in excellence programs", "Targeted improvements in key areas", "Focus on efficiency and outcomes"},
+		},
+		{
+			suffix:      "Partnership",
+			options:     []string{"Strong Partnership", "Enhanced Cooperation", "Current Relations"},
+			descriptions: []string{"Strengthen partnerships significantly", "Enhance cooperation in key areas", "Maintain current relationship levels"},
+		},
+		{
+			suffix:      "Improvement",
+			options:     []string{"Comprehensive Improvement", "Priority Focus", "Incremental Change"},
+			descriptions: []string{"Comprehensive improvement across all areas", "Focus on highest priority improvements", "Make incremental changes over time"},
+		},
+		{
+			suffix:      "Rights",
+			options:     []string{"Strengthen Rights", "Balanced Approach", "Current Framework"},
+			descriptions: []string{"Significantly strengthen protections", "Balance rights with other interests", "Maintain current framework"},
+		},
+		{
+			suffix:      "Target",
+			options:     []string{"Aggressive Target", "Moderate Target", "Flexible Approach"},
+			descriptions: []string{"Set aggressive targets with deadlines", "Set moderate achievable targets", "Allow flexible approach based on conditions"},
+		},
+		{
+			suffix:      "Crisis",
+			options:     []string{"Emergency Action", "Urgent Response", "Measured Response"},
+			descriptions: []string{"Declare emergency and take immediate action", "Urgent response with prioritized measures", "Measured response with careful planning"},
+		},
+		{
+			suffix:      "Completion",
+			options:     []string{"Prioritize Completion", "Phased Completion", "Reassess Project"},
+			descriptions: []string{"Make completion a top priority", "Complete in phases as funding allows", "Reassess project scope and timeline"},
+		},
+		{
+			suffix:      "Restoration",
+			options:     []string{"Full Restoration", "Targeted Restoration", "Gradual Restoration"},
+			descriptions: []string{"Comprehensive restoration program", "Focus on critical areas first", "Gradual restoration over extended period"},
+		},
+		{
+			suffix:      "Diversification",
+			options:     []string{"Active Diversification", "Supported Transition", "Market-Led Change"},
+			descriptions: []string{"Active government-led diversification", "Support private sector transition", "Allow market forces to drive change"},
+		},
+		{
+			suffix:      "Technology",
+			options:     []string{"Major Investment", "Strategic Investment", "Private Sector Focus"},
+			descriptions: []string{"Major public investment in technology", "Strategic investments in key areas", "Focus on private sector innovation"},
+		},
+		{
+			suffix:      "Preservation",
+			options:     []string{"Enhanced Preservation", "Targeted Preservation", "Current Levels"},
+			descriptions: []string{"Significantly enhance preservation efforts", "Target most endangered resources", "Maintain current preservation levels"},
+		},
+		{
+			suffix:      "Industry",
+			options:     []string{"Strong Support", "Balanced Support", "Market Approach"},
+			descriptions: []string{"Provide strong industry support", "Balance support with other priorities", "Rely on market-based approaches"},
+		},
+		{
+			suffix:      "Growth",
+			options:     []string{"Accelerated Growth", "Sustainable Growth", "Managed Growth"},
+			descriptions: []string{"Accelerate growth through incentives", "Focus on sustainable growth", "Carefully manage growth rate"},
+		},
+		{
+			suffix:      "Relations",
+			options:     []string{"Strengthen Relations", "Enhanced Cooperation", "Status Quo"},
+			descriptions: []string{"Significantly strengthen relationships", "Enhance cooperation in specific areas", "Maintain current relationship"},
+		},
+		{
+			suffix:      "Sustainability",
+			options:     []string{"Full Sustainability", "Transition Plan", "Current Practices"},
+			descriptions: []string{"Commit to full sustainability practices", "Develop transition plan to sustainability", "Maintain current practices"},
+		},
+		{
+			suffix:      "Housing",
+			options:     []string{"Major Program", "Targeted Assistance", "Market Solutions"},
+			descriptions: []string{"Create major housing program", "Provide targeted assistance to most in need", "Rely on market-based solutions"},
+		},
+		{
+			suffix:      "Resilience",
+			options:     []string{"Comprehensive Resilience", "Priority Investments", "Current Approach"},
+			descriptions: []string{"Build comprehensive resilience infrastructure", "Invest in highest priority areas", "Continue current resilience approach"},
+		},
+		{
+			suffix:      "Corridor",
+			options:     []string{"Accelerate Development", "Planned Growth", "Organic Growth"},
+			descriptions: []string{"Accelerate corridor development", "Follow planned development approach", "Allow organic growth patterns"},
+		},
+		{
+			suffix:      "Modernization",
+			options:     []string{"Full Modernization", "Phased Modernization", "Targeted Updates"},
+			descriptions: []string{"Comprehensive modernization program", "Modernize in phases over time", "Focus on most critical updates"},
+		},
+		{
+			suffix:      "Renaissance",
+			options:     []string{"Major Initiative", "Strategic Focus", "Market-Driven"},
+			descriptions: []string{"Launch major renaissance initiative", "Focus on strategic opportunities", "Support market-driven revival"},
+		},
+		{
+			suffix:      "Revival",
+			options:     []string{"Active Revival", "Supported Revival", "Natural Recovery"},
+			descriptions: []string{"Actively pursue revival through incentives", "Support community-led revival efforts", "Allow natural economic recovery"},
+		},
+		{
+			suffix:      "Quality",
+			options:     []string{"Strict Standards", "Balanced Standards", "Current Standards"},
+			descriptions: []string{"Implement strictest quality standards", "Balance quality with practicality", "Maintain current quality standards"},
+		},
+	}
+
+	// Insert the specific federal ballot items
 	for _, item := range ballotItems {
 		ballotID, ok := ballotIDs[item.ballotTitle]
 		if !ok {
-			continue // Skip if ballot wasn't found
+			continue
 		}
 
 		query := `
@@ -649,8 +1598,59 @@ func seedBallotItems(db *sql.DB) error {
 		if err != nil {
 			return fmt.Errorf("failed to insert ballot item '%s': %v", item.title, err)
 		}
-
 		log.Printf("✓ Ballot item created: %s", item.title)
+	}
+
+	// For state-level ballots, generate generic options based on title pattern
+	for title, ballotID := range ballotIDs {
+		// Skip if this ballot already has items (federal ballots)
+		var count int
+		err := db.QueryRow("SELECT COUNT(*) FROM ballot_items WHERE ballot_id = $1", ballotID).Scan(&count)
+		if err != nil {
+			return fmt.Errorf("failed to count items for ballot %d: %v", ballotID, err)
+		}
+		if count > 0 {
+			continue
+		}
+
+		// Find matching option pattern based on title suffix
+		var options []string
+		var descriptions []string
+		foundMatch := false
+
+		for _, pattern := range genericStateOptions {
+			if len(title) > len(pattern.suffix) && title[len(title)-len(pattern.suffix):] == pattern.suffix {
+				options = pattern.options
+				descriptions = pattern.descriptions
+				foundMatch = true
+				break
+			}
+		}
+
+		// Default options if no pattern matched
+		if !foundMatch {
+			options = []string{"Yes - Support", "Yes with Modifications", "No - Oppose"}
+			descriptions = []string{
+				"Support this measure as proposed",
+				"Support with suggested modifications",
+				"Oppose this measure",
+			}
+		}
+
+		// Insert the options
+		for i, opt := range options {
+			query := `
+				INSERT INTO ballot_items (ballot_id, title, description, vote_count)
+				VALUES ($1, $2, $3, 0)
+				ON CONFLICT DO NOTHING
+			`
+
+			_, err := db.Exec(query, ballotID, opt, descriptions[i])
+			if err != nil {
+				return fmt.Errorf("failed to insert ballot item '%s': %v", opt, err)
+			}
+			log.Printf("✓ Ballot item created: %s (for %s)", opt, title)
+		}
 	}
 
 	return nil
