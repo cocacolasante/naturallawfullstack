@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - Common-Law Republic U.S.A.</title>
+    <style>
+        :root {
+            --primary-dark: #000000;
+            --secondary-dark: #111111;
+            --tertiary-dark: #1a1a1a;
+            --accent-gold: #f5d442;
+            --accent-gold-hover: #ffe97f;
+            --text-light: #ffffcc;
+            --text-white: #fefefe;
+            --highlight-pink: #ff33e3;
+            --border-color: #444;
+            --shadow-color: rgba(255, 215, 0, 0.2);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            margin: 0; padding: 0;
+            font-family: "Times New Roman", Times, serif;
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 { color: var(--accent-gold); margin-bottom: 1rem; }
+        a { color: var(--accent-gold); text-decoration: none; transition: color 0.3s ease; }
+        a:hover { color: var(--accent-gold-hover); }
+
+        .main-header {
+            background-color: var(--primary-dark);
+            border-bottom: 2px solid var(--accent-gold);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .header-title { text-align: center; padding: 1rem 0; }
+        .header-title h1 { font-size: 2.7rem; margin: 0; color: #ffffff; }
+
+        .topnav {
+            background-color: var(--secondary-dark);
+            display: flex; justify-content: center; align-items: center;
+            padding: 0; position: sticky; top: 0; z-index: 1000;
+        }
+
+        .dropdown { position: relative; display: inline-block; margin: 0 0.5rem; }
+        .dropbtn {
+            background: transparent; color: var(--accent-gold);
+            padding: 0.8rem 1.2rem; font-size: 1rem; border: none;
+            cursor: pointer; font-weight: bold; transition: color 0.3s ease;
+        }
+        .dropbtn:hover { color: var(--accent-gold-hover); }
+        .dropdown-content {
+            display: none; position: absolute; background-color: var(--tertiary-dark);
+            min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+            z-index: 1; border: 1px solid var(--border-color); border-radius: 4px;
+        }
+        .dropdown-content a {
+            color: var(--text-light); padding: 12px 16px; display: block; text-align: left;
+        }
+        .dropdown-content a:hover { background-color: var(--secondary-dark); color: var(--accent-gold); }
+        .dropdown:hover .dropdown-content { display: block; }
+
+        .main-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+
+        .page-title { font-size: 2.2rem; margin-bottom: 0.5rem; }
+        .page-subtitle { font-size: 1.2rem; color: var(--text-light); margin-bottom: 2rem; }
+
+        /* Auth required message */
+        .auth-required {
+            background-color: var(--secondary-dark);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            max-width: 500px;
+            margin: 3rem auto;
+        }
+
+        .auth-required p { margin-bottom: 1rem; font-size: 1.2rem; }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.6rem;
+            background-color: var(--accent-gold);
+            color: var(--primary-dark);
+            border: none; border-radius: 8px;
+            font-size: 1rem; font-weight: bold;
+            cursor: pointer; text-decoration: none;
+            transition: background-color 0.2s ease;
+        }
+        .btn:hover { background-color: var(--accent-gold-hover); color: var(--primary-dark); }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--accent-gold);
+            border: 1px solid var(--accent-gold);
+        }
+        .btn-outline:hover { background-color: var(--accent-gold); color: var(--primary-dark); }
+
+        .btn-small {
+            padding: 0.4rem 1rem;
+            font-size: 0.9rem;
+        }
+
+        /* Profile sections */
+        .profile-section {
+            background-color: var(--secondary-dark);
+            margin: 1.5rem auto;
+            padding: 1.5rem;
+            max-width: 700px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px var(--shadow-color);
+            border: 1px solid var(--border-color);
+            text-align: left;
+        }
+
+        .section-header {
+            background-color: #333;
+            color: #ffec99;
+            padding: 0.6rem 1rem;
+            margin: -1.5rem -1.5rem 1.5rem -1.5rem;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            border-bottom: 2px solid #ffec99;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-header h3 { margin: 0; font-size: 1.3rem; }
+
+        .section-header a {
+            font-size: 0.9rem;
+            color: var(--accent-gold);
+            text-decoration: underline;
+        }
+
+        .profile-row {
+            display: flex;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .profile-row:last-child { border-bottom: none; }
+
+        .profile-label {
+            width: 40%;
+            font-weight: bold;
+            color: var(--accent-gold);
+            font-size: 1rem;
+        }
+
+        .profile-value {
+            width: 60%;
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .profile-value.empty { color: #777; font-style: italic; }
+
+        .tag-list { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+        .tag {
+            background-color: var(--tertiary-dark);
+            border: 1px solid var(--border-color);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .loading-spinner {
+            text-align: center;
+            padding: 3rem;
+            font-size: 1.2rem;
+            color: var(--text-light);
+        }
+
+        .account-header {
+            background-color: var(--secondary-dark);
+            margin: 0 auto 1rem auto;
+            padding: 1.5rem;
+            max-width: 700px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .account-header .user-info h2 { margin: 0; font-size: 1.6rem; }
+        .account-header .user-info p { margin: 0; color: #aaa; font-size: 1rem; }
+
+        .account-actions { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+
+        .main-footer {
+            background-color: var(--secondary-dark);
+            padding: 1rem; margin-top: 2rem;
+            border-top: 2px solid var(--border-color);
+            text-align: center;
+        }
+        .main-footer p { font-size: 0.9rem; }
+
+        @media screen and (max-width: 768px) {
+            .topnav { flex-direction: column; padding: 0; }
+            .dropdown { width: 100%; margin: 0; }
+            .dropbtn { width: 100%; padding: 1rem; }
+            .dropdown-content { width: 100%; position: relative; }
+            .main-content { padding: 1rem; }
+            .profile-row { flex-direction: column; }
+            .profile-label { width: 100%; margin-bottom: 0.2rem; }
+            .profile-value { width: 100%; }
+            .account-header { flex-direction: column; text-align: center; }
+            .account-actions { justify-content: center; }
+            .section-header { flex-direction: column; gap: 0.5rem; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-title">
+            <h1><u>Common-Law Republic</u>; <u>U.S.A.</u>.</h1>
+        </div>
+
+        <nav class="topnav">
+            <div class="dropdown">
+                <button class="dropbtn">Home Page.</button>
+                <div class="dropdown-content">
+                    <a href="../index.html">Home Page.</a>
+                    <a href="../Z-ReferenceDocuments/BriefGuidelines-PreferentialVotingBallot-Generic-Edit3.pdf">Using Ballots; Instructions.</a>
+                    <a href="../Z-ReferenceDocuments/OrganicHierarchiesUSA-V4.2.pdf">Social-Organizing Under Constitutional "Organic Hierarchies".</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Register; or: Log-In.</button>
+                <div class="dropdown-content">
+                    <a href="./NewUsers-Registration.html">Register</a>
+                    <a href="./Login.html">Login</a>
+                    <a href="./AccountProfiles-Management-Index.html">AccountProfiles-Management-Index</a>
+                    <a href="./MyProfile.html">View My Profile</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">National Civil-Government.</button>
+                <div class="dropdown-content">
+                    <a href="../USA-GoverningBodies/Executive-Department-SubDepartments-Agencies/ExcDpt-SubDepartments&Agencies-Listed.html">Executive-Department.</a>
+                    <a href="../USA-GoverningBodies/JudicialDepartment/JudicialIndex.html">Judicial-Department.</a>
+                    <a href="../USA-GoverningBodies/Legislature-HouseReps/Leg-HRepsIndex.html">Legislature: House Representatives.</a>
+                    <a href="../USA-GoverningBodies/Legislature-Senate/Leg-Senate.html">Legislature; Senate.</a>
+                    <a href="../USA-GoverningBodies/Ballots-Index.html"><u>Ballots</u>.</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Local Civil-Governments.</button>
+                <div class="dropdown-content" style="text-align:center;">
+                    <a href="../USA-LocalJurisdictions/01-NewEngland-SS/NewEngland-SS.html">01: New-England</a>
+                    <a href="../USA-LocalJurisdictions/02-NewYork-SS/NewYork-SS.html">02: New-York</a>
+                    <a href="../USA-LocalJurisdictions/03-Jersey-Penn-SS/JerseyPenn-SS.html">03: Jersey-Penn</a>
+                    <a href="../USA-LocalJurisdictions/04-GreatLakes-SS/GreatLakes-SS.html">04: Great-Lakes</a>
+                    <a href="../USA-LocalJurisdictions/05-VirginiaCarolina-SS/Virginia-Carolina-SS.html">05: Virginia-Carolina</a>
+                    <a href="../USA-LocalJurisdictions/06-FloridaGeorgia-SS/FloridaGeorgia-SS.html">06: Florida-Georgia</a>
+                    <a href="../USA-LocalJurisdictions/07-MississippiValley-SS/MississippiValley-SS.html">07: Mississippi-Valley</a>
+                    <a href="../USA-LocalJurisdictions/08-NorthCentralPlains-SS/NorthCentralPlains-SS.html">08: NorthCentral-Plains</a>
+                    <a href="../USA-LocalJurisdictions/09-Texas-SS/Texas-SS.html">09: Texas</a>
+                    <a href="../USA-LocalJurisdictions/10-SouthWest-SS/SouthWest-SS.html">10: South-West</a>
+                    <a href="../USA-LocalJurisdictions/11-PacificNW-SS/PacificNW-SS.html">11: Pacific-NW</a>
+                    <a href="../USA-LocalJurisdictions/12-California-SS/California-SS.html">12: California</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Support.</button>
+                <div class="dropdown-content">
+                    <a href="../Support/Support.html">Support-Help-Contacts</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <h2 class="page-title"><u>My Profile</u></h2>
+        <p class="page-subtitle">View all of your account and profile information.</p>
+
+        <!-- Auth Required (shown when not logged in) -->
+        <div id="authRequired" class="auth-required" style="display: none;">
+            <h3>Login Required</h3>
+            <p>You must be logged in to view your profile.</p>
+            <a href="./Login.html" class="btn">Log In</a>
+            <br><br>
+            <a href="./NewUsers-Registration.html" class="btn btn-outline">Register</a>
+        </div>
+
+        <!-- Loading -->
+        <div id="loadingState" class="loading-spinner">Loading profile data...</div>
+
+        <!-- Profile Content (shown when logged in) -->
+        <div id="profileContent" style="display: none;">
+
+            <!-- Account Header -->
+            <div class="account-header">
+                <div class="user-info">
+                    <h2 id="displayUsername">Username</h2>
+                    <p id="displayEmail">email@example.com</p>
+                    <p id="displayMemberSince" style="color: #666; font-size: 0.85rem;"></p>
+                </div>
+                <div class="account-actions">
+                    <a href="./AccountProfiles-Management-Index.html" class="btn btn-small btn-outline">Edit Profiles</a>
+                    <button class="btn btn-small btn-outline" onclick="logOut()">Log Out</button>
+                </div>
+            </div>
+
+            <!-- Section 1: Basic Personal Info -->
+            <div class="profile-section">
+                <div class="section-header">
+                    <h3>1. Basic Personal Info & Communications</h3>
+                    <a href="./1-BasicPersonalData-&-Communications-Profile.html">Edit</a>
+                </div>
+                <div id="sectionPersonal">
+                    <div id="personalEmpty" class="profile-row" style="display:none;">
+                        <span class="profile-value empty">No personal information provided yet.</span>
+                    </div>
+                    <div id="personalData"></div>
+                </div>
+            </div>
+
+            <!-- Section 2: Address / Geographical Location -->
+            <div class="profile-section">
+                <div class="section-header">
+                    <h3>2. Geographical Location & Address</h3>
+                    <a href="./2-GeographicalLocation-Venue-Profile.html">Edit</a>
+                </div>
+                <div id="sectionAddress">
+                    <div id="addressEmpty" class="profile-row" style="display:none;">
+                        <span class="profile-value empty">No address information provided yet.</span>
+                    </div>
+                    <div id="addressData"></div>
+                </div>
+            </div>
+
+            <!-- Section 3: Political Affiliation -->
+            <div class="profile-section">
+                <div class="section-header">
+                    <h3>3. Political Parties & Activism</h3>
+                    <a href="./3: Politics-&-Activism.html">Edit</a>
+                </div>
+                <div id="sectionPolitical">
+                    <div id="politicalEmpty" class="profile-row" style="display:none;">
+                        <span class="profile-value empty">No political affiliation provided yet.</span>
+                    </div>
+                    <div id="politicalData"></div>
+                </div>
+            </div>
+
+            <!-- Section 4: Economic Info -->
+            <div class="profile-section">
+                <div class="section-header">
+                    <h3>4. Economics & Professions</h3>
+                    <a href="./4-Econimics-&-Professions.html">Edit</a>
+                </div>
+                <div id="sectionEconomic">
+                    <div id="economicEmpty" class="profile-row" style="display:none;">
+                        <span class="profile-value empty">No economic information provided yet.</span>
+                    </div>
+                    <div id="economicData"></div>
+                </div>
+            </div>
+
+            <!-- Section 5: Religious Affiliation -->
+            <div class="profile-section">
+                <div class="section-header">
+                    <h3>5. Religious & Spiritual Communities</h3>
+                    <a href="./5-Spiritual&Religious-Profile.html">Edit</a>
+                </div>
+                <div id="sectionReligious">
+                    <div id="religiousEmpty" class="profile-row" style="display:none;">
+                        <span class="profile-value empty">No religious affiliation provided yet.</span>
+                    </div>
+                    <div id="religiousData"></div>
+                </div>
+            </div>
+
+            <!-- Section 6: Race/Ethnicity -->
+            <div class="profile-section">
+                <div class="section-header">
+                    <h3>6. DNA, Genetic & Racial Heritage</h3>
+                    <a href="./6-DNA-Genetic&RacialHeritage-Profile.html">Edit</a>
+                </div>
+                <div id="sectionRace">
+                    <div id="raceEmpty" class="profile-row" style="display:none;">
+                        <span class="profile-value empty">No race/ethnicity information provided yet.</span>
+                    </div>
+                    <div id="raceData"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <p><u>Common-Law Republic, U.S.A.</u>; <u>Empowering Self-Governing Communities</u>.</p>
+    </footer>
+
+    <script>
+        const API_BASE = 'http://localhost:8080/api/v1';
+
+        function getAuthToken() {
+            return localStorage.getItem('authToken') || sessionStorage.getItem('authToken');
+        }
+
+        function getAuthUser() {
+            const raw = localStorage.getItem('authUser') || sessionStorage.getItem('authUser');
+            if (!raw) return null;
+            try { return JSON.parse(raw); } catch(e) { return null; }
+        }
+
+        function logOut() {
+            localStorage.removeItem('authToken');
+            localStorage.removeItem('authUser');
+            sessionStorage.removeItem('authToken');
+            sessionStorage.removeItem('authUser');
+            window.location.href = './Login.html';
+        }
+
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function formatDate(dateStr) {
+            if (!dateStr) return '';
+            const d = new Date(dateStr);
+            if (isNaN(d.getTime())) return dateStr;
+            return d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+        }
+
+        function renderRow(label, value) {
+            const isEmpty = !value || value === '' || value === 'null';
+            return `<div class="profile-row">
+                <span class="profile-label">${escapeHtml(label)}:</span>
+                <span class="profile-value${isEmpty ? ' empty' : ''}">${isEmpty ? 'Not provided' : escapeHtml(value)}</span>
+            </div>`;
+        }
+
+        function renderTagsRow(label, items) {
+            if (!items || items.length === 0) {
+                return `<div class="profile-row">
+                    <span class="profile-label">${escapeHtml(label)}:</span>
+                    <span class="profile-value empty">Not provided</span>
+                </div>`;
+            }
+            const tags = items.map(item => `<span class="tag">${escapeHtml(item)}</span>`).join('');
+            return `<div class="profile-row">
+                <span class="profile-label">${escapeHtml(label)}:</span>
+                <span class="profile-value"><div class="tag-list">${tags}</div></span>
+            </div>`;
+        }
+
+        async function authedFetch(url) {
+            const token = getAuthToken();
+            const res = await fetch(url, {
+                headers: {
+                    'Authorization': 'Bearer ' + token,
+                    'Content-Type': 'application/json'
+                }
+            });
+            return res;
+        }
+
+        async function loadProfile() {
+            const token = getAuthToken();
+            const loadingState = document.getElementById('loadingState');
+            const authRequired = document.getElementById('authRequired');
+            const profileContent = document.getElementById('profileContent');
+
+            if (!token) {
+                loadingState.style.display = 'none';
+                authRequired.style.display = 'block';
+                return;
+            }
+
+            // Load account info from stored user data
+            const user = getAuthUser();
+            if (user) {
+                document.getElementById('displayUsername').textContent = user.username || 'User';
+                document.getElementById('displayEmail').textContent = user.email || '';
+                if (user.created_at) {
+                    document.getElementById('displayMemberSince').textContent = 'Member since ' + formatDate(user.created_at);
+                }
+            }
+
+            // Fetch all profile sections in parallel
+            const [personalRes, addressRes, politicalRes, religiousRes, raceRes, economicRes] = await Promise.allSettled([
+                authedFetch(API_BASE + '/profile/info'),
+                authedFetch(API_BASE + '/profile/address'),
+                authedFetch(API_BASE + '/profile/political'),
+                authedFetch(API_BASE + '/profile/religious'),
+                authedFetch(API_BASE + '/profile/race-ethnicity'),
+                authedFetch(API_BASE + '/profile/economic')
+            ]);
+
+            // Render Personal Info
+            if (personalRes.status === 'fulfilled' && personalRes.value.ok) {
+                const data = await personalRes.value.json();
+                const html = [
+                    renderRow('Full Name', data.full_name),
+                    renderRow('Gender', data.gender),
+                    renderRow('Birthday', data.birthday ? formatDate(data.birthday) : ''),
+                    renderRow("Mother's Maiden Name", data.mothers_maiden_name),
+                    renderRow('Phone Number', data.phone_number),
+                    renderTagsRow('Additional Emails', data.additional_emails),
+                ].join('');
+                document.getElementById('personalData').innerHTML = html;
+            } else {
+                document.getElementById('personalEmpty').style.display = 'block';
+            }
+
+            // Render Address
+            if (addressRes.status === 'fulfilled' && addressRes.value.ok) {
+                const data = await addressRes.value.json();
+                const fullAddress = [data.street_number, data.street_name].filter(Boolean).join(' ');
+                const html = [
+                    renderRow('Street Address', fullAddress),
+                    renderRow('Address Line 2', data.address_line_2),
+                    renderRow('City', data.city),
+                    renderRow('State', data.state),
+                    renderRow('Zip Code', data.zip_code),
+                ].join('');
+                document.getElementById('addressData').innerHTML = html;
+            } else {
+                document.getElementById('addressEmpty').style.display = 'block';
+            }
+
+            // Render Political Affiliation
+            if (politicalRes.status === 'fulfilled' && politicalRes.value.ok) {
+                const data = await politicalRes.value.json();
+                const html = renderRow('Party Affiliation', data.party_affiliation);
+                document.getElementById('politicalData').innerHTML = html;
+            } else {
+                document.getElementById('politicalEmpty').style.display = 'block';
+            }
+
+            // Render Religious Affiliation
+            if (religiousRes.status === 'fulfilled' && religiousRes.value.ok) {
+                const data = await religiousRes.value.json();
+                const supportLevel = data.supporting_religion !== null && data.supporting_religion !== undefined
+                    ? data.supporting_religion + '/10'
+                    : '';
+                const html = [
+                    renderRow('Religion', data.religion),
+                    renderRow('Support Level', supportLevel),
+                    renderTagsRow('Religious Service Types', data.religious_services_types),
+                ].join('');
+                document.getElementById('religiousData').innerHTML = html;
+            } else {
+                document.getElementById('religiousEmpty').style.display = 'block';
+            }
+
+            // Render Race/Ethnicity
+            if (raceRes.status === 'fulfilled' && raceRes.value.ok) {
+                const data = await raceRes.value.json();
+                const html = renderTagsRow('Race / Ethnicity', data.race);
+                document.getElementById('raceData').innerHTML = html;
+            } else {
+                document.getElementById('raceEmpty').style.display = 'block';
+            }
+
+            // Render Economic Info
+            if (economicRes.status === 'fulfilled' && economicRes.value.ok) {
+                const data = await economicRes.value.json();
+                const html = [
+                    renderRow('For Current Political Structure', data.for_current_political_structure),
+                    renderRow('For Capitalism', data.for_capitalism),
+                    renderRow('For Laws', data.for_laws),
+                    renderTagsRow('Goods & Services', data.goods_services),
+                    renderTagsRow('Affiliations', data.affiliations),
+                    renderRow('Support of Alt. Economics', data.support_of_alt_econ),
+                    renderRow('Support Alt. Communities', data.support_alt_comm),
+                    renderRow('Additional Notes', data.additional_text),
+                ].join('');
+                document.getElementById('economicData').innerHTML = html;
+            } else {
+                document.getElementById('economicEmpty').style.display = 'block';
+            }
+
+            // Show content
+            loadingState.style.display = 'none';
+            profileContent.style.display = 'block';
+        }
+
+        document.addEventListener('DOMContentLoaded', loadProfile);
+    </script>
+</body>
+</html>
