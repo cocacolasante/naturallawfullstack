@@ -203,6 +203,60 @@
 
         .account-actions { display: flex; gap: 0.6rem; flex-wrap: wrap; }
 
+        /* Trust score banner */
+        .trust-banner {
+            background-color: var(--tertiary-dark);
+            border: 1px solid var(--accent-gold);
+            border-radius: 10px;
+            padding: 1rem 1.5rem;
+            margin: 0 auto 1rem auto;
+            max-width: 700px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .trust-score-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent-gold);
+        }
+        .trust-score-label { color: #aaa; font-size: 0.95rem; }
+
+        /* Visibility threshold controls */
+        .threshold-control {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.7rem 0 0 0;
+            border-top: 1px dashed rgba(255,255,255,0.1);
+            margin-top: 0.7rem;
+            flex-wrap: wrap;
+        }
+        .threshold-control label { color: #aaa; font-size: 0.88rem; white-space: nowrap; }
+        .threshold-control input[type="number"] {
+            width: 65px;
+            background: var(--tertiary-dark);
+            border: 1px solid var(--border-color);
+            color: var(--text-light);
+            padding: 0.3rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        .threshold-save-btn {
+            background: transparent;
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: background 0.2s;
+        }
+        .threshold-save-btn:hover { background: var(--accent-gold); color: var(--primary-dark); }
+        .threshold-saved { color: #5f5; font-size: 0.82rem; margin-left: 0.3rem; display: none; }
+
         .main-footer {
             background-color: var(--secondary-dark);
             padding: 1rem; margin-top: 2rem;
@@ -317,9 +371,20 @@
                     <p id="displayMemberSince" style="color: #666; font-size: 0.85rem;"></p>
                 </div>
                 <div class="account-actions">
+                    <a href="./user-search.html" class="btn btn-small btn-outline">Find Users</a>
                     <a href="./AccountProfiles-Management-Index.html" class="btn btn-small btn-outline">Edit Profiles</a>
                     <button class="btn btn-small btn-outline" onclick="logOut()">Log Out</button>
                 </div>
+            </div>
+
+            <!-- Trust Score Banner -->
+            <div class="trust-banner">
+                <div>
+                    <div class="trust-score-label">Your Trust Score</div>
+                    <span class="trust-score-value" id="myTrustScore">—</span>
+                    <span style="color:#aaa; font-size:0.9rem;"> / 100</span>
+                </div>
+                <div style="color:#aaa; font-size:0.9rem;" id="myTrustVoteCount"></div>
             </div>
 
             <!-- Section 1: Basic Personal Info -->
@@ -333,6 +398,13 @@
                         <span class="profile-value empty">No personal information provided yet.</span>
                     </div>
                     <div id="personalData"></div>
+                </div>
+                <div class="threshold-control">
+                    <label>Visibility Threshold:</label>
+                    <input type="number" id="thresh-info" min="0" max="100" value="0">
+                    <span style="color:#aaa;font-size:0.85rem;">/ 100</span>
+                    <button class="threshold-save-btn" onclick="saveThreshold('info_threshold', 'thresh-info', 'saved-info')">Save</button>
+                    <span class="threshold-saved" id="saved-info">Saved ✓</span>
                 </div>
             </div>
 
@@ -348,6 +420,13 @@
                     </div>
                     <div id="addressData"></div>
                 </div>
+                <div class="threshold-control">
+                    <label>Visibility Threshold:</label>
+                    <input type="number" id="thresh-address" min="0" max="100" value="0">
+                    <span style="color:#aaa;font-size:0.85rem;">/ 100</span>
+                    <button class="threshold-save-btn" onclick="saveThreshold('address_threshold', 'thresh-address', 'saved-address')">Save</button>
+                    <span class="threshold-saved" id="saved-address">Saved ✓</span>
+                </div>
             </div>
 
             <!-- Section 3: Political Affiliation -->
@@ -361,6 +440,13 @@
                         <span class="profile-value empty">No political affiliation provided yet.</span>
                     </div>
                     <div id="politicalData"></div>
+                </div>
+                <div class="threshold-control">
+                    <label>Visibility Threshold:</label>
+                    <input type="number" id="thresh-political" min="0" max="100" value="0">
+                    <span style="color:#aaa;font-size:0.85rem;">/ 100</span>
+                    <button class="threshold-save-btn" onclick="saveThreshold('political_threshold', 'thresh-political', 'saved-political')">Save</button>
+                    <span class="threshold-saved" id="saved-political">Saved ✓</span>
                 </div>
             </div>
 
@@ -376,6 +462,13 @@
                     </div>
                     <div id="economicData"></div>
                 </div>
+                <div class="threshold-control">
+                    <label>Visibility Threshold:</label>
+                    <input type="number" id="thresh-economic" min="0" max="100" value="0">
+                    <span style="color:#aaa;font-size:0.85rem;">/ 100</span>
+                    <button class="threshold-save-btn" onclick="saveThreshold('economic_threshold', 'thresh-economic', 'saved-economic')">Save</button>
+                    <span class="threshold-saved" id="saved-economic">Saved ✓</span>
+                </div>
             </div>
 
             <!-- Section 5: Religious Affiliation -->
@@ -390,6 +483,13 @@
                     </div>
                     <div id="religiousData"></div>
                 </div>
+                <div class="threshold-control">
+                    <label>Visibility Threshold:</label>
+                    <input type="number" id="thresh-religious" min="0" max="100" value="0">
+                    <span style="color:#aaa;font-size:0.85rem;">/ 100</span>
+                    <button class="threshold-save-btn" onclick="saveThreshold('religious_threshold', 'thresh-religious', 'saved-religious')">Save</button>
+                    <span class="threshold-saved" id="saved-religious">Saved ✓</span>
+                </div>
             </div>
 
             <!-- Section 6: Race/Ethnicity -->
@@ -403,6 +503,13 @@
                         <span class="profile-value empty">No race/ethnicity information provided yet.</span>
                     </div>
                     <div id="raceData"></div>
+                </div>
+                <div class="threshold-control">
+                    <label>Visibility Threshold:</label>
+                    <input type="number" id="thresh-race" min="0" max="100" value="0">
+                    <span style="color:#aaa;font-size:0.85rem;">/ 100</span>
+                    <button class="threshold-save-btn" onclick="saveThreshold('race_ethnicity_threshold', 'thresh-race', 'saved-race')">Save</button>
+                    <span class="threshold-saved" id="saved-race">Saved ✓</span>
                 </div>
             </div>
         </div>
@@ -478,6 +585,56 @@
                 }
             });
             return res;
+        }
+
+        async function saveThreshold(fieldName, inputId, savedId) {
+            const token = getAuthToken();
+            const val = parseInt(document.getElementById(inputId).value, 10);
+            if (isNaN(val) || val < 0 || val > 100) return;
+            try {
+                const res = await fetch(API_BASE + '/profile/visibility', {
+                    method: 'PUT',
+                    headers: { 'Authorization': 'Bearer ' + token, 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ [fieldName]: val })
+                });
+                if (res.ok) {
+                    const savedEl = document.getElementById(savedId);
+                    savedEl.style.display = 'inline';
+                    setTimeout(() => { savedEl.style.display = 'none'; }, 2500);
+                }
+            } catch(e) {}
+        }
+
+        async function loadVisibilityThresholds() {
+            const token = getAuthToken();
+            try {
+                const res = await fetch(API_BASE + '/profile/visibility', {
+                    headers: { 'Authorization': 'Bearer ' + token }
+                });
+                if (!res.ok) return;
+                const data = await res.json();
+                document.getElementById('thresh-info').value = data.info_threshold ?? 0;
+                document.getElementById('thresh-address').value = data.address_threshold ?? 0;
+                document.getElementById('thresh-political').value = data.political_threshold ?? 0;
+                document.getElementById('thresh-economic').value = data.economic_threshold ?? 0;
+                document.getElementById('thresh-religious').value = data.religious_threshold ?? 0;
+                document.getElementById('thresh-race').value = data.race_ethnicity_threshold ?? 0;
+            } catch(e) {}
+        }
+
+        async function loadMyTrustScore() {
+            const token = getAuthToken();
+            try {
+                const res = await fetch(API_BASE + '/my-trust-score', {
+                    headers: { 'Authorization': 'Bearer ' + token }
+                });
+                if (!res.ok) return;
+                const data = await res.json();
+                const score = data.vote_count > 0 ? data.score.toFixed(1) : '—';
+                document.getElementById('myTrustScore').textContent = score;
+                document.getElementById('myTrustVoteCount').textContent =
+                    data.vote_count === 1 ? '1 rating received' : data.vote_count + ' ratings received';
+            } catch(e) {}
         }
 
         async function loadProfile() {
@@ -599,6 +756,10 @@
             // Show content
             loadingState.style.display = 'none';
             profileContent.style.display = 'block';
+
+            // Load trust score and thresholds
+            loadMyTrustScore();
+            loadVisibilityThresholds();
         }
 
         document.addEventListener('DOMContentLoaded', loadProfile);

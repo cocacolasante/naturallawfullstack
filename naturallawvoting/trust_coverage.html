@@ -1,0 +1,2312 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>handlers: Go Coverage Report</title>
+		<style>
+			body {
+				background: black;
+				color: rgb(80, 80, 80);
+			}
+			body, pre, #legend span {
+				font-family: Menlo, monospace;
+				font-weight: bold;
+			}
+			#topbar {
+				background: black;
+				position: fixed;
+				top: 0; left: 0; right: 0;
+				height: 42px;
+				border-bottom: 1px solid rgb(80, 80, 80);
+			}
+			#content {
+				margin-top: 50px;
+			}
+			#nav, #legend {
+				float: left;
+				margin-left: 10px;
+			}
+			#legend {
+				margin-top: 12px;
+			}
+			#nav {
+				margin-top: 10px;
+			}
+			#legend span {
+				margin: 0 5px;
+			}
+			.cov0 { color: rgb(192, 0, 0) }
+.cov1 { color: rgb(128, 128, 128) }
+.cov2 { color: rgb(116, 140, 131) }
+.cov3 { color: rgb(104, 152, 134) }
+.cov4 { color: rgb(92, 164, 137) }
+.cov5 { color: rgb(80, 176, 140) }
+.cov6 { color: rgb(68, 188, 143) }
+.cov7 { color: rgb(56, 200, 146) }
+.cov8 { color: rgb(44, 212, 149) }
+.cov9 { color: rgb(32, 224, 152) }
+.cov10 { color: rgb(20, 236, 155) }
+
+		</style>
+	</head>
+	<body>
+		<div id="topbar">
+			<div id="nav">
+				<select id="files">
+				
+				<option value="file0">voting-api/handlers/auth.go (1.6%)</option>
+				
+				<option value="file1">voting-api/handlers/ballot.go (0.6%)</option>
+				
+				<option value="file2">voting-api/handlers/profile.go (0.2%)</option>
+				
+				<option value="file3">voting-api/handlers/trust.go (92.3%)</option>
+				
+				<option value="file4">voting-api/handlers/vote.go (0.8%)</option>
+				
+				</select>
+			</div>
+			<div id="legend">
+				<span>not tracked</span>
+			
+				<span class="cov0">not covered</span>
+				<span class="cov8">covered</span>
+			
+			</div>
+		</div>
+		<div id="content">
+		
+		<pre class="file" id="file0" style="display: none">package handlers
+
+import (
+        "database/sql"
+        "net/http"
+        "voting-api/database"
+        "voting-api/models"
+        "voting-api/utils"
+
+        "github.com/gin-gonic/gin"
+)
+
+type AuthHandler struct {
+        db *database.DB
+}
+
+func NewAuthHandler(db *database.DB) *AuthHandler <span class="cov8" title="1">{
+        return &amp;AuthHandler{db: db}
+}</span>
+
+func (h *AuthHandler) Register(c *gin.Context) <span class="cov0" title="0">{
+        var req models.RegisterRequest
+        if err := c.ShouldBindJSON(&amp;req); err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+                return
+        }</span>
+
+        // Check if user already exists
+        <span class="cov0" title="0">var existingUser models.User
+        err := h.db.QueryRow("SELECT id FROM users WHERE email = $1 OR username = $2", req.Email, req.Username).Scan(&amp;existingUser.ID)
+        if err == nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusConflict, gin.H{"error": "User already exists"})
+                return
+        }</span> else<span class="cov0" title="0"> if err != sql.ErrNoRows </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
+                return
+        }</span>
+
+        // Hash password
+        <span class="cov0" title="0">hashedPassword, err := utils.HashPassword(req.Password)
+        if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Error hashing password"})
+                return
+        }</span>
+
+        // Insert user
+        <span class="cov0" title="0">var user models.User
+        err = h.db.QueryRow(
+                "INSERT INTO users (username, email, password_hash) VALUES ($1, $2, $3) RETURNING id, username, email, created_at, updated_at",
+                req.Username, req.Email, hashedPassword,
+        ).Scan(&amp;user.ID, &amp;user.Username, &amp;user.Email, &amp;user.CreatedAt, &amp;user.UpdatedAt)
+
+        if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Error creating user"})
+                return
+        }</span>
+
+        // Generate JWT
+        <span class="cov0" title="0">token, err := utils.GenerateJWT(user.ID, user.Email)
+        if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Error generating token"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">c.JSON(http.StatusCreated, models.AuthResponse{
+                Token: token,
+                User:  user,
+        })</span>
+}
+
+func (h *AuthHandler) Login(c *gin.Context) <span class="cov0" title="0">{
+        var req models.LoginRequest
+        if err := c.ShouldBindJSON(&amp;req); err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+                return
+        }</span>
+
+        // Get user from database
+        <span class="cov0" title="0">var user models.User
+        err := h.db.QueryRow(
+                "SELECT id, username, email, password_hash, created_at, updated_at FROM users WHERE email = $1",
+                req.Email,
+        ).Scan(&amp;user.ID, &amp;user.Username, &amp;user.Email, &amp;user.Password, &amp;user.CreatedAt, &amp;user.UpdatedAt)
+
+        if err == sql.ErrNoRows </span><span class="cov0" title="0">{
+                c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid credentials"})
+                return
+        }</span> else<span class="cov0" title="0"> if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
+                return
+        }</span>
+
+        // Check password
+        <span class="cov0" title="0">if !utils.CheckPassword(req.Password, user.Password) </span><span class="cov0" title="0">{
+                c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid credentials"})
+                return
+        }</span>
+
+        // Generate JWT
+        <span class="cov0" title="0">token, err := utils.GenerateJWT(user.ID, user.Email)
+        if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Error generating token"})
+                return
+        }</span>
+
+        // Clear password from response
+        <span class="cov0" title="0">user.Password = ""
+
+        c.JSON(http.StatusOK, models.AuthResponse{
+                Token: token,
+                User:  user,
+        })</span>
+}
+
+func (h *AuthHandler) GetProfile(c *gin.Context) <span class="cov0" title="0">{
+        userID, exists := c.Get("user_id")
+        if !exists </span><span class="cov0" title="0">{
+                c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">var user models.User
+        err := h.db.QueryRow(
+                "SELECT id, username, email, created_at, updated_at FROM users WHERE id = $1",
+                userID,
+        ).Scan(&amp;user.ID, &amp;user.Username, &amp;user.Email, &amp;user.CreatedAt, &amp;user.UpdatedAt)
+
+        if err == sql.ErrNoRows </span><span class="cov0" title="0">{
+                c.JSON(http.StatusNotFound, gin.H{"error": "User not found"})
+                return
+        }</span> else<span class="cov0" title="0"> if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">c.JSON(http.StatusOK, user)</span>
+}</pre>
+		
+		<pre class="file" id="file1" style="display: none">package handlers
+
+import (
+        "database/sql"
+        "net/http"
+        "strconv"
+        "voting-api/database"
+        "voting-api/models"
+
+        "github.com/gin-gonic/gin"
+)
+
+type BallotHandler struct {
+        db *database.DB
+}
+
+func NewBallotHandler(db *database.DB) *BallotHandler <span class="cov8" title="1">{
+        return &amp;BallotHandler{db: db}
+}</span>
+
+func (h *BallotHandler) CreateBallot(c *gin.Context) <span class="cov0" title="0">{
+        userID, exists := c.Get("user_id")
+        if !exists </span><span class="cov0" title="0">{
+                c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">var req models.CreateBallotRequest
+        if err := c.ShouldBindJSON(&amp;req); err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+                return
+        }</span>
+
+        // Start transaction
+        <span class="cov0" title="0">tx, err := h.db.Begin()
+        if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
+                return
+        }</span>
+        <span class="cov0" title="0">defer tx.Rollback()
+
+        // Insert ballot
+        var ballot models.Ballot
+        err = tx.QueryRow(
+                "INSERT INTO ballots (title, description, category, superstate, state, district, creator_id) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id, title, description, category, superstate, state, COALESCE(district, ''), creator_id, is_active, created_at, updated_at",
+                req.Title, req.Description, req.Category, req.Superstate, req.State, req.District, userID,
+        ).Scan(&amp;ballot.ID, &amp;ballot.Title, &amp;ballot.Description, &amp;ballot.Category, &amp;ballot.Superstate, &amp;ballot.State, &amp;ballot.District, &amp;ballot.CreatorID, &amp;ballot.IsActive, &amp;ballot.CreatedAt, &amp;ballot.UpdatedAt)
+
+        if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Error creating ballot"})
+                return
+        }</span>
+
+        // Insert ballot items
+        <span class="cov0" title="0">var items []models.BallotItem
+        for _, item := range req.Items </span><span class="cov0" title="0">{
+                var ballotItem models.BallotItem
+                err = tx.QueryRow(
+                        "INSERT INTO ballot_items (ballot_id, title, description) VALUES ($1, $2, $3) RETURNING id, ballot_id, title, description, vote_count",
+                        ballot.ID, item.Title, item.Description,
+                ).Scan(&amp;ballotItem.ID, &amp;ballotItem.BallotID, &amp;ballotItem.Title, &amp;ballotItem.Description, &amp;ballotItem.VoteCount)
+
+                if err != nil </span><span class="cov0" title="0">{
+                        c.JSON(http.StatusInternalServerError, gin.H{"error": "Error creating ballot items"})
+                        return
+                }</span>
+                <span class="cov0" title="0">items = append(items, ballotItem)</span>
+        }
+
+        // Commit transaction
+        <span class="cov0" title="0">if err = tx.Commit(); err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Error committing transaction"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">ballot.Items = items
+        c.JSON(http.StatusCreated, ballot)</span>
+}
+
+func (h *BallotHandler) GetAllBallots(c *gin.Context) <span class="cov0" title="0">{
+        category := c.Query("category")
+        superstate := c.Query("superstate")
+        state := c.Query("state")
+        district := c.Query("district")
+
+        query := `
+                SELECT b.id, b.title, b.description, b.category, COALESCE(b.superstate, ''), COALESCE(b.state, ''), COALESCE(b.district, ''), b.creator_id, b.is_active, b.created_at, b.updated_at,
+                       u.username as creator_username
+                FROM ballots b
+                JOIN users u ON b.creator_id = u.id
+                WHERE b.is_active = true`
+
+        var args []interface{}
+        argIndex := 1
+
+        if category != "" </span><span class="cov0" title="0">{
+                query += ` AND b.category = $` + strconv.Itoa(argIndex)
+                args = append(args, category)
+                argIndex++
+        }</span>
+
+        <span class="cov0" title="0">if superstate != "" </span><span class="cov0" title="0">{
+                query += ` AND b.superstate = $` + strconv.Itoa(argIndex)
+                args = append(args, superstate)
+                argIndex++
+        }</span>
+
+        <span class="cov0" title="0">if state != "" </span><span class="cov0" title="0">{
+                query += ` AND b.state = $` + strconv.Itoa(argIndex)
+                args = append(args, state)
+                argIndex++
+        }</span>
+
+        <span class="cov0" title="0">if district != "" </span><span class="cov0" title="0">{
+                query += ` AND b.district = $` + strconv.Itoa(argIndex)
+                args = append(args, district)
+                argIndex++
+        }</span>
+
+        <span class="cov0" title="0">query += ` ORDER BY b.created_at DESC`
+
+        rows, err := h.db.Query(query, args...)
+        if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
+                return
+        }</span>
+        <span class="cov0" title="0">defer rows.Close()
+
+        var ballots []models.Ballot
+        for rows.Next() </span><span class="cov0" title="0">{
+                var ballot models.Ballot
+                var creatorUsername string
+                err := rows.Scan(
+                        &amp;ballot.ID, &amp;ballot.Title, &amp;ballot.Description, &amp;ballot.Category, &amp;ballot.Superstate, &amp;ballot.State, &amp;ballot.District, &amp;ballot.CreatorID,
+                        &amp;ballot.IsActive, &amp;ballot.CreatedAt, &amp;ballot.UpdatedAt, &amp;creatorUsername,
+                )
+                if err != nil </span><span class="cov0" title="0">{
+                        c.JSON(http.StatusInternalServerError, gin.H{"error": "Error scanning ballot"})
+                        return
+                }</span>
+                <span class="cov0" title="0">ballots = append(ballots, ballot)</span>
+        }
+
+        <span class="cov0" title="0">c.JSON(http.StatusOK, ballots)</span>
+}
+
+func (h *BallotHandler) GetBallot(c *gin.Context) <span class="cov0" title="0">{
+        ballotIDStr := c.Param("id")
+        ballotID, err := strconv.Atoi(ballotIDStr)
+        if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid ballot ID"})
+                return
+        }</span>
+
+        // Get ballot
+        <span class="cov0" title="0">var ballot models.Ballot
+        err = h.db.QueryRow(`
+                SELECT b.id, b.title, b.description, b.category, COALESCE(b.superstate, ''), COALESCE(b.state, ''), COALESCE(b.district, ''), b.creator_id, b.is_active, b.created_at, b.updated_at
+                FROM ballots b WHERE b.id = $1
+        `, ballotID).Scan(
+                &amp;ballot.ID, &amp;ballot.Title, &amp;ballot.Description, &amp;ballot.Category, &amp;ballot.Superstate, &amp;ballot.State, &amp;ballot.District, &amp;ballot.CreatorID,
+                &amp;ballot.IsActive, &amp;ballot.CreatedAt, &amp;ballot.UpdatedAt,
+        )
+
+        if err == sql.ErrNoRows </span><span class="cov0" title="0">{
+                c.JSON(http.StatusNotFound, gin.H{"error": "Ballot not found"})
+                return
+        }</span> else<span class="cov0" title="0"> if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
+                return
+        }</span>
+
+        // Get ballot items with vote counts
+        <span class="cov0" title="0">rows, err := h.db.Query(`
+                SELECT id, ballot_id, title, description, vote_count
+                FROM ballot_items 
+                WHERE ballot_id = $1 
+                ORDER BY id ASC
+        `, ballotID)
+        if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Error fetching ballot items"})
+                return
+        }</span>
+        <span class="cov0" title="0">defer rows.Close()
+
+        var items []models.BallotItem
+        for rows.Next() </span><span class="cov0" title="0">{
+                var item models.BallotItem
+                err := rows.Scan(&amp;item.ID, &amp;item.BallotID, &amp;item.Title, &amp;item.Description, &amp;item.VoteCount)
+                if err != nil </span><span class="cov0" title="0">{
+                        c.JSON(http.StatusInternalServerError, gin.H{"error": "Error scanning ballot item"})
+                        return
+                }</span>
+                <span class="cov0" title="0">items = append(items, item)</span>
+        }
+
+        <span class="cov0" title="0">ballot.Items = items
+        c.JSON(http.StatusOK, ballot)</span>
+}
+
+func (h *BallotHandler) GetUserBallots(c *gin.Context) <span class="cov0" title="0">{
+        userID, exists := c.Get("user_id")
+        if !exists </span><span class="cov0" title="0">{
+                c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">rows, err := h.db.Query(`
+                SELECT id, title, description, category, COALESCE(superstate, ''), COALESCE(state, ''), COALESCE(district, ''), creator_id, is_active, created_at, updated_at
+                FROM ballots
+                WHERE creator_id = $1
+                ORDER BY created_at DESC
+        `, userID)
+        if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
+                return
+        }</span>
+        <span class="cov0" title="0">defer rows.Close()
+
+        var ballots []models.Ballot
+        for rows.Next() </span><span class="cov0" title="0">{
+                var ballot models.Ballot
+                err := rows.Scan(
+                        &amp;ballot.ID, &amp;ballot.Title, &amp;ballot.Description, &amp;ballot.Category, &amp;ballot.Superstate, &amp;ballot.State, &amp;ballot.District, &amp;ballot.CreatorID,
+                        &amp;ballot.IsActive, &amp;ballot.CreatedAt, &amp;ballot.UpdatedAt,
+                )
+                if err != nil </span><span class="cov0" title="0">{
+                        c.JSON(http.StatusInternalServerError, gin.H{"error": "Error scanning ballot"})
+                        return
+                }</span>
+                <span class="cov0" title="0">ballots = append(ballots, ballot)</span>
+        }
+
+        <span class="cov0" title="0">c.JSON(http.StatusOK, ballots)</span>
+}
+
+// GetSuperstates returns a list of all superstates that have ballots
+func (h *BallotHandler) GetSuperstates(c *gin.Context) <span class="cov0" title="0">{
+        rows, err := h.db.Query(`
+                SELECT DISTINCT superstate
+                FROM ballots
+                WHERE superstate IS NOT NULL AND superstate != '' AND is_active = true
+                ORDER BY superstate
+        `)
+        if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
+                return
+        }</span>
+        <span class="cov0" title="0">defer rows.Close()
+
+        var superstates []string
+        for rows.Next() </span><span class="cov0" title="0">{
+                var superstate string
+                if err := rows.Scan(&amp;superstate); err != nil </span><span class="cov0" title="0">{
+                        c.JSON(http.StatusInternalServerError, gin.H{"error": "Error scanning superstate"})
+                        return
+                }</span>
+                <span class="cov0" title="0">superstates = append(superstates, superstate)</span>
+        }
+
+        <span class="cov0" title="0">c.JSON(http.StatusOK, gin.H{"superstates": superstates})</span>
+}
+
+// GetStates returns a list of all states within a superstate that have ballots
+func (h *BallotHandler) GetStates(c *gin.Context) <span class="cov0" title="0">{
+        superstate := c.Param("superstate")
+        if superstate == "" </span><span class="cov0" title="0">{
+                c.JSON(http.StatusBadRequest, gin.H{"error": "Superstate parameter required"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">rows, err := h.db.Query(`
+                SELECT DISTINCT state
+                FROM ballots
+                WHERE superstate = $1 AND state IS NOT NULL AND state != '' AND is_active = true
+                ORDER BY state
+        `, superstate)
+        if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
+                return
+        }</span>
+        <span class="cov0" title="0">defer rows.Close()
+
+        var states []string
+        for rows.Next() </span><span class="cov0" title="0">{
+                var state string
+                if err := rows.Scan(&amp;state); err != nil </span><span class="cov0" title="0">{
+                        c.JSON(http.StatusInternalServerError, gin.H{"error": "Error scanning state"})
+                        return
+                }</span>
+                <span class="cov0" title="0">states = append(states, state)</span>
+        }
+
+        <span class="cov0" title="0">c.JSON(http.StatusOK, gin.H{"superstate": superstate, "states": states})</span>
+}
+
+// GetDistricts returns a list of all districts within a superstate+state that have ballots
+func (h *BallotHandler) GetDistricts(c *gin.Context) <span class="cov0" title="0">{
+        superstate := c.Param("superstate")
+        state := c.Param("state")
+        if superstate == "" || state == "" </span><span class="cov0" title="0">{
+                c.JSON(http.StatusBadRequest, gin.H{"error": "Superstate and state parameters required"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">rows, err := h.db.Query(`
+                SELECT DISTINCT district
+                FROM ballots
+                WHERE superstate = $1 AND state = $2 AND is_active = true AND district IS NOT NULL AND district != ''
+                ORDER BY district
+        `, superstate, state)
+        if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
+                return
+        }</span>
+        <span class="cov0" title="0">defer rows.Close()
+
+        var districts []string
+        for rows.Next() </span><span class="cov0" title="0">{
+                var district string
+                if err := rows.Scan(&amp;district); err != nil </span><span class="cov0" title="0">{
+                        c.JSON(http.StatusInternalServerError, gin.H{"error": "Error scanning district"})
+                        return
+                }</span>
+                <span class="cov0" title="0">districts = append(districts, district)</span>
+        }
+
+        <span class="cov0" title="0">c.JSON(http.StatusOK, gin.H{"superstate": superstate, "state": state, "districts": districts})</span>
+}</pre>
+		
+		<pre class="file" id="file2" style="display: none">package handlers
+
+import (
+        "database/sql"
+        "net/http"
+        "time"
+        "voting-api/database"
+        "voting-api/models"
+
+        "github.com/gin-gonic/gin"
+        "github.com/lib/pq"
+)
+
+type ProfileHandler struct {
+        db *database.DB
+}
+
+func NewProfileHandler(db *database.DB) *ProfileHandler <span class="cov8" title="1">{
+        return &amp;ProfileHandler{db: db}
+}</span>
+
+// User Profile Handlers
+
+func (h *ProfileHandler) GetUserProfile(c *gin.Context) <span class="cov0" title="0">{
+        userID, exists := c.Get("user_id")
+        if !exists </span><span class="cov0" title="0">{
+                c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+                return
+        }</span>
+
+        // Get user email first
+        <span class="cov0" title="0">var email string
+        err := h.db.QueryRow("SELECT email FROM users WHERE id = $1", userID).Scan(&amp;email)
+        if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">var profile models.UserProfile
+        err = h.db.QueryRow(`
+                SELECT user_id, email, full_name, birthday, gender, mothers_maiden_name,
+                       phone_number, additional_emails, created_at, updated_at
+                FROM user_profiles WHERE email = $1`,
+                email,
+        ).Scan(&amp;profile.UserID, &amp;profile.Email, &amp;profile.FullName, &amp;profile.Birthday,
+                &amp;profile.Gender, &amp;profile.MothersMaidenName, &amp;profile.PhoneNumber,
+                &amp;profile.AdditionalEmails, &amp;profile.CreatedAt, &amp;profile.UpdatedAt)
+
+        if err == sql.ErrNoRows </span><span class="cov0" title="0">{
+                c.JSON(http.StatusNotFound, gin.H{"error": "Profile not found"})
+                return
+        }</span> else<span class="cov0" title="0"> if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">c.JSON(http.StatusOK, profile)</span>
+}
+
+func (h *ProfileHandler) CreateUserProfile(c *gin.Context) <span class="cov0" title="0">{
+        userID, exists := c.Get("user_id")
+        if !exists </span><span class="cov0" title="0">{
+                c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">var req models.CreateUserProfileRequest
+        if err := c.ShouldBindJSON(&amp;req); err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+                return
+        }</span>
+
+        // Get user email
+        <span class="cov0" title="0">var email string
+        err := h.db.QueryRow("SELECT email FROM users WHERE id = $1", userID).Scan(&amp;email)
+        if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
+                return
+        }</span>
+
+        // Check if profile already exists
+        <span class="cov0" title="0">var existingProfile models.UserProfile
+        err = h.db.QueryRow("SELECT user_id FROM user_profiles WHERE email = $1", email).Scan(&amp;existingProfile.UserID)
+        if err == nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusConflict, gin.H{"error": "Profile already exists"})
+                return
+        }</span> else<span class="cov0" title="0"> if err != sql.ErrNoRows </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
+                return
+        }</span>
+
+        // Parse birthday if provided
+        <span class="cov0" title="0">var birthday *time.Time
+        if req.Birthday != "" </span><span class="cov0" title="0">{
+                parsedDate, err := time.Parse("2006-01-02", req.Birthday)
+                if err != nil </span><span class="cov0" title="0">{
+                        c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid birthday format. Use YYYY-MM-DD"})
+                        return
+                }</span>
+                <span class="cov0" title="0">birthday = &amp;parsedDate</span>
+        }
+
+        <span class="cov0" title="0">var profile models.UserProfile
+        err = h.db.QueryRow(`
+                INSERT INTO user_profiles
+                (user_id, email, full_name, birthday, gender, mothers_maiden_name, phone_number, additional_emails)
+                VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+                RETURNING user_id, email, full_name, birthday, gender, mothers_maiden_name, phone_number,
+                          additional_emails, created_at, updated_at`,
+                userID, email, req.FullName, birthday, req.Gender, req.MothersMaidenName,
+                req.PhoneNumber, pq.Array(req.AdditionalEmails),
+        ).Scan(&amp;profile.UserID, &amp;profile.Email, &amp;profile.FullName, &amp;profile.Birthday,
+                &amp;profile.Gender, &amp;profile.MothersMaidenName, &amp;profile.PhoneNumber,
+                &amp;profile.AdditionalEmails, &amp;profile.CreatedAt, &amp;profile.UpdatedAt)
+
+        if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Error creating profile"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">c.JSON(http.StatusCreated, profile)</span>
+}
+
+func (h *ProfileHandler) UpdateUserProfile(c *gin.Context) <span class="cov0" title="0">{
+        userID, exists := c.Get("user_id")
+        if !exists </span><span class="cov0" title="0">{
+                c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">var req models.UpdateUserProfileRequest
+        if err := c.ShouldBindJSON(&amp;req); err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+                return
+        }</span>
+
+        // Get user email
+        <span class="cov0" title="0">var email string
+        err := h.db.QueryRow("SELECT email FROM users WHERE id = $1", userID).Scan(&amp;email)
+        if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
+                return
+        }</span>
+
+        // Build dynamic update query
+        <span class="cov0" title="0">query := "UPDATE user_profiles SET "
+        args := []interface{}{}
+        argCount := 1
+
+        if req.FullName != nil </span><span class="cov0" title="0">{
+                query += "full_name = $" + string(rune(argCount+'0')) + ", "
+                args = append(args, *req.FullName)
+                argCount++
+        }</span>
+        <span class="cov0" title="0">if req.Birthday != nil </span><span class="cov0" title="0">{
+                parsedDate, err := time.Parse("2006-01-02", *req.Birthday)
+                if err != nil </span><span class="cov0" title="0">{
+                        c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid birthday format. Use YYYY-MM-DD"})
+                        return
+                }</span>
+                <span class="cov0" title="0">query += "birthday = $" + string(rune(argCount+'0')) + ", "
+                args = append(args, parsedDate)
+                argCount++</span>
+        }
+        <span class="cov0" title="0">if req.Gender != nil </span><span class="cov0" title="0">{
+                query += "gender = $" + string(rune(argCount+'0')) + ", "
+                args = append(args, *req.Gender)
+                argCount++
+        }</span>
+        <span class="cov0" title="0">if req.MothersMaidenName != nil </span><span class="cov0" title="0">{
+                query += "mothers_maiden_name = $" + string(rune(argCount+'0')) + ", "
+                args = append(args, *req.MothersMaidenName)
+                argCount++
+        }</span>
+        <span class="cov0" title="0">if req.PhoneNumber != nil </span><span class="cov0" title="0">{
+                query += "phone_number = $" + string(rune(argCount+'0')) + ", "
+                args = append(args, *req.PhoneNumber)
+                argCount++
+        }</span>
+        <span class="cov0" title="0">if req.AdditionalEmails != nil </span><span class="cov0" title="0">{
+                query += "additional_emails = $" + string(rune(argCount+'0')) + ", "
+                args = append(args, pq.Array(req.AdditionalEmails))
+                argCount++
+        }</span>
+
+        <span class="cov0" title="0">if len(args) == 0 </span><span class="cov0" title="0">{
+                c.JSON(http.StatusBadRequest, gin.H{"error": "No fields to update"})
+                return
+        }</span>
+
+        // Remove trailing comma and space
+        <span class="cov0" title="0">query = query[:len(query)-2]
+        query += " WHERE email = $" + string(rune(argCount+'0')) + " RETURNING user_id, email, full_name, birthday, gender, mothers_maiden_name, phone_number, additional_emails, created_at, updated_at"
+        args = append(args, email)
+
+        var profile models.UserProfile
+        err = h.db.QueryRow(query, args...).Scan(
+                &amp;profile.UserID, &amp;profile.Email, &amp;profile.FullName, &amp;profile.Birthday,
+                &amp;profile.Gender, &amp;profile.MothersMaidenName, &amp;profile.PhoneNumber,
+                &amp;profile.AdditionalEmails, &amp;profile.CreatedAt, &amp;profile.UpdatedAt)
+
+        if err == sql.ErrNoRows </span><span class="cov0" title="0">{
+                c.JSON(http.StatusNotFound, gin.H{"error": "Profile not found"})
+                return
+        }</span> else<span class="cov0" title="0"> if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Error updating profile"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">c.JSON(http.StatusOK, profile)</span>
+}
+
+func (h *ProfileHandler) DeleteUserProfile(c *gin.Context) <span class="cov0" title="0">{
+        userID, exists := c.Get("user_id")
+        if !exists </span><span class="cov0" title="0">{
+                c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+                return
+        }</span>
+
+        // Get user email
+        <span class="cov0" title="0">var email string
+        err := h.db.QueryRow("SELECT email FROM users WHERE id = $1", userID).Scan(&amp;email)
+        if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">result, err := h.db.Exec("DELETE FROM user_profiles WHERE email = $1", email)
+        if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Error deleting profile"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">rowsAffected, _ := result.RowsAffected()
+        if rowsAffected == 0 </span><span class="cov0" title="0">{
+                c.JSON(http.StatusNotFound, gin.H{"error": "Profile not found"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">c.JSON(http.StatusOK, gin.H{"message": "Profile deleted successfully"})</span>
+}
+
+// User Address Handlers
+
+func (h *ProfileHandler) GetUserAddress(c *gin.Context) <span class="cov0" title="0">{
+        userID, exists := c.Get("user_id")
+        if !exists </span><span class="cov0" title="0">{
+                c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">var address models.UserAddress
+        err := h.db.QueryRow(`
+                SELECT user_id, street_number, street_name, address_line_2, city, state,
+                       zip_code, created_at, updated_at
+                FROM user_addresses WHERE user_id = $1`,
+                userID,
+        ).Scan(&amp;address.UserID, &amp;address.StreetNumber, &amp;address.StreetName,
+                &amp;address.AddressLine2, &amp;address.City, &amp;address.State, &amp;address.ZipCode,
+                &amp;address.CreatedAt, &amp;address.UpdatedAt)
+
+        if err == sql.ErrNoRows </span><span class="cov0" title="0">{
+                c.JSON(http.StatusNotFound, gin.H{"error": "Address not found"})
+                return
+        }</span> else<span class="cov0" title="0"> if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">c.JSON(http.StatusOK, address)</span>
+}
+
+func (h *ProfileHandler) CreateUserAddress(c *gin.Context) <span class="cov0" title="0">{
+        userID, exists := c.Get("user_id")
+        if !exists </span><span class="cov0" title="0">{
+                c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">var req models.CreateUserAddressRequest
+        if err := c.ShouldBindJSON(&amp;req); err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+                return
+        }</span>
+
+        // Check if address already exists
+        <span class="cov0" title="0">var existingAddress models.UserAddress
+        err := h.db.QueryRow("SELECT user_id FROM user_addresses WHERE user_id = $1", userID).Scan(&amp;existingAddress.UserID)
+        if err == nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusConflict, gin.H{"error": "Address already exists"})
+                return
+        }</span> else<span class="cov0" title="0"> if err != sql.ErrNoRows </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">var address models.UserAddress
+        err = h.db.QueryRow(`
+                INSERT INTO user_addresses
+                (user_id, street_number, street_name, address_line_2, city, state, zip_code)
+                VALUES ($1, $2, $3, $4, $5, $6, $7)
+                RETURNING user_id, street_number, street_name, address_line_2, city, state,
+                          zip_code, created_at, updated_at`,
+                userID, req.StreetNumber, req.StreetName, req.AddressLine2, req.City, req.State, req.ZipCode,
+        ).Scan(&amp;address.UserID, &amp;address.StreetNumber, &amp;address.StreetName,
+                &amp;address.AddressLine2, &amp;address.City, &amp;address.State, &amp;address.ZipCode,
+                &amp;address.CreatedAt, &amp;address.UpdatedAt)
+
+        if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Error creating address"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">c.JSON(http.StatusCreated, address)</span>
+}
+
+func (h *ProfileHandler) UpdateUserAddress(c *gin.Context) <span class="cov0" title="0">{
+        userID, exists := c.Get("user_id")
+        if !exists </span><span class="cov0" title="0">{
+                c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">var req models.UpdateUserAddressRequest
+        if err := c.ShouldBindJSON(&amp;req); err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+                return
+        }</span>
+
+        // Build dynamic update query
+        <span class="cov0" title="0">query := "UPDATE user_addresses SET "
+        args := []interface{}{}
+        argCount := 1
+
+        if req.StreetNumber != nil </span><span class="cov0" title="0">{
+                query += "street_number = $" + string(rune(argCount+'0')) + ", "
+                args = append(args, *req.StreetNumber)
+                argCount++
+        }</span>
+        <span class="cov0" title="0">if req.StreetName != nil </span><span class="cov0" title="0">{
+                query += "street_name = $" + string(rune(argCount+'0')) + ", "
+                args = append(args, *req.StreetName)
+                argCount++
+        }</span>
+        <span class="cov0" title="0">if req.AddressLine2 != nil </span><span class="cov0" title="0">{
+                query += "address_line_2 = $" + string(rune(argCount+'0')) + ", "
+                args = append(args, *req.AddressLine2)
+                argCount++
+        }</span>
+        <span class="cov0" title="0">if req.City != nil </span><span class="cov0" title="0">{
+                query += "city = $" + string(rune(argCount+'0')) + ", "
+                args = append(args, *req.City)
+                argCount++
+        }</span>
+        <span class="cov0" title="0">if req.State != nil </span><span class="cov0" title="0">{
+                query += "state = $" + string(rune(argCount+'0')) + ", "
+                args = append(args, *req.State)
+                argCount++
+        }</span>
+        <span class="cov0" title="0">if req.ZipCode != nil </span><span class="cov0" title="0">{
+                query += "zip_code = $" + string(rune(argCount+'0')) + ", "
+                args = append(args, *req.ZipCode)
+                argCount++
+        }</span>
+
+        <span class="cov0" title="0">if len(args) == 0 </span><span class="cov0" title="0">{
+                c.JSON(http.StatusBadRequest, gin.H{"error": "No fields to update"})
+                return
+        }</span>
+
+        // Remove trailing comma and space
+        <span class="cov0" title="0">query = query[:len(query)-2]
+        query += " WHERE user_id = $" + string(rune(argCount+'0')) + " RETURNING user_id, street_number, street_name, address_line_2, city, state, zip_code, created_at, updated_at"
+        args = append(args, userID)
+
+        var address models.UserAddress
+        err := h.db.QueryRow(query, args...).Scan(
+                &amp;address.UserID, &amp;address.StreetNumber, &amp;address.StreetName,
+                &amp;address.AddressLine2, &amp;address.City, &amp;address.State, &amp;address.ZipCode,
+                &amp;address.CreatedAt, &amp;address.UpdatedAt)
+
+        if err == sql.ErrNoRows </span><span class="cov0" title="0">{
+                c.JSON(http.StatusNotFound, gin.H{"error": "Address not found"})
+                return
+        }</span> else<span class="cov0" title="0"> if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Error updating address"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">c.JSON(http.StatusOK, address)</span>
+}
+
+func (h *ProfileHandler) DeleteUserAddress(c *gin.Context) <span class="cov0" title="0">{
+        userID, exists := c.Get("user_id")
+        if !exists </span><span class="cov0" title="0">{
+                c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">result, err := h.db.Exec("DELETE FROM user_addresses WHERE user_id = $1", userID)
+        if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Error deleting address"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">rowsAffected, _ := result.RowsAffected()
+        if rowsAffected == 0 </span><span class="cov0" title="0">{
+                c.JSON(http.StatusNotFound, gin.H{"error": "Address not found"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">c.JSON(http.StatusOK, gin.H{"message": "Address deleted successfully"})</span>
+}
+
+// User Political Affiliation Handlers
+
+func (h *ProfileHandler) GetUserPoliticalAffiliation(c *gin.Context) <span class="cov0" title="0">{
+        userID, exists := c.Get("user_id")
+        if !exists </span><span class="cov0" title="0">{
+                c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">var affiliation models.UserPoliticalAffiliation
+        err := h.db.QueryRow(`
+                SELECT user_id, party_affiliation, created_at, updated_at
+                FROM user_political_affiliations WHERE user_id = $1`,
+                userID,
+        ).Scan(&amp;affiliation.UserID, &amp;affiliation.PartyAffiliation,
+                &amp;affiliation.CreatedAt, &amp;affiliation.UpdatedAt)
+
+        if err == sql.ErrNoRows </span><span class="cov0" title="0">{
+                c.JSON(http.StatusNotFound, gin.H{"error": "Political affiliation not found"})
+                return
+        }</span> else<span class="cov0" title="0"> if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">c.JSON(http.StatusOK, affiliation)</span>
+}
+
+func (h *ProfileHandler) CreateUserPoliticalAffiliation(c *gin.Context) <span class="cov0" title="0">{
+        userID, exists := c.Get("user_id")
+        if !exists </span><span class="cov0" title="0">{
+                c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">var req models.CreateUserPoliticalAffiliationRequest
+        if err := c.ShouldBindJSON(&amp;req); err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+                return
+        }</span>
+
+        // Check if affiliation already exists
+        <span class="cov0" title="0">var existingAffiliation models.UserPoliticalAffiliation
+        err := h.db.QueryRow("SELECT user_id FROM user_political_affiliations WHERE user_id = $1", userID).Scan(&amp;existingAffiliation.UserID)
+        if err == nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusConflict, gin.H{"error": "Political affiliation already exists"})
+                return
+        }</span> else<span class="cov0" title="0"> if err != sql.ErrNoRows </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">var affiliation models.UserPoliticalAffiliation
+        err = h.db.QueryRow(`
+                INSERT INTO user_political_affiliations (user_id, party_affiliation)
+                VALUES ($1, $2)
+                RETURNING user_id, party_affiliation, created_at, updated_at`,
+                userID, req.PartyAffiliation,
+        ).Scan(&amp;affiliation.UserID, &amp;affiliation.PartyAffiliation,
+                &amp;affiliation.CreatedAt, &amp;affiliation.UpdatedAt)
+
+        if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Error creating political affiliation"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">c.JSON(http.StatusCreated, affiliation)</span>
+}
+
+func (h *ProfileHandler) UpdateUserPoliticalAffiliation(c *gin.Context) <span class="cov0" title="0">{
+        userID, exists := c.Get("user_id")
+        if !exists </span><span class="cov0" title="0">{
+                c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">var req models.UpdateUserPoliticalAffiliationRequest
+        if err := c.ShouldBindJSON(&amp;req); err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+                return
+        }</span>
+
+        <span class="cov0" title="0">if req.PartyAffiliation == nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusBadRequest, gin.H{"error": "No fields to update"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">var affiliation models.UserPoliticalAffiliation
+        err := h.db.QueryRow(`
+                UPDATE user_political_affiliations
+                SET party_affiliation = $1
+                WHERE user_id = $2
+                RETURNING user_id, party_affiliation, created_at, updated_at`,
+                *req.PartyAffiliation, userID,
+        ).Scan(&amp;affiliation.UserID, &amp;affiliation.PartyAffiliation,
+                &amp;affiliation.CreatedAt, &amp;affiliation.UpdatedAt)
+
+        if err == sql.ErrNoRows </span><span class="cov0" title="0">{
+                c.JSON(http.StatusNotFound, gin.H{"error": "Political affiliation not found"})
+                return
+        }</span> else<span class="cov0" title="0"> if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Error updating political affiliation"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">c.JSON(http.StatusOK, affiliation)</span>
+}
+
+func (h *ProfileHandler) DeleteUserPoliticalAffiliation(c *gin.Context) <span class="cov0" title="0">{
+        userID, exists := c.Get("user_id")
+        if !exists </span><span class="cov0" title="0">{
+                c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">result, err := h.db.Exec("DELETE FROM user_political_affiliations WHERE user_id = $1", userID)
+        if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Error deleting political affiliation"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">rowsAffected, _ := result.RowsAffected()
+        if rowsAffected == 0 </span><span class="cov0" title="0">{
+                c.JSON(http.StatusNotFound, gin.H{"error": "Political affiliation not found"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">c.JSON(http.StatusOK, gin.H{"message": "Political affiliation deleted successfully"})</span>
+}
+
+// User Religious Affiliation Handlers
+
+func (h *ProfileHandler) GetUserReligiousAffiliation(c *gin.Context) <span class="cov0" title="0">{
+        userID, exists := c.Get("user_id")
+        if !exists </span><span class="cov0" title="0">{
+                c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">var affiliation models.UserReligiousAffiliation
+        err := h.db.QueryRow(`
+                SELECT user_id, religion, supporting_religion, religious_services_types,
+                       created_at, updated_at
+                FROM user_religious_affiliations WHERE user_id = $1`,
+                userID,
+        ).Scan(&amp;affiliation.UserID, &amp;affiliation.Religion, &amp;affiliation.SupportingReligion,
+                &amp;affiliation.ReligiousServicesTypes, &amp;affiliation.CreatedAt, &amp;affiliation.UpdatedAt)
+
+        if err == sql.ErrNoRows </span><span class="cov0" title="0">{
+                c.JSON(http.StatusNotFound, gin.H{"error": "Religious affiliation not found"})
+                return
+        }</span> else<span class="cov0" title="0"> if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">c.JSON(http.StatusOK, affiliation)</span>
+}
+
+func (h *ProfileHandler) CreateUserReligiousAffiliation(c *gin.Context) <span class="cov0" title="0">{
+        userID, exists := c.Get("user_id")
+        if !exists </span><span class="cov0" title="0">{
+                c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">var req models.CreateUserReligiousAffiliationRequest
+        if err := c.ShouldBindJSON(&amp;req); err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+                return
+        }</span>
+
+        // Validate supporting_religion is between 0-10
+        <span class="cov0" title="0">if req.SupportingReligion != nil &amp;&amp; (*req.SupportingReligion &lt; 0 || *req.SupportingReligion &gt; 10) </span><span class="cov0" title="0">{
+                c.JSON(http.StatusBadRequest, gin.H{"error": "supporting_religion must be between 0 and 10"})
+                return
+        }</span>
+
+        // Check if affiliation already exists
+        <span class="cov0" title="0">var existingAffiliation models.UserReligiousAffiliation
+        err := h.db.QueryRow("SELECT user_id FROM user_religious_affiliations WHERE user_id = $1", userID).Scan(&amp;existingAffiliation.UserID)
+        if err == nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusConflict, gin.H{"error": "Religious affiliation already exists"})
+                return
+        }</span> else<span class="cov0" title="0"> if err != sql.ErrNoRows </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">var affiliation models.UserReligiousAffiliation
+        err = h.db.QueryRow(`
+                INSERT INTO user_religious_affiliations
+                (user_id, religion, supporting_religion, religious_services_types)
+                VALUES ($1, $2, $3, $4)
+                RETURNING user_id, religion, supporting_religion, religious_services_types,
+                          created_at, updated_at`,
+                userID, req.Religion, req.SupportingReligion, pq.Array(req.ReligiousServicesTypes),
+        ).Scan(&amp;affiliation.UserID, &amp;affiliation.Religion, &amp;affiliation.SupportingReligion,
+                &amp;affiliation.ReligiousServicesTypes, &amp;affiliation.CreatedAt, &amp;affiliation.UpdatedAt)
+
+        if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Error creating religious affiliation"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">c.JSON(http.StatusCreated, affiliation)</span>
+}
+
+func (h *ProfileHandler) UpdateUserReligiousAffiliation(c *gin.Context) <span class="cov0" title="0">{
+        userID, exists := c.Get("user_id")
+        if !exists </span><span class="cov0" title="0">{
+                c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">var req models.UpdateUserReligiousAffiliationRequest
+        if err := c.ShouldBindJSON(&amp;req); err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+                return
+        }</span>
+
+        // Validate supporting_religion is between 0-10
+        <span class="cov0" title="0">if req.SupportingReligion != nil &amp;&amp; (*req.SupportingReligion &lt; 0 || *req.SupportingReligion &gt; 10) </span><span class="cov0" title="0">{
+                c.JSON(http.StatusBadRequest, gin.H{"error": "supporting_religion must be between 0 and 10"})
+                return
+        }</span>
+
+        // Build dynamic update query
+        <span class="cov0" title="0">query := "UPDATE user_religious_affiliations SET "
+        args := []interface{}{}
+        argCount := 1
+
+        if req.Religion != nil </span><span class="cov0" title="0">{
+                query += "religion = $" + string(rune(argCount+'0')) + ", "
+                args = append(args, *req.Religion)
+                argCount++
+        }</span>
+        <span class="cov0" title="0">if req.SupportingReligion != nil </span><span class="cov0" title="0">{
+                query += "supporting_religion = $" + string(rune(argCount+'0')) + ", "
+                args = append(args, *req.SupportingReligion)
+                argCount++
+        }</span>
+        <span class="cov0" title="0">if req.ReligiousServicesTypes != nil </span><span class="cov0" title="0">{
+                query += "religious_services_types = $" + string(rune(argCount+'0')) + ", "
+                args = append(args, pq.Array(req.ReligiousServicesTypes))
+                argCount++
+        }</span>
+
+        <span class="cov0" title="0">if len(args) == 0 </span><span class="cov0" title="0">{
+                c.JSON(http.StatusBadRequest, gin.H{"error": "No fields to update"})
+                return
+        }</span>
+
+        // Remove trailing comma and space
+        <span class="cov0" title="0">query = query[:len(query)-2]
+        query += " WHERE user_id = $" + string(rune(argCount+'0')) + " RETURNING user_id, religion, supporting_religion, religious_services_types, created_at, updated_at"
+        args = append(args, userID)
+
+        var affiliation models.UserReligiousAffiliation
+        err := h.db.QueryRow(query, args...).Scan(
+                &amp;affiliation.UserID, &amp;affiliation.Religion, &amp;affiliation.SupportingReligion,
+                &amp;affiliation.ReligiousServicesTypes, &amp;affiliation.CreatedAt, &amp;affiliation.UpdatedAt)
+
+        if err == sql.ErrNoRows </span><span class="cov0" title="0">{
+                c.JSON(http.StatusNotFound, gin.H{"error": "Religious affiliation not found"})
+                return
+        }</span> else<span class="cov0" title="0"> if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Error updating religious affiliation"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">c.JSON(http.StatusOK, affiliation)</span>
+}
+
+func (h *ProfileHandler) DeleteUserReligiousAffiliation(c *gin.Context) <span class="cov0" title="0">{
+        userID, exists := c.Get("user_id")
+        if !exists </span><span class="cov0" title="0">{
+                c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">result, err := h.db.Exec("DELETE FROM user_religious_affiliations WHERE user_id = $1", userID)
+        if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Error deleting religious affiliation"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">rowsAffected, _ := result.RowsAffected()
+        if rowsAffected == 0 </span><span class="cov0" title="0">{
+                c.JSON(http.StatusNotFound, gin.H{"error": "Religious affiliation not found"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">c.JSON(http.StatusOK, gin.H{"message": "Religious affiliation deleted successfully"})</span>
+}
+
+// User Race/Ethnicity Handlers
+
+func (h *ProfileHandler) GetUserRaceEthnicity(c *gin.Context) <span class="cov0" title="0">{
+        userID, exists := c.Get("user_id")
+        if !exists </span><span class="cov0" title="0">{
+                c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">var raceEthnicity models.UserRaceEthnicity
+        err := h.db.QueryRow(`
+                SELECT user_id, race, created_at, updated_at
+                FROM user_race_ethnicity WHERE user_id = $1`,
+                userID,
+        ).Scan(&amp;raceEthnicity.UserID, &amp;raceEthnicity.Race,
+                &amp;raceEthnicity.CreatedAt, &amp;raceEthnicity.UpdatedAt)
+
+        if err == sql.ErrNoRows </span><span class="cov0" title="0">{
+                c.JSON(http.StatusNotFound, gin.H{"error": "Race/ethnicity not found"})
+                return
+        }</span> else<span class="cov0" title="0"> if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">c.JSON(http.StatusOK, raceEthnicity)</span>
+}
+
+func (h *ProfileHandler) CreateUserRaceEthnicity(c *gin.Context) <span class="cov0" title="0">{
+        userID, exists := c.Get("user_id")
+        if !exists </span><span class="cov0" title="0">{
+                c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">var req models.CreateUserRaceEthnicityRequest
+        if err := c.ShouldBindJSON(&amp;req); err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+                return
+        }</span>
+
+        // Check if race/ethnicity already exists
+        <span class="cov0" title="0">var existingRaceEthnicity models.UserRaceEthnicity
+        err := h.db.QueryRow("SELECT user_id FROM user_race_ethnicity WHERE user_id = $1", userID).Scan(&amp;existingRaceEthnicity.UserID)
+        if err == nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusConflict, gin.H{"error": "Race/ethnicity already exists"})
+                return
+        }</span> else<span class="cov0" title="0"> if err != sql.ErrNoRows </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">var raceEthnicity models.UserRaceEthnicity
+        err = h.db.QueryRow(`
+                INSERT INTO user_race_ethnicity (user_id, race)
+                VALUES ($1, $2)
+                RETURNING user_id, race, created_at, updated_at`,
+                userID, pq.Array(req.Race),
+        ).Scan(&amp;raceEthnicity.UserID, &amp;raceEthnicity.Race,
+                &amp;raceEthnicity.CreatedAt, &amp;raceEthnicity.UpdatedAt)
+
+        if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Error creating race/ethnicity"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">c.JSON(http.StatusCreated, raceEthnicity)</span>
+}
+
+func (h *ProfileHandler) UpdateUserRaceEthnicity(c *gin.Context) <span class="cov0" title="0">{
+        userID, exists := c.Get("user_id")
+        if !exists </span><span class="cov0" title="0">{
+                c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">var req models.UpdateUserRaceEthnicityRequest
+        if err := c.ShouldBindJSON(&amp;req); err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+                return
+        }</span>
+
+        <span class="cov0" title="0">if req.Race == nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusBadRequest, gin.H{"error": "No fields to update"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">var raceEthnicity models.UserRaceEthnicity
+        err := h.db.QueryRow(`
+                UPDATE user_race_ethnicity
+                SET race = $1
+                WHERE user_id = $2
+                RETURNING user_id, race, created_at, updated_at`,
+                pq.Array(req.Race), userID,
+        ).Scan(&amp;raceEthnicity.UserID, &amp;raceEthnicity.Race,
+                &amp;raceEthnicity.CreatedAt, &amp;raceEthnicity.UpdatedAt)
+
+        if err == sql.ErrNoRows </span><span class="cov0" title="0">{
+                c.JSON(http.StatusNotFound, gin.H{"error": "Race/ethnicity not found"})
+                return
+        }</span> else<span class="cov0" title="0"> if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Error updating race/ethnicity"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">c.JSON(http.StatusOK, raceEthnicity)</span>
+}
+
+func (h *ProfileHandler) DeleteUserRaceEthnicity(c *gin.Context) <span class="cov0" title="0">{
+        userID, exists := c.Get("user_id")
+        if !exists </span><span class="cov0" title="0">{
+                c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">result, err := h.db.Exec("DELETE FROM user_race_ethnicity WHERE user_id = $1", userID)
+        if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Error deleting race/ethnicity"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">rowsAffected, _ := result.RowsAffected()
+        if rowsAffected == 0 </span><span class="cov0" title="0">{
+                c.JSON(http.StatusNotFound, gin.H{"error": "Race/ethnicity not found"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">c.JSON(http.StatusOK, gin.H{"message": "Race/ethnicity deleted successfully"})</span>
+}
+
+// Economic Info Handlers
+
+func (h *ProfileHandler) GetEconomicInfo(c *gin.Context) <span class="cov0" title="0">{
+        userID, exists := c.Get("user_id")
+        if !exists </span><span class="cov0" title="0">{
+                c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">var economicInfo models.EconomicInfo
+        err := h.db.QueryRow(`
+                SELECT user_id, for_current_political_structure, for_capitalism, for_laws,
+                       goods_services, affiliations, support_of_alt_econ, support_alt_comm,
+                       additional_text, created_at, updated_at
+                FROM economic_info WHERE user_id = $1`,
+                userID,
+        ).Scan(&amp;economicInfo.UserID, &amp;economicInfo.ForCurrentPoliticalStructure,
+                &amp;economicInfo.ForCapitalism, &amp;economicInfo.ForLaws, &amp;economicInfo.GoodsServices,
+                &amp;economicInfo.Affiliations, &amp;economicInfo.SupportOfAltEcon, &amp;economicInfo.SupportAltComm,
+                &amp;economicInfo.AdditionalText, &amp;economicInfo.CreatedAt, &amp;economicInfo.UpdatedAt)
+
+        if err == sql.ErrNoRows </span><span class="cov0" title="0">{
+                c.JSON(http.StatusNotFound, gin.H{"error": "Economic info not found"})
+                return
+        }</span> else<span class="cov0" title="0"> if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">c.JSON(http.StatusOK, economicInfo)</span>
+}
+
+func (h *ProfileHandler) CreateEconomicInfo(c *gin.Context) <span class="cov0" title="0">{
+        userID, exists := c.Get("user_id")
+        if !exists </span><span class="cov0" title="0">{
+                c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">var req models.CreateEconomicInfoRequest
+        if err := c.ShouldBindJSON(&amp;req); err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+                return
+        }</span>
+
+        // Check if economic info already exists
+        <span class="cov0" title="0">var existingEconomicInfo models.EconomicInfo
+        err := h.db.QueryRow("SELECT user_id FROM economic_info WHERE user_id = $1", userID).Scan(&amp;existingEconomicInfo.UserID)
+        if err == nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusConflict, gin.H{"error": "Economic info already exists"})
+                return
+        }</span> else<span class="cov0" title="0"> if err != sql.ErrNoRows </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">var economicInfo models.EconomicInfo
+        err = h.db.QueryRow(`
+                INSERT INTO economic_info
+                (user_id, for_current_political_structure, for_capitalism, for_laws,
+                 goods_services, affiliations, support_of_alt_econ, support_alt_comm, additional_text)
+                VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+                RETURNING user_id, for_current_political_structure, for_capitalism, for_laws,
+                          goods_services, affiliations, support_of_alt_econ, support_alt_comm,
+                          additional_text, created_at, updated_at`,
+                userID, req.ForCurrentPoliticalStructure, req.ForCapitalism, req.ForLaws,
+                pq.Array(req.GoodsServices), pq.Array(req.Affiliations), req.SupportOfAltEcon,
+                req.SupportAltComm, req.AdditionalText,
+        ).Scan(&amp;economicInfo.UserID, &amp;economicInfo.ForCurrentPoliticalStructure,
+                &amp;economicInfo.ForCapitalism, &amp;economicInfo.ForLaws, &amp;economicInfo.GoodsServices,
+                &amp;economicInfo.Affiliations, &amp;economicInfo.SupportOfAltEcon, &amp;economicInfo.SupportAltComm,
+                &amp;economicInfo.AdditionalText, &amp;economicInfo.CreatedAt, &amp;economicInfo.UpdatedAt)
+
+        if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Error creating economic info"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">c.JSON(http.StatusCreated, economicInfo)</span>
+}
+
+func (h *ProfileHandler) UpdateEconomicInfo(c *gin.Context) <span class="cov0" title="0">{
+        userID, exists := c.Get("user_id")
+        if !exists </span><span class="cov0" title="0">{
+                c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">var req models.UpdateEconomicInfoRequest
+        if err := c.ShouldBindJSON(&amp;req); err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+                return
+        }</span>
+
+        // Build dynamic update query
+        <span class="cov0" title="0">query := "UPDATE economic_info SET "
+        args := []interface{}{}
+        argCount := 1
+
+        if req.ForCurrentPoliticalStructure != nil </span><span class="cov0" title="0">{
+                query += "for_current_political_structure = $" + string(rune(argCount+'0')) + ", "
+                args = append(args, *req.ForCurrentPoliticalStructure)
+                argCount++
+        }</span>
+        <span class="cov0" title="0">if req.ForCapitalism != nil </span><span class="cov0" title="0">{
+                query += "for_capitalism = $" + string(rune(argCount+'0')) + ", "
+                args = append(args, *req.ForCapitalism)
+                argCount++
+        }</span>
+        <span class="cov0" title="0">if req.ForLaws != nil </span><span class="cov0" title="0">{
+                query += "for_laws = $" + string(rune(argCount+'0')) + ", "
+                args = append(args, *req.ForLaws)
+                argCount++
+        }</span>
+        <span class="cov0" title="0">if req.GoodsServices != nil </span><span class="cov0" title="0">{
+                query += "goods_services = $" + string(rune(argCount+'0')) + ", "
+                args = append(args, pq.Array(req.GoodsServices))
+                argCount++
+        }</span>
+        <span class="cov0" title="0">if req.Affiliations != nil </span><span class="cov0" title="0">{
+                query += "affiliations = $" + string(rune(argCount+'0')) + ", "
+                args = append(args, pq.Array(req.Affiliations))
+                argCount++
+        }</span>
+        <span class="cov0" title="0">if req.SupportOfAltEcon != nil </span><span class="cov0" title="0">{
+                query += "support_of_alt_econ = $" + string(rune(argCount+'0')) + ", "
+                args = append(args, *req.SupportOfAltEcon)
+                argCount++
+        }</span>
+        <span class="cov0" title="0">if req.SupportAltComm != nil </span><span class="cov0" title="0">{
+                query += "support_alt_comm = $" + string(rune(argCount+'0')) + ", "
+                args = append(args, *req.SupportAltComm)
+                argCount++
+        }</span>
+        <span class="cov0" title="0">if req.AdditionalText != nil </span><span class="cov0" title="0">{
+                query += "additional_text = $" + string(rune(argCount+'0')) + ", "
+                args = append(args, *req.AdditionalText)
+                argCount++
+        }</span>
+
+        <span class="cov0" title="0">if len(args) == 0 </span><span class="cov0" title="0">{
+                c.JSON(http.StatusBadRequest, gin.H{"error": "No fields to update"})
+                return
+        }</span>
+
+        // Remove trailing comma and space
+        <span class="cov0" title="0">query = query[:len(query)-2]
+        query += " WHERE user_id = $" + string(rune(argCount+'0')) + " RETURNING user_id, for_current_political_structure, for_capitalism, for_laws, goods_services, affiliations, support_of_alt_econ, support_alt_comm, additional_text, created_at, updated_at"
+        args = append(args, userID)
+
+        var economicInfo models.EconomicInfo
+        err := h.db.QueryRow(query, args...).Scan(
+                &amp;economicInfo.UserID, &amp;economicInfo.ForCurrentPoliticalStructure,
+                &amp;economicInfo.ForCapitalism, &amp;economicInfo.ForLaws, &amp;economicInfo.GoodsServices,
+                &amp;economicInfo.Affiliations, &amp;economicInfo.SupportOfAltEcon, &amp;economicInfo.SupportAltComm,
+                &amp;economicInfo.AdditionalText, &amp;economicInfo.CreatedAt, &amp;economicInfo.UpdatedAt)
+
+        if err == sql.ErrNoRows </span><span class="cov0" title="0">{
+                c.JSON(http.StatusNotFound, gin.H{"error": "Economic info not found"})
+                return
+        }</span> else<span class="cov0" title="0"> if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Error updating economic info"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">c.JSON(http.StatusOK, economicInfo)</span>
+}
+
+func (h *ProfileHandler) DeleteEconomicInfo(c *gin.Context) <span class="cov0" title="0">{
+        userID, exists := c.Get("user_id")
+        if !exists </span><span class="cov0" title="0">{
+                c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">result, err := h.db.Exec("DELETE FROM economic_info WHERE user_id = $1", userID)
+        if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Error deleting economic info"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">rowsAffected, _ := result.RowsAffected()
+        if rowsAffected == 0 </span><span class="cov0" title="0">{
+                c.JSON(http.StatusNotFound, gin.H{"error": "Economic info not found"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">c.JSON(http.StatusOK, gin.H{"message": "Economic info deleted successfully"})</span>
+}
+</pre>
+		
+		<pre class="file" id="file3" style="display: none">package handlers
+
+import (
+        "database/sql"
+        "fmt"
+        "net/http"
+        "strconv"
+        "voting-api/database"
+        "voting-api/models"
+
+        "github.com/gin-gonic/gin"
+        "github.com/lib/pq"
+)
+
+type TrustHandler struct {
+        db *database.DB
+}
+
+func NewTrustHandler(db *database.DB) *TrustHandler <span class="cov8" title="1">{
+        return &amp;TrustHandler{db: db}
+}</span>
+
+func (h *TrustHandler) calcTrustScore(userID int) (float64, int) <span class="cov8" title="1">{
+        var score float64
+        var count int
+        err := h.db.QueryRow(
+                `SELECT COALESCE(AVG(score), 0), COUNT(*) FROM trust_votes WHERE subject_id = $1`,
+                userID,
+        ).Scan(&amp;score, &amp;count)
+        if err != nil </span><span class="cov8" title="1">{
+                return 0, 0
+        }</span>
+        <span class="cov8" title="1">return score, count</span>
+}
+
+// POST /api/v1/users/:user_id/trust
+func (h *TrustHandler) SubmitTrustVote(c *gin.Context) <span class="cov8" title="1">{
+        voterID, exists := c.Get("user_id")
+        if !exists </span><span class="cov0" title="0">{
+                c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+                return
+        }</span>
+
+        <span class="cov8" title="1">subjectID, err := strconv.Atoi(c.Param("user_id"))
+        if err != nil </span><span class="cov8" title="1">{
+                c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid user_id"})
+                return
+        }</span>
+
+        <span class="cov8" title="1">if voterID.(int) == subjectID </span><span class="cov8" title="1">{
+                c.JSON(http.StatusBadRequest, gin.H{"error": "Cannot rate yourself"})
+                return
+        }</span>
+
+        <span class="cov8" title="1">var req models.TrustVoteRequest
+        if err := c.ShouldBindJSON(&amp;req); err != nil </span><span class="cov8" title="1">{
+                c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+                return
+        }</span>
+
+        <span class="cov8" title="1">var vote models.TrustVote
+        err = h.db.QueryRow(`
+                INSERT INTO trust_votes (voter_id, subject_id, score)
+                VALUES ($1, $2, $3)
+                ON CONFLICT (voter_id, subject_id) DO UPDATE
+                  SET score = EXCLUDED.score, updated_at = NOW()
+                RETURNING id, voter_id, subject_id, score, created_at, updated_at`,
+                voterID, subjectID, req.Score,
+        ).Scan(&amp;vote.ID, &amp;vote.VoterID, &amp;vote.SubjectID, &amp;vote.Score, &amp;vote.CreatedAt, &amp;vote.UpdatedAt)
+        if err != nil </span><span class="cov8" title="1">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
+                return
+        }</span>
+
+        <span class="cov8" title="1">c.JSON(http.StatusOK, vote)</span>
+}
+
+// GET /api/v1/public/users/:user_id/trust-score
+func (h *TrustHandler) GetTrustScore(c *gin.Context) <span class="cov8" title="1">{
+        userID, err := strconv.Atoi(c.Param("user_id"))
+        if err != nil </span><span class="cov8" title="1">{
+                c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid user_id"})
+                return
+        }</span>
+
+        <span class="cov8" title="1">score, count := h.calcTrustScore(userID)
+        c.JSON(http.StatusOK, models.TrustScore{
+                UserID:    userID,
+                Score:     score,
+                VoteCount: count,
+        })</span>
+}
+
+// GET /api/v1/users/:user_id/my-trust-vote
+func (h *TrustHandler) GetMyTrustVote(c *gin.Context) <span class="cov8" title="1">{
+        voterID, exists := c.Get("user_id")
+        if !exists </span><span class="cov0" title="0">{
+                c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+                return
+        }</span>
+
+        <span class="cov8" title="1">subjectID, err := strconv.Atoi(c.Param("user_id"))
+        if err != nil </span><span class="cov8" title="1">{
+                c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid user_id"})
+                return
+        }</span>
+
+        <span class="cov8" title="1">var vote models.TrustVote
+        err = h.db.QueryRow(`
+                SELECT id, voter_id, subject_id, score, created_at, updated_at
+                FROM trust_votes WHERE voter_id = $1 AND subject_id = $2`,
+                voterID, subjectID,
+        ).Scan(&amp;vote.ID, &amp;vote.VoterID, &amp;vote.SubjectID, &amp;vote.Score, &amp;vote.CreatedAt, &amp;vote.UpdatedAt)
+
+        if err == sql.ErrNoRows </span><span class="cov8" title="1">{
+                c.JSON(http.StatusNotFound, gin.H{"error": "No trust vote found"})
+                return
+        }</span> else<span class="cov8" title="1"> if err != nil </span><span class="cov8" title="1">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
+                return
+        }</span>
+
+        <span class="cov8" title="1">c.JSON(http.StatusOK, vote)</span>
+}
+
+// GET /api/v1/my-trust-score
+func (h *TrustHandler) GetMyTrustScore(c *gin.Context) <span class="cov8" title="1">{
+        userID, exists := c.Get("user_id")
+        if !exists </span><span class="cov0" title="0">{
+                c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+                return
+        }</span>
+
+        <span class="cov8" title="1">score, count := h.calcTrustScore(userID.(int))
+        c.JSON(http.StatusOK, models.TrustScore{
+                UserID:    userID.(int),
+                Score:     score,
+                VoteCount: count,
+        })</span>
+}
+
+// GET /api/v1/profile/visibility
+func (h *TrustHandler) GetProfileVisibility(c *gin.Context) <span class="cov8" title="1">{
+        userID, exists := c.Get("user_id")
+        if !exists </span><span class="cov0" title="0">{
+                c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+                return
+        }</span>
+
+        <span class="cov8" title="1">var pv models.ProfileVisibility
+        err := h.db.QueryRow(`
+                SELECT user_id, info_threshold, address_threshold, political_threshold,
+                       religious_threshold, race_ethnicity_threshold, economic_threshold
+                FROM profile_visibility WHERE user_id = $1`,
+                userID,
+        ).Scan(&amp;pv.UserID, &amp;pv.InfoThreshold, &amp;pv.AddressThreshold, &amp;pv.PoliticalThreshold,
+                &amp;pv.ReligiousThreshold, &amp;pv.RaceEthnicityThreshold, &amp;pv.EconomicThreshold)
+
+        if err == sql.ErrNoRows </span><span class="cov8" title="1">{
+                // Return defaults (all 0)
+                pv = models.ProfileVisibility{UserID: userID.(int)}
+        }</span> else<span class="cov8" title="1"> if err != nil </span><span class="cov8" title="1">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
+                return
+        }</span>
+
+        <span class="cov8" title="1">c.JSON(http.StatusOK, pv)</span>
+}
+
+// PUT /api/v1/profile/visibility
+func (h *TrustHandler) UpdateProfileVisibility(c *gin.Context) <span class="cov8" title="1">{
+        userID, exists := c.Get("user_id")
+        if !exists </span><span class="cov0" title="0">{
+                c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+                return
+        }</span>
+
+        <span class="cov8" title="1">var req models.UpdateProfileVisibilityRequest
+        if err := c.ShouldBindJSON(&amp;req); err != nil </span><span class="cov8" title="1">{
+                c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+                return
+        }</span>
+
+        // Upsert with defaults then update only provided fields
+        <span class="cov8" title="1">_, err := h.db.Exec(`
+                INSERT INTO profile_visibility (user_id) VALUES ($1)
+                ON CONFLICT (user_id) DO NOTHING`, userID)
+        if err != nil </span><span class="cov8" title="1">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
+                return
+        }</span>
+
+        // Build dynamic update
+        <span class="cov8" title="1">setClauses := []string{}
+        args := []interface{}{}
+        argIdx := 1
+
+        if req.InfoThreshold != nil </span><span class="cov8" title="1">{
+                setClauses = append(setClauses, fmt.Sprintf("info_threshold = $%d", argIdx))
+                args = append(args, *req.InfoThreshold)
+                argIdx++
+        }</span>
+        <span class="cov8" title="1">if req.AddressThreshold != nil </span><span class="cov8" title="1">{
+                setClauses = append(setClauses, fmt.Sprintf("address_threshold = $%d", argIdx))
+                args = append(args, *req.AddressThreshold)
+                argIdx++
+        }</span>
+        <span class="cov8" title="1">if req.PoliticalThreshold != nil </span><span class="cov8" title="1">{
+                setClauses = append(setClauses, fmt.Sprintf("political_threshold = $%d", argIdx))
+                args = append(args, *req.PoliticalThreshold)
+                argIdx++
+        }</span>
+        <span class="cov8" title="1">if req.ReligiousThreshold != nil </span><span class="cov8" title="1">{
+                setClauses = append(setClauses, fmt.Sprintf("religious_threshold = $%d", argIdx))
+                args = append(args, *req.ReligiousThreshold)
+                argIdx++
+        }</span>
+        <span class="cov8" title="1">if req.RaceEthnicityThreshold != nil </span><span class="cov8" title="1">{
+                setClauses = append(setClauses, fmt.Sprintf("race_ethnicity_threshold = $%d", argIdx))
+                args = append(args, *req.RaceEthnicityThreshold)
+                argIdx++
+        }</span>
+        <span class="cov8" title="1">if req.EconomicThreshold != nil </span><span class="cov8" title="1">{
+                setClauses = append(setClauses, fmt.Sprintf("economic_threshold = $%d", argIdx))
+                args = append(args, *req.EconomicThreshold)
+                argIdx++
+        }</span>
+
+        <span class="cov8" title="1">if len(setClauses) &gt; 0 </span><span class="cov8" title="1">{
+                query := "UPDATE profile_visibility SET "
+                for i, clause := range setClauses </span><span class="cov8" title="1">{
+                        if i &gt; 0 </span><span class="cov8" title="1">{
+                                query += ", "
+                        }</span>
+                        <span class="cov8" title="1">query += clause</span>
+                }
+                <span class="cov8" title="1">query += fmt.Sprintf(" WHERE user_id = $%d", argIdx)
+                args = append(args, userID)
+                if _, err := h.db.Exec(query, args...); err != nil </span><span class="cov8" title="1">{
+                        c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
+                        return
+                }</span>
+        }
+
+        <span class="cov8" title="1">var pv models.ProfileVisibility
+        err = h.db.QueryRow(`
+                SELECT user_id, info_threshold, address_threshold, political_threshold,
+                       religious_threshold, race_ethnicity_threshold, economic_threshold
+                FROM profile_visibility WHERE user_id = $1`, userID,
+        ).Scan(&amp;pv.UserID, &amp;pv.InfoThreshold, &amp;pv.AddressThreshold, &amp;pv.PoliticalThreshold,
+                &amp;pv.ReligiousThreshold, &amp;pv.RaceEthnicityThreshold, &amp;pv.EconomicThreshold)
+        if err != nil </span><span class="cov8" title="1">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
+                return
+        }</span>
+
+        <span class="cov8" title="1">c.JSON(http.StatusOK, pv)</span>
+}
+
+// GET /api/v1/public/users/search?username=X
+func (h *TrustHandler) SearchUsers(c *gin.Context) <span class="cov8" title="1">{
+        username := c.Query("username")
+        if username == "" </span><span class="cov8" title="1">{
+                c.JSON(http.StatusBadRequest, gin.H{"error": "username query param required"})
+                return
+        }</span>
+
+        <span class="cov8" title="1">rows, err := h.db.Query(`
+                SELECT u.id, u.username,
+                       COALESCE(AVG(tv.score), 0) as trust_score,
+                       COUNT(tv.id) as vote_count
+                FROM users u
+                LEFT JOIN trust_votes tv ON tv.subject_id = u.id
+                WHERE u.username ILIKE '%' || $1 || '%'
+                GROUP BY u.id
+                ORDER BY u.username
+                LIMIT 20`,
+                username,
+        )
+        if err != nil </span><span class="cov8" title="1">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
+                return
+        }</span>
+        <span class="cov8" title="1">defer rows.Close()
+
+        users := []models.PublicUser{}
+        for rows.Next() </span><span class="cov8" title="1">{
+                var u models.PublicUser
+                if err := rows.Scan(&amp;u.ID, &amp;u.Username, &amp;u.TrustScore, &amp;u.VoteCount); err != nil </span><span class="cov8" title="1">{
+                        continue</span>
+                }
+                <span class="cov8" title="1">users = append(users, u)</span>
+        }
+
+        <span class="cov8" title="1">c.JSON(http.StatusOK, users)</span>
+}
+
+// GET /api/v1/users/:user_id/profile
+func (h *TrustHandler) GetUserProfileSections(c *gin.Context) <span class="cov8" title="1">{
+        viewerIDRaw, exists := c.Get("user_id")
+        if !exists </span><span class="cov0" title="0">{
+                c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+                return
+        }</span>
+        <span class="cov8" title="1">viewerID := viewerIDRaw.(int)
+
+        subjectID, err := strconv.Atoi(c.Param("user_id"))
+        if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid user_id"})
+                return
+        }</span>
+
+        // Get subject username
+        <span class="cov8" title="1">var subjectUsername string
+        err = h.db.QueryRow("SELECT username FROM users WHERE id = $1", subjectID).Scan(&amp;subjectUsername)
+        if err == sql.ErrNoRows </span><span class="cov8" title="1">{
+                c.JSON(http.StatusNotFound, gin.H{"error": "User not found"})
+                return
+        }</span> else<span class="cov8" title="1"> if err != nil </span><span class="cov8" title="1">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
+                return
+        }</span>
+
+        <span class="cov8" title="1">subjectTrustScore, subjectVoteCount := h.calcTrustScore(subjectID)
+        isOwner := viewerID == subjectID
+
+        // Get viewer's trust score
+        var viewerScore float64
+        if !isOwner </span><span class="cov8" title="1">{
+                viewerScore, _ = h.calcTrustScore(viewerID)
+        }</span> else<span class="cov8" title="1"> {
+                viewerScore = 100
+        }</span>
+
+        // Get subject's visibility thresholds
+        <span class="cov8" title="1">pv := models.ProfileVisibility{UserID: subjectID}
+        err = h.db.QueryRow(`
+                SELECT user_id, info_threshold, address_threshold, political_threshold,
+                       religious_threshold, race_ethnicity_threshold, economic_threshold
+                FROM profile_visibility WHERE user_id = $1`, subjectID,
+        ).Scan(&amp;pv.UserID, &amp;pv.InfoThreshold, &amp;pv.AddressThreshold, &amp;pv.PoliticalThreshold,
+                &amp;pv.ReligiousThreshold, &amp;pv.RaceEthnicityThreshold, &amp;pv.EconomicThreshold)
+        if err != nil &amp;&amp; err != sql.ErrNoRows </span><span class="cov8" title="1">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
+                return
+        }</span>
+
+        <span class="cov8" title="1">sectionResult := func(threshold int, data interface{}) gin.H </span><span class="cov8" title="1">{
+                if isOwner || viewerScore &gt;= float64(threshold) </span><span class="cov8" title="1">{
+                        return gin.H{"locked": false, "data": data}
+                }</span>
+                <span class="cov8" title="1">return gin.H{"locked": true, "threshold": threshold, "viewer_score": viewerScore}</span>
+        }
+
+        // Fetch each section
+        // Info
+        <span class="cov8" title="1">var infoData interface{}
+        var subjectEmail string
+        err = h.db.QueryRow("SELECT email FROM users WHERE id = $1", subjectID).Scan(&amp;subjectEmail)
+        if err == nil </span><span class="cov8" title="1">{
+                var profile models.UserProfile
+                err2 := h.db.QueryRow(`
+                        SELECT user_id, email, full_name, birthday, gender, mothers_maiden_name,
+                               phone_number, additional_emails, created_at, updated_at
+                        FROM user_profiles WHERE email = $1`, subjectEmail,
+                ).Scan(&amp;profile.UserID, &amp;profile.Email, &amp;profile.FullName, &amp;profile.Birthday,
+                        &amp;profile.Gender, &amp;profile.MothersMaidenName, &amp;profile.PhoneNumber,
+                        &amp;profile.AdditionalEmails, &amp;profile.CreatedAt, &amp;profile.UpdatedAt)
+                if err2 == nil </span><span class="cov8" title="1">{
+                        infoData = profile
+                }</span>
+        }
+
+        // Address
+        <span class="cov8" title="1">var addressData interface{}
+        var address models.UserAddress
+        err = h.db.QueryRow(`
+                SELECT user_id, street_number, street_name, address_line_2, city, state,
+                       zip_code, created_at, updated_at
+                FROM user_addresses WHERE user_id = $1`, subjectID,
+        ).Scan(&amp;address.UserID, &amp;address.StreetNumber, &amp;address.StreetName,
+                &amp;address.AddressLine2, &amp;address.City, &amp;address.State, &amp;address.ZipCode,
+                &amp;address.CreatedAt, &amp;address.UpdatedAt)
+        if err == nil </span><span class="cov8" title="1">{
+                addressData = address
+        }</span>
+
+        // Political
+        <span class="cov8" title="1">var politicalData interface{}
+        var political models.UserPoliticalAffiliation
+        err = h.db.QueryRow(`
+                SELECT user_id, party_affiliation, created_at, updated_at
+                FROM user_political_affiliations WHERE user_id = $1`, subjectID,
+        ).Scan(&amp;political.UserID, &amp;political.PartyAffiliation, &amp;political.CreatedAt, &amp;political.UpdatedAt)
+        if err == nil </span><span class="cov8" title="1">{
+                politicalData = political
+        }</span>
+
+        // Religious
+        <span class="cov8" title="1">var religiousData interface{}
+        var religious models.UserReligiousAffiliation
+        err = h.db.QueryRow(`
+                SELECT user_id, religion, supporting_religion, religious_services_types, created_at, updated_at
+                FROM user_religious_affiliations WHERE user_id = $1`, subjectID,
+        ).Scan(&amp;religious.UserID, &amp;religious.Religion, &amp;religious.SupportingReligion,
+                pq.Array(&amp;religious.ReligiousServicesTypes), &amp;religious.CreatedAt, &amp;religious.UpdatedAt)
+        if err == nil </span><span class="cov0" title="0">{
+                religiousData = religious
+        }</span>
+
+        // Race/Ethnicity
+        <span class="cov8" title="1">var raceData interface{}
+        var race models.UserRaceEthnicity
+        err = h.db.QueryRow(`
+                SELECT user_id, race, created_at, updated_at
+                FROM user_race_ethnicity WHERE user_id = $1`, subjectID,
+        ).Scan(&amp;race.UserID, pq.Array(&amp;race.Race), &amp;race.CreatedAt, &amp;race.UpdatedAt)
+        if err == nil </span><span class="cov0" title="0">{
+                raceData = race
+        }</span>
+
+        // Economic
+        <span class="cov8" title="1">var economicData interface{}
+        var economic models.EconomicInfo
+        err = h.db.QueryRow(`
+                SELECT user_id, for_current_political_structure, for_capitalism, for_laws,
+                       goods_services, affiliations, support_of_alt_econ, support_alt_comm,
+                       additional_text, created_at, updated_at
+                FROM economic_info WHERE user_id = $1`, subjectID,
+        ).Scan(&amp;economic.UserID, &amp;economic.ForCurrentPoliticalStructure, &amp;economic.ForCapitalism,
+                &amp;economic.ForLaws, pq.Array(&amp;economic.GoodsServices), pq.Array(&amp;economic.Affiliations),
+                &amp;economic.SupportOfAltEcon, &amp;economic.SupportAltComm, &amp;economic.AdditionalText,
+                &amp;economic.CreatedAt, &amp;economic.UpdatedAt)
+        if err == nil </span><span class="cov8" title="1">{
+                economicData = economic
+        }</span>
+
+        <span class="cov8" title="1">c.JSON(http.StatusOK, gin.H{
+                "user": models.PublicUser{
+                        ID:         subjectID,
+                        Username:   subjectUsername,
+                        TrustScore: subjectTrustScore,
+                        VoteCount:  subjectVoteCount,
+                },
+                "info":           sectionResult(pv.InfoThreshold, infoData),
+                "address":        sectionResult(pv.AddressThreshold, addressData),
+                "political":      sectionResult(pv.PoliticalThreshold, politicalData),
+                "religious":      sectionResult(pv.ReligiousThreshold, religiousData),
+                "race_ethnicity": sectionResult(pv.RaceEthnicityThreshold, raceData),
+                "economic":       sectionResult(pv.EconomicThreshold, economicData),
+        })</span>
+}
+</pre>
+		
+		<pre class="file" id="file4" style="display: none">package handlers
+
+import (
+        "database/sql"
+        "net/http"
+        "strconv"
+        "voting-api/database"
+        "voting-api/models"
+
+        "github.com/gin-gonic/gin"
+)
+
+type VoteHandler struct {
+        db *database.DB
+}
+
+func NewVoteHandler(db *database.DB) *VoteHandler <span class="cov8" title="1">{
+        return &amp;VoteHandler{db: db}
+}</span>
+
+func (h *VoteHandler) Vote(c *gin.Context) <span class="cov0" title="0">{
+        userID, exists := c.Get("user_id")
+        if !exists </span><span class="cov0" title="0">{
+                c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">ballotIDStr := c.Param("ballot_id")
+        ballotID, err := strconv.Atoi(ballotIDStr)
+        if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid ballot ID"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">var req models.VoteRequest
+        if err := c.ShouldBindJSON(&amp;req); err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+                return
+        }</span>
+
+        // Support both option_id (from frontend) and ballot_item_id
+        <span class="cov0" title="0">ballotItemID := req.BallotItemID
+        if ballotItemID == 0 &amp;&amp; req.OptionID != 0 </span><span class="cov0" title="0">{
+                ballotItemID = req.OptionID
+        }</span>
+
+        <span class="cov0" title="0">if ballotItemID == 0 </span><span class="cov0" title="0">{
+                c.JSON(http.StatusBadRequest, gin.H{"error": "option_id or ballot_item_id is required"})
+                return
+        }</span>
+
+        // Check if ballot exists and is active
+        <span class="cov0" title="0">var ballotExists bool
+        err = h.db.QueryRow("SELECT is_active FROM ballots WHERE id = $1", ballotID).Scan(&amp;ballotExists)
+        if err == sql.ErrNoRows </span><span class="cov0" title="0">{
+                c.JSON(http.StatusNotFound, gin.H{"error": "Ballot not found"})
+                return
+        }</span> else<span class="cov0" title="0"> if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">if !ballotExists </span><span class="cov0" title="0">{
+                c.JSON(http.StatusBadRequest, gin.H{"error": "Ballot is not active"})
+                return
+        }</span>
+
+        // Check if ballot item belongs to this ballot
+        <span class="cov0" title="0">var itemBallotID int
+        err = h.db.QueryRow("SELECT ballot_id FROM ballot_items WHERE id = $1", ballotItemID).Scan(&amp;itemBallotID)
+        if err == sql.ErrNoRows </span><span class="cov0" title="0">{
+                c.JSON(http.StatusNotFound, gin.H{"error": "Ballot item not found"})
+                return
+        }</span> else<span class="cov0" title="0"> if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">if itemBallotID != ballotID </span><span class="cov0" title="0">{
+                c.JSON(http.StatusBadRequest, gin.H{"error": "Ballot item does not belong to this ballot"})
+                return
+        }</span>
+
+        // Start transaction
+        <span class="cov0" title="0">tx, err := h.db.Begin()
+        if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
+                return
+        }</span>
+        <span class="cov0" title="0">defer tx.Rollback()
+
+        // Check if user has already voted on this ballot
+        var existingVoteID int
+        var existingBallotItemID int
+        err = tx.QueryRow("SELECT id, ballot_item_id FROM votes WHERE user_id = $1 AND ballot_id = $2", userID, ballotID).Scan(&amp;existingVoteID, &amp;existingBallotItemID)
+        
+        if err == nil </span><span class="cov0" title="0">{
+                // User has already voted, update their vote
+                // First decrease vote count for previous choice
+                _, err = tx.Exec("UPDATE ballot_items SET vote_count = vote_count - 1 WHERE id = $1", existingBallotItemID)
+                if err != nil </span><span class="cov0" title="0">{
+                        c.JSON(http.StatusInternalServerError, gin.H{"error": "Error updating vote count"})
+                        return
+                }</span>
+
+                // Update the vote record
+                <span class="cov0" title="0">_, err = tx.Exec("UPDATE votes SET ballot_item_id = $1 WHERE id = $2", ballotItemID, existingVoteID)
+                if err != nil </span><span class="cov0" title="0">{
+                        c.JSON(http.StatusInternalServerError, gin.H{"error": "Error updating vote"})
+                        return
+                }</span>
+        } else<span class="cov0" title="0"> if err == sql.ErrNoRows </span><span class="cov0" title="0">{
+                // User hasn't voted yet, create new vote
+                _, err = tx.Exec("INSERT INTO votes (user_id, ballot_id, ballot_item_id) VALUES ($1, $2, $3)", userID, ballotID, ballotItemID)
+                if err != nil </span><span class="cov0" title="0">{
+                        c.JSON(http.StatusInternalServerError, gin.H{"error": "Error creating vote"})
+                        return
+                }</span>
+        } else<span class="cov0" title="0"> {
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
+                return
+        }</span>
+
+        // Increase vote count for chosen item
+        <span class="cov0" title="0">_, err = tx.Exec("UPDATE ballot_items SET vote_count = vote_count + 1 WHERE id = $1", ballotItemID)
+        if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Error updating vote count"})
+                return
+        }</span>
+
+        // Commit transaction
+        <span class="cov0" title="0">if err = tx.Commit(); err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Error committing transaction"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">c.JSON(http.StatusOK, gin.H{"message": "Vote recorded successfully"})</span>
+}
+
+func (h *VoteHandler) GetUserVote(c *gin.Context) <span class="cov0" title="0">{
+        userID, exists := c.Get("user_id")
+        if !exists </span><span class="cov0" title="0">{
+                c.JSON(http.StatusUnauthorized, gin.H{"error": "Unauthorized"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">ballotIDStr := c.Param("ballot_id")
+        ballotID, err := strconv.Atoi(ballotIDStr)
+        if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid ballot ID"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">var vote models.Vote
+        err = h.db.QueryRow(
+                "SELECT id, user_id, ballot_id, ballot_item_id, created_at FROM votes WHERE user_id = $1 AND ballot_id = $2",
+                userID, ballotID,
+        ).Scan(&amp;vote.ID, &amp;vote.UserID, &amp;vote.BallotID, &amp;vote.BallotItemID, &amp;vote.CreatedAt)
+
+        if err == sql.ErrNoRows </span><span class="cov0" title="0">{
+                c.JSON(http.StatusNotFound, gin.H{"error": "No vote found for this ballot"})
+                return
+        }</span> else<span class="cov0" title="0"> if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
+                return
+        }</span>
+
+        // Return response with both option_id and ballot_item_id for compatibility
+        <span class="cov0" title="0">c.JSON(http.StatusOK, gin.H{
+                "id":              vote.ID,
+                "user_id":         vote.UserID,
+                "ballot_id":       vote.BallotID,
+                "ballot_item_id":  vote.BallotItemID,
+                "option_id":       vote.BallotItemID, // Frontend expects option_id
+                "created_at":      vote.CreatedAt,
+        })</span>
+}
+
+func (h *VoteHandler) GetBallotResults(c *gin.Context) <span class="cov0" title="0">{
+        ballotIDStr := c.Param("id")
+        ballotID, err := strconv.Atoi(ballotIDStr)
+        if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusBadRequest, gin.H{"error": "Invalid ballot ID"})
+                return
+        }</span>
+
+        // Check if ballot exists
+        <span class="cov0" title="0">var ballotExists bool
+        err = h.db.QueryRow("SELECT EXISTS(SELECT 1 FROM ballots WHERE id = $1)", ballotID).Scan(&amp;ballotExists)
+        if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
+                return
+        }</span>
+
+        <span class="cov0" title="0">if !ballotExists </span><span class="cov0" title="0">{
+                c.JSON(http.StatusNotFound, gin.H{"error": "Ballot not found"})
+                return
+        }</span>
+
+        // Get ballot items with vote counts
+        <span class="cov0" title="0">rows, err := h.db.Query(`
+                SELECT id, ballot_id, title, description, vote_count
+                FROM ballot_items 
+                WHERE ballot_id = $1 
+                ORDER BY vote_count DESC, id ASC
+        `, ballotID)
+        if err != nil </span><span class="cov0" title="0">{
+                c.JSON(http.StatusInternalServerError, gin.H{"error": "Error fetching results"})
+                return
+        }</span>
+        <span class="cov0" title="0">defer rows.Close()
+
+        type ResultItem struct {
+                ID          int    `json:"id"`
+                OptionID    int    `json:"option_id"` // Frontend expects option_id
+                BallotID    int    `json:"ballot_id"`
+                Title       string `json:"title"`
+                OptionTitle string `json:"option_title"` // Alias for title
+                Description string `json:"description"`
+                VoteCount   int    `json:"vote_count"`
+        }
+
+        results := make([]ResultItem, 0)
+        totalVotes := 0
+        for rows.Next() </span><span class="cov0" title="0">{
+                var item models.BallotItem
+                err := rows.Scan(&amp;item.ID, &amp;item.BallotID, &amp;item.Title, &amp;item.Description, &amp;item.VoteCount)
+                if err != nil </span><span class="cov0" title="0">{
+                        c.JSON(http.StatusInternalServerError, gin.H{"error": "Error scanning result"})
+                        return
+                }</span>
+                <span class="cov0" title="0">results = append(results, ResultItem{
+                        ID:          item.ID,
+                        OptionID:    item.ID,
+                        BallotID:    item.BallotID,
+                        Title:       item.Title,
+                        OptionTitle: item.Title,
+                        Description: item.Description,
+                        VoteCount:   item.VoteCount,
+                })
+                totalVotes += item.VoteCount</span>
+        }
+
+        <span class="cov0" title="0">c.JSON(http.StatusOK, gin.H{
+                "ballot_id":   ballotID,
+                "results":     results,
+                "total_votes": totalVotes,
+        })</span>
+}</pre>
+		
+		</div>
+	</body>
+	<script>
+	(function() {
+		var files = document.getElementById('files');
+		var visible;
+		files.addEventListener('change', onChange, false);
+		function select(part) {
+			if (visible)
+				visible.style.display = 'none';
+			visible = document.getElementById(part);
+			if (!visible)
+				return;
+			files.value = part;
+			visible.style.display = 'block';
+			location.hash = part;
+		}
+		function onChange() {
+			select(files.value);
+			window.scrollTo(0, 0);
+		}
+		if (location.hash != "") {
+			select(location.hash.substr(1));
+		}
+		if (!visible) {
+			select("file0");
+		}
+	})();
+	</script>
+</html>

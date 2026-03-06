@@ -1,15 +1,22 @@
 package tests
 
 import (
+	"crypto"
 	"database/sql"
 	"encoding/json"
+	"errors"
 	"net/http/httptest"
+	"strings"
 	"testing"
 	"time"
+	"voting-api/database"
+	"voting-api/handlers"
 	"voting-api/models"
 	"voting-api/utils"
 
 	"github.com/DATA-DOG/go-sqlmock"
+	"github.com/gin-gonic/gin"
+	"github.com/golang-jwt/jwt/v5"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -19,7 +26,7 @@ func TestUserRegistration(t *testing.T) {
 		testSetup, err := SetupTestEnvironment()
 		require.NoError(t, err)
 		defer testSetup.DB.Close()
-		
+
 		// Mock that user doesn't exist
 		testSetup.Mock.ExpectQuery("SELECT id FROM users WHERE email = $1 OR username = $2").
 			WithArgs("test@example.com", "testuser").
@@ -46,12 +53,12 @@ func TestUserRegistration(t *testing.T) {
 
 		t.Logf("Response Body: %s", recorder.Body.String())
 		assert.Equal(t, 201, recorder.Code)
-		
+
 		// Verify response contains token and user data
 		var response models.AuthResponse
 		err = parseJSONResponse(recorder, &response)
 		require.NoError(t, err)
-		
+
 		assert.NotEmpty(t, response.Token)
 		assert.Equal(t, "testuser", response.User.Username)
 		assert.Equal(t, "test@example.com", response.User.Email)
@@ -107,6 +114,60 @@ func TestUserRegistration(t *testing.T) {
 		testSetup.Router.ServeHTTP(recorder, req)
 
 		assert.Equal(t, 400, recorder.Code)
+	})
+
+	t.Run("Register DB Error on User Check (not ErrNoRows)", func(t *testing.T) {
+		testSetup, err := SetupTestEnvironment()
+		require.NoError(t, err)
+		defer testSetup.DB.Close()
+
+		testSetup.Mock.ExpectQuery("SELECT id FROM users WHERE email = $1 OR username = $2").
+			WithArgs("test@example.com", "testuser").
+			WillReturnError(errors.New("connection error"))
+
+		reqBody := models.RegisterRequest{
+			Username: "testuser",
+			Email:    "test@example.com",
+			Password: "password123",
+		}
+
+		req, err := CreateTestRequest("POST", "/api/v1/auth/register", reqBody)
+		require.NoError(t, err)
+
+		recorder := httptest.NewRecorder()
+		testSetup.Router.ServeHTTP(recorder, req)
+
+		AssertErrorResponse(t, recorder, 500, "Database error")
+		assert.NoError(t, testSetup.Mock.ExpectationsWereMet())
+	})
+
+	t.Run("Register DB Error on INSERT User", func(t *testing.T) {
+		testSetup, err := SetupTestEnvironment()
+		require.NoError(t, err)
+		defer testSetup.DB.Close()
+
+		testSetup.Mock.ExpectQuery("SELECT id FROM users WHERE email = $1 OR username = $2").
+			WithArgs("test@example.com", "testuser").
+			WillReturnError(sql.ErrNoRows)
+
+		testSetup.Mock.ExpectQuery("INSERT INTO users (username, email, password_hash) VALUES ($1, $2, $3) RETURNING id, username, email, created_at, updated_at").
+			WithArgs("testuser", "test@example.com", sqlmock.AnyArg()).
+			WillReturnError(errors.New("insert error"))
+
+		reqBody := models.RegisterRequest{
+			Username: "testuser",
+			Email:    "test@example.com",
+			Password: "password123",
+		}
+
+		req, err := CreateTestRequest("POST", "/api/v1/auth/register", reqBody)
+		require.NoError(t, err)
+
+		recorder := httptest.NewRecorder()
+		testSetup.Router.ServeHTTP(recorder, req)
+
+		AssertErrorResponse(t, recorder, 500, "Error creating user")
+		assert.NoError(t, testSetup.Mock.ExpectationsWereMet())
 	})
 }
 
@@ -205,6 +266,30 @@ func TestUserLogin(t *testing.T) {
 		AssertErrorResponse(t, recorder, 401, "Invalid credentials")
 		assert.NoError(t, testSetup.Mock.ExpectationsWereMet())
 	})
+
+	t.Run("Login DB Error (not ErrNoRows)", func(t *testing.T) {
+		testSetup, err := SetupTestEnvironment()
+		require.NoError(t, err)
+		defer testSetup.DB.Close()
+
+		testSetup.Mock.ExpectQuery("SELECT id, username, email, password_hash, created_at, updated_at FROM users WHERE email = $1").
+			WithArgs("test@example.com").
+			WillReturnError(errors.New("connection error"))
+
+		reqBody := models.LoginRequest{
+			Email:    "test@example.com",
+			Password: "password123",
+		}
+
+		req, err := CreateTestRequest("POST", "/api/v1/auth/login", reqBody)
+		require.NoError(t, err)
+
+		recorder := httptest.NewRecorder()
+		testSetup.Router.ServeHTTP(recorder, req)
+
+		AssertErrorResponse(t, recorder, 500, "Database error")
+		assert.NoError(t, testSetup.Mock.ExpectationsWereMet())
+	})
 }
 
 func TestGetProfile(t *testing.T) {
@@ -270,6 +355,72 @@ func TestGetProfile(t *testing.T) {
 
 		AssertErrorResponse(t, recorder, 401, "Invalid token")
 	})
+
+	t.Run("Get Profile User Not Found (ErrNoRows)", func(t *testing.T) {
+		testSetup, err := SetupTestEnvironment()
+		require.NoError(t, err)
+		defer testSetup.DB.Close()
+
+		userID := 999
+		email := "notfound@example.com"
+
+		testSetup.Mock.ExpectQuery("SELECT id, username, email, created_at, updated_at FROM users WHERE id = $1").
+			WithArgs(userID).
+			WillReturnError(sql.ErrNoRows)
+
+		req, err := CreateAuthenticatedRequest("GET", "/api/v1/profile", nil, userID, email)
+		require.NoError(t, err)
+
+		recorder := httptest.NewRecorder()
+		testSetup.Router.ServeHTTP(recorder, req)
+
+		AssertErrorResponse(t, recorder, 404, "User not found")
+		assert.NoError(t, testSetup.Mock.ExpectationsWereMet())
+	})
+
+	t.Run("Get Profile DB Error", func(t *testing.T) {
+		testSetup, err := SetupTestEnvironment()
+		require.NoError(t, err)
+		defer testSetup.DB.Close()
+
+		userID := 1
+		email := "test@example.com"
+
+		testSetup.Mock.ExpectQuery("SELECT id, username, email, created_at, updated_at FROM users WHERE id = $1").
+			WithArgs(userID).
+			WillReturnError(errors.New("db error"))
+
+		req, err := CreateAuthenticatedRequest("GET", "/api/v1/profile", nil, userID, email)
+		require.NoError(t, err)
+
+		recorder := httptest.NewRecorder()
+		testSetup.Router.ServeHTTP(recorder, req)
+
+		AssertErrorResponse(t, recorder, 500, "Database error")
+		assert.NoError(t, testSetup.Mock.ExpectationsWereMet())
+	})
+
+	t.Run("Get Profile No User ID In Context", func(t *testing.T) {
+		mockDB, mock, err := sqlmock.New(sqlmock.QueryMatcherOption(sqlmock.QueryMatcherEqual))
+		require.NoError(t, err)
+		defer mockDB.Close()
+		_ = mock
+
+		db := &database.DB{DB: mockDB}
+		handler := handlers.NewAuthHandler(db)
+
+		gin.SetMode(gin.TestMode)
+		w := httptest.NewRecorder()
+		c, _ := gin.CreateTestContext(w)
+		c.Request, _ = CreateTestRequest("GET", "/api/v1/profile", nil)
+		handler.GetProfile(c)
+		assert.Equal(t, 401, w.Code)
+
+		var response map[string]interface{}
+		err = json.Unmarshal(w.Body.Bytes(), &response)
+		assert.NoError(t, err)
+		assert.Equal(t, "Unauthorized", response["error"])
+	})
 }
 
 // Helper function to parse JSON response
@@ -279,4 +430,131 @@ func parseJSONResponse(recorder *httptest.ResponseRecorder, target interface{}) 
 
 func parseJSONFromBytes(data []byte, target interface{}) error {
 	return json.Unmarshal(data, target)
+}
+
+// TestRegisterHashPasswordError tests the branch where bcrypt fails (password > 72 bytes)
+func TestRegisterHashPasswordError(t *testing.T) {
+	t.Run("Register With Password Too Long (HashPassword error)", func(t *testing.T) {
+		testSetup, err := SetupTestEnvironment()
+		require.NoError(t, err)
+		defer testSetup.DB.Close()
+
+		// Mock that user doesn't exist
+		testSetup.Mock.ExpectQuery("SELECT id FROM users WHERE email = $1 OR username = $2").
+			WithArgs("test@example.com", "testuser").
+			WillReturnError(sql.ErrNoRows)
+
+		// Password longer than 72 bytes causes bcrypt.ErrPasswordTooLong
+		longPassword := strings.Repeat("a", 73)
+
+		reqBody := models.RegisterRequest{
+			Username: "testuser",
+			Email:    "test@example.com",
+			Password: longPassword,
+		}
+
+		req, err := CreateTestRequest("POST", "/api/v1/auth/register", reqBody)
+		require.NoError(t, err)
+
+		recorder := httptest.NewRecorder()
+		testSetup.Router.ServeHTTP(recorder, req)
+
+		AssertErrorResponse(t, recorder, 500, "Error hashing password")
+		assert.NoError(t, testSetup.Mock.ExpectationsWereMet())
+	})
+}
+
+// TestRegisterGenerateJWTError tests the branch where JWT generation fails after successful INSERT
+func TestRegisterGenerateJWTError(t *testing.T) {
+	t.Run("Register GenerateJWT Error", func(t *testing.T) {
+		testSetup, err := SetupTestEnvironment()
+		require.NoError(t, err)
+		defer testSetup.DB.Close()
+
+		// Mock that user doesn't exist
+		testSetup.Mock.ExpectQuery("SELECT id FROM users WHERE email = $1 OR username = $2").
+			WithArgs("test@example.com", "testuser").
+			WillReturnError(sql.ErrNoRows)
+
+		createdAt := time.Date(2023, 1, 1, 0, 0, 0, 0, time.UTC)
+		testSetup.Mock.ExpectQuery("INSERT INTO users (username, email, password_hash) VALUES ($1, $2, $3) RETURNING id, username, email, created_at, updated_at").
+			WithArgs("testuser", "test@example.com", sqlmock.AnyArg()).
+			WillReturnRows(sqlmock.NewRows([]string{"id", "username", "email", "created_at", "updated_at"}).
+				AddRow(1, "testuser", "test@example.com", createdAt, createdAt))
+
+		// Make jwt.SigningMethodHS256 fail by setting an unavailable hash
+		origHash := jwt.SigningMethodHS256.Hash
+		jwt.SigningMethodHS256.Hash = crypto.Hash(0)
+		defer func() { jwt.SigningMethodHS256.Hash = origHash }()
+
+		reqBody := models.RegisterRequest{
+			Username: "testuser",
+			Email:    "test@example.com",
+			Password: "password123",
+		}
+
+		req, err := CreateTestRequest("POST", "/api/v1/auth/register", reqBody)
+		require.NoError(t, err)
+
+		recorder := httptest.NewRecorder()
+		testSetup.Router.ServeHTTP(recorder, req)
+
+		AssertErrorResponse(t, recorder, 500, "Error generating token")
+		assert.NoError(t, testSetup.Mock.ExpectationsWereMet())
+	})
+}
+
+// TestLoginShouldBindJSONError tests the branch where Login ShouldBindJSON fails
+func TestLoginShouldBindJSONError(t *testing.T) {
+	t.Run("Login With Invalid JSON Body", func(t *testing.T) {
+		testSetup, err := SetupTestEnvironment()
+		require.NoError(t, err)
+		defer testSetup.DB.Close()
+
+		req, err := CreateRawBodyRequest("POST", "/api/v1/auth/login", "not-valid-json{")
+		require.NoError(t, err)
+
+		recorder := httptest.NewRecorder()
+		testSetup.Router.ServeHTTP(recorder, req)
+
+		assert.Equal(t, 400, recorder.Code)
+	})
+}
+
+// TestLoginGenerateJWTError tests the branch where JWT generation fails in Login
+func TestLoginGenerateJWTError(t *testing.T) {
+	t.Run("Login GenerateJWT Error", func(t *testing.T) {
+		testSetup, err := SetupTestEnvironment()
+		require.NoError(t, err)
+		defer testSetup.DB.Close()
+
+		password := "password123"
+		hashedPassword, err := utils.HashPassword(password)
+		require.NoError(t, err)
+
+		createdAt := time.Date(2023, 1, 1, 0, 0, 0, 0, time.UTC)
+		testSetup.Mock.ExpectQuery("SELECT id, username, email, password_hash, created_at, updated_at FROM users WHERE email = $1").
+			WithArgs("test@example.com").
+			WillReturnRows(sqlmock.NewRows([]string{"id", "username", "email", "password_hash", "created_at", "updated_at"}).
+				AddRow(1, "testuser", "test@example.com", hashedPassword, createdAt, createdAt))
+
+		// Make jwt.SigningMethodHS256 fail by setting an unavailable hash
+		origHash := jwt.SigningMethodHS256.Hash
+		jwt.SigningMethodHS256.Hash = crypto.Hash(0)
+		defer func() { jwt.SigningMethodHS256.Hash = origHash }()
+
+		reqBody := models.LoginRequest{
+			Email:    "test@example.com",
+			Password: password,
+		}
+
+		req, err := CreateTestRequest("POST", "/api/v1/auth/login", reqBody)
+		require.NoError(t, err)
+
+		recorder := httptest.NewRecorder()
+		testSetup.Router.ServeHTTP(recorder, req)
+
+		AssertErrorResponse(t, recorder, 500, "Error generating token")
+		assert.NoError(t, testSetup.Mock.ExpectationsWereMet())
+	})
 }

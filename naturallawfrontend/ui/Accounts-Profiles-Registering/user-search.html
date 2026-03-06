@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Users - Common-Law Republic U.S.A.</title>
+    <style>
+        :root {
+            --primary-dark: #000000;
+            --secondary-dark: #111111;
+            --tertiary-dark: #1a1a1a;
+            --accent-gold: #f5d442;
+            --accent-gold-hover: #ffe97f;
+            --text-light: #ffffcc;
+            --text-white: #fefefe;
+            --border-color: #444;
+            --shadow-color: rgba(255, 215, 0, 0.2);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: "Times New Roman", Times, serif;
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 { color: var(--accent-gold); margin-bottom: 1rem; }
+        a { color: var(--accent-gold); text-decoration: none; transition: color 0.3s ease; }
+        a:hover { color: var(--accent-gold-hover); }
+
+        .main-header {
+            background-color: var(--primary-dark);
+            border-bottom: 2px solid var(--accent-gold);
+        }
+        .header-title { text-align: center; padding: 1rem 0; }
+        .header-title h1 { font-size: 2.7rem; color: #ffffff; }
+
+        .topnav {
+            background-color: var(--secondary-dark);
+            display: flex; justify-content: center; align-items: center;
+            padding: 0; position: sticky; top: 0; z-index: 1000;
+        }
+        .dropdown { position: relative; display: inline-block; margin: 0 0.5rem; }
+        .dropbtn {
+            background: transparent; color: var(--accent-gold);
+            padding: 0.8rem 1.2rem; font-size: 1rem; border: none;
+            cursor: pointer; font-weight: bold; transition: color 0.3s ease;
+        }
+        .dropbtn:hover { color: var(--accent-gold-hover); }
+        .dropdown-content {
+            display: none; position: absolute; background-color: var(--tertiary-dark);
+            min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+            z-index: 1; border: 1px solid var(--border-color); border-radius: 4px;
+        }
+        .dropdown-content a {
+            color: var(--text-light); padding: 12px 16px; display: block;
+        }
+        .dropdown-content a:hover { background-color: var(--secondary-dark); color: var(--accent-gold); }
+        .dropdown:hover .dropdown-content { display: block; }
+
+        .main-content {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 0.6rem;
+            margin-bottom: 2rem;
+        }
+
+        .search-box input {
+            flex: 1;
+            background: var(--secondary-dark);
+            border: 1px solid var(--border-color);
+            color: var(--text-light);
+            padding: 0.7rem 1rem;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .search-box input:focus { outline: 1px solid var(--accent-gold); }
+
+        .btn {
+            padding: 0.7rem 1.4rem;
+            background-color: var(--accent-gold);
+            color: var(--primary-dark);
+            border: none; border-radius: 8px;
+            font-size: 1rem; font-weight: bold;
+            cursor: pointer; font-family: inherit;
+            transition: background-color 0.2s;
+        }
+        .btn:hover { background-color: var(--accent-gold-hover); }
+
+        .user-card {
+            background-color: var(--secondary-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 1rem 1.4rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .user-card-info h3 { margin: 0; font-size: 1.2rem; }
+        .trust-badge {
+            background: var(--tertiary-dark);
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+            padding: 0.25rem 0.7rem;
+            border-radius: 20px;
+            font-size: 0.88rem;
+            margin-top: 0.3rem;
+            display: inline-block;
+        }
+
+        .btn-view {
+            padding: 0.45rem 1.1rem;
+            background: transparent;
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            cursor: pointer;
+            font-family: inherit;
+            transition: background 0.2s;
+            text-decoration: none;
+        }
+        .btn-view:hover { background: var(--accent-gold); color: var(--primary-dark); }
+
+        #resultsStatus { color: #aaa; font-size: 1rem; margin-bottom: 1rem; }
+
+        .main-footer {
+            background-color: var(--secondary-dark);
+            padding: 1rem; margin-top: 2rem;
+            border-top: 2px solid var(--border-color);
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-title">
+            <h1><u>Common-Law Republic</u>; <u>U.S.A.</u>.</h1>
+        </div>
+        <nav class="topnav">
+            <div class="dropdown">
+                <button class="dropbtn">Home Page.</button>
+                <div class="dropdown-content">
+                    <a href="../index.html">Home Page.</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="dropbtn">Account.</button>
+                <div class="dropdown-content">
+                    <a href="./Login.html">Login</a>
+                    <a href="./NewUsers-Registration.html">Register</a>
+                    <a href="./MyProfile.html">My Profile</a>
+                    <a href="./user-search.html">Find Users</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <h2>Find Users</h2>
+
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="Search by username..." onkeydown="if(event.key==='Enter') doSearch()">
+            <button class="btn" onclick="doSearch()">Search</button>
+        </div>
+
+        <div id="resultsStatus"></div>
+        <div id="results"></div>
+    </main>
+
+    <footer class="main-footer">
+        <p><u>Common-Law Republic, U.S.A.</u>; <u>Empowering Self-Governing Communities</u>.</p>
+    </footer>
+
+    <script>
+        const API_BASE = 'http://localhost:8080/api/v1';
+
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        async function doSearch() {
+            const q = document.getElementById('searchInput').value.trim();
+            if (!q) return;
+
+            document.getElementById('resultsStatus').textContent = 'Searching...';
+            document.getElementById('results').innerHTML = '';
+
+            try {
+                const res = await fetch(`${API_BASE}/public/users/search?username=${encodeURIComponent(q)}`);
+                if (!res.ok) throw new Error('Search failed');
+                const users = await res.json();
+
+                if (!users || users.length === 0) {
+                    document.getElementById('resultsStatus').textContent = 'No users found.';
+                    return;
+                }
+
+                document.getElementById('resultsStatus').textContent = `${users.length} result(s)`;
+                const html = users.map(u => {
+                    const score = u.vote_count > 0 ? u.trust_score.toFixed(1) : '—';
+                    const votes = u.vote_count === 1 ? '1 rating' : u.vote_count + ' ratings';
+                    return `<div class="user-card">
+                        <div class="user-card-info">
+                            <h3>${escapeHtml(u.username)}</h3>
+                            <span class="trust-badge">Trust Score: ${score} / 100 &nbsp;(${votes})</span>
+                        </div>
+                        <a href="./view-profile.html?user_id=${u.id}" class="btn-view">View Profile</a>
+                    </div>`;
+                }).join('');
+
+                document.getElementById('results').innerHTML = html;
+            } catch(e) {
+                document.getElementById('resultsStatus').textContent = 'Error: ' + e.message;
+            }
+        }
+    </script>
+</body>
+</html>

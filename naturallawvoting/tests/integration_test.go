@@ -70,12 +70,12 @@ func TestFullVotingFlow(t *testing.T) {
 		// Mock transaction begin
 		testSetup.Mock.ExpectBegin()
 
-		// Mock ballot insertion
+		// Mock ballot insertion - updated query with category/superstate/state/district
 		createdAt := time.Date(2023, 1, 1, 0, 0, 0, 0, time.UTC)
-		testSetup.Mock.ExpectQuery("INSERT INTO ballots (title, description, creator_id) VALUES ($1, $2, $3) RETURNING id, title, description, creator_id, is_active, created_at, updated_at").
-			WithArgs("Integration Test Ballot", "Testing the full workflow", userID).
-			WillReturnRows(sqlmock.NewRows([]string{"id", "title", "description", "creator_id", "is_active", "created_at", "updated_at"}).
-				AddRow(ballotID, "Integration Test Ballot", "Testing the full workflow", userID, true, createdAt, createdAt))
+		testSetup.Mock.ExpectQuery("INSERT INTO ballots (title, description, category, superstate, state, district, creator_id) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id, title, description, category, superstate, state, COALESCE(district, ''), creator_id, is_active, created_at, updated_at").
+			WithArgs("Integration Test Ballot", "Testing the full workflow", "", "", "", "", userID).
+			WillReturnRows(sqlmock.NewRows([]string{"id", "title", "description", "category", "superstate", "state", "district", "creator_id", "is_active", "created_at", "updated_at"}).
+				AddRow(ballotID, "Integration Test Ballot", "Testing the full workflow", "", "", "", "", userID, true, createdAt, createdAt))
 
 		// Mock ballot items insertion
 		testSetup.Mock.ExpectQuery("INSERT INTO ballot_items (ballot_id, title, description) VALUES ($1, $2, $3) RETURNING id, ballot_id, title, description, vote_count").
@@ -119,16 +119,16 @@ func TestFullVotingFlow(t *testing.T) {
 	})
 
 	t.Run("3. Get All Ballots (Public)", func(t *testing.T) {
-		// Mock ballots query
+		// Mock ballots query - updated columns
 		createdAt := time.Date(2023, 1, 1, 0, 0, 0, 0, time.UTC)
-		testSetup.Mock.ExpectQuery(`SELECT b.id, b.title, b.description, b.creator_id, b.is_active, b.created_at, b.updated_at,
-       u.username as creator_username
-FROM ballots b 
-JOIN users u ON b.creator_id = u.id 
-WHERE b.is_active = true 
-ORDER BY b.created_at DESC`).
-			WillReturnRows(sqlmock.NewRows([]string{"id", "title", "description", "creator_id", "is_active", "created_at", "updated_at", "creator_username"}).
-				AddRow(ballotID, "Integration Test Ballot", "Testing the full workflow", userID, true, createdAt, createdAt, username))
+		testSetup.Mock.ExpectQuery(`
+		SELECT b.id, b.title, b.description, b.category, COALESCE(b.superstate, ''), COALESCE(b.state, ''), COALESCE(b.district, ''), b.creator_id, b.is_active, b.created_at, b.updated_at,
+		       u.username as creator_username
+		FROM ballots b
+		JOIN users u ON b.creator_id = u.id
+		WHERE b.is_active = true ORDER BY b.created_at DESC`).
+			WillReturnRows(sqlmock.NewRows([]string{"id", "title", "description", "category", "superstate", "state", "district", "creator_id", "is_active", "created_at", "updated_at", "creator_username"}).
+				AddRow(ballotID, "Integration Test Ballot", "Testing the full workflow", "", "", "", "", userID, true, createdAt, createdAt, username))
 
 		req, err := CreateTestRequest("GET", "/api/v1/public/ballots", nil)
 		require.NoError(t, err)
@@ -149,19 +149,23 @@ ORDER BY b.created_at DESC`).
 	})
 
 	t.Run("4. Get Specific Ballot with Items", func(t *testing.T) {
-		// Mock ballot query
+		// Mock ballot query - updated columns
 		createdAt := time.Date(2023, 1, 1, 0, 0, 0, 0, time.UTC)
-		testSetup.Mock.ExpectQuery(`SELECT b.id, b.title, b.description, b.creator_id, b.is_active, b.created_at, b.updated_at
-FROM ballots b WHERE b.id = $1`).
+		testSetup.Mock.ExpectQuery(`
+		SELECT b.id, b.title, b.description, b.category, COALESCE(b.superstate, ''), COALESCE(b.state, ''), COALESCE(b.district, ''), b.creator_id, b.is_active, b.created_at, b.updated_at
+		FROM ballots b WHERE b.id = $1
+	`).
 			WithArgs(ballotID).
-			WillReturnRows(sqlmock.NewRows([]string{"id", "title", "description", "creator_id", "is_active", "created_at", "updated_at"}).
-				AddRow(ballotID, "Integration Test Ballot", "Testing the full workflow", userID, true, createdAt, createdAt))
+			WillReturnRows(sqlmock.NewRows([]string{"id", "title", "description", "category", "superstate", "state", "district", "creator_id", "is_active", "created_at", "updated_at"}).
+				AddRow(ballotID, "Integration Test Ballot", "Testing the full workflow", "", "", "", "", userID, true, createdAt, createdAt))
 
 		// Mock ballot items query
-		testSetup.Mock.ExpectQuery(`SELECT id, ballot_id, title, description, vote_count
-FROM ballot_items 
-WHERE ballot_id = $1 
-ORDER BY id ASC`).
+		testSetup.Mock.ExpectQuery(`
+		SELECT id, ballot_id, title, description, vote_count
+		FROM ballot_items
+		WHERE ballot_id = $1
+		ORDER BY id ASC
+	`).
 			WithArgs(ballotID).
 			WillReturnRows(sqlmock.NewRows([]string{"id", "ballot_id", "title", "description", "vote_count"}).
 				AddRow(1, ballotID, "Option A", "First choice", 0).
@@ -273,9 +277,10 @@ ORDER BY id ASC`).
 
 		// Mock ballot results (Option A should have 1 vote now)
 		testSetup.Mock.ExpectQuery(`SELECT id, ballot_id, title, description, vote_count
-FROM ballot_items 
-WHERE ballot_id = $1 
-ORDER BY vote_count DESC, id ASC`).
+		FROM ballot_items
+		WHERE ballot_id = $1
+		ORDER BY vote_count DESC, id ASC
+	`).
 			WithArgs(ballotID).
 			WillReturnRows(sqlmock.NewRows([]string{"id", "ballot_id", "title", "description", "vote_count"}).
 				AddRow(1, ballotID, "Option A", "First choice", 1).
@@ -309,15 +314,17 @@ ORDER BY vote_count DESC, id ASC`).
 	})
 
 	t.Run("8. Get User's Ballots", func(t *testing.T) {
-		// Mock user ballots query
+		// Mock user ballots query - updated columns
 		createdAt := time.Date(2023, 1, 1, 0, 0, 0, 0, time.UTC)
-		testSetup.Mock.ExpectQuery(`SELECT id, title, description, creator_id, is_active, created_at, updated_at
-FROM ballots 
-WHERE creator_id = $1 
-ORDER BY created_at DESC`).
+		testSetup.Mock.ExpectQuery(`
+		SELECT id, title, description, category, COALESCE(superstate, ''), COALESCE(state, ''), COALESCE(district, ''), creator_id, is_active, created_at, updated_at
+		FROM ballots
+		WHERE creator_id = $1
+		ORDER BY created_at DESC
+	`).
 			WithArgs(userID).
-			WillReturnRows(sqlmock.NewRows([]string{"id", "title", "description", "creator_id", "is_active", "created_at", "updated_at"}).
-				AddRow(ballotID, "Integration Test Ballot", "Testing the full workflow", userID, true, createdAt, createdAt))
+			WillReturnRows(sqlmock.NewRows([]string{"id", "title", "description", "category", "superstate", "state", "district", "creator_id", "is_active", "created_at", "updated_at"}).
+				AddRow(ballotID, "Integration Test Ballot", "Testing the full workflow", "", "", "", "", userID, true, createdAt, createdAt))
 
 		req, err := CreateAuthenticatedRequest("GET", "/api/v1/my-ballots", nil, userID, email)
 		require.NoError(t, err)

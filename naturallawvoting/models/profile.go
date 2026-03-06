@@ -144,6 +144,25 @@ type CreateEconomicInfoRequest struct {
 	AdditionalText               string   `json:"additional_text"`
 }
 
+type ProfileVisibility struct {
+	UserID                 int `json:"user_id"`
+	InfoThreshold          int `json:"info_threshold"`
+	AddressThreshold       int `json:"address_threshold"`
+	PoliticalThreshold     int `json:"political_threshold"`
+	ReligiousThreshold     int `json:"religious_threshold"`
+	RaceEthnicityThreshold int `json:"race_ethnicity_threshold"`
+	EconomicThreshold      int `json:"economic_threshold"`
+}
+
+type UpdateProfileVisibilityRequest struct {
+	InfoThreshold          *int `json:"info_threshold" binding:"omitempty,min=0,max=100"`
+	AddressThreshold       *int `json:"address_threshold" binding:"omitempty,min=0,max=100"`
+	PoliticalThreshold     *int `json:"political_threshold" binding:"omitempty,min=0,max=100"`
+	ReligiousThreshold     *int `json:"religious_threshold" binding:"omitempty,min=0,max=100"`
+	RaceEthnicityThreshold *int `json:"race_ethnicity_threshold" binding:"omitempty,min=0,max=100"`
+	EconomicThreshold      *int `json:"economic_threshold" binding:"omitempty,min=0,max=100"`
+}
+
 type UpdateEconomicInfoRequest struct {
 	ForCurrentPoliticalStructure *string  `json:"for_current_political_structure"`
 	ForCapitalism                *string  `json:"for_capitalism"`

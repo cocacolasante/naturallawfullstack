@@ -30,6 +30,7 @@ func SetupRoutes(db *database.DB) *gin.Engine {
 	ballotHandler := handlers.NewBallotHandler(db)
 	voteHandler := handlers.NewVoteHandler(db)
 	profileHandler := handlers.NewProfileHandler(db)
+	trustHandler := handlers.NewTrustHandler(db)
 
 	// Health check
 	r.GET("/health", func(c *gin.Context) {
@@ -57,6 +58,10 @@ func SetupRoutes(db *database.DB) *gin.Engine {
 			public.GET("/superstates", ballotHandler.GetSuperstates)
 			public.GET("/superstates/:superstate/states", ballotHandler.GetStates)
 			public.GET("/superstates/:superstate/states/:state/districts", ballotHandler.GetDistricts)
+
+			// Trust / user search (public)
+			public.GET("/users/search", trustHandler.SearchUsers)
+			public.GET("/users/:user_id/trust-score", trustHandler.GetTrustScore)
 		}
 
 		// Protected routes (authentication required)
@@ -112,6 +117,14 @@ func SetupRoutes(db *database.DB) *gin.Engine {
 			protected.POST("/profile/economic", profileHandler.CreateEconomicInfo)
 			protected.PUT("/profile/economic", profileHandler.UpdateEconomicInfo)
 			protected.DELETE("/profile/economic", profileHandler.DeleteEconomicInfo)
+
+			// Trust votes and profile visibility
+			protected.POST("/users/:user_id/trust", trustHandler.SubmitTrustVote)
+			protected.GET("/users/:user_id/my-trust-vote", trustHandler.GetMyTrustVote)
+			protected.GET("/my-trust-score", trustHandler.GetMyTrustScore)
+			protected.GET("/profile/visibility", trustHandler.GetProfileVisibility)
+			protected.PUT("/profile/visibility", trustHandler.UpdateProfileVisibility)
+			protected.GET("/users/:user_id/profile", trustHandler.GetUserProfileSections)
 		}
 	}
 

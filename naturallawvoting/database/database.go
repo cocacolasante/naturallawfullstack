@@ -219,6 +219,41 @@ CREATE TRIGGER update_user_race_ethnicity_updated_at BEFORE UPDATE ON user_race_
 DROP TRIGGER IF EXISTS update_economic_info_updated_at ON economic_info;
 CREATE TRIGGER update_economic_info_updated_at BEFORE UPDATE ON economic_info
     FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+-- Trust votes: one score (1-100) per voter-subject pair
+CREATE TABLE IF NOT EXISTS trust_votes (
+    id SERIAL PRIMARY KEY,
+    voter_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    subject_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    score INTEGER NOT NULL CHECK (score >= 1 AND score <= 100),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(voter_id, subject_id)
+);
+
+-- Profile visibility thresholds per section (0 = always visible)
+CREATE TABLE IF NOT EXISTS profile_visibility (
+    user_id INTEGER PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
+    info_threshold INTEGER NOT NULL DEFAULT 0 CHECK (info_threshold >= 0 AND info_threshold <= 100),
+    address_threshold INTEGER NOT NULL DEFAULT 0 CHECK (address_threshold >= 0 AND address_threshold <= 100),
+    political_threshold INTEGER NOT NULL DEFAULT 0 CHECK (political_threshold >= 0 AND political_threshold <= 100),
+    religious_threshold INTEGER NOT NULL DEFAULT 0 CHECK (religious_threshold >= 0 AND religious_threshold <= 100),
+    race_ethnicity_threshold INTEGER NOT NULL DEFAULT 0 CHECK (race_ethnicity_threshold >= 0 AND race_ethnicity_threshold <= 100),
+    economic_threshold INTEGER NOT NULL DEFAULT 0 CHECK (economic_threshold >= 0 AND economic_threshold <= 100),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_trust_votes_subject ON trust_votes(subject_id);
+CREATE INDEX IF NOT EXISTS idx_trust_votes_voter ON trust_votes(voter_id);
+
+DROP TRIGGER IF EXISTS update_trust_votes_updated_at ON trust_votes;
+CREATE TRIGGER update_trust_votes_updated_at BEFORE UPDATE ON trust_votes
+    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+DROP TRIGGER IF EXISTS update_profile_visibility_updated_at ON profile_visibility;
+CREATE TRIGGER update_profile_visibility_updated_at BEFORE UPDATE ON profile_visibility
+    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 `
 
 	_, err := db.Exec(schemaSQL)

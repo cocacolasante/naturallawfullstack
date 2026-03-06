@@ -69,6 +69,32 @@ func CreateTestRequest(method, url string, body interface{}) (*http.Request, err
 	return req, nil
 }
 
+// CreateRawBodyRequest creates an HTTP request with a raw string body
+func CreateRawBodyRequest(method, url string, rawBody string) (*http.Request, error) {
+	req, err := http.NewRequest(method, url, bytes.NewBufferString(rawBody))
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Set("Content-Type", "application/json")
+	return req, nil
+}
+
+// CreateAuthenticatedRawBodyRequest creates an authenticated request with raw body
+func CreateAuthenticatedRawBodyRequest(method, url string, rawBody string, userID int, email string) (*http.Request, error) {
+	req, err := CreateRawBodyRequest(method, url, rawBody)
+	if err != nil {
+		return nil, err
+	}
+
+	token, err := utils.GenerateJWT(userID, email)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Set("Authorization", "Bearer "+token)
+	return req, nil
+}
+
 // CreateAuthenticatedRequest creates an HTTP request with JWT token
 func CreateAuthenticatedRequest(method, url string, body interface{}, userID int, email string) (*http.Request, error) {
 	req, err := CreateTestRequest(method, url, body)
