@@ -42,9 +42,9 @@ func (h *BallotHandler) CreateBallot(c *gin.Context) {
 	// Insert ballot
 	var ballot models.Ballot
 	err = tx.QueryRow(
-		"INSERT INTO ballots (title, description, category, superstate, state, creator_id) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id, title, description, category, superstate, state, creator_id, is_active, created_at, updated_at",
-		req.Title, req.Description, req.Category, req.Superstate, req.State, userID,
-	).Scan(&ballot.ID, &ballot.Title, &ballot.Description, &ballot.Category, &ballot.Superstate, &ballot.State, &ballot.CreatorID, &ballot.IsActive, &ballot.CreatedAt, &ballot.UpdatedAt)
+		"INSERT INTO ballots (title, description, category, superstate, state, district, creator_id) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING id, title, description, category, superstate, state, COALESCE(district, ''), creator_id, is_active, created_at, updated_at",
+		req.Title, req.Description, req.Category, req.Superstate, req.State, req.District, userID,
+	).Scan(&ballot.ID, &ballot.Title, &ballot.Description, &ballot.Category, &ballot.Superstate, &ballot.State, &ballot.District, &ballot.CreatorID, &ballot.IsActive, &ballot.CreatedAt, &ballot.UpdatedAt)
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Error creating ballot"})
@@ -81,9 +81,10 @@ func (h *BallotHandler) GetAllBallots(c *gin.Context) {
 	category := c.Query("category")
 	superstate := c.Query("superstate")
 	state := c.Query("state")
+	district := c.Query("district")
 
 	query := `
-		SELECT b.id, b.title, b.description, b.category, COALESCE(b.superstate, ''), COALESCE(b.state, ''), b.creator_id, b.is_active, b.created_at, b.updated_at,
+		SELECT b.id, b.title, b.description, b.category, COALESCE(b.superstate, ''), COALESCE(b.state, ''), COALESCE(b.district, ''), b.creator_id, b.is_active, b.created_at, b.updated_at,
 		       u.username as creator_username
 		FROM ballots b
 		JOIN users u ON b.creator_id = u.id
@@ -110,6 +111,12 @@ func (h *BallotHandler) GetAllBallots(c *gin.Context) {
 		argIndex++
 	}
 
+	if district != "" {
+		query += ` AND b.district = $` + strconv.Itoa(argIndex)
+		args = append(args, district)
+		argIndex++
+	}
+
 	query += ` ORDER BY b.created_at DESC`
 
 	rows, err := h.db.Query(query, args...)
@@ -124,7 +131,7 @@ func (h *BallotHandler) GetAllBallots(c *gin.Context) {
 		var ballot models.Ballot
 		var creatorUsername string
 		err := rows.Scan(
-			&ballot.ID, &ballot.Title, &ballot.Description, &ballot.Category, &ballot.Superstate, &ballot.State, &ballot.CreatorID,
+			&ballot.ID, &ballot.Title, &ballot.Description, &ballot.Category, &ballot.Superstate, &ballot.State, &ballot.District, &ballot.CreatorID,
 			&ballot.IsActive, &ballot.CreatedAt, &ballot.UpdatedAt, &creatorUsername,
 		)
 		if err != nil {
@@ -148,10 +155,10 @@ func (h *BallotHandler) GetBallot(c *gin.Context) {
 	// Get ballot
 	var ballot models.Ballot
 	err = h.db.QueryRow(`
-		SELECT b.id, b.title, b.description, b.category, COALESCE(b.superstate, ''), COALESCE(b.state, ''), b.creator_id, b.is_active, b.created_at, b.updated_at
+		SELECT b.id, b.title, b.description, b.category, COALESCE(b.superstate, ''), COALESCE(b.state, ''), COALESCE(b.district, ''), b.creator_id, b.is_active, b.created_at, b.updated_at
 		FROM ballots b WHERE b.id = $1
 	`, ballotID).Scan(
-		&ballot.ID, &ballot.Title, &ballot.Description, &ballot.Category, &ballot.Superstate, &ballot.State, &ballot.CreatorID,
+		&ballot.ID, &ballot.Title, &ballot.Description, &ballot.Category, &ballot.Superstate, &ballot.State, &ballot.District, &ballot.CreatorID,
 		&ballot.IsActive, &ballot.CreatedAt, &ballot.UpdatedAt,
 	)
 
@@ -199,7 +206,7 @@ func (h *BallotHandler) GetUserBallots(c *gin.Context) {
 	}
 
 	rows, err := h.db.Query(`
-		SELECT id, title, description, category, COALESCE(superstate, ''), COALESCE(state, ''), creator_id, is_active, created_at, updated_at
+		SELECT id, title, description, category, COALESCE(superstate, ''), COALESCE(state, ''), COALESCE(district, ''), creator_id, is_active, created_at, updated_at
 		FROM ballots
 		WHERE creator_id = $1
 		ORDER BY created_at DESC
@@ -214,7 +221,7 @@ func (h *BallotHandler) GetUserBallots(c *gin.Context) {
 	for rows.Next() {
 		var ballot models.Ballot
 		err := rows.Scan(
-			&ballot.ID, &ballot.Title, &ballot.Description, &ballot.Category, &ballot.Superstate, &ballot.State, &ballot.CreatorID,
+			&ballot.ID, &ballot.Title, &ballot.Description, &ballot.Category, &ballot.Superstate, &ballot.State, &ballot.District, &ballot.CreatorID,
 			&ballot.IsActive, &ballot.CreatedAt, &ballot.UpdatedAt,
 		)
 		if err != nil {
@@ -285,4 +292,38 @@ func (h *BallotHandler) GetStates(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{"superstate": superstate, "states": states})
+}
+
+// GetDistricts returns a list of all districts within a superstate+state that have ballots
+func (h *BallotHandler) GetDistricts(c *gin.Context) {
+	superstate := c.Param("superstate")
+	state := c.Param("state")
+	if superstate == "" || state == "" {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Superstate and state parameters required"})
+		return
+	}
+
+	rows, err := h.db.Query(`
+		SELECT DISTINCT district
+		FROM ballots
+		WHERE superstate = $1 AND state = $2 AND is_active = true AND district IS NOT NULL AND district != ''
+		ORDER BY district
+	`, superstate, state)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
+		return
+	}
+	defer rows.Close()
+
+	var districts []string
+	for rows.Next() {
+		var district string
+		if err := rows.Scan(&district); err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Error scanning district"})
+			return
+		}
+		districts = append(districts, district)
+	}
+
+	c.JSON(http.StatusOK, gin.H{"superstate": superstate, "state": state, "districts": districts})
 }

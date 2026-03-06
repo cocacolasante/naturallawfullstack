@@ -109,6 +109,15 @@ func ensureSchema(db *sql.DB) error {
 		return fmt.Errorf("failed to add state column: %v", err)
 	}
 
+	// Add district column to ballots if it doesn't exist
+	_, err = db.Exec(`
+		ALTER TABLE ballots
+		ADD COLUMN IF NOT EXISTS district VARCHAR(100) DEFAULT ''
+	`)
+	if err != nil {
+		return fmt.Errorf("failed to add district column: %v", err)
+	}
+
 	log.Println("✓ Schema verified/updated")
 	return nil
 }
@@ -167,6 +176,7 @@ func seedBallots(db *sql.DB) error {
 		category    string
 		superstate  string
 		state       string
+		district    string
 		isActive    bool
 	}{
 		// ===============================================================
@@ -1689,21 +1699,125 @@ func seedBallots(db *sql.DB) error {
 		},
 	}
 
+	// District lookup: state slug → ordered list of congressional districts.
+	// Each ballot for a state gets the next district in the list (cycling).
+	// At-Large District is used for single-CD states.
+	stateDistricts := map[string][]string{
+		// 01 New England
+		"vermont":       {"At-Large District"},
+		"rhode-island":  {"Congressional District 1", "Congressional District 2"},
+		"maine":         {"Congressional District 1", "Congressional District 2"},
+		"new-hampshire": {"Congressional District 1", "Congressional District 2"},
+		"connecticut":   {"Congressional District 1", "Congressional District 2", "Congressional District 3", "Congressional District 4", "Congressional District 5"},
+		"massachusetts": {"Congressional District 1", "Congressional District 2", "Congressional District 3", "Congressional District 4", "Congressional District 5", "Congressional District 6", "Congressional District 7", "Congressional District 8", "Congressional District 9"},
+		// 02 New York
+		"long-island":      {"Congressional District 1", "Congressional District 2", "Congressional District 3", "Congressional District 4"},
+		"new-york-city":    {"Congressional District 5", "Congressional District 6", "Congressional District 7", "Congressional District 8", "Congressional District 9", "Congressional District 10", "Congressional District 11", "Congressional District 12", "Congressional District 13", "Congressional District 15", "Congressional District 16"},
+		"upstate-new-york": {"Congressional District 17", "Congressional District 18", "Congressional District 19", "Congressional District 20", "Congressional District 21", "Congressional District 22", "Congressional District 23", "Congressional District 24", "Congressional District 25", "Congressional District 26"},
+		// 03 Jersey-Penn
+		"washington-dc": {"At-Large District"},
+		"delaware":      {"At-Large District"},
+		"maryland":      {"Congressional District 1", "Congressional District 2", "Congressional District 3", "Congressional District 4", "Congressional District 5", "Congressional District 6", "Congressional District 7", "Congressional District 8"},
+		"new-jersey":    {"Congressional District 1", "Congressional District 2", "Congressional District 3", "Congressional District 4", "Congressional District 5", "Congressional District 6", "Congressional District 7", "Congressional District 8", "Congressional District 9", "Congressional District 10", "Congressional District 11", "Congressional District 12"},
+		"pennsylvania":  {"Congressional District 1", "Congressional District 2", "Congressional District 3", "Congressional District 4", "Congressional District 5", "Congressional District 6", "Congressional District 7", "Congressional District 8", "Congressional District 9", "Congressional District 10", "Congressional District 11", "Congressional District 12", "Congressional District 13", "Congressional District 14", "Congressional District 15", "Congressional District 16", "Congressional District 17"},
+		// 04 Great Lakes
+		"kentucky": {"Congressional District 1", "Congressional District 2", "Congressional District 3", "Congressional District 4", "Congressional District 5", "Congressional District 6"},
+		"indiana":  {"Congressional District 1", "Congressional District 2", "Congressional District 3", "Congressional District 4", "Congressional District 5", "Congressional District 6", "Congressional District 7", "Congressional District 8", "Congressional District 9"},
+		"michigan": {"Congressional District 1", "Congressional District 2", "Congressional District 3", "Congressional District 4", "Congressional District 5", "Congressional District 6", "Congressional District 7", "Congressional District 8", "Congressional District 9", "Congressional District 10", "Congressional District 11", "Congressional District 12", "Congressional District 13"},
+		"ohio":     {"Congressional District 1", "Congressional District 2", "Congressional District 3", "Congressional District 4", "Congressional District 5", "Congressional District 6", "Congressional District 7", "Congressional District 8", "Congressional District 9", "Congressional District 10", "Congressional District 11", "Congressional District 12", "Congressional District 13", "Congressional District 14", "Congressional District 15"},
+		// 05 Virginia-Carolina
+		"west-virginia":  {"Congressional District 1", "Congressional District 2"},
+		"virginia":       {"Congressional District 1", "Congressional District 2", "Congressional District 3", "Congressional District 4", "Congressional District 5", "Congressional District 6", "Congressional District 7", "Congressional District 8", "Congressional District 9", "Congressional District 10", "Congressional District 11"},
+		"south-carolina": {"Congressional District 1", "Congressional District 2", "Congressional District 3", "Congressional District 4", "Congressional District 5", "Congressional District 6", "Congressional District 7"},
+		"north-carolina": {"Congressional District 1", "Congressional District 2", "Congressional District 3", "Congressional District 4", "Congressional District 5", "Congressional District 6", "Congressional District 7", "Congressional District 8", "Congressional District 9", "Congressional District 10", "Congressional District 11", "Congressional District 12", "Congressional District 13", "Congressional District 14"},
+		// 06 Florida-Georgia
+		"georgia": {"Congressional District 1", "Congressional District 2", "Congressional District 3", "Congressional District 4", "Congressional District 5", "Congressional District 6", "Congressional District 7", "Congressional District 8", "Congressional District 9", "Congressional District 10", "Congressional District 11", "Congressional District 12", "Congressional District 13", "Congressional District 14"},
+		"florida": {"Congressional District 1", "Congressional District 2", "Congressional District 3", "Congressional District 4", "Congressional District 5", "Congressional District 6", "Congressional District 7", "Congressional District 8", "Congressional District 9", "Congressional District 10", "Congressional District 11", "Congressional District 12", "Congressional District 13", "Congressional District 14", "Congressional District 15", "Congressional District 16", "Congressional District 17", "Congressional District 18", "Congressional District 19", "Congressional District 20", "Congressional District 21", "Congressional District 22", "Congressional District 23", "Congressional District 24", "Congressional District 25", "Congressional District 26", "Congressional District 27", "Congressional District 28"},
+		// 07 Mississippi Valley
+		"mississippi": {"Congressional District 1", "Congressional District 2", "Congressional District 3", "Congressional District 4"},
+		"arkansas":    {"Congressional District 1", "Congressional District 2", "Congressional District 3", "Congressional District 4"},
+		"louisiana":   {"Congressional District 1", "Congressional District 2", "Congressional District 3", "Congressional District 4", "Congressional District 5", "Congressional District 6"},
+		"alabama":     {"Congressional District 1", "Congressional District 2", "Congressional District 3", "Congressional District 4", "Congressional District 5", "Congressional District 6", "Congressional District 7"},
+		"missouri":    {"Congressional District 1", "Congressional District 2", "Congressional District 3", "Congressional District 4", "Congressional District 5", "Congressional District 6", "Congressional District 7", "Congressional District 8"},
+		"tennessee":   {"Congressional District 1", "Congressional District 2", "Congressional District 3", "Congressional District 4", "Congressional District 5", "Congressional District 6", "Congressional District 7", "Congressional District 8", "Congressional District 9"},
+		// 08 North Central Plains
+		"north-dakota": {"At-Large District"},
+		"south-dakota": {"At-Large District"},
+		"iowa":         {"Congressional District 1", "Congressional District 2", "Congressional District 3", "Congressional District 4"},
+		"minnesota":    {"Congressional District 1", "Congressional District 2", "Congressional District 3", "Congressional District 4", "Congressional District 5", "Congressional District 6", "Congressional District 7", "Congressional District 8"},
+		"wisconsin":    {"Congressional District 1", "Congressional District 2", "Congressional District 3", "Congressional District 4", "Congressional District 5", "Congressional District 6", "Congressional District 7", "Congressional District 8"},
+		"illinois":     {"Congressional District 1", "Congressional District 2", "Congressional District 3", "Congressional District 4", "Congressional District 5", "Congressional District 6", "Congressional District 7", "Congressional District 8", "Congressional District 9", "Congressional District 10", "Congressional District 11", "Congressional District 12", "Congressional District 13", "Congressional District 14", "Congressional District 15", "Congressional District 16", "Congressional District 17"},
+		// 09 Texas (12 CLR regions — district = congressional district within each region)
+		"south-east-dallas":   {"Congressional District 1", "Congressional District 2", "Congressional District 3"},
+		"north-east-dallas":   {"Congressional District 4", "Congressional District 5", "Congressional District 6"},
+		"north-west-texas":    {"Congressional District 7", "Congressional District 8", "Congressional District 9"},
+		"west-texas":          {"Congressional District 10", "Congressional District 11", "Congressional District 12"},
+		"south-west-texas":    {"Congressional District 13", "Congressional District 14", "Congressional District 15"},
+		"south-dallas":        {"Congressional District 16", "Congressional District 17", "Congressional District 18"},
+		"south-central-texas": {"Congressional District 19", "Congressional District 20", "Congressional District 21"},
+		"south-coast-texas":   {"Congressional District 22", "Congressional District 23", "Congressional District 24"},
+		"south-west-houston":  {"Congressional District 25", "Congressional District 26", "Congressional District 27"},
+		"central-east-texas":  {"Congressional District 28", "Congressional District 29", "Congressional District 30"},
+		"north-houston":       {"Congressional District 31", "Congressional District 32", "Congressional District 33"},
+		"south-east-texas":    {"Congressional District 34", "Congressional District 35", "Congressional District 36", "Congressional District 37", "Congressional District 38"},
+		// 10 South West
+		"nebraska":   {"Congressional District 1", "Congressional District 2", "Congressional District 3"},
+		"new-mexico": {"Congressional District 1", "Congressional District 2", "Congressional District 3"},
+		"kansas":     {"Congressional District 1", "Congressional District 2", "Congressional District 3", "Congressional District 4"},
+		"oklahoma":   {"Congressional District 1", "Congressional District 2", "Congressional District 3", "Congressional District 4", "Congressional District 5"},
+		"colorado":   {"Congressional District 1", "Congressional District 2", "Congressional District 3", "Congressional District 4", "Congressional District 5", "Congressional District 6", "Congressional District 7", "Congressional District 8"},
+		"arizona":    {"Congressional District 1", "Congressional District 2", "Congressional District 3", "Congressional District 4", "Congressional District 5", "Congressional District 6", "Congressional District 7", "Congressional District 8", "Congressional District 9"},
+		// 11 Pacific NW
+		"wyoming": {"At-Large District"},
+		"alaska":  {"At-Large District"},
+		"montana": {"Congressional District 1", "Congressional District 2"},
+		"hawaii":  {"Congressional District 1", "Congressional District 2"},
+		"idaho":   {"Congressional District 1", "Congressional District 2"},
+		"nevada":  {"Congressional District 1", "Congressional District 2", "Congressional District 3", "Congressional District 4"},
+		"utah":    {"Congressional District 1", "Congressional District 2", "Congressional District 3", "Congressional District 4"},
+		"oregon":  {"Congressional District 1", "Congressional District 2", "Congressional District 3", "Congressional District 4", "Congressional District 5", "Congressional District 6"},
+		"washington": {"Congressional District 1", "Congressional District 2", "Congressional District 3", "Congressional District 4", "Congressional District 5", "Congressional District 6", "Congressional District 7", "Congressional District 8", "Congressional District 9", "Congressional District 10"},
+		// 12 California (12 CLR regions — district = congressional district within each region)
+		"north-california":       {"Congressional District 1", "Congressional District 2", "Congressional District 3", "Congressional District 4", "Congressional District 5"},
+		"east-bay-area":          {"Congressional District 6", "Congressional District 7", "Congressional District 8", "Congressional District 9", "Congressional District 10"},
+		"south-east-bay-area":    {"Congressional District 11", "Congressional District 12", "Congressional District 13"},
+		"south-san-francisco":    {"Congressional District 14", "Congressional District 15", "Congressional District 16"},
+		"central-california":     {"Congressional District 17", "Congressional District 18", "Congressional District 19", "Congressional District 20"},
+		"north-coast-los-angeles": {"Congressional District 21", "Congressional District 22", "Congressional District 23"},
+		"north-los-angeles":      {"Congressional District 24", "Congressional District 25", "Congressional District 26", "Congressional District 27", "Congressional District 28"},
+		"north-east-los-angeles": {"Congressional District 29", "Congressional District 30", "Congressional District 31", "Congressional District 32"},
+		"east-los-angeles":       {"Congressional District 33", "Congressional District 34", "Congressional District 35", "Congressional District 36"},
+		"south-coast-los-angeles": {"Congressional District 37", "Congressional District 38", "Congressional District 39", "Congressional District 40", "Congressional District 41"},
+		"south-east-california":  {"Congressional District 42", "Congressional District 43", "Congressional District 44", "Congressional District 45", "Congressional District 46"},
+		"san-diego-coast":        {"Congressional District 47", "Congressional District 48", "Congressional District 49", "Congressional District 50", "Congressional District 51", "Congressional District 52"},
+	}
+	stateDistrictIdx := make(map[string]int)
+
 	for _, ballot := range ballots {
+		// Determine district: use ballot.district if explicitly set, else auto-assign from stateDistricts map
+		district := ballot.district
+		if district == "" && ballot.state != "" {
+			if districts, ok := stateDistricts[ballot.state]; ok {
+				idx := stateDistrictIdx[ballot.state]
+				district = districts[idx%len(districts)]
+				stateDistrictIdx[ballot.state] = idx + 1
+			}
+		}
+
 		query := `
-			INSERT INTO ballots (creator_id, title, description, category, superstate, state, is_active, created_at, updated_at)
-			VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+			INSERT INTO ballots (creator_id, title, description, category, superstate, state, district, is_active, created_at, updated_at)
+			VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
 			ON CONFLICT DO NOTHING
 		`
 
 		now := time.Now()
-		_, err := db.Exec(query, ballot.creatorID, ballot.title, ballot.description, ballot.category, ballot.superstate, ballot.state, ballot.isActive, now, now)
+		_, err := db.Exec(query, ballot.creatorID, ballot.title, ballot.description, ballot.category, ballot.superstate, ballot.state, district, ballot.isActive, now, now)
 		if err != nil {
 			return fmt.Errorf("failed to insert ballot '%s': %v", ballot.title, err)
 		}
 
 		if ballot.superstate != "" {
-			log.Printf("✓ Ballot created: %s (superstate: %s, state: %s)", ballot.title, ballot.superstate, ballot.state)
+			log.Printf("✓ Ballot created: %s (superstate: %s, state: %s, district: %s)", ballot.title, ballot.superstate, ballot.state, district)
 		} else {
 			log.Printf("✓ Ballot created: %s (category: %s)", ballot.title, ballot.category)
 		}

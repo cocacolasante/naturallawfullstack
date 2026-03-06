@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Districts - Common-Law Republic</title>
+    <style>
+        :root {
+            --primary-dark: #000000;
+            --secondary-dark: #111111;
+            --tertiary-dark: #1a1a1a;
+            --accent-gold: #f5d442;
+            --accent-gold-hover: #ffe97f;
+            --text-light: #ffffcc;
+            --text-white: #fefefe;
+            --border-color: #444;
+            --shadow-color: rgba(255, 215, 0, 0.2);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: "Times New Roman", Times, serif;
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .main-header {
+            background-color: var(--primary-dark);
+            border-bottom: 2px solid var(--accent-gold);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .header-title {
+            text-align: center;
+            padding: 1rem 0;
+        }
+
+        .header-title h1 {
+            font-size: 2.7rem;
+            margin: 0;
+            color: #ffffff;
+        }
+
+        .topnav {
+            background-color: var(--secondary-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            margin: 0 0.5rem;
+        }
+
+        .dropbtn {
+            background-color: transparent;
+            color: var(--accent-gold);
+            padding: 0.8rem 1.2rem;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .dropbtn:hover { color: var(--accent-gold-hover); }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--tertiary-dark);
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+            z-index: 1;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+        }
+
+        .dropdown-content a {
+            color: var(--text-light);
+            padding: 12px 16px;
+            display: block;
+            text-align: left;
+        }
+
+        .dropdown-content a:hover {
+            background-color: var(--secondary-dark);
+            color: var(--accent-gold);
+        }
+
+        .dropdown:hover .dropdown-content { display: block; }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .content-section {
+            background-color: var(--secondary-dark);
+            margin: 0.5rem 0;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px var(--shadow-color);
+            border: 1px solid var(--border-color);
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 1rem;
+            color: var(--accent-gold);
+            text-decoration: none;
+        }
+
+        .back-link:hover { color: var(--accent-gold-hover); }
+
+        .page-title {
+            text-align: center;
+            color: var(--accent-gold);
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            text-align: center;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .breadcrumb {
+            font-size: 0.9rem;
+            color: #888;
+            margin-bottom: 1.5rem;
+        }
+
+        .breadcrumb a {
+            color: var(--accent-gold);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover { color: var(--accent-gold-hover); }
+
+        .district-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1rem;
+        }
+
+        .district-card {
+            background-color: var(--tertiary-dark);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.2rem 1.5rem;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+            text-decoration: none;
+            display: block;
+            color: var(--text-light);
+        }
+
+        .district-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px var(--shadow-color);
+            border-color: var(--accent-gold);
+            color: var(--accent-gold);
+        }
+
+        .district-card-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: var(--accent-gold);
+        }
+
+        .district-card:hover .district-card-title {
+            color: var(--accent-gold-hover);
+        }
+
+        .district-card-subtitle {
+            font-size: 0.85rem;
+            color: #888;
+            margin-top: 0.3rem;
+        }
+
+        .loading-state, .empty-state, .error-state {
+            text-align: center;
+            padding: 3rem;
+        }
+
+        .main-footer {
+            background-color: var(--secondary-dark);
+            padding: 1rem;
+            margin-top: 2rem;
+            border-top: 2px solid var(--border-color);
+            text-align: center;
+        }
+
+        @media screen and (max-width: 768px) {
+            .topnav { flex-direction: column; padding: 0; }
+            .dropdown { width: 100%; margin: 0; }
+            .dropbtn { width: 100%; padding: 1rem; }
+            .dropdown-content { width: 100%; position: relative; }
+            .container { padding: 1rem; }
+            .district-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-title">
+            <h1><u>Common-Law Republic</u>; <u>U.S.A.</u>.</h1>
+        </div>
+
+        <nav class="topnav">
+            <div class="dropdown">
+                <button class="dropbtn">Home Page.</button>
+                <div class="dropdown-content">
+                    <a href="../index.html">Home Page.</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Register; or: Log-In.</button>
+                <div class="dropdown-content">
+                    <a href="../Accounts-Profiles-Registering/NewUsers-Registration.html">Register</a>
+                    <a href="../Accounts-Profiles-Registering/Login.html">Login</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Local Civil-Governments</button>
+                <div class="dropdown-content">
+                    <a href="./01-NewEngland-SS/NewEngland-SS.html">01: New-England</a>
+                    <a href="./02-NewYork-SS/NewYork-SS.html">02: New-York</a>
+                    <a href="./03-Jersey-Penn-SS/JerseyPenn-SS.html">03: Jersey-Penn</a>
+                    <a href="./04-GreatLakes-SS/GreatLakes-SS.html">04: Great-Lakes</a>
+                    <a href="./05-VirginiaCarolina-SS/VirginiaCarolina-SS.html">05: Virginia-Carolina</a>
+                    <a href="./06-FloridaGeorgia-SS/FloridaGeorgia-SS.html">06: Florida-Georgia</a>
+                    <a href="./07-MississippiValley-SS/MississippiValley-SS.html">07: Mississippi-Valley</a>
+                    <a href="./08-NorthCentralPlains-SS/NorthCentralPlains-SS.html">08: NorthCentral-Plains</a>
+                    <a href="./09-Texas-SS/Texas-SS.html">09: Texas</a>
+                    <a href="./10-SouthWest-SS/SouthWest-SS.html">10: South-West</a>
+                    <a href="./11-PacificNW-SS/PacificNW-SS.html">11: Pacific-NW</a>
+                    <a href="./12-California-SS/California-SS.html">12: California</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropbtn">Support.</button>
+                <div class="dropdown-content">
+                    <a href="../Support/Support.html">Support-Help-Contacts</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="content-section">
+            <a href="#" id="backLink" class="back-link">&larr; Back</a>
+
+            <div class="breadcrumb" id="breadcrumb"></div>
+
+            <h2 class="page-title" id="pageTitle">Districts</h2>
+            <p class="page-subtitle" id="pageSubtitle">Select a district to view its ballots</p>
+
+            <div id="loadingState" class="loading-state">
+                <p>Loading districts...</p>
+            </div>
+
+            <div id="errorState" class="error-state" style="display: none;">
+                <p id="errorMessage" style="color: #ff6b6b;"></p>
+            </div>
+
+            <div id="districtGrid" class="district-grid" style="display: none;"></div>
+
+            <div id="emptyState" class="empty-state" style="display: none;">
+                <p>No districts found for this area.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <p>&copy; 2025 Common-Law Republic, U.S.A. All rights reserved.</p>
+        <p>Empowering communities through democratic participation</p>
+    </footer>
+
+    <script>
+        const API_BASE_URL = 'http://localhost:8080/api/v1';
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const superstate = urlParams.get('superstate');
+        const state = urlParams.get('state');
+        const label = urlParams.get('label') || state || superstate || 'Area';
+
+        // Superstate display names
+        const superstateNames = {
+            'new-england': 'New England Super-State',
+            'new-york': 'New York Super-State',
+            'jersey-penn': 'Jersey-Penn Super-State',
+            'great-lakes': 'Great Lakes Super-State',
+            'virginia-carolina': 'Virginia-Carolina Super-State',
+            'florida-georgia': 'Florida-Georgia Super-State',
+            'mississippi-valley': 'Mississippi Valley Super-State',
+            'north-central-plains': 'North Central Plains Super-State',
+            'texas': 'Texas Super-State',
+            'south-west': 'South-West Super-State',
+            'pacific-nw': 'Pacific NW Super-State',
+            'california': 'California Super-State'
+        };
+
+        const superstateFolders = {
+            'new-england': '01-NewEngland-SS',
+            'new-york': '02-NewYork-SS',
+            'jersey-penn': '03-Jersey-Penn-SS',
+            'great-lakes': '04-GreatLakes-SS',
+            'virginia-carolina': '05-VirginiaCarolina-SS',
+            'florida-georgia': '06-FloridaGeorgia-SS',
+            'mississippi-valley': '07-MississippiValley-SS',
+            'north-central-plains': '08-NorthCentralPlains-SS',
+            'texas': '09-Texas-SS',
+            'south-west': '10-SouthWest-SS',
+            'pacific-nw': '11-PacificNW-SS',
+            'california': '12-California-SS'
+        };
+
+        const superstatePages = {
+            'new-england': 'NewEngland-SS.html',
+            'new-york': 'NewYork-SS.html',
+            'jersey-penn': 'JerseyPenn-SS.html',
+            'great-lakes': 'GreatLakes-SS.html',
+            'virginia-carolina': 'VirginiaCarolina-SS.html',
+            'florida-georgia': 'FloridaGeorgia-SS.html',
+            'mississippi-valley': 'MississippiValley-SS.html',
+            'north-central-plains': 'NorthCentralPlains-SS.html',
+            'texas': 'Texas-SS.html',
+            'south-west': 'SouthWest-SS.html',
+            'pacific-nw': 'PacificNW-SS.html',
+            'california': 'California-SS.html'
+        };
+
+        const loadingState = document.getElementById('loadingState');
+        const errorState = document.getElementById('errorState');
+        const errorMessage = document.getElementById('errorMessage');
+        const districtGrid = document.getElementById('districtGrid');
+        const emptyState = document.getElementById('emptyState');
+        const pageTitle = document.getElementById('pageTitle');
+        const pageSubtitle = document.getElementById('pageSubtitle');
+        const backLink = document.getElementById('backLink');
+        const breadcrumb = document.getElementById('breadcrumb');
+
+        document.addEventListener('DOMContentLoaded', function() {
+            if (!superstate || !state) {
+                showError('Missing superstate or state parameter.');
+                return;
+            }
+
+            const superstateName = superstateNames[superstate] || superstate;
+            const folder = superstateFolders[superstate] || superstate;
+            const page = superstatePages[superstate] || 'index.html';
+
+            // Set page metadata
+            pageTitle.textContent = label + ' — Districts';
+            pageSubtitle.textContent = 'Select a congressional district to view its ballots';
+            document.title = label + ' Districts - Common-Law Republic';
+
+            // Breadcrumb
+            breadcrumb.innerHTML = `
+                <a href="./${folder}/${page}">${superstateName}</a> &rsaquo;
+                <a href="./state-ballots.html?superstate=${encodeURIComponent(superstate)}&state=${encodeURIComponent(state)}">${label}</a> &rsaquo;
+                Districts
+            `;
+
+            // Back link goes to state-ballots (which now shows state info / redirects)
+            backLink.href = `./state-ballots.html?superstate=${encodeURIComponent(superstate)}&state=${encodeURIComponent(state)}`;
+
+            fetchDistricts();
+        });
+
+        async function fetchDistricts() {
+            try {
+                const url = `${API_BASE_URL}/public/superstates/${encodeURIComponent(superstate)}/states/${encodeURIComponent(state)}/districts`;
+                const response = await fetch(url);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+                const data = await response.json();
+                const districts = data.districts || [];
+
+                if (districts.length === 0) {
+                    showEmpty();
+                } else {
+                    displayDistricts(districts);
+                }
+            } catch (err) {
+                console.error('Error fetching districts:', err);
+                showError('Failed to load districts. Please try again later.');
+            }
+        }
+
+        function displayDistricts(districts) {
+            districtGrid.innerHTML = '';
+
+            districts.forEach(district => {
+                const card = document.createElement('a');
+                card.className = 'district-card';
+                card.href = `./district-ballots.html?superstate=${encodeURIComponent(superstate)}&state=${encodeURIComponent(state)}&district=${encodeURIComponent(district)}`;
+
+                card.innerHTML = `
+                    <div class="district-card-title">${escapeHtml(district)}</div>
+                    <div class="district-card-subtitle">View ballots &rarr;</div>
+                `;
+                districtGrid.appendChild(card);
+            });
+
+            loadingState.style.display = 'none';
+            districtGrid.style.display = 'grid';
+        }
+
+        function showError(msg) {
+            loadingState.style.display = 'none';
+            errorMessage.textContent = msg;
+            errorState.style.display = 'block';
+        }
+
+        function showEmpty() {
+            loadingState.style.display = 'none';
+            emptyState.style.display = 'block';
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    </script>
+</body>
+</html>
