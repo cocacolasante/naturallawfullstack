@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>World-Communities-Index</title>
-      <style>
-    /* Root Variables and Basic Reset */
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>World Communities - Common-Law Republic U.S.A.</title>
+  <style>
     :root {
       --primary-dark: #000000;
       --secondary-dark: #111111;
@@ -14,77 +13,45 @@
       --accent-gold-hover: #ffe97f;
       --text-light: #ffffcc;
       --text-white: #fefefe;
-      --highlight-pink: #ff33e3;
       --border-color: #444;
       --shadow-color: rgba(255, 215, 0, 0.2);
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: "Times New Roman", Times, serif;
+      background-color: var(--primary-dark);
+      color: var(--text-light);
+      line-height: 1.6;
     }
 
-body {
-    margin: 0;
-    padding: 0;
-    font-family: "Times New Roman", Times, serif;  /* Changed from "Segoe UI" */
-    background-color: var(--primary-dark);
-    color: var(--text-light);
-    line-height: 1.6;
-}
+    h1, h2, h3, h4, h5, h6 { color: var(--accent-gold); margin-bottom: 1rem; }
 
-    /* Typography */
-    h1, h2, h3, h4, h5, h6 {
-      color: var(--accent-gold);
-      margin-bottom: 1rem;
-    }
+    a { color: var(--accent-gold); text-decoration: none; transition: color 0.3s ease; }
+    a:hover { color: var(--accent-gold-hover); }
 
-    a {
-      color: var(--accent-gold);
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    a:hover {
-      color: var(--accent-gold-hover);
-    }
-
-    /* Header Styles */
     .main-header {
       background-color: var(--primary-dark);
       border-bottom: 2px solid var(--accent-gold);
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
     }
 
-    .header-title {
-    text-align: center;
-    padding: 1rem 0;    /* Reduced from 1.5rem to 0.5rem */
-}
+    .header-title { text-align: center; padding: 1rem 0; }
+    .header-title h1 { font-size: 2.7rem; margin: 0; color: #ffffff; }
 
-    .header-title h1 {
-      font-size: 2.7rem;
-      margin: 0;
-        color: #ffffff;   /* Changed to white, overriding the default gold color */
+    .topnav {
+      background-color: var(--secondary-dark);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
 
-    /* Navigation Styles */
-.topnav {
-    background-color: var(--secondary-dark);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0.0rem 0;    /* Reduced from 0.5rem to 0rem */
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-    .dropdown {
-      position: relative;
-      display: inline-block;
-      margin: 0 0.5rem;
-    }
+    .dropdown { position: relative; display: inline-block; margin: 0 0.5rem; }
 
     .dropbtn {
       background-color: transparent;
@@ -96,10 +63,7 @@ body {
       font-weight: bold;
       transition: color 0.3s ease;
     }
-
-    .dropbtn:hover {
-      color: var(--accent-gold-hover);
-    }
+    .dropbtn:hover { color: var(--accent-gold-hover); }
 
     .dropdown-content {
       display: none;
@@ -118,374 +82,316 @@ body {
       display: block;
       text-align: left;
     }
+    .dropdown-content a:hover { background-color: var(--secondary-dark); color: var(--accent-gold); }
+    .dropdown:hover .dropdown-content { display: block; }
 
-.dropdown-content .long-item {
-    white-space: normal;
-    line-height: 1.2;
-    padding: 8px 16px;
-}
+    .container { max-width: 1000px; margin: 0 auto; padding: 0.1rem; }
 
-    .dropdown-content a:hover {
+    .content-section {
       background-color: var(--secondary-dark);
-      color: var(--accent-gold);
-    }
-
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-
-    /* Main Container Styles */
-    .container {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: .1rem;    /* Reduced from 2rem */
-    }
-
-    /* Content Section Styles */
- .content-section {
-    background-color: var(--secondary-dark);
-    margin: 0.1rem 0;
-    padding: 0.5rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px var(--shadow-color);
-    border: 1px solid var(--border-color);
-}
-
-    /* Front Page Specific Styles */
-    .welcome-content {
-      padding: .1rem;   /* Reduced from 3rem */
-    }
-
-.welcome-block {
-    display: flex;
-    flex-direction: column;
-    gap: 0;  /* Controls spacing between lines */
-    padding-top: 0rem;     /* minimal top space */
-    padding-bottom: 1rem;   /* larger bottom space */
-}
-
-
-.welcome-line {
-    font-size: 1.8rem;
-    color: var(--accent-gold);
-    font-weight: bold;
-    line-height: 1.2;  /* Tighter line spacing */
-    margin: 0;
-    padding: 0;
-}
-
-.welcome-text {
-    font-size: 1.2rem;
-    color: var(--text-light);
-    font-weight: 500;
-    line-height: 1.2;
-    margin: 0;
-    padding: 0;
-}
-
-.welcome-block > div:nth-child(2) {
-    margin-bottom: 0.5rem;  /* Small space before the smaller text */
-}
-
-/* Map Styles */
-.map-container {
-    width: 100%;
-    overflow: hidden;
-    padding: 0.5rem 0;    /* Reduced from 1rem */
-    margin-bottom: 0.5rem; /* Add this to reduce space before footer */
-}
-
-.responsive-map {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-    border-radius: 8px;  /* Optional: adds slightly rounded corners */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);  /* Optional: adds subtle shadow */
-}
-
-/* Optional: Add hover effect */
-.responsive-map:hover {
-    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.2);
-    transition: box-shadow 0.3s ease;
-}
-
-@media screen and (max-width: 768px) {
-    .map-container {
-        padding: 0.5rem 0;
-    }
-    
-    .responsive-map {
-        width: 100%;
-    }
-}
-
-    .registration-cta {
-      padding: 2rem;
-    }
-
-    .registration-cta h3 {
-      font-size: 1.6rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .registration-cta p {
-      font-size: 1.1rem;
-      line-height: 1.8;
-    }
-
-/* Footer Styles */
-.main-footer {
-    background-color: var(--secondary-dark);
-    padding: 1rem;          /* Reduced padding */
-    margin-top: 1rem;       /* Reduced top margin */
-    border-top: 2px solid var(--border-color);
-}
-
-.footer-content {
-    max-width: 1000px;
-    margin: 0 auto;
-    display: block;
-}
-
-.footer-section {
-    padding: 0.2rem;        /* Reduced padding */
-    margin-bottom: 0.2rem;  /* Reduced margin */
-    text-align: center;
-}
-
-.footer-section p {
-    margin-bottom: 0.2rem;
-    line-height: 1.4;
-    max-width: 800px;     /* Add this to control text width */
-    margin-left: auto;    /* Center the contained text */
-    margin-right: auto;
-}
-
-.footer-section p.mt-1 {
-    margin-top: 0.2rem;     /* Reduced margin for paragraphs with mt-1 class */
-}
-
-.footer-section:hover {
-    background-color: var(--tertiary-dark);
-    transition: background-color 0.3s ease;
-}
-
-.footer-bottom {
-    text-align: center;
-    padding-top: 0.5rem;    /* Reduced padding */
-    margin-top: 0.5rem;     /* Reduced margin */
-    border-top: 1px solid var(--border-color);
-}
-
-    /* Utility Classes */
-    .text-center {
-      text-align: center;
-    }
-
-    .mt-1 { margin-top: 1rem; }
-    .mt-2 { margin-top: 2rem; }
-
-    /* Responsive Design */
-    @media screen and (max-width: 768px) {
-      .topnav {
-        flex-direction: column;
-        padding: 0;
-      }
-
-      .dropdown {
-        width: 100%;
-        margin: 0;
-      }
-
-      .dropbtn {
-        width: 100%;
-        padding: 1rem;
-      }
-
-      .dropdown-content {
-        width: 100%;
-        position: relative;
-      }
-
-      .container {
-        padding: 1rem;
-      }
-
-      .content-section {
-        padding: 1rem;
-      }
-
-      .footer-content {
-        grid-template-columns: 1fr;
-      }
-    }
-    
-    /* Added for world regions content */
-    .world-regions-container {
-      max-width: 800px;
-      margin: 2rem auto;
-      padding: 2rem;
-      background-color: var(--secondary-dark);
+      margin: 0.5rem 0;
+      padding: 1.5rem;
       border-radius: 12px;
       box-shadow: 0 4px 10px var(--shadow-color);
       border: 1px solid var(--border-color);
-      text-align: center;
     }
-    
+
+    .page-title {
+      color: var(--accent-gold);
+      text-align: center;
+      margin-bottom: 1.5rem;
+      font-size: 2rem;
+    }
+
+    .intro-block {
+      background-color: var(--tertiary-dark);
+      padding: 1rem 1.2rem;
+      border-radius: 4px;
+      border-left: 4px solid var(--accent-gold);
+      margin-bottom: 1.5rem;
+      font-size: 1.1rem;
+      line-height: 1.7;
+    }
+
+    .section-heading {
+      color: var(--accent-gold);
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.4rem;
+    }
+
     .world-region-link {
       display: block;
-      margin: 1rem 0;
-      font-size: 1.2rem;
-      padding: 0.5rem;
+      margin: 0.5rem 0;
+      padding: 0.9rem 1rem;
       background-color: var(--tertiary-dark);
-      border-radius: 8px;
+      border-radius: 4px;
+      font-size: 1.1rem;
+      color: var(--accent-gold);
       transition: background-color 0.3s ease;
     }
-    
     .world-region-link:hover {
       background-color: rgba(255, 215, 0, 0.1);
+      color: var(--accent-gold-hover);
     }
-    
-    .world-description {
-      margin: 1.5rem 0;
-      line-height: 1.8;
+
+    .description-block {
+      margin: 1rem 0;
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+
+    .description-block p { margin-bottom: 1rem; }
+
+    .map-container {
+      width: 100%;
+      overflow: hidden;
+      padding: 1rem 0;
+      text-align: center;
+    }
+
+    .map-container img {
+      max-width: 90%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    }
+
+    .map-container img:hover {
+      box-shadow: 0 4px 12px rgba(255, 215, 0, 0.2);
+    }
+
+    .main-footer {
+      background-color: var(--secondary-dark);
+      padding: 1rem;
+      margin-top: 1rem;
+      border-top: 2px solid var(--border-color);
+      text-align: center;
+    }
+
+    .footer-bottom {
+      padding-top: 0.5rem;
+      margin-top: 0.5rem;
+      border-top: 1px solid var(--border-color);
+      font-size: 1.1rem;
+      line-height: 1.5;
+    }
+
+    @media screen and (max-width: 768px) {
+      .topnav { flex-direction: column; padding: 0; }
+      .dropdown { width: 100%; margin: 0; }
+      .dropbtn { width: 100%; padding: 1rem; }
+      .dropdown-content { width: 100%; position: relative; }
+      .header-title h1 { font-size: 2rem; }
+      .container { padding: 1rem; }
+      .map-container img { max-width: 100%; }
     }
   </style>
 </head>
 <body>
-    <header class="main-header">
-        <div class="header-title">
-            <h1><u>Common-Law Republic</u>; <u>U.S.A.</u>.</h1>
+
+  <header class="main-header">
+    <div class="header-title">
+      <h1><u>Common-Law Republic</u>; <u>U.S.A.</u>.</h1>
+    </div>
+
+    <nav class="topnav">
+      <div class="dropdown">
+        <button class="dropbtn">Home Page.</button>
+        <div class="dropdown-content">
+          <a href="../../index.html">Home Page.</a>
+          <a href="../../Z-ReferenceDocuments/BriefGuidelines-PreferentialVotingBallot-Generic-Edit3.pdf">Using Ballots; Instructions.</a>
+          <a href="../../Z-ReferenceDocuments/OrganicHierarchiesUSA-V4.2.pdf">Social-Organizing Under Constitutional "Organic Hierarchies".</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="dropbtn">Register; or: Log-In.</button>
+        <div class="dropdown-content">
+          <a href="../../Accounts-Profiles-Registering/NewUsers-Registration.html">Register</a>
+          <a href="../../Accounts-Profiles-Registering/Login.html">Login</a>
+          <a href="../../Accounts-Profiles-Registering/AccountProfiles-Management-Index.html">AccountProfiles-Management-Index</a>
+          <a href="../../Accounts-Profiles-Registering/Subscribe-EmailList.html">Subscribe To Email-List</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="dropbtn">National Civil-Government; Political-Activism.</button>
+        <div class="dropdown-content">
+          <a href="../../USA-GoverningBodies/Executive-Department-SubDepartments-Agencies/ExcDpt-SubDepartments&Agencies-Listed.html">Executive-Department;<br>Sub-Departments, &amp; Agencies.</a>
+          <a href="../../USA-GoverningBodies/JudicialDepartment/JudicialIndex.html">Judicial-Department.</a>
+          <a href="../../USA-GoverningBodies/Legislature-HouseReps/Leg-HRepsIndex.html">Legislature: House Representatives.</a>
+          <a href="../../USA-GoverningBodies/Legislature-Senate/Leg-Senate.html">Legislature; Senate.</a>
+          <a href="../../USA-GoverningBodies/Ballots-Index.html"><u>Ballots</u>.</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="dropbtn">Local Civil-Governments; Political-Activism.</button>
+        <div class="dropdown-content" style="text-align:center;">
+          <a href="../../USA-LocalJurisdictions/01-NewEngland-SS/NewEngland-SS.html">01: New-England</a>
+          <a href="../../USA-LocalJurisdictions/02-NewYork-SS/NewYork-SS.html">02: New-York</a>
+          <a href="../../USA-LocalJurisdictions/03-Jersey-Penn-SS/JerseyPenn-SS.html">03: Jersey-Penn</a>
+          <a href="../../USA-LocalJurisdictions/04-GreatLakes-SS/GreatLakes-SS.html">04: Great-Lakes</a>
+          <a href="../../USA-LocalJurisdictions/05-VirginiaCarolina-SS/VirginiaCarolina-SS.html">05: Virginia-Carolina</a>
+          <a href="../../USA-LocalJurisdictions/06-FloridaGeorgia-SS/FloridaGeorgia-SS.html">06: Florida-Georgia</a>
+          <a href="../../USA-LocalJurisdictions/07-MississippiValley-SS/MississippiValley-SS.html">07: Mississippi-Valley</a>
+          <a href="../../USA-LocalJurisdictions/08-NorthCentralPlains-SS/NorthCentralPlains-SS.html">08: NorthCentral-Plains</a>
+          <a href="../../USA-LocalJurisdictions/09-Texas-SS/Texas-SS.html">09: Texas</a>
+          <a href="../../USA-LocalJurisdictions/10-SouthWest-SS/SouthWest-SS.html">10: South-West</a>
+          <a href="../../USA-LocalJurisdictions/11-PacificNW-SS/PacificNW-SS.html">11: Pacific-NW</a>
+          <a href="../../USA-LocalJurisdictions/12-California-SS/California-SS.html">12: California</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="dropbtn">EveryThing Else:</button>
+        <div class="dropdown-content">
+          <a href="../1-Political-Parties/PoliticalParties.html">Political Parties.</a>
+          <a href="../2-Religous-&-Spiritual-Communities/SpiritualIndex.html">Religious &amp; Spiritual Communities.</a>
+          <a href="../3-Business&Financial-Communities&Corporations/Biz&Finances.html">Business &amp; Financial Communities &amp; Corporations.</a>
+          <a href="../4-DNA-Genetic-Racial-Communities/GeneticCommunities.html">DNA, Genetic, Racial, Communities.</a>
+          <a href="../5-World-Communities-OutsideOfUSA/World-Communities-Index.html">World-Communities.</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="dropbtn">Support.</button>
+        <div class="dropdown-content">
+          <a href="../../Support/Support.html">Support-Help-Contacts</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <center>
+    <main class="container">
+
+      <div class="content-section">
+        <h2 class="page-title"><u>World Communities; Outside of U.S.A.</u>.</h2>
+
+        <div class="intro-block">
+          <p>This page provides a framework for organizing world-wide communities outside
+            of the United States, using a system of Ten World-Regions as a foundation.
+            These Ten World-Regions are generally organized similarly to those proposed
+            in 1973 by the "Club of Rome", as presented in their regional map; adapted
+            with modifications to better harmonize with principles of proportional
+            representation &amp; local sovereignty.</p>
         </div>
 
-        <nav class="topnav">
-            <div class="dropdown">
-                <button class="dropbtn">Home Page.</button>
-                <div class="dropdown-content">
-                    <a href="index.html">Home Page</a>
-                    <a href="./BriefGuidelines-PreferentialVotingBallot-Generic-Edit3.pdf">Ballot Using Instructions</a>
-                    <a href="USA-LocalJurisdictions/OrganicHierarchiesUSA-V4.2.pdf">Social-Organizing Under Constitutional "Organic Hierarchies"</a>
-                </div>
-            </div>
+        <div style="margin-bottom: 1.5rem;">
+          <h3 class="section-heading"><u>Ten World-Regions; Index</u>:</h3>
+          <p style="margin-bottom: 1rem; font-size: 1.05rem;">
+            The following ten regions provide a starting framework for world-wide
+            community organizing. Future development contemplates expanding these
+            ten divisions to twelve, in order to harmonize more fully with universal
+            principles of natural law, common law, &amp; proportional representation.
+          </p>
 
-            <div class="dropdown">
-                <button class="dropbtn">Register; or: Log-In.</button>
-                <div class="dropdown-content">
-                    <a href="Accounts-Profiles-Registering/NewUsers-Registration.html">Register</a>
-                    <a href="./Accounts-Profiles-Registering/Login.html">Login</a>
-                    <a href="./Accounts-Profiles-Registering/AccountProfiles-Management-Index.html">AccountProfiles-Management-Index</a>
-                    <a href="./Accounts-Profiles-Registering/Subscribe-EmailList.html">Subscribe To Email-List</a>
-                    
-                </div>
-            </div>
-
-        <nav class="topnav">
-            <div class="dropdown">
-                <button class="dropbtn">National Civil-Government; ReOrganizing.</button>
-                <div class="dropdown-content">
-                    <a href="./USA-GoverningBodies/Executive-Department-SubDepartments-Agencies/ExcDpt-SubDepartments&Agencies-Listed.html">ExecutiveDepartment; Sub-Departments, & Agencies.</a>
-                    <a href="./USA-GoverningBodies/JudicialDepartment/JudicialIndex.html">Judicial-Department.</a>
-                    <a href="./USA-GoverningBodies/Legislature-HouseReps/Leg-HRepsIndex.html">Legislature: House Representatives.</a>
-                    <a href="./USA-GoverningBodies/Legislature-Senate/Leg-Senate.html">Legislature; Senate.</a> 
-                    <a href="./USA-GoverningBodies/Ballots-Index.html"><u>Ballots</u>.</a>
-                </div>
-            </div>
-
-            <div class="dropdown">
-                <button class="dropbtn">Local Civil-Governments; ReOrganizing.</button>
-                <div class="dropdown-content"style="text-align:center;">
-                    <p><u>USA-Super-States: 12.</u>:</p>
-                            <a href="./USA-LocalJurisdictions/01-NewEngland-SS/NewEngland-SS.html" value="usa-01">01: New-England</a>
-                            <a href="./USA-LocalJurisdictions/02-NewYork-SS/NewYork-SS.html" value="usa-02">02: New-York</a>
-                            <a href="./USA-LocalJurisdictions/03-Jersey-Penn-SS/JerseyPenn-SS.html" value="usa-03">03: Jersey-Penn</a>
-                            <a href="./USA-LocalJurisdictions/04-GreatLakes-SS/GreatLakes-SS.html" value="usa-04">04: Great-Lakes</a>
-                            <a href="./USA-LocalJurisdictions/05-VirginiaCarolins-SS/Virginia-Carolina-SS.html" value="usa-05">05: Virginia-Carolina</a>
-                            <a href="./USA-LocalJurisdictions/07-MississippiValley-SS/MississippiValley-SS.html" value="usa-06">06: Mississippi-Valley</a>
-                            <a href="./USA-LocalJurisdictions/06-FloridaGeorgia-SS/FloridaGeorgia-SS.html" value="usa-07">07: Florida-Georgia</a>
-                            <a href="./USA-LocalJurisdictions/08-WestGreatLakes-SS/WestreatLakes-SS.html" value="usa-08">08: West-Great-Lakes</a>
-                            <a href="./USA-LocalJurisdictions/09-Texas-SS/Texas-SS.html" value="usa-09">09: Texas</a>
-                            <a href="./USA-LocalJurisdictions/10-SouthWest-SS/SouthWest-SS.html" value="usa-10">10: South-West</a>
-                            <a href="./USA-LocalJurisdictions/11-PacificNW-SS/PacificNW-SS.html" value="usa-11">11: Pacific-NW</a>
-                            <a href="./USA-LocalJurisdictions/12-California-SS/California-SS.html"value="usa-12">12: California</a>
-                     </div>
-            </div>
-
-            <div class="dropdown">
-                <button class="dropbtn">EveryThing Else:</button>
-                <div class="dropdown-content">
-                    <a href="./PrivateSpecialReligiousCommunities/2-Political-Parties/PoliticalParties.html">Political Parties</a>
-                    <a href="./PrivateSpecialReligiousCommunities/1-Religous-&-Spiritual-Communities/SpiritualIndex.html">Religious & Spiritual Communities</a>
-                    <a href="./PrivateSpecialReligiousCommunities/3-Business&Financial-Communities&Corporations/Biz&Finances.html">Business & Financial Communities & Corporations</a>
-                    <a href="./PrivateSpecialReligiousCommunities/8-DNA-Genetic-Racial-Bloodlines-Communities/GeneticHeritage.html">DNA, Genetic, Racial, Blood-line, & Ethnic Communities</a>
-                </div>
-            </div>
-
-            <div class="dropdown">
-                <button class="dropbtn">Support.</button>
-                <div class="dropdown-content">
-                    <a href="./Support/Support.html">Support-Help-Contacts</a>
-                </div>
-            </div>
-        </nav>
-    </header>
-
-    <div class="world-regions-container">
-        <h2><u>World Regions</u></h2>
-        
-        <div class="world-region-links">
-            <a href="../../WorldJurisdictions/01-NorthAmerica-Canada/NorthAmerica-Canada.html" class="world-region-link" value="world-01">01: North-America Canada</a>
-            
-            <a href="../../WorldJurisdictions/02-WesternEurope/WesternEurope.html" class="world-region-link" value="world-02">02: Western-Europe</a>
-            
-            <a href="../../WorldJurisdictions/03-PacificOcean/PacificOcean.html" class="world-region-link" value="world-03">03: Pacific-Ocean</a>
-            
-            <a href="../../WorldJurisdictions/04-SouthEastAsia/SouthEastAsia.html" class="world-region-link" value="world-04">04: South-East Asia</a>
-            
-            <a href="../../WorldJurisdictions/05-NorthAsia-&-EasternEurope/NorthAsia-&-EasternEurope.html" class="world-region-link" value="world-05">05: Northern-Asia & Eastern-Europe</a>
-            
-            <a href="../../WorldJurisdictions/06-Central-&SouthAmerica/Central&SouthAmerica.html" class="world-region-link" value="world-06">06: Central-&-South-America</a>
-            
-            <a href="../../WorldJurisdictions/07-EasrernMediteranean&NorthAfrica/EasternMediteranean-&-NorthAfrica.html" class="world-region-link" value="world-07">07: Eastern-Mediterranean & North-Africa</a>
-            
-            <a href="../../WorldJurisdictions/08-India/India.html" class="world-region-link" value="world-08">08: India</a>
-            
-            <a href="../../WorldJurisdictions/09-South&CentralAfrica/South&CentralAfrica.html" class="world-region-link" value="world-09">09: South-&-Central Africa</a>
-            
-            <a href="../../WorldJurisdictions/10-China/China.html" class="world-region-link" value="world-10">10: China</a>
-        </div>
-        
-        <div class="world-description">
-            <p>These "Ten World-Regions" are Generally Organized Similarly as 
-              those which have been Proposed in 1973, by the "Club of Rome"; 
-              as presented in their "Map", as web-linked here:</p>
+          <a href="#" class="world-region-link">01: North-America &amp; Canada</a>
+          <a href="#" class="world-region-link">02: Western-Europe</a>
+          <a href="#" class="world-region-link">03: Pacific-Ocean Region</a>
+          <a href="#" class="world-region-link">04: South-East Asia</a>
+          <a href="#" class="world-region-link">05: Northern-Asia &amp; Eastern-Europe</a>
+          <a href="#" class="world-region-link">06: Central &amp; South-America</a>
+          <a href="#" class="world-region-link">07: Eastern-Mediterranean &amp; North-Africa</a>
+          <a href="#" class="world-region-link">08: India &amp; South Asia</a>
+          <a href="#" class="world-region-link">09: South &amp; Central Africa</a>
+          <a href="#" class="world-region-link">10: China</a>
         </div>
 
         <!-- Map Section -->
-        <div class="content-section">
-            <div class="map-container text-center">
-                <img 
-                    src="./Map-ClubOfRome-TenWorldEmpires.gif" 
-                    alt="Map: Club-Of-Rome: Ten World-Empires." 
-                    class="responsive-map"
-                >
-            </div>
+        <div class="content-section" style="margin-bottom: 1.5rem;">
+          <h3 class="section-heading" style="text-align: center;"><u>Club of Rome: Ten World-Regions Map</u>.</h3>
+          <div class="map-container">
+            <img
+              src="./Map-ClubOfRome-TenWorldEmpires.gif"
+              alt="Map: Club-Of-Rome: Ten World-Empires."
+            >
+          </div>
         </div>
 
-        <div class="world-description">
-            <p>While more advanced conspiracy-theorists will instantly recognize this 
-              Map as being engineered by people mostly addicted to an evil-empire ideology of despotic world-government; the cold-hard fact is, that, a clear majority of the Ten Regions mapped-out here, are, nicely, "Proportionally-Balanced"; with Roughly "Equal Population-Counts";</p>
-            
-            <p>&, here-under, (with a few minor modifications which we are embracing); this map will, temporarily, serve as a nicely useful foundation for the larger "World Community-Organizing Efforts", which are contemplated, eventually, by the organizers of this effort.</p>
-            
-            <p>One big remaining issue, is that, later on; we will Need to Increase These "Ten Divisions", To" "Twelve Divisions"; in order to harmonize more effectively with more universal principles of natural-law, common-law, & biblical torah-law.</p>
-            
-            <p>The first big issue there-under, is that, the massively-populated power-house of China, will need to be split in-to two separate factions; which will bring this world-districts total to 11; &, after that, we can consider which other regional-borders need to be re-drawn in order to bring our full-total of world-divisions to a full universal-number of 12.</p>
-            
-            <p>But, all of that is for a future-date in our growth-time-line here; &, for now, these ten basic regions, from this Club-of-Rome Map, will serve as a very nice "starting-point" for our world-organizing efforts here.</p>
-            
-            <p>We expect soon to produce a world-map similar to this one; but which is focused less intensely than the Romanists on establishing submissive Empires; & which are more focused on harmonizing with such natural-laws as "proportional-representation", & "local sovereignty", both of which are obligatory over all leaders of all "responsibly self-governing communities".</p>
+        <div class="description-block">
+          <p>These "Ten World-Regions" are Generally Organized Similarly as those which have been
+            Proposed in 1973, by the "Club of Rome"; as presented in their "Map", linked above.
+            While more advanced observers will instantly recognize this map as engineered by
+            people mostly addicted to an evil-empire ideology of despotic world-government;
+            the cold-hard fact is that a clear majority of the Ten Regions mapped-out here
+            are nicely "Proportionally-Balanced"; with Roughly "Equal Population-Counts".</p>
+
+          <p>Here-under, with a few minor modifications which we are embracing, this map will
+            temporarily serve as a nicely useful foundation for the larger "World Community-Organizing
+            Efforts" which are contemplated, eventually, by the organizers of this effort.</p>
+
+          <p>One big remaining issue is that, later on, we will Need to Increase These "Ten Divisions"
+            to "Twelve Divisions"; in order to harmonize more effectively with more universal principles
+            of natural-law, common-law, &amp; biblical torah-law. The massively-populated power-house
+            of China will need to be split into two separate factions; which will bring this world-districts
+            total to eleven; &amp; after that, we can consider which other regional-borders need
+            to be re-drawn in order to bring our full-total of world-divisions to a full universal-number
+            of twelve.</p>
+
+          <p>But all of that is for a future-date in our growth-time-line here; &amp; for now,
+            these ten basic regions, from this Club-of-Rome Map, will serve as a very nice
+            "starting-point" for our world-organizing efforts here.</p>
+
+          <p>We expect soon to produce a world-map similar to this one; but which is focused
+            less intensely than the Romanists on establishing submissive Empires; &amp; which
+            is more focused on harmonizing with such natural-laws as "proportional-representation"
+            &amp; "local sovereignty", both of which are obligatory over all leaders of all
+            "responsibly self-governing communities".</p>
         </div>
+
+        <div style="text-align: center; padding-top: 0.5rem;">
+          <a href="../../index.html" style="
+            display: inline-block;
+            background-color: var(--accent-gold);
+            color: var(--primary-dark);
+            padding: 0.8rem 2rem;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            margin-right: 1rem;
+          " onmouseover="this.style.backgroundColor='#ffe97f'" onmouseout="this.style.backgroundColor='#f5d442'">
+            Return to Home Page
+          </a>
+          <a href="../../Accounts-Profiles-Registering/NewUsers-Registration.html" style="
+            display: inline-block;
+            background-color: transparent;
+            color: var(--accent-gold);
+            padding: 0.8rem 2rem;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border: 2px solid var(--accent-gold);
+            transition: all 0.3s ease;
+          " onmouseover="this.style.backgroundColor='rgba(245,212,66,0.1)'" onmouseout="this.style.backgroundColor='transparent'">
+            Register to Participate
+          </a>
+        </div>
+      </div>
+
+    </main>
+  </center>
+
+  <footer class="main-footer">
+    <div style="max-width: 1000px; margin: 0 auto;">
+      <div style="padding: 0.3rem; font-size: 1.2rem; line-height: 1.5;">
+        <p>The Common-Law Republic organizing model contemplates eventual world-wide
+          community organizing, founded upon the same principles of proportional
+          representation, local sovereignty, &amp; responsible self-governance
+          that guide our USA organizing efforts.</p>
+      </div>
+      <div class="footer-bottom">
+        <p>
+          <u>Common-Law Republic, U.S.A.</u>; <u>Empowering Self-Governing Communities</u>.<br>
+          Engineered by: Charles Stewart, of Coleman Texas. ... Last up-dated: July-2025.
+        </p>
+      </div>
     </div>
+  </footer>
+
 </body>
 </html>

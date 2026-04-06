@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Politics-Parties-&-Ideologies</title>
-      <style>
-    /* Root Variables and Basic Reset */
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Political Parties & Ideologies - Common-Law Republic U.S.A.</title>
+  <style>
     :root {
       --primary-dark: #000000;
       --secondary-dark: #111111;
@@ -13,407 +12,248 @@
       --accent-gold: #f5d442;
       --accent-gold-hover: #ffe97f;
       --text-light: #ffffcc;
-      --text-white: #fefefe;
-      --highlight-pink: #ff33e3;
       --border-color: #444;
       --shadow-color: rgba(255, 215, 0, 0.2);
     }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: "Times New Roman", Times, serif; background-color: var(--primary-dark); color: var(--text-light); line-height: 1.6; }
+    h1, h2, h3 { color: var(--accent-gold); margin-bottom: 1rem; }
+    a { color: var(--accent-gold); text-decoration: none; transition: color 0.3s ease; }
+    a:hover { color: var(--accent-gold-hover); }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    .main-header { background-color: var(--primary-dark); border-bottom: 2px solid var(--accent-gold); box-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+    .header-title { text-align: center; padding: 1rem 0; }
+    .header-title h1 { font-size: 2.7rem; margin: 0; color: #ffffff; }
 
-body {
-    margin: 0;
-    padding: 0;
-    font-family: "Times New Roman", Times, serif;  /* Changed from "Segoe UI" */
-    background-color: var(--primary-dark);
-    color: var(--text-light);
-    line-height: 1.6;
-}
+    .topnav { background-color: var(--secondary-dark); display: flex; justify-content: center; align-items: center; padding: 0; position: sticky; top: 0; z-index: 1000; }
+    .dropdown { position: relative; display: inline-block; margin: 0 0.5rem; }
+    .dropbtn { background-color: transparent; color: var(--accent-gold); padding: 0.8rem 1.2rem; font-size: 1rem; border: none; cursor: pointer; font-weight: bold; transition: color 0.3s ease; }
+    .dropbtn:hover { color: var(--accent-gold-hover); }
+    .dropdown-content { display: none; position: absolute; background-color: var(--tertiary-dark); min-width: 200px; box-shadow: 0 8px 16px rgba(0,0,0,0.4); z-index: 1; border: 1px solid var(--border-color); border-radius: 4px; }
+    .dropdown-content a { color: var(--text-light); padding: 12px 16px; display: block; text-align: left; }
+    .dropdown-content a:hover { background-color: var(--secondary-dark); color: var(--accent-gold); }
+    .dropdown:hover .dropdown-content { display: block; }
 
-    /* Typography */
-    h1, h2, h3, h4, h5, h6 {
-      color: var(--accent-gold);
-      margin-bottom: 1rem;
-    }
+    .container { max-width: 1000px; margin: 0 auto; padding: 0.1rem; }
+    .content-section { background-color: var(--secondary-dark); margin: 0.5rem 0; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 10px var(--shadow-color); border: 1px solid var(--border-color); }
 
-    a {
-      color: var(--accent-gold);
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
+    .page-title { color: var(--accent-gold); text-align: center; margin-bottom: 1.5rem; font-size: 2rem; }
+    .intro-block { background-color: var(--tertiary-dark); padding: 1rem 1.2rem; border-radius: 4px; border-left: 4px solid var(--accent-gold); margin-bottom: 1.5rem; font-size: 1.1rem; line-height: 1.7; }
+    .section-heading { color: var(--accent-gold); font-size: 1.4rem; margin-bottom: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.4rem; }
 
-    a:hover {
-      color: var(--accent-gold-hover);
-    }
-
-    /* Header Styles */
-    .main-header {
-      background-color: var(--primary-dark);
-      border-bottom: 2px solid var(--accent-gold);
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-    }
-
-    .header-title {
-    text-align: center;
-    padding: 1rem 0;    /* Reduced from 1.5rem to 0.5rem */
-}
-
-    .header-title h1 {
-      font-size: 2.7rem;
-      margin: 0;
-        color: #ffffff;   /* Changed to white, overriding the default gold color */
-    }
-
-    /* Navigation Styles */
-.topnav {
-    background-color: var(--secondary-dark);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0.0rem 0;    /* Reduced from 0.5rem to 0rem */
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-    .dropdown {
-      position: relative;
-      display: inline-block;
-      margin: 0 0.5rem;
-    }
-
-    .dropbtn {
-      background-color: transparent;
-      color: var(--accent-gold);
-      padding: 0.8rem 1.2rem;
-      font-size: 1rem;
-      border: none;
-      cursor: pointer;
-      font-weight: bold;
-      transition: color 0.3s ease;
-    }
-
-    .dropbtn:hover {
-      color: var(--accent-gold-hover);
-    }
-
-    .dropdown-content {
-      display: none;
-      position: absolute;
+    /* Party list items */
+    .party-list { list-style: none; }
+    .party-list li { margin-bottom: 0.6rem; }
+    .party-link {
+      display: block;
+      padding: 1rem 1.2rem;
       background-color: var(--tertiary-dark);
-      min-width: 200px;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.4);
-      z-index: 1;
-      border: 1px solid var(--border-color);
       border-radius: 4px;
-    }
-
-    .dropdown-content a {
-      color: var(--text-light);
-      padding: 12px 16px;
-      display: block;
-      text-align: left;
-    }
-
-.dropdown-content .long-item {
-    white-space: normal;
-    line-height: 1.2;
-    padding: 8px 16px;
-}
-
-    .dropdown-content a:hover {
-      background-color: var(--secondary-dark);
+      font-size: 1.5rem;
+      font-weight: bold;
       color: var(--accent-gold);
+      transition: background-color 0.2s ease, color 0.2s ease;
+      border-left: 4px solid transparent;
     }
-
-    .dropdown:hover .dropdown-content {
+    .party-link:hover {
+      background-color: rgba(245, 212, 66, 0.08);
+      color: var(--accent-gold-hover);
+      border-left-color: var(--accent-gold);
+    }
+    .party-link .party-desc {
       display: block;
+      font-size: 0.95rem;
+      font-weight: normal;
+      color: var(--text-light);
+      margin-top: 0.25rem;
     }
 
-    /* Main Container Styles */
-    .container {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: .1rem;    /* Reduced from 2rem */
-    }
-
-    /* Content Section Styles */
- .content-section {
-    background-color: var(--secondary-dark);
-    margin: 0.1rem 0;
-    padding: 0.5rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px var(--shadow-color);
-    border: 1px solid var(--border-color);
-}
-
-    /* Front Page Specific Styles */
-    .welcome-content {
-      padding: .1rem;   /* Reduced from 3rem */
-    }
-
-.welcome-block {
-    display: flex;
-    flex-direction: column;
-    gap: 0;  /* Controls spacing between lines */
-    padding-top: 0rem;     /* minimal top space */
-    padding-bottom: 1rem;   /* larger bottom space */
-}
-
-
-.welcome-line {
-    font-size: 1.8rem;
-    color: var(--accent-gold);
-    font-weight: bold;
-    line-height: 1.2;  /* Tighter line spacing */
-    margin: 0;
-    padding: 0;
-}
-
-.welcome-text {
-    font-size: 1.2rem;
-    color: var(--text-light);
-    font-weight: 500;
-    line-height: 1.2;
-    margin: 0;
-    padding: 0;
-}
-
-.welcome-block > div:nth-child(2) {
-    margin-bottom: 0.5rem;  /* Small space before the smaller text */
-}
-
-/* Map Styles */
-.map-container {
-    width: 100%;
-    overflow: hidden;
-    padding: 0.5rem 0;    /* Reduced from 1rem */
-    margin-bottom: 0.5rem; /* Add this to reduce space before footer */
-}
-
-.responsive-map {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-    border-radius: 8px;  /* Optional: adds slightly rounded corners */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);  /* Optional: adds subtle shadow */
-}
-
-/* Optional: Add hover effect */
-.responsive-map:hover {
-    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.2);
-    transition: box-shadow 0.3s ease;
-}
-
-@media screen and (max-width: 768px) {
-    .map-container {
-        padding: 0.5rem 0;
-    }
-    
-    .responsive-map {
-        width: 100%;
-    }
-}
-
-    .registration-cta {
-      padding: 2rem;
-    }
-
-    .registration-cta h3 {
-      font-size: 1.6rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .registration-cta p {
+    /* Loading / error states */
+    #party-list-container .loading {
+      color: var(--text-light);
       font-size: 1.1rem;
-      line-height: 1.8;
-    }
-
-/* Footer Styles */
-.main-footer {
-    background-color: var(--secondary-dark);
-    padding: 1rem;          /* Reduced padding */
-    margin-top: 1rem;       /* Reduced top margin */
-    border-top: 2px solid var(--border-color);
-}
-
-.footer-content {
-    max-width: 1000px;
-    margin: 0 auto;
-    display: block;
-}
-
-.footer-section {
-    padding: 0.2rem;        /* Reduced padding */
-    margin-bottom: 0.2rem;  /* Reduced margin */
-    text-align: center;
-}
-
-.footer-section p {
-    margin-bottom: 0.2rem;
-    line-height: 1.4;
-    max-width: 800px;     /* Add this to control text width */
-    margin-left: auto;    /* Center the contained text */
-    margin-right: auto;
-}
-
-.footer-section p.mt-1 {
-    margin-top: 0.2rem;     /* Reduced margin for paragraphs with mt-1 class */
-}
-
-.footer-section:hover {
-    background-color: var(--tertiary-dark);
-    transition: background-color 0.3s ease;
-}
-
-.footer-bottom {
-    text-align: center;
-    padding-top: 0.5rem;    /* Reduced padding */
-    margin-top: 0.5rem;     /* Reduced margin */
-    border-top: 1px solid var(--border-color);
-}
-
-    /* Utility Classes */
-    .text-center {
+      padding: 1rem;
       text-align: center;
     }
+    #party-list-container .error-msg {
+      color: #DC143C;
+      font-size: 1.1rem;
+      padding: 1rem;
+    }
 
-    .mt-1 { margin-top: 1rem; }
-    .mt-2 { margin-top: 2rem; }
+    .main-footer { background-color: var(--secondary-dark); padding: 1rem; margin-top: 1rem; border-top: 2px solid var(--border-color); text-align: center; }
+    .footer-bottom { padding-top: 0.5rem; margin-top: 0.5rem; border-top: 1px solid var(--border-color); font-size: 1.1rem; line-height: 1.5; }
 
-    /* Responsive Design */
     @media screen and (max-width: 768px) {
-      .topnav {
-        flex-direction: column;
-        padding: 0;
-      }
-
-      .dropdown {
-        width: 100%;
-        margin: 0;
-      }
-
-      .dropbtn {
-        width: 100%;
-        padding: 1rem;
-      }
-
-      .dropdown-content {
-        width: 100%;
-        position: relative;
-      }
-
-      .container {
-        padding: 1rem;
-      }
-
-      .content-section {
-        padding: 1rem;
-      }
-
-      .footer-content {
-        grid-template-columns: 1fr;
-      }
+      .topnav { flex-direction: column; }
+      .dropdown { width: 100%; margin: 0; }
+      .dropbtn { width: 100%; padding: 1rem; }
+      .dropdown-content { width: 100%; position: relative; }
+      .header-title h1 { font-size: 2rem; }
+      .container { padding: 1rem; }
     }
   </style>
 </head>
 <body>
-        <header class="main-header">
-        <div class="header-title">
-            <h1><u>Common-Law Republic</u>; <u>U.S.A.</u>.</h1>
+
+  <header class="main-header">
+    <div class="header-title">
+      <h1><u>Common-Law Republic</u>; <u>U.S.A.</u>.</h1>
+    </div>
+
+    <nav class="topnav">
+      <div class="dropdown">
+        <button class="dropbtn">Home Page.</button>
+        <div class="dropdown-content">
+          <a href="../../index.html">Home Page.</a>
+          <a href="../../Z-ReferenceDocuments/BriefGuidelines-PreferentialVotingBallot-Generic-Edit3.pdf">Using Ballots; Instructions.</a>
+          <a href="../../Z-ReferenceDocuments/OrganicHierarchiesUSA-V4.2.pdf">Social-Organizing Under Constitutional "Organic Hierarchies".</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">Register; or: Log-In.</button>
+        <div class="dropdown-content">
+          <a href="../../Accounts-Profiles-Registering/NewUsers-Registration.html">Register</a>
+          <a href="../../Accounts-Profiles-Registering/Login.html">Login</a>
+          <a href="../../Accounts-Profiles-Registering/AccountProfiles-Management-Index.html">AccountProfiles-Management-Index</a>
+          <a href="../../Accounts-Profiles-Registering/Subscribe-EmailList.html">Subscribe To Email-List</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">National Civil-Government; Political-Activism.</button>
+        <div class="dropdown-content">
+          <a href="../../USA-GoverningBodies/Executive-Department-SubDepartments-Agencies/ExcDpt-SubDepartments&Agencies-Listed.html">Executive-Department; Sub-Departments, &amp; Agencies.</a>
+          <a href="../../USA-GoverningBodies/JudicialDepartment/JudicialIndex.html">Judicial-Department.</a>
+          <a href="../../USA-GoverningBodies/Legislature-HouseReps/Leg-HRepsIndex.html">Legislature: House Representatives.</a>
+          <a href="../../USA-GoverningBodies/Legislature-Senate/Leg-Senate.html">Legislature; Senate.</a>
+          <a href="../../USA-GoverningBodies/Ballots-Index.html"><u>Ballots</u>.</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">Local Civil-Governments; Political-Activism.</button>
+        <div class="dropdown-content" style="text-align:center;">
+          <a href="../../USA-LocalJurisdictions/01-NewEngland-SS/NewEngland-SS.html">01: New-England</a>
+          <a href="../../USA-LocalJurisdictions/02-NewYork-SS/NewYork-SS.html">02: New-York</a>
+          <a href="../../USA-LocalJurisdictions/03-Jersey-Penn-SS/JerseyPenn-SS.html">03: Jersey-Penn</a>
+          <a href="../../USA-LocalJurisdictions/04-GreatLakes-SS/GreatLakes-SS.html">04: Great-Lakes</a>
+          <a href="../../USA-LocalJurisdictions/05-VirginiaCarolina-SS/VirginiaCarolina-SS.html">05: Virginia-Carolina</a>
+          <a href="../../USA-LocalJurisdictions/06-FloridaGeorgia-SS/FloridaGeorgia-SS.html">06: Florida-Georgia</a>
+          <a href="../../USA-LocalJurisdictions/07-MississippiValley-SS/MississippiValley-SS.html">07: Mississippi-Valley</a>
+          <a href="../../USA-LocalJurisdictions/08-NorthCentralPlains-SS/NorthCentralPlains-SS.html">08: NorthCentral-Plains</a>
+          <a href="../../USA-LocalJurisdictions/09-Texas-SS/Texas-SS.html">09: Texas</a>
+          <a href="../../USA-LocalJurisdictions/10-SouthWest-SS/SouthWest-SS.html">10: South-West</a>
+          <a href="../../USA-LocalJurisdictions/11-PacificNW-SS/PacificNW-SS.html">11: Pacific-NW</a>
+          <a href="../../USA-LocalJurisdictions/12-California-SS/California-SS.html">12: California</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">EveryThing Else:</button>
+        <div class="dropdown-content">
+          <a href="../1-Political-Parties/PoliticalParties.html">Political Parties.</a>
+          <a href="../2-Religous-&-Spiritual-Communities/SpiritualIndex.html">Religious &amp; Spiritual Communities.</a>
+          <a href="../3-Business&Financial-Communities&Corporations/Biz&Finances.html">Business &amp; Financial Communities &amp; Corporations.</a>
+          <a href="../4-DNA-Genetic-Racial-Communities/GeneticCommunities.html">DNA, Genetic, Racial, Communities.</a>
+          <a href="../5-World-Communities-OutsideOfUSA/World-Communities-Index.html">World-Communities.</a>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropbtn">Support.</button>
+        <div class="dropdown-content">
+          <a href="../../Support/Support.html">Support-Help-Contacts</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <center>
+    <main class="container">
+      <div class="content-section">
+        <h2 class="page-title">
+          <u>Political-Parties; Political-Ideologies;</u><br>
+          &amp;: <u>Socially-Responsible Organizing &amp; Activism</u>.
+        </h2>
+
+        <div class="intro-block">
+          <p>This page presents an index of the most significant political parties
+            presently active in the United States, with web-links to each party's
+            dedicated organizing pages. The tools provided are designed to help
+            activists build consensus using a grass-roots, bottom-up strategy
+            based on the principles of Common-Law Republicanism. Good-faith activists
+            of all political persuasions are welcomed here.</p>
+          <p style="margin-top:0.8rem;">New political parties may be added to this list
+            upon request by Common-Law Republic members in good standing.</p>
         </div>
 
-        <nav class="topnav">
-            <div class="dropdown">
-                <button class="dropbtn">Home-Page</button>
-                <div class="dropdown-content">
-                    <a href="index.html">Home Page</a>
-                    <a href="USA-LocalJurisdictions/OrganicHierarchiesUSA-V4.2.pdf">Social-Organizing Under Constitutional "Organic Hierarchies"</a>
-                </div>
-            </div>
+        <div style="margin-bottom:1.5rem;">
+          <h3 class="section-heading"><u>Political Parties; Listed</u>:</h3>
 
-            <div class="dropdown">
-                <button class="dropbtn">Register;
-                  or: Log-In.</button>
-                <div class="dropdown-content">
-                    <a href="Accounts-Profiles-Registering/NewUsers-Registration.html">Register</a>
-                    <a href="./Accounts-Profiles-Registering/Login.html">Login</a>
-                    <a href="Accounts-Profiles-Registering/ProfileIndexManagement.html">Different User-Account Profile-Pages; Explained</a>
-                </div>
-            </div>
+          <!-- Dynamically populated from API -->
+          <div id="party-list-container">
+            <ol class="party-list" id="party-list">
+              <li class="loading">Loading parties&hellip;</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </main>
+  </center>
 
-        <nav class="topnav">
-            <div class="dropdown">
-                <button class="dropbtn">USA-National-Categories-Index</button>
-                <div class="dropdown-content">
-                    <a href="./USA-NationalIssues/NationalCategories-Index.html">USA-National-Categories-Index</a>
-                    <a href="./USA-NationalIssues/ExecutiveDepartment-Prez/index.html">Executive-Department-Prez</a>
-                    <a href="./USA-NationalIssues/JudicialDepartment/JudicialIndex.html">Judicial-Department</a>
-                    <a href="./USA-NationalIssues/Legislature-HouseReps/Leg-HRepsIndex.html">Legislature-HouseReps</a>
-                    <a href="./USA-NationalIssues/Legislature-Senate/Leg-Senate.html">Legislature-Senate</a>
-                    <a href="./USA-NationalIssues/Treasury/TreasuryIndex.html">Treasury</a>
-                    <a href="./USA-NationalIssues/SecretaryofState/SecofStateIndex.html">Secretary-of-State</a>
-                    <a href="./USA-NationalIssues/Z-Agencies/Agencies.html">Z-Agencies-CIA-DOJ-FBI</a>                                                            
-                </div>
-            </div>
+  <footer class="main-footer">
+    <div style="max-width:1000px; margin:0 auto;">
+      <div style="padding:0.3rem; font-size:1.2rem; line-height:1.5;">
+        <p>This framework welcomes activists of all political persuasions who seek to
+          organize responsibly &amp; in good-faith, under the principles of
+          Common-Law &amp; Constitutional Republicanism.</p>
+      </div>
+      <div class="footer-bottom">
+        <p>
+          <u>Common-Law Republic, U.S.A.</u>; <u>Empowering Self-Governing Communities</u>.<br>
+          Engineered by: Charles Stewart, of Coleman Texas. ... Last up-dated: July-2025.
+        </p>
+      </div>
+    </div>
+  </footer>
 
-            <div class="dropdown">
-                <button class="dropbtn">Local Community Organizing</button>
-                <div class="dropdown-content"style="text-align:center;">
-                    <a href="#">Residence & Geographical-Location</a>
-                    <p><u>USA Super-States</u>:</p>
-                            <a href="./USA-LocalJurisdictions/01-NewEngland-SS/NewEngland-SS.html" value="usa-01">USA-01: New-England</a>
-                            <a href="./USA-LocalJurisdictions/02-NewYork-SS/NewYork-SS.html" value="usa-02">USA-02: New-York</a>
-                            <a href="./USA-LocalJurisdictions/03-Jersey-Penn-SS/JerseyPenn-SS.html" value="usa-03">USA-03: Jersey-Penn</a>
-                            <a href="./USA-LocalJurisdictions/04-GreatLakes-SS/GreatLakes-SS.html" value="usa-04">USA-04: Great-Lakes</a>
-                            <a href="./USA-LocalJurisdictions/05-VirginiaCarolins-SS/Virginia-Carolina-SS.html" value="usa-05">USA-05: Virginia-Carolina</a>
-                            <a href="./USA-LocalJurisdictions/07-MississippiValley-SS/MississippiValley-SS.html" value="usa-06">USA-06: Mississippi-Valley</a>
-                            <a href="./USA-LocalJurisdictions/06-FloridaGeorgia-SS/FloridaGeorgia-SS.html" value="usa-07">USA-07: Florida-Georgia</a>
-                            <a href="./USA-LocalJurisdictions/08-WestGreatLakes-SS/WestreatLakes-SS.html" value="usa-08">USA-08: West-Great-Lakes</a>
-                            <a href="./USA-LocalJurisdictions/09-Texas-SS/Texas-SS.html" value="usa-09">USA-09: Texas</a>
-                            <a href="./USA-LocalJurisdictions/10-SouthWest-SS/SouthWest-SS.html" value="usa-10">USA-10: South-West</a>
-                            <a href="./USA-LocalJurisdictions/11-PacificNW-SS/PacificNW-SS.html" value="usa-11">USA-11: Pacific-NW</a>
-                            <a href="./USA-LocalJurisdictions/12-California-SS/California-SS.html"value="usa-12">USA-12: California</a>
-                            <p><u>World Regions</u>:</p>
-                            <a href="../../WorldJurisdictions/01-NorthAmerica-Canada/NorthAmerica-Canada.html" value="world-01">World-01: North-America Canada</a>
-                            <a href="../../WorldJurisdictions/02-WesternEurope/WesternEurope.html" value="world-02">World-02: Western-Europe</a>
-                            <a href="../../WorldJurisdictions/03-PacificOcean/PacificOcean.html" value="world-03">World-03: Pacific-Ocean</a>
-                            <a href="../../WorldJurisdictions/04-SouthEastAsia/SouthEastAsia.html" value="world-04">World-04: South-East Asia</a>
-                            <a href="../../WorldJurisdictions/05-NorthAsia-&-EasternEurope/NorthAsia-&-EasternEurope.html" value="world-05">World-05: Northern-Asia & Eastern-Europe</a>
-                            <a href="../../WorldJurisdictions/06-Central-&SouthAmerica/Central&SouthAmerica.html" value="world-06">World-06: Central-&-South-America</a>
-                            <a href="../../WorldJurisdictions/07-EasrernMediteranean&NorthAfrica/EasternMediteranean-&-NorthAfrica.html" value="world-07">World-07: Eastern-Mediterranean & North-Africa</a>
-                            <a href="../../WorldJurisdictions/08-India/India.html" value="world-08">World-08: India</a>
-                            <a href="../../WorldJurisdictions/09-South&CentralAfrica/South&CentralAfrica.html" value="world-09">World-09: South-&-Central Africa</a>
-                            <a href="../../WorldJurisdictions/10-China/China.html" value="world-10">World-10: China</a>
-                </div>
-            </div>
+  <script>
+    // URL mapping from API slug → local HTML file
+    const PARTY_URLS = {
+      'republican':  './Republicans/RepublicanParty-1-MainIndex.html',
+      'democrat':    './Democrats/DemocratParty.html',
+      'socialist':   './Socialists/SocialistParty.html',
+      'green':       './Greens/GreenParty.html',
+      'libertarian': './Libertarians/LibertarianParty.html'
+    };
 
-            <div class="dropdown">
-                <button class="dropbtn">Private/Special/Ideological/Religious Organizing</button>
-                <div class="dropdown-content">
-                    <a href="./PrivateSpecialReligiousCommunities/1-Religous-&-Spiritual-Communities/SpiritualIndex.html">Religious & Spiritual Communities</a>
-                    <a href="./PrivateSpecialReligiousCommunities/2-Political-Parties/PoliticalParties.html">Political Parties</a>
-                    <a href="./PrivateSpecialReligiousCommunities/3-Business&Financial-Communities&Corporations/Biz&Finances.html">Business & Financial Communities & Corporations</a>
-                    <a href="./PrivateSpecialReligiousCommunities/4-Trade-Unions/TradeUnions.html">Trade Unions</a>
-                    <a href="./PrivateSpecialReligiousCommunities/5-FoodProduction&Distribution-Communities/FoodProduction.html">Food Production & Distribution Communities</a>
-                    <a href="./PrivateSpecialReligiousCommunities/6-EnvironmentalActivist-Communities/EnvironmentActivism.html">Environmental Activist Communities</a>
-                    <a href="./PrivateSpecialReligiousCommunities/7-HealthActivist-Communities/HealthActivism.html">Health Activist Communities</a>
-                    <a href="./PrivateSpecialReligiousCommunities/8-DNA-Genetic-Racial-Bloodlines-Communities/GeneticHeritage.html">DNA, Genetic, Racial, Blood-line, & Ethnic Communities</a>
-                </div>
-            </div>
+    const API_BASE = (window.NLV_API_BASE || 'http://localhost:8080').replace(/\/$/, '');
 
-            <div class="dropdown">
-                <button class="dropbtn">Support</button>
-                <div class="dropdown-content">
-                    <a href="./Support/Support.html">Support-Help-Contacts</a>                </div>
-            </div>
-        </nav>
-    </header>
-    
+    async function loadParties() {
+      const listEl = document.getElementById('party-list');
+      try {
+        const res = await fetch(`${API_BASE}/api/v1/public/parties`);
+        if (!res.ok) throw new Error('Server error');
+        const parties = await res.json();
+
+        listEl.innerHTML = '';
+        parties.forEach((party, i) => {
+          const href = PARTY_URLS[party.slug] || '#';
+          const li = document.createElement('li');
+          li.innerHTML = `
+            <a href="${href}" class="party-link">
+              ${i + 1}. &ldquo;${party.name}&rdquo; Political-Party.
+              <span class="party-desc">${party.description}</span>
+            </a>`;
+          listEl.appendChild(li);
+        });
+      } catch (err) {
+        listEl.innerHTML = `<li class="error-msg">
+          Unable to load party list from server. Please ensure the backend is running
+          at <code>${API_BASE}</code> and refresh this page.
+        </li>`;
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', loadParties);
+  </script>
+
 </body>
 </html>

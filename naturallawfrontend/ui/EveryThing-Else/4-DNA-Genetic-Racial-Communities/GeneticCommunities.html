@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GeneticHeritage</title>
-      <style>
-    /* Root Variables and Basic Reset */
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DNA, Genetic, Racial & Ethnic Communities - Common-Law Republic U.S.A.</title>
+  <style>
     :root {
       --primary-dark: #000000;
       --secondary-dark: #111111;
@@ -14,77 +13,45 @@
       --accent-gold-hover: #ffe97f;
       --text-light: #ffffcc;
       --text-white: #fefefe;
-      --highlight-pink: #ff33e3;
       --border-color: #444;
       --shadow-color: rgba(255, 215, 0, 0.2);
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: "Times New Roman", Times, serif;
+      background-color: var(--primary-dark);
+      color: var(--text-light);
+      line-height: 1.6;
     }
 
-body {
-    margin: 0;
-    padding: 0;
-    font-family: "Times New Roman", Times, serif;  /* Changed from "Segoe UI" */
-    background-color: var(--primary-dark);
-    color: var(--text-light);
-    line-height: 1.6;
-}
+    h1, h2, h3, h4, h5, h6 { color: var(--accent-gold); margin-bottom: 1rem; }
 
-    /* Typography */
-    h1, h2, h3, h4, h5, h6 {
-      color: var(--accent-gold);
-      margin-bottom: 1rem;
-    }
+    a { color: var(--accent-gold); text-decoration: none; transition: color 0.3s ease; }
+    a:hover { color: var(--accent-gold-hover); }
 
-    a {
-      color: var(--accent-gold);
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    a:hover {
-      color: var(--accent-gold-hover);
-    }
-
-    /* Header Styles */
     .main-header {
       background-color: var(--primary-dark);
       border-bottom: 2px solid var(--accent-gold);
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
     }
 
-    .header-title {
-    text-align: center;
-    padding: 1rem 0;    /* Reduced from 1.5rem to 0.5rem */
-}
+    .header-title { text-align: center; padding: 1rem 0; }
+    .header-title h1 { font-size: 2.7rem; margin: 0; color: #ffffff; }
 
-    .header-title h1 {
-      font-size: 2.7rem;
-      margin: 0;
-        color: #ffffff;   /* Changed to white, overriding the default gold color */
+    .topnav {
+      background-color: var(--secondary-dark);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
     }
 
-    /* Navigation Styles */
-.topnav {
-    background-color: var(--secondary-dark);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0.0rem 0;    /* Reduced from 0.5rem to 0rem */
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-    .dropdown {
-      position: relative;
-      display: inline-block;
-      margin: 0 0.5rem;
-    }
+    .dropdown { position: relative; display: inline-block; margin: 0 0.5rem; }
 
     .dropbtn {
       background-color: transparent;
@@ -96,10 +63,7 @@ body {
       font-weight: bold;
       transition: color 0.3s ease;
     }
-
-    .dropbtn:hover {
-      color: var(--accent-gold-hover);
-    }
+    .dropbtn:hover { color: var(--accent-gold-hover); }
 
     .dropdown-content {
       display: none;
@@ -118,302 +82,337 @@ body {
       display: block;
       text-align: left;
     }
+    .dropdown-content a:hover { background-color: var(--secondary-dark); color: var(--accent-gold); }
+    .dropdown:hover .dropdown-content { display: block; }
 
-.dropdown-content .long-item {
-    white-space: normal;
-    line-height: 1.2;
-    padding: 8px 16px;
-}
+    .container { max-width: 1000px; margin: 0 auto; padding: 0.1rem; }
 
-    .dropdown-content a:hover {
+    .content-section {
       background-color: var(--secondary-dark);
+      margin: 0.5rem 0;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px var(--shadow-color);
+      border: 1px solid var(--border-color);
+    }
+
+    .page-title {
       color: var(--accent-gold);
-    }
-
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-
-    /* Main Container Styles */
-    .container {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: .1rem;    /* Reduced from 2rem */
-    }
-
-    /* Content Section Styles */
- .content-section {
-    background-color: var(--secondary-dark);
-    margin: 0.1rem 0;
-    padding: 0.5rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px var(--shadow-color);
-    border: 1px solid var(--border-color);
-}
-
-    /* Front Page Specific Styles */
-    .welcome-content {
-      padding: .1rem;   /* Reduced from 3rem */
-    }
-
-.welcome-block {
-    display: flex;
-    flex-direction: column;
-    gap: 0;  /* Controls spacing between lines */
-    padding-top: 0rem;     /* minimal top space */
-    padding-bottom: 1rem;   /* larger bottom space */
-}
-
-
-.welcome-line {
-    font-size: 1.8rem;
-    color: var(--accent-gold);
-    font-weight: bold;
-    line-height: 1.2;  /* Tighter line spacing */
-    margin: 0;
-    padding: 0;
-}
-
-.welcome-text {
-    font-size: 1.2rem;
-    color: var(--text-light);
-    font-weight: 500;
-    line-height: 1.2;
-    margin: 0;
-    padding: 0;
-}
-
-.welcome-block > div:nth-child(2) {
-    margin-bottom: 0.5rem;  /* Small space before the smaller text */
-}
-
-/* Map Styles */
-.map-container {
-    width: 100%;
-    overflow: hidden;
-    padding: 0.5rem 0;    /* Reduced from 1rem */
-    margin-bottom: 0.5rem; /* Add this to reduce space before footer */
-}
-
-.responsive-map {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-    border-radius: 8px;  /* Optional: adds slightly rounded corners */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);  /* Optional: adds subtle shadow */
-}
-
-/* Optional: Add hover effect */
-.responsive-map:hover {
-    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.2);
-    transition: box-shadow 0.3s ease;
-}
-
-@media screen and (max-width: 768px) {
-    .map-container {
-        padding: 0.5rem 0;
-    }
-    
-    .responsive-map {
-        width: 100%;
-    }
-}
-
-    .registration-cta {
-      padding: 2rem;
-    }
-
-    .registration-cta h3 {
-      font-size: 1.6rem;
+      text-align: center;
       margin-bottom: 1.5rem;
+      font-size: 2rem;
     }
 
-    .registration-cta p {
+    .intro-block {
+      background-color: var(--tertiary-dark);
+      padding: 1rem 1.2rem;
+      border-radius: 4px;
+      border-left: 4px solid var(--accent-gold);
+      margin-bottom: 1.5rem;
       font-size: 1.1rem;
-      line-height: 1.8;
+      line-height: 1.7;
     }
 
-/* Footer Styles */
-.main-footer {
-    background-color: var(--secondary-dark);
-    padding: 1rem;          /* Reduced padding */
-    margin-top: 1rem;       /* Reduced top margin */
-    border-top: 2px solid var(--border-color);
-}
+    .section-heading {
+      color: var(--accent-gold);
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 0.4rem;
+    }
 
-.footer-content {
-    max-width: 1000px;
-    margin: 0 auto;
-    display: block;
-}
+    .community-list { list-style-type: none; margin-bottom: 1.5rem; }
 
-.footer-section {
-    padding: 0.2rem;        /* Reduced padding */
-    margin-bottom: 0.2rem;  /* Reduced margin */
-    text-align: center;
-}
+    .community-item {
+      padding: 0.9rem 1rem;
+      margin-bottom: 0.5rem;
+      background-color: var(--tertiary-dark);
+      border-radius: 4px;
+      font-size: 1.05rem;
+    }
 
-.footer-section p {
-    margin-bottom: 0.2rem;
-    line-height: 1.4;
-    max-width: 800px;     /* Add this to control text width */
-    margin-left: auto;    /* Center the contained text */
-    margin-right: auto;
-}
+    .community-item strong { color: var(--accent-gold); }
 
-.footer-section p.mt-1 {
-    margin-top: 0.2rem;     /* Reduced margin for paragraphs with mt-1 class */
-}
+    .community-item p {
+      margin-top: 0.4rem;
+      font-size: 1rem;
+      color: var(--text-light);
+      line-height: 1.5;
+    }
 
-.footer-section:hover {
-    background-color: var(--tertiary-dark);
-    transition: background-color 0.3s ease;
-}
-
-.footer-bottom {
-    text-align: center;
-    padding-top: 0.5rem;    /* Reduced padding */
-    margin-top: 0.5rem;     /* Reduced margin */
-    border-top: 1px solid var(--border-color);
-}
-
-    /* Utility Classes */
-    .text-center {
+    .main-footer {
+      background-color: var(--secondary-dark);
+      padding: 1rem;
+      margin-top: 1rem;
+      border-top: 2px solid var(--border-color);
       text-align: center;
     }
 
-    .mt-1 { margin-top: 1rem; }
-    .mt-2 { margin-top: 2rem; }
+    .footer-bottom {
+      padding-top: 0.5rem;
+      margin-top: 0.5rem;
+      border-top: 1px solid var(--border-color);
+      font-size: 1.1rem;
+      line-height: 1.5;
+    }
 
-    /* Responsive Design */
     @media screen and (max-width: 768px) {
-      .topnav {
-        flex-direction: column;
-        padding: 0;
-      }
-
-      .dropdown {
-        width: 100%;
-        margin: 0;
-      }
-
-      .dropbtn {
-        width: 100%;
-        padding: 1rem;
-      }
-
-      .dropdown-content {
-        width: 100%;
-        position: relative;
-      }
-
-      .container {
-        padding: 1rem;
-      }
-
-      .content-section {
-        padding: 1rem;
-      }
-
-      .footer-content {
-        grid-template-columns: 1fr;
-      }
+      .topnav { flex-direction: column; padding: 0; }
+      .dropdown { width: 100%; margin: 0; }
+      .dropbtn { width: 100%; padding: 1rem; }
+      .dropdown-content { width: 100%; position: relative; }
+      .header-title h1 { font-size: 2rem; }
+      .container { padding: 1rem; }
     }
   </style>
 </head>
 <body>
-        <header class="main-header">
-        <div class="header-title">
-            <h1><u>Common-Law Republic</u>; <u>U.S.A.</u>.</h1>
+
+  <header class="main-header">
+    <div class="header-title">
+      <h1><u>Common-Law Republic</u>; <u>U.S.A.</u>.</h1>
+    </div>
+
+    <nav class="topnav">
+      <div class="dropdown">
+        <button class="dropbtn">Home Page.</button>
+        <div class="dropdown-content">
+          <a href="../../index.html">Home Page.</a>
+          <a href="../../Z-ReferenceDocuments/BriefGuidelines-PreferentialVotingBallot-Generic-Edit3.pdf">Using Ballots; Instructions.</a>
+          <a href="../../Z-ReferenceDocuments/OrganicHierarchiesUSA-V4.2.pdf">Social-Organizing Under Constitutional "Organic Hierarchies".</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="dropbtn">Register; or: Log-In.</button>
+        <div class="dropdown-content">
+          <a href="../../Accounts-Profiles-Registering/NewUsers-Registration.html">Register</a>
+          <a href="../../Accounts-Profiles-Registering/Login.html">Login</a>
+          <a href="../../Accounts-Profiles-Registering/AccountProfiles-Management-Index.html">AccountProfiles-Management-Index</a>
+          <a href="../../Accounts-Profiles-Registering/Subscribe-EmailList.html">Subscribe To Email-List</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="dropbtn">National Civil-Government; Political-Activism.</button>
+        <div class="dropdown-content">
+          <a href="../../USA-GoverningBodies/Executive-Department-SubDepartments-Agencies/ExcDpt-SubDepartments&Agencies-Listed.html">Executive-Department;<br>Sub-Departments, &amp; Agencies.</a>
+          <a href="../../USA-GoverningBodies/JudicialDepartment/JudicialIndex.html">Judicial-Department.</a>
+          <a href="../../USA-GoverningBodies/Legislature-HouseReps/Leg-HRepsIndex.html">Legislature: House Representatives.</a>
+          <a href="../../USA-GoverningBodies/Legislature-Senate/Leg-Senate.html">Legislature; Senate.</a>
+          <a href="../../USA-GoverningBodies/Ballots-Index.html"><u>Ballots</u>.</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="dropbtn">Local Civil-Governments; Political-Activism.</button>
+        <div class="dropdown-content" style="text-align:center;">
+          <a href="../../USA-LocalJurisdictions/01-NewEngland-SS/NewEngland-SS.html">01: New-England</a>
+          <a href="../../USA-LocalJurisdictions/02-NewYork-SS/NewYork-SS.html">02: New-York</a>
+          <a href="../../USA-LocalJurisdictions/03-Jersey-Penn-SS/JerseyPenn-SS.html">03: Jersey-Penn</a>
+          <a href="../../USA-LocalJurisdictions/04-GreatLakes-SS/GreatLakes-SS.html">04: Great-Lakes</a>
+          <a href="../../USA-LocalJurisdictions/05-VirginiaCarolina-SS/VirginiaCarolina-SS.html">05: Virginia-Carolina</a>
+          <a href="../../USA-LocalJurisdictions/06-FloridaGeorgia-SS/FloridaGeorgia-SS.html">06: Florida-Georgia</a>
+          <a href="../../USA-LocalJurisdictions/07-MississippiValley-SS/MississippiValley-SS.html">07: Mississippi-Valley</a>
+          <a href="../../USA-LocalJurisdictions/08-NorthCentralPlains-SS/NorthCentralPlains-SS.html">08: NorthCentral-Plains</a>
+          <a href="../../USA-LocalJurisdictions/09-Texas-SS/Texas-SS.html">09: Texas</a>
+          <a href="../../USA-LocalJurisdictions/10-SouthWest-SS/SouthWest-SS.html">10: South-West</a>
+          <a href="../../USA-LocalJurisdictions/11-PacificNW-SS/PacificNW-SS.html">11: Pacific-NW</a>
+          <a href="../../USA-LocalJurisdictions/12-California-SS/California-SS.html">12: California</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="dropbtn">EveryThing Else:</button>
+        <div class="dropdown-content">
+          <a href="../1-Political-Parties/PoliticalParties.html">Political Parties.</a>
+          <a href="../2-Religous-&-Spiritual-Communities/SpiritualIndex.html">Religious &amp; Spiritual Communities.</a>
+          <a href="../3-Business&Financial-Communities&Corporations/Biz&Finances.html">Business &amp; Financial Communities &amp; Corporations.</a>
+          <a href="../4-DNA-Genetic-Racial-Communities/GeneticCommunities.html">DNA, Genetic, Racial, Communities.</a>
+          <a href="../5-World-Communities-OutsideOfUSA/World-Communities-Index.html">World-Communities.</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="dropbtn">Support.</button>
+        <div class="dropdown-content">
+          <a href="../../Support/Support.html">Support-Help-Contacts</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <center>
+    <main class="container">
+
+      <div class="content-section">
+        <h2 class="page-title"><u>DNA, Genetic, Racial &amp; Ethnic Heritage Communities</u>.</h2>
+
+        <div class="intro-block">
+          <p>This page provides a framework within which activists may work to serve
+            the interests of DNA, Genetic, Racial, Blood-line, &amp; Ethnic Heritage Communities.
+            Every person carries a unique genetic heritage &amp; ethnic identity that
+            deserves to be understood, preserved, &amp; respected. This organizing framework
+            acknowledges the rich diversity of humanity while affirming the common dignity
+            &amp; equal standing before the law of all people, regardless of race or ethnicity.
+            All communities listed here-under are invited to participate in good-faith
+            dialogue &amp; consensus-building within the Common-Law Republic framework.</p>
         </div>
 
-        <nav class="topnav">
-            <div class="dropdown">
-                <button class="dropbtn">Home-Page</button>
-                <div class="dropdown-content">
-                    <a href="index.html">Home Page</a>
-                    <a href="USA-LocalJurisdictions/OrganicHierarchiesUSA-V4.2.pdf">Social-Organizing Under Constitutional "Organic Hierarchies"</a>
-                </div>
-            </div>
+        <div style="margin-bottom: 1.5rem;">
+          <h3 class="section-heading"><u>Major Genetic, Racial &amp; Ethnic Heritage Communities; Listed</u>:</h3>
+          <p style="margin-bottom: 1rem; font-size: 1.05rem;">
+            The following represent the principal genetic, racial, &amp; ethnic heritage
+            communities present within the United States &amp; world-wide. This listing is
+            intended as a starting point; &amp; suggestions for additions are welcomed.
+          </p>
 
-            <div class="dropdown">
-                <button class="dropbtn">Register;
-                  or: Log-In.</button>
-                <div class="dropdown-content">
-                    <a href="Accounts-Profiles-Registering/NewUsers-Registration.html">Register</a>
-                    <a href="./Accounts-Profiles-Registering/Login.html">Login</a>
-                    <a href="Accounts-Profiles-Registering/ProfileIndexManagement.html">Different User-Account Profile-Pages; Explained</a>
-                </div>
-            </div>
+          <ul class="community-list">
+            <li class="community-item">
+              <strong>Native American &amp; Indigenous Peoples Communities.</strong>
+              <p>The original inhabitants of North America, comprising hundreds of distinct
+                tribal nations, each with unique languages, cultures, &amp; traditions.
+                The Common-Law Republic organizing model deeply respects the sovereignty
+                claims &amp; cultural heritage of all Native &amp; Indigenous peoples.</p>
+            </li>
+            <li class="community-item">
+              <strong>Anglo-Saxon &amp; Germanic Heritage Communities.</strong>
+              <p>Communities tracing their lineage to the Germanic-speaking peoples of
+                Northern Europe, including England, Germany, the Netherlands, Scandinavia,
+                &amp; related regions. Much of the Common-Law &amp; Republican legal tradition
+                derives from this cultural heritage.</p>
+            </li>
+            <li class="community-item">
+              <strong>Celtic Heritage Communities.</strong>
+              <p>Communities tracing their ancestry to the Celtic peoples of Ireland,
+                Scotland, Wales, Brittany, &amp; related regions. A rich tradition of
+                tribal self-governance &amp; customary law exists within Celtic heritage.</p>
+            </li>
+            <li class="community-item">
+              <strong>African &amp; African-American Heritage Communities.</strong>
+              <p>Communities whose ancestry traces to the African continent, representing
+                extraordinary linguistic, cultural, &amp; genetic diversity. A central
+                community in American history &amp; in the ongoing struggle for equal
+                standing before the law &amp; genuine self-governance.</p>
+            </li>
+            <li class="community-item">
+              <strong>Hispanic &amp; Latin Heritage Communities.</strong>
+              <p>Communities tracing their heritage to Spain, Portugal, Mexico, Central
+                America, South America, &amp; the Caribbean. A rich blend of European,
+                Indigenous, &amp; African heritage forms the foundation of these diverse communities.</p>
+            </li>
+            <li class="community-item">
+              <strong>Ashkenazi &amp; Sephardic Jewish Heritage Communities.</strong>
+              <p>Communities tracing their ancestry to the ancient Israelite peoples,
+                with distinct Ashkenazi (Eastern European) &amp; Sephardic (Iberian/Mediterranean)
+                lineages. A long tradition of community self-governance &amp; legal
+                scholarship is an important part of this heritage.</p>
+            </li>
+            <li class="community-item">
+              <strong>East Asian Heritage Communities.</strong>
+              <p>Communities tracing their ancestry to China, Japan, Korea, Taiwan,
+                &amp; related regions. A rich cultural heritage of family loyalty,
+                community discipline, &amp; scholarly achievement characterizes these communities.</p>
+            </li>
+            <li class="community-item">
+              <strong>South Asian Heritage Communities.</strong>
+              <p>Communities tracing their ancestry to India, Pakistan, Bangladesh,
+                Sri Lanka, &amp; related regions. One of the most diverse groupings
+                of human genetic &amp; cultural heritage on earth.</p>
+            </li>
+            <li class="community-item">
+              <strong>Middle Eastern &amp; North African Heritage Communities.</strong>
+              <p>Communities tracing their ancestry to the Arab world, Persia (Iran),
+                Turkey, the Levant, &amp; North Africa. Ancient cradles of civilization
+                &amp; rich traditions of law, philosophy, &amp; commerce.</p>
+            </li>
+            <li class="community-item">
+              <strong>Slavic Heritage Communities.</strong>
+              <p>Communities tracing their ancestry to the Slavic peoples of Eastern Europe,
+                including Russia, Ukraine, Poland, the Czech Republic, Slovakia, the Balkans,
+                &amp; related regions.</p>
+            </li>
+            <li class="community-item">
+              <strong>Pacific Islander &amp; Polynesian Heritage Communities.</strong>
+              <p>Communities tracing their ancestry to Hawaii, Samoa, Tonga, Fiji,
+                the Marshall Islands, &amp; the broader Pacific Island region.
+                Strong traditions of community governance &amp; oral cultural transmission
+                characterize these peoples.</p>
+            </li>
+            <li class="community-item">
+              <strong>Multi-Racial &amp; Mixed-Heritage Communities.</strong>
+              <p>A growing segment of the American population identifies with multiple
+                racial &amp; ethnic heritages. These communities represent the living
+                reality of human genetic mixing throughout history &amp; are fully
+                welcomed within the Common-Law Republic organizing framework.</p>
+            </li>
+          </ul>
+        </div>
 
-        <nav class="topnav">
-            <div class="dropdown">
-                <button class="dropbtn">USA-National-Categories-Index</button>
-                <div class="dropdown-content">
-                    <a href="./USA-NationalIssues/NationalCategories-Index.html">USA-National-Categories-Index</a>
-                    <a href="./USA-NationalIssues/ExecutiveDepartment-Prez/index.html">Executive-Department-Prez</a>
-                    <a href="./USA-NationalIssues/JudicialDepartment/JudicialIndex.html">Judicial-Department</a>
-                    <a href="./USA-NationalIssues/Legislature-HouseReps/Leg-HRepsIndex.html">Legislature-HouseReps</a>
-                    <a href="./USA-NationalIssues/Legislature-Senate/Leg-Senate.html">Legislature-Senate</a>
-                    <a href="./USA-NationalIssues/Treasury/TreasuryIndex.html">Treasury</a>
-                    <a href="./USA-NationalIssues/SecretaryofState/SecofStateIndex.html">Secretary-of-State</a>
-                    <a href="./USA-NationalIssues/Z-Agencies/Agencies.html">Z-Agencies-CIA-DOJ-FBI</a>                                                            
-                </div>
-            </div>
+        <div style="margin-bottom: 1.5rem;">
+          <h3 class="section-heading"><u>Principles for Ethnic &amp; Heritage Community Organizing</u>:</h3>
+          <p style="margin-bottom: 1rem; font-size: 1.05rem;">
+            All genetic, racial, &amp; ethnic communities participating in this framework
+            are encouraged to observe the following principles:
+          </p>
+          <ul class="community-list">
+            <li class="community-item">Affirm the equal standing before the Common Law of all persons, regardless of race or ethnicity.</li>
+            <li class="community-item">Celebrate &amp; preserve the unique cultural heritage, language, &amp; traditions of each community.</li>
+            <li class="community-item">Engage in good-faith dialogue &amp; consensus-building across racial &amp; ethnic lines.</li>
+            <li class="community-item">Promote equal access to justice &amp; equal protection of natural rights for all persons.</li>
+            <li class="community-item">Support community self-determination &amp; local sovereignty for all heritage communities.</li>
+            <li class="community-item">Resist agitation, division, &amp; conflict deliberately fomented between communities.</li>
+          </ul>
+        </div>
 
-            <div class="dropdown">
-                <button class="dropbtn">Local Community Organizing</button>
-                <div class="dropdown-content"style="text-align:center;">
-                    <a href="#">Residence & Geographical-Location</a>
-                    <p><u>USA Super-States</u>:</p>
-                            <a href="./USA-LocalJurisdictions/01-NewEngland-SS/NewEngland-SS.html" value="usa-01">USA-01: New-England</a>
-                            <a href="./USA-LocalJurisdictions/02-NewYork-SS/NewYork-SS.html" value="usa-02">USA-02: New-York</a>
-                            <a href="./USA-LocalJurisdictions/03-Jersey-Penn-SS/JerseyPenn-SS.html" value="usa-03">USA-03: Jersey-Penn</a>
-                            <a href="./USA-LocalJurisdictions/04-GreatLakes-SS/GreatLakes-SS.html" value="usa-04">USA-04: Great-Lakes</a>
-                            <a href="./USA-LocalJurisdictions/05-VirginiaCarolins-SS/Virginia-Carolina-SS.html" value="usa-05">USA-05: Virginia-Carolina</a>
-                            <a href="./USA-LocalJurisdictions/07-MississippiValley-SS/MississippiValley-SS.html" value="usa-06">USA-06: Mississippi-Valley</a>
-                            <a href="./USA-LocalJurisdictions/06-FloridaGeorgia-SS/FloridaGeorgia-SS.html" value="usa-07">USA-07: Florida-Georgia</a>
-                            <a href="./USA-LocalJurisdictions/08-WestGreatLakes-SS/WestreatLakes-SS.html" value="usa-08">USA-08: West-Great-Lakes</a>
-                            <a href="./USA-LocalJurisdictions/09-Texas-SS/Texas-SS.html" value="usa-09">USA-09: Texas</a>
-                            <a href="./USA-LocalJurisdictions/10-SouthWest-SS/SouthWest-SS.html" value="usa-10">USA-10: South-West</a>
-                            <a href="./USA-LocalJurisdictions/11-PacificNW-SS/PacificNW-SS.html" value="usa-11">USA-11: Pacific-NW</a>
-                            <a href="./USA-LocalJurisdictions/12-California-SS/California-SS.html"value="usa-12">USA-12: California</a>
-                            <p><u>World Regions</u>:</p>
-                            <a href="../../WorldJurisdictions/01-NorthAmerica-Canada/NorthAmerica-Canada.html" value="world-01">World-01: North-America Canada</a>
-                            <a href="../../WorldJurisdictions/02-WesternEurope/WesternEurope.html" value="world-02">World-02: Western-Europe</a>
-                            <a href="../../WorldJurisdictions/03-PacificOcean/PacificOcean.html" value="world-03">World-03: Pacific-Ocean</a>
-                            <a href="../../WorldJurisdictions/04-SouthEastAsia/SouthEastAsia.html" value="world-04">World-04: South-East Asia</a>
-                            <a href="../../WorldJurisdictions/05-NorthAsia-&-EasternEurope/NorthAsia-&-EasternEurope.html" value="world-05">World-05: Northern-Asia & Eastern-Europe</a>
-                            <a href="../../WorldJurisdictions/06-Central-&SouthAmerica/Central&SouthAmerica.html" value="world-06">World-06: Central-&-South-America</a>
-                            <a href="../../WorldJurisdictions/07-EasrernMediteranean&NorthAfrica/EasternMediteranean-&-NorthAfrica.html" value="world-07">World-07: Eastern-Mediterranean & North-Africa</a>
-                            <a href="../../WorldJurisdictions/08-India/India.html" value="world-08">World-08: India</a>
-                            <a href="../../WorldJurisdictions/09-South&CentralAfrica/South&CentralAfrica.html" value="world-09">World-09: South-&-Central Africa</a>
-                            <a href="../../WorldJurisdictions/10-China/China.html" value="world-10">World-10: China</a>
-                </div>
-            </div>
+        <div style="text-align: center; padding-top: 0.5rem;">
+          <a href="../../index.html" style="
+            display: inline-block;
+            background-color: var(--accent-gold);
+            color: var(--primary-dark);
+            padding: 0.8rem 2rem;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            margin-right: 1rem;
+          " onmouseover="this.style.backgroundColor='#ffe97f'" onmouseout="this.style.backgroundColor='#f5d442'">
+            Return to Home Page
+          </a>
+          <a href="../../Accounts-Profiles-Registering/NewUsers-Registration.html" style="
+            display: inline-block;
+            background-color: transparent;
+            color: var(--accent-gold);
+            padding: 0.8rem 2rem;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border: 2px solid var(--accent-gold);
+            transition: all 0.3s ease;
+          " onmouseover="this.style.backgroundColor='rgba(245,212,66,0.1)'" onmouseout="this.style.backgroundColor='transparent'">
+            Register to Participate
+          </a>
+        </div>
+      </div>
 
-            <div class="dropdown">
-                <button class="dropbtn">Private/Special/Ideological/Religious Organizing</button>
-                <div class="dropdown-content">
-                    <a href="./PrivateSpecialReligiousCommunities/1-Religous-&-Spiritual-Communities/SpiritualIndex.html">Religious & Spiritual Communities</a>
-                    <a href="./PrivateSpecialReligiousCommunities/2-Political-Parties/PoliticalParties.html">Political Parties</a>
-                    <a href="./PrivateSpecialReligiousCommunities/3-Business&Financial-Communities&Corporations/Biz&Finances.html">Business & Financial Communities & Corporations</a>
-                    <a href="./PrivateSpecialReligiousCommunities/4-Trade-Unions/TradeUnions.html">Trade Unions</a>
-                    <a href="./PrivateSpecialReligiousCommunities/5-FoodProduction&Distribution-Communities/FoodProduction.html">Food Production & Distribution Communities</a>
-                    <a href="./PrivateSpecialReligiousCommunities/6-EnvironmentalActivist-Communities/EnvironmentActivism.html">Environmental Activist Communities</a>
-                    <a href="./PrivateSpecialReligiousCommunities/7-HealthActivist-Communities/HealthActivism.html">Health Activist Communities</a>
-                    <a href="./PrivateSpecialReligiousCommunities/8-DNA-Genetic-Racial-Bloodlines-Communities/GeneticHeritage.html">DNA, Genetic, Racial, Blood-line, & Ethnic Communities</a>
-                </div>
-            </div>
+    </main>
+  </center>
 
-            <div class="dropdown">
-                <button class="dropbtn">Support</button>
-                <div class="dropdown-content">
-                    <a href="./Support/Support.html">Support-Help-Contacts</a>                </div>
-            </div>
-        </nav>
-    </header>
-    
+  <footer class="main-footer">
+    <div style="max-width: 1000px; margin: 0 auto;">
+      <div style="padding: 0.3rem; font-size: 1.2rem; line-height: 1.5;">
+        <p>The Common-Law Republic affirms the equal dignity &amp; standing before the law
+          of all persons of all races &amp; ethnicities, while celebrating the rich diversity
+          of human genetic &amp; cultural heritage across all communities.</p>
+      </div>
+      <div class="footer-bottom">
+        <p>
+          <u>Common-Law Republic, U.S.A.</u>; <u>Empowering Self-Governing Communities</u>.<br>
+          Engineered by: Charles Stewart, of Coleman Texas. ... Last up-dated: July-2025.
+        </p>
+      </div>
+    </div>
+  </footer>
+
 </body>
 </html>

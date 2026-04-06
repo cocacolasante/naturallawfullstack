@@ -31,6 +31,7 @@ func SetupRoutes(db *database.DB) *gin.Engine {
 	voteHandler := handlers.NewVoteHandler(db)
 	profileHandler := handlers.NewProfileHandler(db)
 	trustHandler := handlers.NewTrustHandler(db)
+	partyHandler := handlers.NewPartyHandler(db)
 
 	// Health check
 	r.GET("/health", func(c *gin.Context) {
@@ -62,6 +63,10 @@ func SetupRoutes(db *database.DB) *gin.Engine {
 			// Trust / user search (public)
 			public.GET("/users/search", trustHandler.SearchUsers)
 			public.GET("/users/:user_id/trust-score", trustHandler.GetTrustScore)
+
+			// Political parties (public read)
+			public.GET("/parties", partyHandler.GetParties)
+			public.GET("/parties/:slug", partyHandler.GetParty)
 		}
 
 		// Protected routes (authentication required)
@@ -117,6 +122,10 @@ func SetupRoutes(db *database.DB) *gin.Engine {
 			protected.POST("/profile/economic", profileHandler.CreateEconomicInfo)
 			protected.PUT("/profile/economic", profileHandler.UpdateEconomicInfo)
 			protected.DELETE("/profile/economic", profileHandler.DeleteEconomicInfo)
+
+			// Party engagement (authenticated)
+			protected.POST("/parties/:slug/engagement", partyHandler.SubmitEngagement)
+			protected.GET("/parties/:slug/my-engagement", partyHandler.GetMyEngagement)
 
 			// Trust votes and profile visibility
 			protected.POST("/users/:user_id/trust", trustHandler.SubmitTrustVote)

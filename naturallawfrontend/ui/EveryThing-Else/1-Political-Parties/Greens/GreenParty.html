@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Green Political-Party - Common-Law Republic U.S.A.</title>
+  <style>
+    :root { --primary-dark:#000; --secondary-dark:#111111; --tertiary-dark:#1a1a1a; --accent-gold:#f5d442; --accent-gold-hover:#ffe97f; --text-light:#ffffcc; --border-color:#444; --shadow-color:rgba(255,215,0,0.2); }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family:"Times New Roman",Times,serif; background:var(--primary-dark); color:var(--text-light); line-height:1.6; }
+    h1,h2,h3,h4 { color:var(--accent-gold); margin-bottom:1rem; }
+    a { color:var(--accent-gold); text-decoration:none; transition:color 0.3s; } a:hover { color:var(--accent-gold-hover); }
+    .main-header { background:var(--primary-dark); border-bottom:2px solid var(--accent-gold); }
+    .header-title { text-align:center; padding:1rem 0; } .header-title h1 { font-size:2.7rem; color:#fff; }
+    .topnav { background:var(--secondary-dark); display:flex; justify-content:center; align-items:center; padding:0; position:sticky; top:0; z-index:1000; }
+    .dropdown { position:relative; display:inline-block; margin:0 0.5rem; }
+    .dropbtn { background:transparent; color:var(--accent-gold); padding:0.8rem 1.2rem; font-size:1rem; border:none; cursor:pointer; font-weight:bold; } .dropbtn:hover { color:var(--accent-gold-hover); }
+    .dropdown-content { display:none; position:absolute; background:var(--tertiary-dark); min-width:200px; box-shadow:0 8px 16px rgba(0,0,0,0.4); z-index:1; border:1px solid var(--border-color); border-radius:4px; }
+    .dropdown-content a { color:var(--text-light); padding:12px 16px; display:block; } .dropdown-content a:hover { background:var(--secondary-dark); color:var(--accent-gold); } .dropdown:hover .dropdown-content { display:block; }
+    .auth-bar { text-align:center; padding:0.3rem; font-size:1rem; background:var(--tertiary-dark); border-bottom:1px solid var(--border-color); }
+    .container { max-width:1000px; margin:0 auto; padding:0.1rem; }
+    .content-section { background:var(--secondary-dark); margin:0.5rem 0; padding:1.5rem; border-radius:12px; box-shadow:0 4px 10px var(--shadow-color); border:1px solid var(--border-color); }
+    .section-heading { color:var(--accent-gold); font-size:1.3rem; margin-bottom:1rem; border-bottom:1px solid var(--border-color); padding-bottom:0.4rem; }
+    .question-block { background:var(--tertiary-dark); border-radius:4px; padding:1rem 1.2rem; margin-bottom:0.8rem; }
+    .question-text { font-size:1.05rem; margin-bottom:0.6rem; line-height:1.5; }
+    .radio-row { display:flex; gap:1.5rem; flex-wrap:wrap; }
+    .radio-row label { cursor:pointer; font-size:1rem; display:flex; align-items:center; gap:0.3rem; }
+    .radio-row input[type="radio"] { accent-color:var(--accent-gold); width:1rem; height:1rem; }
+    textarea#comments { width:100%; min-height:100px; background:var(--tertiary-dark); color:var(--text-light); border:1px solid var(--border-color); border-radius:4px; padding:0.7rem; font-size:1rem; font-family:inherit; resize:vertical; }
+    textarea#comments:focus { outline:1px solid var(--accent-gold); }
+    .save-btn { margin-top:0.8rem; padding:0.8rem 2.5rem; background:linear-gradient(135deg,#DC143C,#8B0000); color:var(--accent-gold); font-size:1.1rem; font-weight:bold; border:none; border-radius:4px; cursor:pointer; transition:transform 0.2s,box-shadow 0.2s; }
+    .save-btn:hover { transform:translateY(-2px); box-shadow:0 4px 12px rgba(220,20,60,0.4); }
+    .main-footer { background:var(--secondary-dark); padding:1rem; margin-top:1rem; border-top:2px solid var(--border-color); text-align:center; }
+    .footer-bottom { padding-top:0.5rem; margin-top:0.5rem; border-top:1px solid var(--border-color); font-size:1.1rem; }
+    @media(max-width:768px) { .topnav{flex-direction:column;} .dropdown{width:100%;margin:0;} .dropbtn{width:100%;padding:1rem;} .dropdown-content{width:100%;position:relative;} .header-title h1{font-size:2rem;} .container{padding:1rem;} }
+  </style>
+</head>
+<body>
+  <header class="main-header">
+    <div class="header-title"><h1><u>Common-Law Republic</u>; <u>U.S.A.</u>.</h1></div>
+    <div class="auth-bar" id="auth-status"></div>
+    <nav class="topnav">
+      <div class="dropdown"><button class="dropbtn">Home Page.</button><div class="dropdown-content">
+        <a href="../../../index.html">Home Page.</a>
+        <a href="../../../Z-ReferenceDocuments/BriefGuidelines-PreferentialVotingBallot-Generic-Edit3.pdf">Using Ballots; Instructions.</a>
+        <a href="../../../Z-ReferenceDocuments/OrganicHierarchiesUSA-V4.2.pdf">Social-Organizing Under Constitutional "Organic Hierarchies".</a>
+      </div></div>
+      <div class="dropdown"><button class="dropbtn">Register; or: Log-In.</button><div class="dropdown-content">
+        <a href="../../../Accounts-Profiles-Registering/NewUsers-Registration.html">Register</a>
+        <a href="../../../Accounts-Profiles-Registering/Login.html">Login</a>
+        <a href="../../../Accounts-Profiles-Registering/AccountProfiles-Management-Index.html">AccountProfiles-Management-Index</a>
+        <a href="../../../Accounts-Profiles-Registering/Subscribe-EmailList.html">Subscribe To Email-List</a>
+      </div></div>
+      <div class="dropdown"><button class="dropbtn">National Civil-Government; Political-Activism.</button><div class="dropdown-content">
+        <a href="../../../USA-GoverningBodies/Executive-Department-SubDepartments-Agencies/ExcDpt-SubDepartments&Agencies-Listed.html">Executive-Department; Sub-Departments, &amp; Agencies.</a>
+        <a href="../../../USA-GoverningBodies/JudicialDepartment/JudicialIndex.html">Judicial-Department.</a>
+        <a href="../../../USA-GoverningBodies/Legislature-HouseReps/Leg-HRepsIndex.html">Legislature: House Representatives.</a>
+        <a href="../../../USA-GoverningBodies/Legislature-Senate/Leg-Senate.html">Legislature; Senate.</a>
+        <a href="../../../USA-GoverningBodies/Ballots-Index.html"><u>Ballots</u>.</a>
+      </div></div>
+      <div class="dropdown"><button class="dropbtn">Local Civil-Governments; Political-Activism.</button><div class="dropdown-content" style="text-align:center;">
+        <a href="../../../USA-LocalJurisdictions/01-NewEngland-SS/NewEngland-SS.html">01: New-England</a>
+        <a href="../../../USA-LocalJurisdictions/02-NewYork-SS/NewYork-SS.html">02: New-York</a>
+        <a href="../../../USA-LocalJurisdictions/03-Jersey-Penn-SS/JerseyPenn-SS.html">03: Jersey-Penn</a>
+        <a href="../../../USA-LocalJurisdictions/04-GreatLakes-SS/GreatLakes-SS.html">04: Great-Lakes</a>
+        <a href="../../../USA-LocalJurisdictions/05-VirginiaCarolina-SS/VirginiaCarolina-SS.html">05: Virginia-Carolina</a>
+        <a href="../../../USA-LocalJurisdictions/06-FloridaGeorgia-SS/FloridaGeorgia-SS.html">06: Florida-Georgia</a>
+        <a href="../../../USA-LocalJurisdictions/07-MississippiValley-SS/MississippiValley-SS.html">07: Mississippi-Valley</a>
+        <a href="../../../USA-LocalJurisdictions/08-NorthCentralPlains-SS/NorthCentralPlains-SS.html">08: NorthCentral-Plains</a>
+        <a href="../../../USA-LocalJurisdictions/09-Texas-SS/Texas-SS.html">09: Texas</a>
+        <a href="../../../USA-LocalJurisdictions/10-SouthWest-SS/SouthWest-SS.html">10: South-West</a>
+        <a href="../../../USA-LocalJurisdictions/11-PacificNW-SS/PacificNW-SS.html">11: Pacific-NW</a>
+        <a href="../../../USA-LocalJurisdictions/12-California-SS/California-SS.html">12: California</a>
+      </div></div>
+      <div class="dropdown"><button class="dropbtn">EveryThing Else:</button><div class="dropdown-content">
+        <a href="../PoliticalParties.html">Political Parties.</a>
+        <a href="../../2-Religous-&-Spiritual-Communities/SpiritualIndex.html">Religious &amp; Spiritual Communities.</a>
+        <a href="../../3-Business&Financial-Communities&Corporations/Biz&Finances.html">Business &amp; Financial Communities &amp; Corporations.</a>
+        <a href="../../4-DNA-Genetic-Racial-Communities/GeneticCommunities.html">DNA, Genetic, Racial, Communities.</a>
+        <a href="../../5-World-Communities-OutsideOfUSA/World-Communities-Index.html">World-Communities.</a>
+      </div></div>
+      <div class="dropdown"><button class="dropbtn">Support.</button><div class="dropdown-content">
+        <a href="../../../Support/Support.html">Support-Help-Contacts</a>
+      </div></div>
+    </nav>
+  </header>
+
+  <center><main class="container" id="party-main-content">
+    <div class="content-section">
+      <h2 id="party-heading" class="page-title" style="font-size:1.9rem;">Loading party information&hellip;</h2>
+      <div style="background:var(--tertiary-dark);padding:1rem 1.2rem;border-radius:4px;border-left:4px solid var(--accent-gold);margin-bottom:1.5rem;font-size:1.1rem;line-height:1.7;"><p id="party-intro"></p></div>
+    </div>
+    <div class="content-section">
+      <h3 class="section-heading"><u>Preliminary Questions</u>:</h3>
+      <p style="margin-bottom:1rem;font-size:1.05rem;">Please indicate your affiliation and willingness to participate. Logged-in members may save their responses.</p>
+      <div class="question-block"><p class="question-text">1. Are You A Registered-Voter, &amp; who is also there-under Registered as A "Green Party Member"?</p><div class="radio-row"><label><input type="radio" name="q1" value="yes"> &nbsp;Yes</label><label><input type="radio" name="q1" value="not_sure"> &nbsp;Not Sure</label><label><input type="radio" name="q1" value="no"> &nbsp;No</label></div></div>
+      <div class="question-block"><p class="question-text">2. If You Are "Not A Registered Green-Party Member", Do You Consider Your-Self "More Aligned With", &amp; "Generally Supportive Of", the "Green Political-Party"?</p><div class="radio-row"><label><input type="radio" name="q2" value="yes"> &nbsp;Yes</label><label><input type="radio" name="q2" value="not_sure"> &nbsp;Not Sure</label><label><input type="radio" name="q2" value="no"> &nbsp;No</label></div></div>
+      <div class="question-block"><p class="question-text">3. Are You Willing to "Actively Engage in Consensus-Building Efforts" with Other Green-Party Members, in Efforts to Influence the Decisions of the Green Party, To Promote Justice, Security, &amp; Peace, For the People of the USA?</p><div class="radio-row"><label><input type="radio" name="q3" value="yes"> &nbsp;Yes</label><label><input type="radio" name="q3" value="not_sure"> &nbsp;Not Sure</label><label><input type="radio" name="q3" value="no"> &nbsp;No</label></div></div>
+      <div class="question-block"><p class="question-text">4. Are You Willing to "Actively Engage in Consensus-Building Efforts" with Well-Meaning Activists who are "Not Green-Party Members", in Efforts to Influence the Decisions of the Green Party, To Promote Justice, Security, &amp; Peace, For the People of the USA?</p><div class="radio-row"><label><input type="radio" name="q4" value="yes"> &nbsp;Yes</label><label><input type="radio" name="q4" value="not_sure"> &nbsp;Not Sure</label><label><input type="radio" name="q4" value="no"> &nbsp;No</label></div></div>
+      <div style="margin-top:1.2rem;">
+        <label for="comments" style="display:block;font-size:1.05rem;margin-bottom:0.5rem;">Comments or Valuable Information related to Green-Party Activism:</label>
+        <textarea id="comments" rows="4" placeholder="Enter your comments here..."></textarea>
+      </div>
+      <div style="margin-top:0.8rem;display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+        <button class="save-btn" onclick="saveEngagement()">Save Responses</button>
+        <span id="save-message" style="display:none;"></span>
+      </div>
+    </div>
+    <div class="content-section">
+      <h3 class="section-heading"><u>Listing of: Web-Page Ballots</u>; For Voting on Platform Planks, Leaders &amp; Policies of the Green Political-Party:</h3>
+      <div id="ballot-list"><div style="color:var(--text-light);font-size:1rem;padding:0.5rem;">Loading ballots&hellip;</div></div>
+    </div>
+    <div class="content-section">
+      <h3 class="section-heading"><u>Web-Links Related To Green-Party Organization</u>:</h3>
+      <div id="external-links"><div style="color:var(--text-light);font-size:1rem;padding:0.5rem;">Loading links&hellip;</div></div>
+    </div>
+  </main></center>
+
+  <footer class="main-footer">
+    <div style="max-width:1000px;margin:0 auto;">
+      <div style="padding:0.3rem;font-size:1.2rem;"><p>Activists of all persuasions are welcomed to engage in good-faith consensus-building under Common-Law Republicanism.</p></div>
+      <div class="footer-bottom"><p><u>Common-Law Republic, U.S.A.</u>; <u>Empowering Self-Governing Communities</u>.<br>Engineered by: Charles Stewart, of Coleman Texas. ... Last up-dated: July-2025.</p></div>
+    </div>
+  </footer>
+
+  <script>const PARTY_SLUG = 'green';</script>
+  <script src="../party-render.js"></script>
+</body>
+</html>
