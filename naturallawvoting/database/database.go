@@ -66,9 +66,12 @@ CREATE TABLE IF NOT EXISTS ballots (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Add superstate, state, and district columns if they don't exist (for existing databases)
+-- Add columns if they don't exist (for existing databases)
 DO $$
 BEGIN
+    IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = 'ballots' AND column_name = 'category') THEN
+        ALTER TABLE ballots ADD COLUMN category VARCHAR(100);
+    END IF;
     IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = 'ballots' AND column_name = 'superstate') THEN
         ALTER TABLE ballots ADD COLUMN superstate VARCHAR(100);
     END IF;
