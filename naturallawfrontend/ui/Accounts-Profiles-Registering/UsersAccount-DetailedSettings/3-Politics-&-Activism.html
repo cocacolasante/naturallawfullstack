@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3-Politics-&-Activism-UserProfile</title>
+</head>
+
+<body style="margin: 0; padding: 0; font-family: 'Times New Roman', Times, serif; 
+background-color: #000000; color: #ffffcc; line-height: 1.6;">
+
+<!-- Header Section -->  
+<header style="background: linear-gradient(135deg, #1a1a1a, #2d2d2d); 
+color: #f5d442; text-align: center; padding: 20px 0; position: relative;">
+
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 1rem;">
+        <div style="color: #4dc3ff; font-size: 3.5rem; font-weight: 700; margin: 0; font-family: inherit;">
+            <u>Common-Law Republic</u>; <u>U.S.A.</u>
+        </div>
+    </div>
+    
+    <!-- Login Status Indicator; Option-3: Below Title in header -->
+   <div id="loginStatus" style="margin-top: 10px; font-size: 1.4rem; color: #ffffcc;"></div> 
+ 
+    <div style="width: 80%; height: 2px; background-color: #DC143C; margin: 20px auto 0 auto;"></div>
+</header>
+
+<!-- Navigation Section -->
+<nav style="background-color: #111111; display: flex; justify-content: center; align-items: center; 
+padding: 0; position: sticky; top: 0; z-index: 1000; margin-bottom: 0.5rem; flex-wrap: wrap;">
+
+    <!-- Home-Page DropDown Menu) -->
+    <div style="position: relative; display: inline-block; margin: 0 0.5rem;">
+        <button style="background-color: transparent; color: #f5d442; padding: 0.8rem 1.2rem; 
+font-size: 1.4rem; border: none; cursor: pointer; font-weight: bold;" 
+                onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'"
+                onclick="toggleDropdown('dropdown1')">Home<br>Page.</button>
+
+        <div id="dropdown1" style="display: none; position: absolute; background-color: #1a1a1a; 
+min-width: 300px; box-shadow: 0 8px 16px rgba(0,0,0,0.4); z-index: 1; border: 1px solid #444; 
+border-radius: 4px;">
+
+            <a href="/index.html" style="color: #ffffcc; padding: 12px 16px; display: block; 
+text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Home Page.</a>
+
+            <a href="/Z-Home-ReferenceDocuments/Twelve-USA-SuperStates-Statutory-OrganizedMoreFully-2025.pdf" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; 
+font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'"> 
+Super-States USA; All 12 Listed & Organized.</a>
+
+            <a href="/Z-Home-ReferenceDocuments/OrganicHierarchiesUSA-V4.2.pdf" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; 
+font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'"> 
+Social-Organizing Under "Organic Hierarchies".</a>
+
+            <a href="/Z-Home-ReferenceDocuments/BriefGuidelines-PreferentialVotingBallot-Generic-Edit3.pdf" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; 
+font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Using Ballots; Instructions.</a>
+
+            <a href="/Support/Support.html" style="color: #ffffcc; padding: 12px 16px; display: block; 
+text-align: left; text-decoration: none; font-size: 1.4rem; border-top: 1px solid #444;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Support, Help, & Contacts.</a>
+
+        </div>
+    </div>
+
+    <!-- Register/Login DropDown Menu-->
+    <div style="position: relative; display: inline-block; margin: 0 0.5rem;">
+        <button style="background-color: transparent; color: #f5d442; padding: 
+0.8rem 1.2rem; font-size: 1.4rem; border: none; cursor: pointer; font-weight: bold;" 
+                onmouseover="this.style.color='#ffe97f'" 
+onmouseout="this.style.color='#f5d442'"
+                onclick="toggleDropdown('dropdown2')">
+Register;<br> or: Log-In.</button>
+
+        <div id="dropdown2" style="display: none; position: absolute; background-color: #1a1a1a; 
+min-width: 300px; box-shadow: 0 8px 16px rgba(0,0,0,0.4); z-index: 1; border: 1px solid #444; 
+border-radius: 4px;">
+
+            <a href="/Accounts-Profiles-Registering/NewUsers-Registration.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Register.</a>
+
+            <a href="/Accounts-Profiles-Registering/Login.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Login.</a>
+
+           <a href="/Accounts-Profiles-Registering/AccountProfiles-Management-Index.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Account Profiles & Management; Index.</a>
+
+            <a href="/Accounts-Profiles-Registering/Subscribe-EmailList.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Subscribe To Email-Lists.</a>
+        </div>
+    </div>
+
+    <!-- National Civil-Government DropDown Menu-->
+    <div style="position: relative; display: inline-block; margin: 0 0.5rem;">
+        <button style="background-color: transparent; color: #f5d442; padding: 0.8rem 1.2rem; 
+font-size: 1.4rem; border: none; cursor: pointer; font-weight: bold;" 
+                onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'"
+                onclick="toggleDropdown('dropdown3')">National Civil-Government,<br>
+Political-Activism.</button>
+
+        <div id="dropdown3" style="display: none; position: absolute; background-color: #1a1a1a; 
+min-width: 500px; box-shadow: 0 8px 16px rgba(0,0,0,0.4); z-index: 1; border: 1px solid #444; 
+border-radius: 4px;">
+
+            <a href="/USA-GoverningBodies/Executive-Department-SubDepartments-Agencies/ExcDpt-SubDepartments&Agencies-Listed.html" 
+style="color: #ffffcc; padding: 8px 16px; display: block; text-align: left; text-decoration: none; 
+white-space: normal; line-height: 1.2; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; 
+this.style.color='#ffffcc'">Executive-Department;<br>Sub-Departments, & Agencies.</a>
+
+            <a href="/USA-GoverningBodies/JudicialDepartment/JudicialIndex.html" style="color: #ffffcc; padding: 12px 16px; 
+display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">Judicial-Department.</a>
+
+           <a href="/USA-GoverningBodies/Legislature-HouseReps/Leg-HRepsIndex.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; 
+this.style.color='#ffffcc'">Legislature: House Representatives.</a>
+
+            <a href="/USA-GoverningBodies/Legislature-Senate/Leg-Senate.html" style="color: #ffffcc; padding: 12px 16px; 
+display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">Legislature; Senate.</a>
+
+            <a href="/USA-GoverningBodies/Ballots-Index.html" style="color: #ffffcc; padding: 12px 16px; display: block; 
+text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'"><u>Ballots</u>.</a>
+        </div>
+    </div>
+
+    <!-- Local Civil- Government DropDown Menu -->
+    <div style="position: relative; display: inline-block; margin: 0 0.5rem;">
+        <button style="background-color: transparent; color: #f5d442; padding: 0.8rem 1.2rem; font-size: 1.4rem; 
+border: none; cursor: pointer; font-weight: bold;" 
+                onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'"
+                onclick="toggleDropdown('dropdown4')">
+Local Civil-Government,<br> Political-Activism.</button>
+
+        <div id="dropdown4" style="display: none; position: absolute; background-color: #1a1a1a; 
+min-width: 400px; box-shadow: 0 8px 16px rgba(0,0,0,0.4); z-index: 1; border: 1px solid #444; 
+border-radius: 4px; text-align: center; max-height: 400px; overflow-y: auto;">
+
+            <a href="/USA-LocalJurisdictions/01-NewEngland-SS/NewEngland-SS.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">01: New-England</a>
+
+            <a href="/USA-LocalJurisdictions/02-NewYork-SS/NewYork-SS.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">02: New-York</a>
+
+            <a href="/USA-LocalJurisdictions/03-Jersey-Penn-SS/JerseyPenn-SS.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">03: Jersey-Penn</a>
+
+            <a href="/USA-LocalJurisdictions/04-GreatLakes-SS/GreatLakes-SS.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">04: Great-Lakes</a>
+
+            <a href="/USA-LocalJurisdictions/05-VirginiaCarolina-SS/VirginiaCarolina-SS.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">05: Virginia-Carolina</a>
+
+            <a href="/USA-LocalJurisdictions/06-FloridaGeorgia-SS/FloridaGeorgia-SS.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">06: Florida-Georgia</a>
+
+            <a href="/USA-LocalJurisdictions/07-MississippiValley-SS/MississippiValley-SS.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">07: Mississippi-Valley</a>
+
+            <a href="/USA-LocalJurisdictions/08-NorthCentralPlains-SS/NorthCentralPlains-SS.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+08: North-Central-Plains</a>
+ 
+            <a href="/USA-LocalJurisdictions/09-Texas-SS/Texas-SS.html" style="color: #ffffcc; padding: 12px 16px; 
+display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">09: Texas</a>
+
+            <a href="/USA-LocalJurisdictions/10-SouthWest-SS/SouthWest-SS.html" style="color: #ffffcc; padding: 12px 16px; 
+display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">10: South-West</a>
+
+            <a href="/USA-LocalJurisdictions/11-PacificNW-SS/PacificNW-SS.html" style="color: #ffffcc; padding: 12px 16px; 
+display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+11: Pacific-North-West</a>
+
+            <a href="/USA-LocalJurisdictions/12-California-SS/California-SS.html" style="color: #ffffcc; padding: 12px 16px; 
+display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">12: California</a>
+        </div>
+    </div>
+
+    <!-- Everything-Else DropDown Menu -->
+    <div style="position: relative; display: inline-block; margin: 0 0.5rem;">
+        <button style="background-color: transparent; color: #f5d442; padding: 0.8rem 1.2rem; 
+font-size: 1.4rem; border: none; cursor: pointer; font-weight: bold;" 
+                onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'"
+                onclick="toggleDropdown('dropdown5')">
+Everything<br> Else:</button>
+
+        <div id="dropdown5" style="display: none; position: absolute; background-color: #1a1a1a; 
+min-width: 400px; box-shadow: 0 8px 16px rgba(0,0,0,0.4); z-index: 1; border: 1px solid #444; 
+border-radius: 4px;">
+
+            <a href="/EveryThing-Else/1-Political-Parties/PoliticalParties.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Political Parties & Activist Communities.</a>
+
+            <a href="/EveryThing-Else/2-Religous-&-Spiritual-Communities/SpiritualIndex.html" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; 
+font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Religious & Spiritual Communities.</a>
+
+            <a href="/EveryThing-Else/3-Business&Financial-Communities&Corporations/Biz&Finances.html" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; 
+font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Business & Financial Corporations & Communities.</a>
+
+            <a href="/EveryThing-Else/4-DNA-Genetic-Racial-Communities/GeneticCommunities.html" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; 
+font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; 
+this.style.color='#ffffcc'">
+Ethnic, Genetic, DNA, & Racial, Communities.</a>
+
+            <a href="/EveryThing-Else/5-World-Communities-OutsideOfUSA/World-Communities-Index.html" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; 
+font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+World Geographical Communities.</a>
+         </div>    
+       </div>
+   </nav>
+</header>
+
+<!-- Main Content Area -->
+<main style="max-width: 900px; margin: 0 auto; padding: 2rem;">
+    <div style="background-color: #111111; padding: 2rem; border-radius: 12px; 
+box-shadow: 0 4px 10px rgba(255, 215, 0, 0.2); border: 1px solid #444; text-align: center;">
+        
+        <h2 style="color: #f5d442; margin: 0 0 2rem 0; font-size: 2.5rem; line-height: 1.4; font-weight: 700;">
+            <u>Registration-Form</u>, <u>Section-3</u>;<br>
+            <u>Political-Parties</u>; <u>Political-Ideologies</u>;<br>
+            & <u>Activism</u>; <u>User-Profile</u>:
+        </h2>
+
+        <!-- Introductory Note -->
+        <div style="background-color: #1a1a1a; padding: 1.5rem; border-radius: 8px; 
+margin-bottom: 2rem; border: 1px solid #444; text-align: left;">
+            <p style="margin: 0; line-height: 1.6; font-size: 1.5rem; font-weight: 400; color: #4dc3ff;">
+                This 'Users-Registration Page/Section-3', is designed to help in 
+Identifying Your more specific "<u>Political Beliefs</u>, & <u>Political Ideologies</u>". 
+This below list of categories & questions is presently quite short, but we expect it to expand greatly soon.
+            </p>
+        </div>
+
+        <!-- Political Parties Section -->
+        <div style="background-color: #1a1a1a; padding: 1.5rem; border-radius: 8px; 
+margin-bottom: 2rem; border: 1px solid #444; text-align: left;">
+            <h3 style="color: #f5d442; font-size: 2rem; font-weight: 700; margin: 0 0 1.5rem 0; text-align: center;">
+                <u>Political Parties & Ideologies</u>;<br>
+<u>Support or Opposition</u>; <u>Users-Profile</u>:
+            </h3>
+
+        <!-- Centered Dividing Line -->
+        <p style="text-align: center; margin: 1rem 0; font-size: 1.7rem; font-weight: 400; 
+color: #DC143C; line-height: 1.2;">
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        </p>
+
+            <form id="politicalForm">
+                <!-- Democratic Party -->
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; color: #f5d442; 
+font-size: 1.7rem; font-weight: 700;">
+                        How Supportive Are You of the "<u>Democratic Political-Party</u>"?
+                    </label>
+                    
+                    <!-- LINE 1: Number Box + Reference Guide Dropdown -->
+                    <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 0.5rem;">
+                        <!-- Red Number Input (0-100) -->
+                        <input type="number" min="0" max="100" value="50" id="democratic" name="democratic"
+                               oninput="updateSync('democratic', this.value)"
+                               style="width: 100px; padding: 10px; font-size: 1.6rem; text-align: center; 
+border: 3px solid #DC143C; border-radius: 6px; background-color: #1a1a1a; 
+color: #DC143C; font-weight: 700; box-sizing: border-box; flex-shrink: 0;"
+                               onfocus="this.style.borderColor='#FF6B6B'" 
+                               onblur="this.style.borderColor='#DC143C'">
+                        
+                        <!-- Reference Guide Dropdown (Synced) -->
+                        <select id="democratic_display" 
+                                style="flex-grow: 1; padding: 10px; font-size: 1.3rem; border: 2px solid #444; 
+border-radius: 6px; background-color: #1a1a1a; color: #f5d442; font-weight: 700; 
+cursor: pointer; box-sizing: border-box;"
+                                onfocus="this.style.borderColor='#f5d442'" 
+                                onblur="this.style.borderColor='#444'"
+                                disabled>
+                            <option value="0-9" style="background-color: #1a1a1a; color: #DC143C;">0-9: I Despise This Party or Ideology.</option>
+                            <option value="10-39" style="background-color: #1a1a1a; color: #DC143C;">10-39: I am Apprehensive.</option>
+                            <option value="40-60" selected style="background-color: #1a1a1a; color: #f5d442;">40-60: I am Indifferent.</option>
+                            <option value="61-72" style="background-color: #1a1a1a; color: #f5d442;">61-72: I am Generally Supportive.</option>
+                            <option value="73-85" style="background-color: #1a1a1a; color: #1DAD64;">73-85: I am Seriously Supportive.</option>
+                            <option value="86-100" style="background-color: #1a1a1a; color: #1DAD64;">86-100: I am Vigilantly Supportive.</option>
+                        </select>
+                    </div>
+                    
+                    <!-- LINE 2: Slider Bar -->
+                    <div style="margin-bottom: 0.5rem;">
+                        <input type="range" min="0" max="100" value="50" id="democratic_slider"
+                               oninput="updateSync('democratic', this.value)"
+                               style="width: 100%; height: 8px; border-radius: 4px; 
+background: linear-gradient(to right, #DC143C 0%, #FFD700 50%, #1DAD64 100%); 
+cursor: pointer; -webkit-appearance: none; appearance: none;">
+                    </div>
+                    
+                    <!-- Trustworthiness Threshold -->
+                    <div style="margin-top: 0.5rem; text-align: center;">
+                        <label style="color: #1DAD64; font-size: 1.3rem; font-weight: 400; display: inline-block;">
+                            Trustworthiness Threshold Required to View: 
+                            <input type="number" min="0" max="100" value="25" name="threshold_democratic"
+                                   style="width: 70px; padding: 6px; font-size: 1.3rem; text-align: center; 
+margin-left: 0.5rem; background-color: #1a1a1a; color: #f5d442; border: 2px solid #1DAD64; 
+border-radius: 4px; font-weight: 700;">
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Republican Party -->
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; color: #f5d442; 
+font-size: 1.7rem; font-weight: 700;">
+                        How Supportive Are You of the "<u>Republican Political-Party</u>"?
+                    </label>
+                    
+                    <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 0.5rem;">
+                        <input type="number" min="0" max="100" value="50" id="republican" name="republican"
+                               oninput="updateSync('republican', this.value)"
+                               style="width: 100px; padding: 10px; font-size: 1.6rem; text-align: center; 
+border: 3px solid #DC143C; border-radius: 6px; background-color: #1a1a1a; 
+color: #DC143C; font-weight: 700; box-sizing: border-box; flex-shrink: 0;"
+                               onfocus="this.style.borderColor='#FF6B6B'" 
+                               onblur="this.style.borderColor='#DC143C'">
+                        
+                        <select id="republican_display" 
+                                style="flex-grow: 1; padding: 10px; font-size: 1.3rem; border: 2px solid #444; 
+border-radius: 6px; background-color: #1a1a1a; color: #f5d442; font-weight: 700; 
+cursor: pointer; box-sizing: border-box;"
+                                onfocus="this.style.borderColor='#f5d442'" 
+                                onblur="this.style.borderColor='#444'"
+                                disabled>
+                            <option value="0-9" style="background-color: #1a1a1a; color: #DC143C;">0-9: I Despise This Party or Ideology.</option>
+                            <option value="10-39" style="background-color: #1a1a1a; color: #DC143C;">10-39: I am Apprehensive.</option>
+                            <option value="40-60" selected style="background-color: #1a1a1a; color: #f5d442;">40-60: I am Indifferent.</option>
+                            <option value="61-72" style="background-color: #1a1a1a; color: #f5d442;">61-72: I am Generally Supportive.</option>
+                            <option value="73-85" style="background-color: #1a1a1a; color: #1DAD64;">73-85: I am Seriously Supportive.</option>
+                            <option value="86-100" style="background-color: #1a1a1a; color: #1DAD64;">86-100: I am Vigilantly Supportive.</option>
+                       </select>
+                    </div>
+                    
+                    <div style="margin-bottom: 0.5rem;">
+                        <input type="range" min="0" max="100" value="50" id="republican_slider"
+                               oninput="updateSync('republican', this.value)"
+                               style="width: 100%; height: 8px; border-radius: 4px; 
+background: linear-gradient(to right, #DC143C 0%, #FFD700 50%, #1DAD64 100%); 
+cursor: pointer; -webkit-appearance: none; appearance: none;">
+                    </div>
+                    
+                    <div style="margin-top: 0.5rem; text-align: center;">
+                        <label style="color: #1DAD64; font-size: 1.3rem; font-weight: 400; display: inline-block;">
+                            Trustworthiness Threshold Required to View: 
+                            <input type="number" min="0" max="100" value="25" name="threshold_republican"
+                                   style="width: 70px; padding: 6px; font-size: 1.3rem; text-align: center; 
+margin-left: 0.5rem; background-color: #1a1a1a; color: #f5d442; border: 2px solid #1DAD64; 
+border-radius: 4px; font-weight: 700;">
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Libertarian Party -->
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; color: #f5d442; 
+font-size: 1.7rem; font-weight: 700;">
+                        How Supportive Are You of the "<u>Libertarian Political-Party</u>"?
+                    </label>
+                    
+                    <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 0.5rem;">
+                        <input type="number" min="0" max="100" value="50" id="libertarian" name="libertarian"
+                               oninput="updateSync('libertarian', this.value)"
+                               style="width: 100px; padding: 10px; font-size: 1.6rem; text-align: center; 
+border: 3px solid #DC143C; border-radius: 6px; background-color: #1a1a1a; 
+color: #DC143C; font-weight: 700; box-sizing: border-box; flex-shrink: 0;"
+                               onfocus="this.style.borderColor='#FF6B6B'" 
+                               onblur="this.style.borderColor='#DC143C'">
+                        
+                        <select id="libertarian_display" 
+                                style="flex-grow: 1; padding: 10px; font-size: 1.3rem; border: 2px solid #444; 
+border-radius: 6px; background-color: #1a1a1a; color: #f5d442; font-weight: 700; 
+cursor: pointer; box-sizing: border-box;"
+                                onfocus="this.style.borderColor='#f5d442'" 
+                                onblur="this.style.borderColor='#444'"
+                                disabled>
+                            <option value="0-9" style="background-color: #1a1a1a; color: #DC143C;">0-9: I Despise This Party or Ideology.</option>
+                            <option value="10-39" style="background-color: #1a1a1a; color: #DC143C;">10-39: I am Apprehensive.</option>
+                            <option value="40-60" selected style="background-color: #1a1a1a; color: #f5d442;">40-60: I am Indifferent.</option>
+                            <option value="61-72" style="background-color: #1a1a1a; color: #f5d442;">61-72: I am Generally Supportive.</option>
+                            <option value="73-85" style="background-color: #1a1a1a; color: #1DAD64;">73-85: I am Seriously Supportive.</option>
+                            <option value="86-100" style="background-color: #1a1a1a; color: #1DAD64;">86-100: I am Vigilantly Supportive.</option>
+                        </select>
+                    </div>
+                    
+                    <div style="margin-bottom: 0.5rem;">
+                        <input type="range" min="0" max="100" value="50" id="libertarian_slider"
+                               oninput="updateSync('libertarian', this.value)"
+                               style="width: 100%; height: 8px; border-radius: 4px; 
+background: linear-gradient(to right, #DC143C 0%, #FFD700 50%, #1DAD64 100%); 
+cursor: pointer; -webkit-appearance: none; appearance: none;">
+                    </div>
+                    
+                    <div style="margin-top: 0.5rem; text-align: center;">
+                        <label style="color: #1DAD64; font-size: 1.3rem; font-weight: 400; display: inline-block;">
+                            Trustworthiness Threshold Required to View: 
+                            <input type="number" min="0" max="100" value="25" name="threshold_libertarian"
+                                   style="width: 70px; padding: 6px; font-size: 1.3rem; text-align: center; 
+margin-left: 0.5rem; background-color: #1a1a1a; color: #f5d442; border: 2px solid #1DAD64; 
+border-radius: 4px; font-weight: 700;">
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Socialist Party -->
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; color: #f5d442; 
+font-size: 1.7rem; font-weight: 700;">
+                        How Supportive Are You of the "<u>Socialist Political-Party</u>"?
+                    </label>
+                    
+                    <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 0.5rem;">
+                        <input type="number" min="0" max="100" value="50" id="socialist" name="socialist"
+                               oninput="updateSync('socialist', this.value)"
+                               style="width: 100px; padding: 10px; font-size: 1.6rem; text-align: center; 
+border: 3px solid #DC143C; border-radius: 6px; background-color: #1a1a1a; 
+color: #DC143C; font-weight: 700; box-sizing: border-box; flex-shrink: 0;"
+                               onfocus="this.style.borderColor='#FF6B6B'" 
+                               onblur="this.style.borderColor='#DC143C'">
+                        
+                        <select id="socialist_display" 
+                                style="flex-grow: 1; padding: 10px; font-size: 1.3rem; border: 2px solid #444; 
+border-radius: 6px; background-color: #1a1a1a; color: #f5d442; font-weight: 700; 
+cursor: pointer; box-sizing: border-box;"
+                                onfocus="this.style.borderColor='#f5d442'" 
+                                onblur="this.style.borderColor='#444'"
+                                disabled>
+                            <option value="0-9" style="background-color: #1a1a1a; color: #DC143C;">0-9: I Despise This Party or Ideology.</option>
+                            <option value="10-39" style="background-color: #1a1a1a; color: #DC143C;">10-39: I am Apprehensive.</option>
+                            <option value="40-60" selected style="background-color: #1a1a1a; color: #f5d442;">40-60: I am Indifferent.</option>
+                            <option value="61-72" style="background-color: #1a1a1a; color: #f5d442;">61-72: I am Generally Supportive.</option>
+                            <option value="73-85" style="background-color: #1a1a1a; color: #1DAD64;">73-85: I am Seriously Supportive.</option>
+                            <option value="86-100" style="background-color: #1a1a1a; color: #1DAD64;">86-100: I am Vigilantly Supportive.</option>
+                         </select>
+                    </div>
+                    
+                    <div style="margin-bottom: 0.5rem;">
+                        <input type="range" min="0" max="100" value="50" id="socialist_slider"
+                               oninput="updateSync('socialist', this.value)"
+                               style="width: 100%; height: 8px; border-radius: 4px; 
+background: linear-gradient(to right, #DC143C 0%, #FFD700 50%, #1DAD64 100%); 
+cursor: pointer; -webkit-appearance: none; appearance: none;">
+                    </div>
+                    
+                    <div style="margin-top: 0.5rem; text-align: center;">
+                        <label style="color: #1DAD64; font-size: 1.3rem; font-weight: 400; display: inline-block;">
+                            Trustworthiness Threshold Required to View: 
+                            <input type="number" min="0" max="100" value="30" name="threshold_socialist"
+                                   style="width: 70px; padding: 6px; font-size: 1.3rem; text-align: center; 
+margin-left: 0.5rem; background-color: #1a1a1a; color: #f5d442; border: 2px solid #1DAD64; 
+border-radius: 4px; font-weight: 700;">
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Green Party -->
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; color: #f5d442; 
+font-size: 1.7rem; font-weight: 700;">
+                        How Supportive Are You of the "<u>Green Political-Party</u>"?
+                    </label>
+                    
+                    <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 0.5rem;">
+                        <input type="number" min="0" max="100" value="50" id="green" name="green"
+                               oninput="updateSync('green', this.value)"
+                               style="width: 100px; padding: 10px; font-size: 1.6rem; text-align: center; 
+border: 3px solid #DC143C; border-radius: 6px; background-color: #1a1a1a; 
+color: #DC143C; font-weight: 700; box-sizing: border-box; flex-shrink: 0;"
+                               onfocus="this.style.borderColor='#FF6B6B'" 
+                               onblur="this.style.borderColor='#DC143C'">
+                        
+                        <select id="green_display" 
+                                style="flex-grow: 1; padding: 10px; font-size: 1.3rem; border: 2px solid #444; 
+border-radius: 6px; background-color: #1a1a1a; color: #f5d442; font-weight: 700; 
+cursor: pointer; box-sizing: border-box;"
+                                onfocus="this.style.borderColor='#f5d442'" 
+                                onblur="this.style.borderColor='#444'"
+                                disabled>
+                            <option value="0-9" style="background-color: #1a1a1a; color: #DC143C;">0-9: I Despise This Party or Ideology.</option>
+                            <option value="10-39" style="background-color: #1a1a1a; color: #DC143C;">10-39: I am Apprehensive.</option>
+                            <option value="40-60" selected style="background-color: #1a1a1a; color: #f5d442;">40-60: I am Indifferent.</option>
+                            <option value="61-72" style="background-color: #1a1a1a; color: #f5d442;">61-72: I am Generally Supportive.</option>
+                            <option value="73-85" style="background-color: #1a1a1a; color: #1DAD64;">73-85: I am Seriously Supportive.</option>
+                            <option value="86-100" style="background-color: #1a1a1a; color: #1DAD64;">86-100: I am Vigilantly Supportive.</option>
+                     </select>
+                    </div>
+                    
+                    <div style="margin-bottom: 0.5rem;">
+                        <input type="range" min="0" max="100" value="50" id="green_slider"
+                               oninput="updateSync('green', this.value)"
+                               style="width: 100%; height: 8px; border-radius: 4px; 
+background: linear-gradient(to right, #DC143C 0%, #FFD700 50%, #1DAD64 100%); 
+cursor: pointer; -webkit-appearance: none; appearance: none;">
+                    </div>
+                    
+                    <div style="margin-top: 0.5rem; text-align: center;">
+                        <label style="color: #1DAD64; font-size: 1.3rem; font-weight: 400; display: inline-block;">
+                            Trustworthiness Threshold Required to View: 
+                            <input type="number" min="0" max="100" value="25" name="threshold_green"
+                                   style="width: 70px; padding: 6px; font-size: 1.3rem; text-align: center; 
+margin-left: 0.5rem; background-color: #1a1a1a; color: #f5d442; border: 2px solid #1DAD64; 
+border-radius: 4px; font-weight: 700;">
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Marxist Communism/Socialism -->
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; color: #f5d442; 
+font-size: 1.7rem; font-weight: 700;">
+                        How Supportive Are You of "<u>Marxist Communism or Socialism</u>"?
+                    </label>
+                    
+                    <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 0.5rem;">
+                        <input type="number" min="0" max="100" value="50" id="marxist" name="marxist"
+                               oninput="updateSync('marxist', this.value)"
+                               style="width: 100px; padding: 10px; font-size: 1.6rem; text-align: center; 
+border: 3px solid #DC143C; border-radius: 6px; background-color: #1a1a1a; 
+color: #DC143C; font-weight: 700; box-sizing: border-box; flex-shrink: 0;"
+                               onfocus="this.style.borderColor='#FF6B6B'" 
+                               onblur="this.style.borderColor='#DC143C'">
+                        
+                        <select id="marxist_display" 
+                                style="flex-grow: 1; padding: 10px; font-size: 1.3rem; border: 2px solid #444; 
+border-radius: 6px; background-color: #1a1a1a; color: #f5d442; font-weight: 700; 
+cursor: pointer; box-sizing: border-box;"
+                                onfocus="this.style.borderColor='#f5d442'" 
+                                onblur="this.style.borderColor='#444'"
+                                disabled>
+                             <option value="0-9" style="background-color: #1a1a1a; color: #DC143C;">0-9: I Despise This Party or Ideology.</option>
+                            <option value="10-39" style="background-color: #1a1a1a; color: #DC143C;">10-39: I am Apprehensive.</option>
+                            <option value="40-60" selected style="background-color: #1a1a1a; color: #f5d442;">40-60: I am Indifferent.</option>
+                            <option value="61-72" style="background-color: #1a1a1a; color: #f5d442;">61-72: I am Generally Supportive.</option>
+                            <option value="73-85" style="background-color: #1a1a1a; color: #1DAD64;">73-85: I am Seriously Supportive.</option>
+                            <option value="86-100" style="background-color: #1a1a1a; color: #1DAD64;">86-100: I am Vigilantly Supportive.</option>
+                       </select>
+                    </div>
+                    
+                    <div style="margin-bottom: 0.5rem;">
+                        <input type="range" min="0" max="100" value="50" id="marxist_slider"
+                               oninput="updateSync('marxist', this.value)"
+                               style="width: 100%; height: 8px; border-radius: 4px; 
+background: linear-gradient(to right, #DC143C 0%, #FFD700 50%, #1DAD64 100%); 
+cursor: pointer; -webkit-appearance: none; appearance: none;">
+                    </div>
+                    
+                    <div style="margin-top: 0.5rem; text-align: center;">
+                        <label style="color: #1DAD64; font-size: 1.3rem; font-weight: 400; display: inline-block;">
+                            Trustworthiness Threshold Required to View: 
+                            <input type="number" min="0" max="100" value="40" name="threshold_marxist"
+                                   style="width: 70px; padding: 6px; font-size: 1.3rem; text-align: center; 
+margin-left: 0.5rem; background-color: #1a1a1a; color: #f5d442; border: 2px solid #1DAD64; 
+border-radius: 4px; font-weight: 700;">
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Liberation Theology -->
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; color: #f5d442; 
+font-size: 1.7rem; font-weight: 700;">
+                        How Supportive Are You of "<u>Liberation Theology</u>"?
+                    </label>
+                    
+                    <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 0.5rem;">
+                        <input type="number" min="0" max="100" value="50" id="liberation" name="liberation"
+                               oninput="updateSync('liberation', this.value)"
+                               style="width: 100px; padding: 10px; font-size: 1.6rem; text-align: center; 
+border: 3px solid #DC143C; border-radius: 6px; background-color: #1a1a1a; 
+color: #DC143C; font-weight: 700; box-sizing: border-box; flex-shrink: 0;"
+                               onfocus="this.style.borderColor='#FF6B6B'" 
+                               onblur="this.style.borderColor='#DC143C'">
+                        
+                        <select id="liberation_display" 
+                                style="flex-grow: 1; padding: 10px; font-size: 1.3rem; border: 2px solid #444; 
+border-radius: 6px; background-color: #1a1a1a; color: #f5d442; font-weight: 700; 
+cursor: pointer; box-sizing: border-box;"
+                                onfocus="this.style.borderColor='#f5d442'" 
+                                onblur="this.style.borderColor='#444'"
+                                disabled>
+                             <option value="0-9" style="background-color: #1a1a1a; color: #DC143C;">0-9: I Despise This Party or Ideology.</option>
+                            <option value="10-39" style="background-color: #1a1a1a; color: #DC143C;">10-39: I am Apprehensive.</option>
+                            <option value="40-60" selected style="background-color: #1a1a1a; color: #f5d442;">40-60: I am Indifferent.</option>
+                            <option value="61-72" style="background-color: #1a1a1a; color: #f5d442;">61-72: I am Generally Supportive.</option>
+                            <option value="73-85" style="background-color: #1a1a1a; color: #1DAD64;">73-85: I am Seriously Supportive.</option>
+                            <option value="86-100" style="background-color: #1a1a1a; color: #1DAD64;">86-100: I am Vigilantly Supportive.</option>
+                       </select>
+                    </div>
+                    
+                    <div style="margin-bottom: 0.5rem;">
+                        <input type="range" min="0" max="100" value="50" id="liberation_slider"
+                               oninput="updateSync('liberation', this.value)"
+                               style="width: 100%; height: 8px; border-radius: 4px; 
+background: linear-gradient(to right, #DC143C 0%, #FFD700 50%, #1DAD64 100%); 
+cursor: pointer; -webkit-appearance: none; appearance: none;">
+                    </div>
+                    
+                    <div style="margin-top: 0.5rem; text-align: center;">
+                        <label style="color: #1DAD64; font-size: 1.3rem; font-weight: 400; display: inline-block;">
+                            Trustworthiness Threshold Required to View: 
+                            <input type="number" min="0" max="100" value="35" name="threshold_liberation"
+                                   style="width: 70px; padding: 6px; font-size: 1.3rem; text-align: center; 
+margin-left: 0.5rem; background-color: #1a1a1a; color: #f5d442; border: 2px solid #1DAD64; 
+border-radius: 4px; font-weight: 700;">
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Libertarian Socialism -->
+                <div style="margin-bottom: 1.5rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; color: #f5d442; 
+font-size: 1.7rem; font-weight: 700;">
+                        How Supportive Are You of "<u>Libertarian Socialism</u>"?
+                    </label>
+                    
+                    <div style="display: flex; gap: 1rem; align-items: center; margin-bottom: 0.5rem;">
+                        <input type="number" min="0" max="100" value="50" id="libertarian_socialism" name="libertarian_socialism"
+                               oninput="updateSync('libertarian_socialism', this.value)"
+                               style="width: 100px; padding: 10px; font-size: 1.6rem; text-align: center; 
+border: 3px solid #DC143C; border-radius: 6px; background-color: #1a1a1a; 
+color: #DC143C; font-weight: 700; box-sizing: border-box; flex-shrink: 0;"
+                               onfocus="this.style.borderColor='#FF6B6B'" 
+                               onblur="this.style.borderColor='#DC143C'">
+                        
+                        <select id="libertarian_socialism_display" 
+                                style="flex-grow: 1; padding: 10px; font-size: 1.3rem; border: 2px solid #444; 
+border-radius: 6px; background-color: #1a1a1a; color: #f5d442; font-weight: 700; 
+cursor: pointer; box-sizing: border-box;"
+                                onfocus="this.style.borderColor='#f5d442'" 
+                                onblur="this.style.borderColor='#444'"
+                                disabled>
+                            <option value="0-9" style="background-color: #1a1a1a; color: #DC143C;">0-9: I Despise This Party or Ideology.</option>
+                            <option value="10-39" style="background-color: #1a1a1a; color: #DC143C;">10-39: I am Apprehensive.</option>
+                            <option value="40-60" selected style="background-color: #1a1a1a; color: #f5d442;">40-60: I am Indifferent.</option>
+                            <option value="61-72" style="background-color: #1a1a1a; color: #f5d442;">61-72: I am Generally Supportive.</option>
+                            <option value="73-85" style="background-color: #1a1a1a; color: #1DAD64;">73-85: I am Seriously Supportive.</option>
+                            <option value="86-100" style="background-color: #1a1a1a; color: #1DAD64;">86-100: I am Vigilantly Supportive.</option>
+                        </select>
+                    </div>
+                    
+                    <div style="margin-bottom: 0.5rem;">
+                        <input type="range" min="0" max="100" value="50" id="libertarian_socialism_slider"
+                               oninput="updateSync('libertarian_socialism', this.value)"
+                               style="width: 100%; height: 8px; border-radius: 4px; 
+background: linear-gradient(to right, #DC143C 0%, #FFD700 50%, #1DAD64 100%); 
+cursor: pointer; -webkit-appearance: none; appearance: none;">
+                    </div>
+                    
+                    <div style="margin-top: 0.5rem; text-align: center;">
+                        <label style="color: #1DAD64; font-size: 1.3rem; font-weight: 400; display: inline-block;">
+                            Trustworthiness Threshold Required to View: 
+                            <input type="number" min="0" max="100" value="35" name="threshold_libertarian_socialism"
+                                   style="width: 70px; padding: 6px; font-size: 1.3rem; text-align: center; 
+margin-left: 0.5rem; background-color: #1a1a1a; color: #f5d442; border: 2px solid #1DAD64; 
+border-radius: 4px; font-weight: 700;">
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Additional Information -->
+                <div style="margin-bottom: 2rem;">
+                    <label style="display: block; margin-bottom: 0.5rem; color: #f5d442; 
+font-size: 1.7rem; font-weight: 700;">
+                        Additional Comments or Information:
+                    </label>
+                    <textarea id="additionalInfo" name="additional_info" rows="4" 
+                              placeholder="Here share additional information about your political beliefs or activism interests..."
+                              style="width: 100%; padding: 12px; font-size: 1.4rem; border: 2px solid #444; 
+border-radius: 6px; background-color: #1a1a1a; color: #ffffcc; min-height: 120px; 
+box-sizing: border-box; font-family: 'Times New Roman', Times, serif;"
+                              onfocus="this.style.borderColor='#f5d442'" 
+                              onblur="this.style.borderColor='#444'"></textarea>
+                    <div style="margin-top: 0.5rem; text-align: center;">
+                        <label style="color: #1DAD64; font-size: 1.3rem; font-weight: 400; display: inline-block;">
+                            Trustworthiness Threshold Required to View: 
+                            <input type="number" min="0" max="100" value="50" name="threshold_additional_info"
+                                   style="width: 70px; padding: 6px; font-size: 1.3rem; text-align: center; 
+margin-left: 0.5rem; background-color: #1a1a1a; color: #f5d442; border: 2px solid #1DAD64; 
+border-radius: 4px; font-weight: 700;">
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div style="text-align: center;">
+                    <button type="submit"
+                            style="background: linear-gradient(135deg, #DC143C, #8B0000); color: #f5d442; 
+border: 2px solid #FFD700; padding: 12px 30px; font-size: 1.5rem; font-weight: 700; 
+border-radius: 8px; cursor: pointer; letter-spacing: 1px; min-width: 250px;
+box-shadow: 0 4px 8px rgba(0,0,0,0.3); transition: all 0.3s ease;"
+                            onmouseover="this.style.transform='translateY(-2px)'; 
+this.style.boxShadow='0 6px 12px rgba(0,0,0,0.4)'"
+                            onmouseout="this.style.transform='translateY(0)'; 
+this.style.boxShadow='0 4px 8px rgba(0,0,0,0.3)'">
+                        Save Profile Settings
+                    </button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</main>
+
+<!-- Footer Section -->
+<footer style="margin-top: .5rem; padding: 1rem; background-color: #111111; color: #1DAD64; 
+font-size: 1.4rem; border-top: 1px solid #444; text-align: center;">
+        <div style="text-align: center; margin: .8rem 0;">
+    <p style="color: #DC143C; font-size: 2rem; font-weight: 400; margin: 0 0 0.5rem 0; line-height: .01;">
+  					      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    </p>
+</div>
+        <p style="margin: 0; line-height: 1.4;">
+            <u>Common-Law Republic, U.S.A.</u>; <u>Empowering Self-Governing Communities</u>.<br>
+            With the help of many others; this entire project, as presented through this web-page,<br>
+            has been engineered, by: Charles Stewart, of Coleman Texas. ... Last updated: 2026-January.
+        </p>
+    </div>
+</footer>
+
+<script src="/js/auth.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', async function() {
+  if (!isLoggedIn()) { window.location.href = '/Accounts-Profiles-Registering/Login.html'; return; }
+  try {
+    var res = await authFetch(API_URL + '/profile/political');
+    if (res.ok) {
+      var data = await res.json();
+      if (data.party_affiliation) {
+        var el = document.querySelector('[name="party_affiliation"]');
+        if (el) el.value = data.party_affiliation;
+      }
+    }
+  } catch(e) { console.log('No existing political data'); }
+});
+
+async function savePolitical(e) {
+  e.preventDefault();
+  var form = e.target;
+  var el = form.querySelector('[name="party_affiliation"]');
+  var payload = { party_affiliation: el ? el.value : '' };
+  try {
+    var res = await authFetch(API_URL + '/profile/political', { method: 'PUT', body: JSON.stringify(payload) });
+    if (res.status === 404) {
+      res = await authFetch(API_URL + '/profile/political', { method: 'POST', body: JSON.stringify(payload) });
+    }
+    if (res.ok) { alert('Political affiliation saved!'); }
+    else { var d = await res.json(); alert('Error: ' + (d.error || 'Failed to save')); }
+  } catch(e) { alert('Error: ' + e.message); }
+}
+var polForm = document.querySelector('form');
+if (polForm) polForm.addEventListener('submit', savePolitical);
+</script>
+
+<style><!-- Mobile responsiveness -->
+<style>
+    @media screen and (max-width: 768px) {
+        nav {
+            flex-direction: column !important;
+        }
+        nav > div {
+            margin: 0.2rem 0 !important;
+        }
+        main {
+            padding: 1rem !important;
+        }
+    }
+</style>
+
+</body>
+</html>

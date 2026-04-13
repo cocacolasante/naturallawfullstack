@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vermont-State-CLR</title>
+</head>
+
+<body style="margin: 0; padding: 0; font-family: 'Times New Roman', Times, serif; 
+background-color: #000000; color: #ffffcc; line-height: 1.6;">
+
+<!-- Header Section -->  
+<header style="background: linear-gradient(135deg, #1a1a1a, #2d2d2d); 
+color: #f5d442; text-align: center; padding: 20px 0; position: relative;">
+
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 1rem;">
+        <div style="color: #4dc3ff; font-size: 3.5rem; font-weight: 700; margin: 0; font-family: inherit;">
+            <u>Common-Law Republic</u>; <u>U.S.A.</u>
+        </div>
+    </div>
+    
+    <!-- Login Status Indicator; Option-3: Below Title in header -->
+   <div id="loginStatus" style="margin-top: 10px; font-size: 1.4rem; color: #ffffcc;"></div> 
+ 
+    <div style="width: 80%; height: 2px; background-color: #DC143C; margin: 20px auto 0 auto;"></div>
+</header>
+
+<!-- Navigation Section -->
+<nav style="background-color: #111111; display: flex; justify-content: center; align-items: center; 
+padding: 0; position: sticky; top: 0; z-index: 1000; margin-bottom: 0.5rem; flex-wrap: wrap;">
+
+    <!-- Home-Page DropDown Menu) -->
+    <div style="position: relative; display: inline-block; margin: 0 0.5rem;">
+        <button style="background-color: transparent; color: #f5d442; padding: 0.8rem 1.2rem; 
+font-size: 1.4rem; border: none; cursor: pointer; font-weight: bold;" 
+                onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'"
+                onclick="toggleDropdown('dropdown1')">Home<br>Page.</button>
+
+        <div id="dropdown1" style="display: none; position: absolute; background-color: #1a1a1a; 
+min-width: 300px; box-shadow: 0 8px 16px rgba(0,0,0,0.4); z-index: 1; border: 1px solid #444; 
+border-radius: 4px;">
+
+            <a href="/index.html" style="color: #ffffcc; padding: 12px 16px; display: block; 
+text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Home Page.</a>
+
+            <a href="/Z-Home-ReferenceDocuments/Twelve-USA-SuperStates-Statutory-OrganizedMoreFully-2025.pdf" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; 
+font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'"> 
+Super-States USA; All 12 Listed & Organized.</a>
+
+            <a href="/Z-Home-ReferenceDocuments/OrganicHierarchiesUSA-V4.2.pdf" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; 
+font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'"> 
+Social-Organizing Under "Organic Hierarchies".</a>
+
+            <a href="/Z-Home-ReferenceDocuments/BriefGuidelines-PreferentialVotingBallot-Generic-Edit3.pdf" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; 
+font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Using Ballots; Instructions.</a>
+
+            <a href="/Support/Support.html" style="color: #ffffcc; padding: 12px 16px; display: block; 
+text-align: left; text-decoration: none; font-size: 1.4rem; border-top: 1px solid #444;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Support, Help, & Contacts.</a>
+
+        </div>
+    </div>
+
+    <!-- Register/Login DropDown Menu-->
+    <div style="position: relative; display: inline-block; margin: 0 0.5rem;">
+        <button style="background-color: transparent; color: #f5d442; padding: 
+0.8rem 1.2rem; font-size: 1.4rem; border: none; cursor: pointer; font-weight: bold;" 
+                onmouseover="this.style.color='#ffe97f'" 
+onmouseout="this.style.color='#f5d442'"
+                onclick="toggleDropdown('dropdown2')">
+Register;<br> or: Log-In.</button>
+
+        <div id="dropdown2" style="display: none; position: absolute; background-color: #1a1a1a; 
+min-width: 300px; box-shadow: 0 8px 16px rgba(0,0,0,0.4); z-index: 1; border: 1px solid #444; 
+border-radius: 4px;">
+
+            <a href="/Accounts-Profiles-Registering/NewUsers-Registration.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Register.</a>
+
+            <a href="/Accounts-Profiles-Registering/Login.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Login.</a>
+
+           <a href="/Accounts-Profiles-Registering/AccountProfiles-Management-Index.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Account Profiles & Management; Index.</a>
+
+            <a href="/Accounts-Profiles-Registering/Subscribe-EmailList.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Subscribe To Email-Lists.</a>
+        </div>
+    </div>
+
+    <!-- National Civil-Government DropDown Menu-->
+    <div style="position: relative; display: inline-block; margin: 0 0.5rem;">
+        <button style="background-color: transparent; color: #f5d442; padding: 0.8rem 1.2rem; 
+font-size: 1.4rem; border: none; cursor: pointer; font-weight: bold;" 
+                onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'"
+                onclick="toggleDropdown('dropdown3')">National Civil-Government,<br>
+Political-Activism.</button>
+
+        <div id="dropdown3" style="display: none; position: absolute; background-color: #1a1a1a; 
+min-width: 500px; box-shadow: 0 8px 16px rgba(0,0,0,0.4); z-index: 1; border: 1px solid #444; 
+border-radius: 4px;">
+
+            <a href="/USA-GoverningBodies/Executive-Department-SubDepartments-Agencies/ExcDpt-SubDepartments&Agencies-Listed.html" 
+style="color: #ffffcc; padding: 8px 16px; display: block; text-align: left; text-decoration: none; 
+white-space: normal; line-height: 1.2; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; 
+this.style.color='#ffffcc'">Executive-Department;<br>Sub-Departments, & Agencies.</a>
+
+            <a href="/USA-GoverningBodies/JudicialDepartment/JudicialIndex.html" style="color: #ffffcc; padding: 12px 16px; 
+display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">Judicial-Department.</a>
+
+           <a href="/USA-GoverningBodies/Legislature-HouseReps/Leg-HRepsIndex.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; 
+this.style.color='#ffffcc'">Legislature: House Representatives.</a>
+
+            <a href="/USA-GoverningBodies/Legislature-Senate/Leg-Senate.html" style="color: #ffffcc; padding: 12px 16px; 
+display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">Legislature; Senate.</a>
+
+            <a href="/USA-GoverningBodies/Ballots-Index.html" style="color: #ffffcc; padding: 12px 16px; display: block; 
+text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'"><u>Ballots</u>.</a>
+        </div>
+    </div>
+
+    <!-- Local Civil- Government DropDown Menu -->
+    <div style="position: relative; display: inline-block; margin: 0 0.5rem;">
+        <button style="background-color: transparent; color: #f5d442; padding: 0.8rem 1.2rem; font-size: 1.4rem; 
+border: none; cursor: pointer; font-weight: bold;" 
+                onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'"
+                onclick="toggleDropdown('dropdown4')">
+Local Civil-Government,<br> Political-Activism.</button>
+
+        <div id="dropdown4" style="display: none; position: absolute; background-color: #1a1a1a; 
+min-width: 400px; box-shadow: 0 8px 16px rgba(0,0,0,0.4); z-index: 1; border: 1px solid #444; 
+border-radius: 4px; text-align: center; max-height: 400px; overflow-y: auto;">
+
+            <a href="/USA-LocalJurisdictions/01-NewEngland-SS/NewEngland-SS.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">01: New-England</a>
+
+            <a href="/USA-LocalJurisdictions/02-NewYork-SS/NewYork-SS.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">02: New-York</a>
+
+            <a href="/USA-LocalJurisdictions/03-Jersey-Penn-SS/JerseyPenn-SS.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">03: Jersey-Penn</a>
+
+            <a href="/USA-LocalJurisdictions/04-GreatLakes-SS/GreatLakes-SS.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">04: Great-Lakes</a>
+
+            <a href="/USA-LocalJurisdictions/05-VirginiaCarolina-SS/VirginiaCarolina-SS.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">05: Virginia-Carolina</a>
+
+            <a href="/USA-LocalJurisdictions/06-FloridaGeorgia-SS/FloridaGeorgia-SS.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">06: Florida-Georgia</a>
+
+            <a href="/USA-LocalJurisdictions/07-MississippiValley-SS/MississippiValley-SS.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">07: Mississippi-Valley</a>
+
+            <a href="/USA-LocalJurisdictions/08-NorthCentralPlains-SS/NorthCentralPlains-SS.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+08: North-Central-Plains</a>
+ 
+            <a href="/USA-LocalJurisdictions/09-Texas-SS/Texas-SS.html" style="color: #ffffcc; padding: 12px 16px; 
+display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">09: Texas</a>
+
+            <a href="/USA-LocalJurisdictions/10-SouthWest-SS/SouthWest-SS.html" style="color: #ffffcc; padding: 12px 16px; 
+display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">10: South-West</a>
+
+            <a href="/USA-LocalJurisdictions/11-PacificNW-SS/PacificNW-SS.html" style="color: #ffffcc; padding: 12px 16px; 
+display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+11: Pacific-North-West</a>
+
+            <a href="/USA-LocalJurisdictions/12-California-SS/California-SS.html" style="color: #ffffcc; padding: 12px 16px; 
+display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">12: California</a>
+        </div>
+    </div>
+
+    <!-- Everything-Else DropDown Menu -->
+    <div style="position: relative; display: inline-block; margin: 0 0.5rem;">
+        <button style="background-color: transparent; color: #f5d442; padding: 0.8rem 1.2rem; 
+font-size: 1.4rem; border: none; cursor: pointer; font-weight: bold;" 
+                onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'"
+                onclick="toggleDropdown('dropdown5')">
+Everything<br> Else:</button>
+
+        <div id="dropdown5" style="display: none; position: absolute; background-color: #1a1a1a; 
+min-width: 400px; box-shadow: 0 8px 16px rgba(0,0,0,0.4); z-index: 1; border: 1px solid #444; 
+border-radius: 4px;">
+
+            <a href="/EveryThing-Else/1-Political-Parties/PoliticalParties.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Political Parties & Activist Communities.</a>
+
+            <a href="/EveryThing-Else/2-Religous-&-Spiritual-Communities/SpiritualIndex.html" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; 
+font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Religious & Spiritual Communities.</a>
+
+            <a href="/EveryThing-Else/3-Business&Financial-Communities&Corporations/Biz&Finances.html" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; 
+font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Business & Financial Corporations & Communities.</a>
+
+            <a href="/EveryThing-Else/4-DNA-Genetic-Racial-Communities/GeneticCommunities.html" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; 
+font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; 
+this.style.color='#ffffcc'">
+Ethnic, Genetic, DNA, & Racial, Communities.</a>
+
+            <a href="/EveryThing-Else/5-World-Communities-OutsideOfUSA/World-Communities-Index.html" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; 
+font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+World Geographical Communities.</a>
+         </div>    
+       </div>
+   </nav>
+</header>
+
+<!# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~>
+<!-- Body; Main-Content Area -->
+<main style="max-width: 1100px; margin: 0 auto; padding: 1rem;">
+    <div style="background-color: #111111; padding: 1rem; border-radius: 2px; 
+box-shadow: 0 4px 10px rgba(255, 215, 0, 0.2); border: 1px solid #444; text-align: center;">
+
+        <!-- Page Title -->
+        <h2 style="color: #f5d442; margin: 0 0 1rem 0; font-size: 2.5rem; font-weight: 700; line-height: 1.4;">
+            <u>As With-In The People's</u>: "<u>State of Vermont</u>":
+        </h2>
+
+        <p style="color: #4dc3ff; font-size: 1.6rem; font-weight: 400; line-height: 1.5; margin: 0 0 1.5rem 0;">
+            <u>Below Are Listed Details About our</u><br>
+            Ten Politically-Sub-Divided & Individual<br>
+            "<u>Common-Law Republic Super-Counties</u>":
+        </p>
+
+        <p style="color: #ffffcc; font-size: 1.5rem; font-weight: 400; line-height: 1.6; margin: 0 0 2rem 0;">
+            Vermont-State "<u>Total Population</u>", Estimate: <u>648,493</u>.<br>
+            Vermont-State Civil-Government's "<u>Total Counties</u>": <u>14</u>.<br>
+            Vermont Civil-Gov. "<u>Total Representative-Districts</u>": <u>109/150</u>.<br>
+            Vermont Civil-Gov. "<u>Total Senator-Districts</u>": <u>16/30</u>.<br>
+            Total Civil-Gov <u>US-Fed Representative-Districts</u>: <u>1</u>.
+        </p>
+
+        <!-- Centered Dividing Line -->
+        <p style="text-align: center; margin: 0 0 1.5rem 0; font-size: 1.7rem; font-weight: 400; 
+color: #DC143C; line-height: 1.2;">
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        </p>
+
+        <!-- Main Map: 10-Super-Counties Organizing -->
+        <div style="margin-bottom: 1.5rem; text-align: center;">
+            <img src="./VermontMap-StateRepsDistricts-TopDownOrganizing.png"
+                 alt="Ten Vermont-Districts Map - Top-Down Organization" 
+                 style="max-width: 40%; height: auto; border: 2px solid #444; border-radius: 8px;">
+        </div>
+
+<!# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~>
+        <!-- Explanatory Note: House-Reps Organizing; Part-1 -->
+        <div style="background-color: #1a1a1a; padding: 1.5rem; border-radius: 2px; 
+margin-bottom: 2.2rem; border: 2px solid #444; text-align: left;">
+            <p style="margin: 0; line-height: 1.4; font-size: 1.6rem; font-weight: 400; color: #4dc3ff;">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		Here-in immediately Above, we have presented our '<u>First Re-Edited Version</u>', of: 
+the publicly-available "<u>Vermont State-Representatives Map</u>", which we have Re-Designed, 
+to Illustrate the "<u>Top/Down" Manner</u> in which we are presenting our <u>First-Method</u>, 
+for: "<u>Re-Organizing Vermont's Organic Body-Politic Community</u>", & this in manners which 
+Form Ten New, & <u>More Locally-Controlled "Political Sub-Divisions</u>"; all of which are 
+<u>More Compliant</u> With "<u>Traditional Principles of Republicanism, Common-Law, & 
+Biblical Torah-Law</u>"; (in contrast with that which is presently being provided by Vermont's 
+"Civil-Government").<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		In Supplement to this First Method for Illustrating how these Constitutional Common-Law Principles 
+can be Applied in Vermont's Local Community-Organizing Efforts, we are also presenting, Immediately Below, 
+our Directly-Related & Explanatory "<u>Top/Down Organizing Database-Information-Display Table</u>"; 
+as follows:
+            </p>
+        </div>
+
+<!# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~>
+        <!-- Main Super-Counties, Table: Top-Down Organizing -->
+        <div style="background-color: #1a1a1a; padding: 1.5rem; border-radius: 2px; 
+margin-bottom: 1rem; border: 1px solid #444; overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 1.4rem; table-layout: fixed;">
+                <colgroup>
+                    <col style="width: 42%;">
+                    <col style="width: 58%;">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th style="color: #f5d442; font-size: 1.5rem; font-weight: 700; 
+padding: 0.8rem 1rem; text-align: center; border-bottom: 2px solid #DC143C;">
+                            <u>10 Common-Law Compliant<br>Super-Counties</u>:
+                        </th>
+                        <th style="color: #f5d442; font-size: 1.5rem; font-weight: 700; 
+padding: 0.8rem 1rem; text-align: center; border-bottom: 2px solid #DC143C;">
+                            <u>Civil-Gov</u>: <u>109/150<br>Representative Districts</u>:
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td colspan="2" style="padding: 0.3rem 0; text-align: center;">
+<div style="height: 2px; background-color: #444; width: 100%;"></div></td></tr>
+
+                    <!-- Super-County 1 -->
+                    <tr>
+                        <td style="padding: 0.7rem 1rem; color: #ffffcc; font-weight: 400; text-align: center; vertical-align: center;">
+				<a href="./" style="color: #f5d442; text-decoration: none; font-weight: 700;">
+                                1: <u>North-East Vermont</u>,<br>
+                                State Civil-Government's<br>
+                                15-Representative-Offices,<br>
+                                (Each Representing: 4,323 People,<br>for: a Total-Population of: 64,849);<br>
+                                & All <u>Re-Assembled As</u>:<br>
+                                <u>12-Representative-Districts</u>.
+                            </a>
+                        </td>
+                        <td style="padding: 0.7rem 1rem; color: #ffffcc; font-weight: 400; text-align: center; vertical-align: top;">
+				Essex-Caledonia District;<br>Essex-Orleans District;<br>Caledonia-Essex District, x 2;<br>
+                            Orleans-1 District; Orleans-2 District;<br>Orleans-3 District; Orleans-4 District;<br>
+                            Orleans-Lamoille District, x 2;<br>Caledonia-1 District; Caledonia-2 District;<br>
+				Caledonia-3 District, x 2;<br>Caledonia-Washington District.
+                        </td>
+                    </tr>
+                    <tr><td colspan="2" style="padding: 0.2rem 0;"><div style="height: 1px; background-color: #f5d442; opacity: 0.4; width: 100%;"></div></td></tr>
+
+                    <!-- Super-County 2 -->
+                    <tr>
+                        <td style="padding: 0.7rem 1rem; color: #ffffcc; font-weight: 400; text-align: center; vertical-align: center;">
+                            <a href="./" style="color: #f5d442; text-decoration: none; font-weight: 700;">
+                                2: <u>North-West Vermont</u>,<br>
+                                State Civil-Government's<br>
+                                15-Representative-Offices,<br>
+                                (Each Representing: 4,323 People,<br>for: a Total-Population of: 64,849);<br>
+                                & All <u>Re-Assembled As</u>:<br>
+                                <u>10-Representative-Districts</u>.
+                            </a>
+                        </td>
+                        <td style="padding: 0.7rem 1rem; color: #ffffcc; font-weight: 400; text-align: center; vertical-align: top;">
+                            Franklin-1 District, x 2;<br> Franklin-2 District; Franklin-3 District;<br> 
+				Franklin-4 District, x 2;<br>Franklin-5 District, x 2;<br>
+				Franklin-6 District; Franklin-7 District;<br>Franklin-8 District;<br>
+				Grand Isle-Chittenden District, x 2;<br>Chittenden-Franklin District.
+                        </td>
+                    </tr>
+                    <tr><td colspan="2" style="padding: 0.2rem 0;"><div style="height: 1px; background-color: #f5d442; opacity: 0.4; width: 100%;"></div></td></tr>
+
+                    <!-- Super-County 3 -->
+                    <tr>
+                        <td style="padding: 0.7rem 1rem; color: #ffffcc; font-weight: 400; text-align: center; vertical-align: center;">
+                            <a href="./" style="color: #f5d442; text-decoration: none; font-weight: 700;">
+				3: <u>Lamoille</u>, <u>E-Chittenden</u>,<br><u>& NE-Washington</u>,<br>
+                                State Civil-Government's<br>
+                                15-Representative-Offices,<br>
+                                (Each Representing: 4,323 People,<br>for: a Total-Population of: 64,849);<br>
+                                & All <u>Re-Assembled As</u>:<br>
+                                <u>10-Representative-Districts</u>.
+                            </a>
+                        </td>
+                        <td style="padding: 0.7rem 1rem; color: #ffffcc; font-weight: 400; text-align: center; vertical-align: top;">
+                            Lamoille-1 District;<br> Lamoille-2 District, x 2; Lamoille-3 District;<br>
+                            Lamoille-Washington District, x 2;<br>Chittenden-3 District, x 2;<br>Chittenden-10 District;<br>
+                            Chittenden-22 District, x 2;<br>Chittenden-23 District, x 2;<br>
+				Chittenden-24 District; Chittenden-25 District.
+                        </td>
+                    </tr>
+                    <tr><td colspan="2" style="padding: 0.2rem 0;"><div style="height: 1px; background-color: #f5d442; opacity: 0.4; width: 100%;"></div></td></tr>
+
+                    <!-- Super-County 4 -->
+                    <tr>
+                        <td style="padding: 0.7rem 1rem; color: #ffffcc; font-weight: 400; text-align: center; vertical-align: center;">
+				<a href="./" style="color: #f5d442; text-decoration: none; font-weight: 700;">
+                                4: <u>North-West<br>Chittenden-County</u>,<br>
+                                State Civil-Government's<br>
+                                15-Representative-Offices,<br>
+                                (Each Representing: 4,323 People,<br>for: a Total-Population of: 64,849);<br>
+                                & All <u>Re-Assembled As</u>:<br>
+                                <u>11-Representative-Districts</u>.
+                            </a>
+                        </td>
+                        <td style="padding: 0.7rem 1rem; color: #ffffcc; font-weight: 400; text-align: center; vertical-align: top;">
+                            Windsor-Orange-1 District;<br>Orange-1 District; Orange-2 District;<br>
+				Orange-3 District;<br>Orange-Caledonia District;
+				<br>Orange-Washington-Addison District, x 2;<br>Washington-Orange District, x 2;<br>
+				Washington-3 District, x 2;<br>Washington-4 District, x 2;<br>
+                            Washington-5 District; Washington-6 District.
+                        </td>
+                    </tr>
+                    <tr><td colspan="2" style="padding: 0.2rem 0;"><div style="height: 1px; background-color: #f5d442; opacity: 0.4; width: 100%;"></div></td></tr>
+
+                    <!-- Super-County 5 -->
+                    <tr>
+                        <td style="padding: 0.7rem 1rem; color: #ffffcc; font-weight: 400; text-align: center; vertical-align: center;">
+                            <a href="./" style="color: #f5d442; text-decoration: none; font-weight: 700;">
+				5: <u>South Chittenden-County</u>,<br>
+                                State Civil-Government's<br>
+                                15-Representative-Offices,<br>
+                                (Each Representing: 4,323 People,<br>for: a Total-Population of: 64,849);<br>
+                                & All <u>Re-Assembled As</u>:<br>
+                                <u>8-Representative-Districts</u>.
+                            </a>
+                        </td>
+                        <td style="padding: 0.7rem 1rem; color: #ffffcc; font-weight: 400; text-align: center; vertical-align: top;">
+                            Chittenden-14 District, x 2;<br>Chittenden-15 District, x 2;<br>Chittenden-16 District, x 2;<br>
+                            Chittenden-17 District;<br>Chittenden-18 District, x 2;<br>Chittenden-19 District, x 2;<br>
+                            Chittenden-20 District, x 2;<br>Chittenden-21 District, x 2.
+                        </td>
+                    </tr>
+                    <tr><td colspan="2" style="padding: 0.2rem 0;"><div style="height: 1px; background-color: #f5d442; opacity: 0.4; width: 100%;"></div></td></tr>
+
+                    <!-- Super-County 6 -->
+                    <tr>
+                       <td style="padding: 0.7rem 1rem; color: #ffffcc; font-weight: 400; text-align: center; vertical-align: center;">
+                            <a href="./" style="color: #f5d442; text-decoration: none; font-weight: 700;">
+				6: <u>SE-Washington</u>, <u>& Orange</u>,<br>
+                                State Civil-Government's<br>
+                                15-Representative-Offices,<br>
+                                (Each Representing: 4,323 People,<br>for: a Total-Population of: 64,849);<br>
+                                & All <u>Re-Assembled As</u>:<br>
+                                <u>12-Representative-Districts</u>.
+                            </a>
+                        </td>
+                        <td style="padding: 0.7rem 1rem; color: #ffffcc; font-weight: 400; text-align: center; vertical-align: top;">
+                            Chittenden-1 District;<br>Chittende- 2 District, x 2;<br>
+				Chittenden-4 District; Chittenden-5 District;<br>Chittenden-6 District; Chittenden-7 District;<br>
+				Chittenden-8 District; Chittenden-9 District;<br>Chittenden-11 District; Chittenden-12 District;<br>
+				Chittenden-13 District, x 2;<br>Washington-Chittenden District, x 2.
+                        </td>
+                    </tr>
+                    <tr><td colspan="2" style="padding: 0.2rem 0;"><div style="height: 1px; background-color: #f5d442; opacity: 0.4; width: 100%;"></div></td></tr>
+
+                    <!-- Super-County 7 -->
+                    <tr>
+                        <td style="padding: 0.7rem 1rem; color: #ffffcc; font-weight: 400; text-align: center; vertical-align: center;">
+				<a href="./" style="color: #f5d442; text-decoration: none; font-weight: 700;">
+                                7: <u>Addison</u>, <u>& NW-Rutland</u>,<br>
+                                State Civil-Government's<br>
+                                15-Representative-Offices,<br>
+                                (Each Representing: 4,323 People,<br>for: a Total-Population of: 64,849);<br>
+                                & All <u>Re-Assembled As</u>:<br>
+                                <u>10-Representative-Districts</u>.
+                            </a>
+                        </td>
+                        <td style="padding: 0.7rem 1rem; color: #ffffcc; font-weight: 400; text-align: center; vertical-align: top;">
+                            Addison-1 District, x 2;<br>Addison-2 District; Addison-3 District, x 2;<br>
+                            Addison-4 District, x 2; Addison-5 District;<br>
+				Addison-Rutland-1 District; Rutland-9 District;<br>Windsor-Addison District;<br>
+				Washington-1 District, x 2;<br>Washington 2 District, x 2.
+                        </td>
+                    </tr>
+                    <tr><td colspan="2" style="padding: 0.2rem 0;"><div style="height: 1px; background-color: #f5d442; opacity: 0.4; width: 100%;"></div></td></tr>
+
+                    <!-- Super-County 8 -->
+                    <tr>
+                        <td style="padding: 0.7rem 1rem; color: #ffffcc; font-weight: 400; text-align: center; vertical-align: center;">
+                            <a href="./" style="color: #f5d442; text-decoration: none; font-weight: 700;">
+                                8: <u>Rutland</u>, <u>& NW-Windsor</u>,<br>
+                                State Civil-Government's<br>
+                                15-Representative-Offices,<br>
+                                (Each Representing: 4,323 People,<br>for: a Total-Population of: 64,849);<br>
+                                & All <u>Re-Assembled As</u>:<br>
+                                <u>13.5-Reps-Districts</u>.
+                            </a>
+                        </td>
+                        <td style="padding: 0.7rem 1rem; color: #ffffcc; font-weight: 400; text-align: center; vertical-align: top;">
+                            Rutland-8 District;<br>Rutland-10 District; Rutland-11 District;<br>Rutland-Windsor District;<br>
+                            Rutland-1 District; Rutland-2 District, x 2;<br>Rutland-3 District; Rutland-4 District;<br>
+                            Rutland-5 District; Rutland-6 District;<br>Rutland-7 District; Rutland-Bennington District;<br>
+                            Bennington-Rutland District;<br>Bennington-4 District; Rep-2, (North-Half).
+                        </td>
+                    </tr>
+                    <tr><td colspan="2" style="padding: 0.2rem 0;"><div style="height: 1px; background-color: #f5d442; opacity: 0.4; width: 100%;"></div></td></tr>
+
+                    <!-- Super-County 9 -->
+                    <tr>
+                        <td style="padding: 0.7rem 1rem; color: #ffffcc; font-weight: 400; text-align: center; vertical-align: center;">
+                           <a href="./" style="color: #f5d442; text-decoration: none; font-weight: 700;">
+                                9: <u>North-Windham</u>,<br><u>& SE-Windsor</u>,<br>
+                                State Civil-Government's<br>
+                                15-Representative-Offices,<br>
+                                (Each Representing: 4,323 People,<br>for: a Total-Population of: 64,849);<br>
+                                & All <u>Re-Assembled As</u>:<br>
+                                <u>10-Representative-Districts</u>.
+                            </a>
+                        </td>
+                        <td style="padding: 0.7rem 1rem; color: #ffffcc; font-weight: 400; text-align: center; vertical-align: top;">
+                            Windsor-Orange-2 District, x 2;<br>Windsor-1 District, x 2;<br>
+			Windsor-2 District; Windsor-3 District, x 2;<br>Windsor-4 District; Windsor-5 District;<br>
+			Windsor-6 District, x 2;<br>Windsor-Windham District;<br>
+			Windham-Windsor-Bennington District;<br>Windham-3 District, x 2.
+                        </td>
+                    </tr>
+                    <tr><td colspan="2" style="padding: 0.2rem 0;"><div style="height: 1px; background-color: #f5d442; opacity: 0.4; width: 100%;"></div></td></tr>
+
+                    <!-- Super-County 10 -->
+                    <tr>
+                        <td style="padding: 0.7rem 1rem; color: #ffffcc; font-weight: 400; text-align: center; vertical-align: center;">
+                            <a href="./" style="color: #f5d442; text-decoration: none; font-weight: 700;">
+                                10: <u>South Vermont</u>,<br>
+                                State Civil-Government's<br>
+                                15-Representative-Offices,<br>
+                                (Each Representing: 4,323 People,<br>for: a Total-Population of: 64,849);<br>
+                                & All <u>Re-Assembled As</u>:<br>
+                                <u>12.5-Reps-Districts</u>.
+                            </a>
+                        </td>
+                        <td style="padding: 0.7rem 1rem; color: #ffffcc; font-weight: 400; text-align: center; vertical-align: top;">
+                            Bennington-1 District;<br>Bennington-2 District, x 2; Bennington-3 District;<br>
+                            Bennington-4 District; Rep-1; (South-Half);<br>Bennington-5 District, x 2;<br>
+                            Windham-1 District; Windham-2 District;<br>Windham-4 District; Windham-5 District;<br>
+                            Windham-6 District; Windham-7 District;<br>Windham-8 District; Windham-9 District.
+                        </td>
+                    </tr>
+
+                    <tr><td colspan="2" style="padding: 0.3rem 0; text-align: center;"><div style="height: 2px; background-color: #444; width: 100%;"></div></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Centered Dividing Line -->
+        <p style="text-align: center; margin: 0 0 1.5rem 0; font-size: 1.7rem; font-weight: 400; 
+color: #DC143C; line-height: 1.2;">
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        </p>
+
+<!# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~>
+        <!-- Explanatory Note: Bottom-Up Organizing Introduction -->
+        <div style="background-color: #1a1a1a; padding: 1.5rem; border-radius: 8px; 
+margin-bottom: 2rem; border: 1px solid #444; text-align: left;">
+            <p style="margin: 0; line-height: 1.6; font-size: 1.6rem; font-weight: 400; color: #4dc3ff;">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		As different from our above top/down map & data-base table; <u>Next</u> down here-in <u>Below</u>, 
+<u>we present our "Bottom/Up</u>" Re-Edited Version of Vermont's State-Representatives Map, which is 
+also followed by our <u>presentation</u> of its own Explanatory '<u>Database-Information-Display Table</u>'; 
+both of which are <u>More Focused on Re-Organizing</u> these Same Vermont Sovereign Local-Community 
+Jurisdictions, <u>in this "Bottom-Up" & Grass-Roots Local-Community Organizing Manner</u>.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		All of this is very Organic & Fluid; & <u>these Jurisdictional Boundary-Lines are Expected to be 
+Frequently Changing</u>, <u>as the differing Local-Communities involved</u> in each such Jurisdiction, 
+<u>come to an Agreement/Consensus</u>, about <u>the Best Methodologies for Applying these</u> Traditional 
+'Organic Body-Politic Self-Governing <u>Principles</u>', <u>in Manners which Promote</u> the 
+<u>Responsible Self-Governing</u> of the Individual People involved in each such Local Community.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		Here-by, & eventually, <u>we expect</u>, that: <u>Both of these "Top-Down" & "Bottom-Up" Methods 
+for Organizing</u> Vermont's Local Self-Governing Communities, <u>will become "Seamlessly Merged</u>".
+Here-under & here-by; Vermont's Local Community Members are being Legitimately & 
+Constitutionally Empowered, to Form <u>More Locally-Controlled</u> "Political Sub-Divisions".
+            </p>
+        </div>
+
+<!# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~>
+        <!-- Map Section: 15-Traditional-Counties Map (Bottom-Up) -->
+        <div style="margin-bottom: 1.5rem; text-align: center;">
+            <img src="./VermontMap-StateRepsDistricts-BottomUpOrganizing.png"
+                 alt="Vermont Bottom-Up Organization by Traditional Counties" 
+                 style="max-width: 50%; height: auto; border: 2px solid #444; border-radius: 8px;">
+        </div>
+
+<!# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~>
+        <!-- Secondary Table: Bottom-Up County Organizing, 15 Traditional Counties -->
+        <div style="background-color: #1a1a1a; padding: .2rem; border-radius: 2px; 
+margin-bottom: 1rem; border: 1px solid #444; text-align: left;">
+            <table style="width: 100%; border-collapse: collapse; font-size: 1.4rem; table-layout: fixed;">
+                <colgroup>
+                    <col style="width: 42%;">
+                    <col style="width: 58%;">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th style="color: #f5d442; font-size: 1.5rem; font-weight: 700; 
+padding: 0.8rem 1rem; text-align: center; border-bottom: 2px solid #DC143C;">
+                            <u>15 Common-Law Compliant<br>& Traditional Counties</u>:
+                        </th>
+                        <th style="color: #f5d442; font-size: 1.5rem; font-weight: 700; 
+padding: 0.8rem 1rem; text-align: center; border-bottom: 2px solid #DC143C;">
+                            <u>Civil-Gov</u>: <u>109/150<br>Representative Districts</u>:
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td colspan="2" style="padding: 0.3rem 0; text-align: center;"><div style="height: 2px; background-color: #444; width: 100%;"></div></td></tr>
+
+                    <!-- County 1 -->
+                    <tr>
+                        <td style="padding: 0.7rem 1rem; color: #ffffcc; font-weight: 400; text-align: center; vertical-align: top;">
+                            <a href="./" style="color: #f5d442; text-decoration: none; font-weight: 700;">
+                                1: <u>North-East Vermont</u>,<br>
+                                <u>Essex/Caledonia Area</u>;<br>
+                                State Civil-Government's<br>
+                                10-Representative-Offices,<br>
+                                (Each Representing 4,323,<br>with Total of: 43,233);<br>
+                                & All <u>Re-Assembled As</u>:<br>
+                                <u>8-Reps-Districts</u>.
+                            </a>
+                        </td>
+                        <td style="padding: 0.7rem 1rem; color: #ffffcc; font-weight: 400; text-align: center; vertical-align: top;">
+                            Essex-Caledonia;<br>Essex-Orleans;<br>Caledonia-Essex, x 2;<br>Orleans-1;<br>
+                            Orleans-2;<br>Orleans-3;<br>Orleans-4;<br>Caledonia-3, x 2.
+                        </td>
+                    </tr>
+                    <tr><td colspan="2" style="padding: 0.2rem 0;"><div style="height: 1px; background-color: #f5d442; opacity: 0.4; width: 100%;"></div></td></tr>
+
+                    <!-- County 2 -->
+                    <tr>
+                        <td style="padding: 0.7rem 1rem; color: #ffffcc; font-weight: 400; text-align: center; vertical-align: top;">
+                            <a href="./" style="color: #f5d442; text-decoration: none; font-weight: 700;">
+                                2: <u>North-Vermont</u>,<br>
+                                State Civil-Government's<br>
+                                10-Representative-Offices,<br>
+                                (Total of: 43,233);<br>
+                                & All <u>Re-Assembled As</u>:<br>
+                                <u>6-Reps-Districts</u>.
+                            </a>
+                        </td>
+                        <td style="padding: 0.7rem 1rem; color: #ffffcc; font-weight: 400; text-align: center; vertical-align: top;">
+                            Orleans-Lamoille, x 2;<br>Lamoille-2, x 2;<br>Franklin-4, x 2;<br>Franklin-5, x 2;<br>
+Franklin-6;<br>Franklin-7.
+                        </td>
+                    </tr>
+                    <tr><td colspan="2" style="padding: 0.2rem 0;"><div style="height: 1px; background-color: #f5d442; opacity: 0.4; width: 100%;"></div></td></tr>
+
+                    <!-- County 3 -->
+                    <tr>
+                        <td style="padding: 0.7rem 1rem; color: #ffffcc; font-weight: 400; text-align: center; vertical-align: top;">
+                            <a href="./" style="color: #f5d442; text-decoration: none; font-weight: 700;">
+                                3: <u>NW-Vermont</u>,<br>
+                                State Civil-Government's<br>
+                                10-Representative-Offices,<br>
+                                (Each Representing 4,323,<br>with Total of: 43,233);<br>
+                                & All <u>Re-Assembled As</u>:<br>
+                                <u>7-Reps-Districts</u>.
+                            </a>
+                        </td>
+                        <td style="padding: 0.7rem 1rem; color: #ffffcc; font-weight: 400; text-align: center; vertical-align: top;">
+                            Grand Isle-Chittenden, x 2;<br>Chittenden-Franklin;<br>Chittenden-25;<br>
+                            Franklin-1, x 2;<br>Franklin-2;<br>Franklin-3;<br>Franklin-8.
+                        </td>
+                    </tr>
+                    <tr><td colspan="2" style="padding: 0.2rem 0;"><div style="height: 1px; background-color: #f5d442; opacity: 0.4; width: 100%;"></div></td></tr>
+
+                    <!-- County 4 -->
+                    <tr>
+                        <td style="padding: 0.7rem 1rem; color: #ffffcc; font-weight: 400; text-align: center; vertical-align: top;">
+                            <a href="./" style="color: #f5d442; text-decoration: none; font-weight: 700;">
+                                4: <u>Caledonia-County Area</u>;<br>
+                                State Civil-Government's<br>
+                                10-Representative-Offices,<br>
+                                (Each Representing 4,323,<br>with Total of: 43,233);<br>
+                                & All <u>Re-Assembled As</u>:<br>
+                                <u>8-Reps-Districts</u>.
+                            </a>
+                        </td>
+                        <td style="padding: 0.7rem 1rem; color: #ffffcc; font-weight: 400; text-align: center; vertical-align: top;">
+                            Caledonia-1; Caledonia-2;<br>Washington-4, x 2;<br>Washington-5;<br>Washington-6;<br>
+                            Orange-Caledonia;<br>Caledonia-Washington;<br>Lamoille-Washington, x 2.
+                        </td>
+                    </tr>
+                    <tr><td colspan="2" style="padding: 0.2rem 0;"><div style="height: 1px; background-color: #f5d442; opacity: 0.4; width: 100%;"></div></td></tr>
+
+                    <!-- County 5 -->
+                    <tr>
+                        <td style="padding: 0.7rem 1rem; color: #ffffcc; font-weight: 400; text-align: center; vertical-align: top;">
+                            <a href="./" style="color: #f5d442; text-decoration: none; font-weight: 700;">
+                                5: <u>Lamoille-County Area</u>,<br>
+                                State Civil-Government's<br>
+                                10-Representative-Offices,<br>
+                                (Each Representing 4,323,<br>with Total of: 43,233);<br>
+                                & All <u>Re-Assembled As</u>:<br>
+                                <u>7-Reps-Districts</u>.
+                            </a>
+                        </td>
+                        <td style="padding: 0.7rem 1rem; color: #ffffcc; font-weight: 400; text-align: center; vertical-align: top;">
+                            Lamoille-1;<br>Lamoille-3;<br>Chittenden-3, x 2;<br>Chittenden-10;<br>
+                            Chittenden-22, x 2;<br>Chittenden-23, x 2;<br>Chittenden-24.
+                        </td>
+                    </tr>
+                    <tr><td colspan="2" style="padding: 0.2rem 0;"><div style="height: 1px; background-color: #f5d442; opacity: 0.4; width: 100%;"></div></td></tr>
+
+                    <!-- County 6 -->
+                    <tr>
+                        <td style="padding: 0.7rem 1rem; color: #ffffcc; font-weight: 400; text-align: center; vertical-align: top;">
+                            <a href="./" style="color: #f5d442; text-decoration: none; font-weight: 700;">
+                                6: <u>NE-Chittenden-County</u>,<br>
+                                State Civil-Government's<br>
+                                10-Representative-Offices,<br>
+                                (Total of: 43,233);<br>
+                                & All <u>Re-Assembled As</u>:<br>
+                                <u>5-Reps-Districts</u>.
+                            </a>
+                        </td>
+                        <td style="padding: 0.7rem 1rem; color: #ffffcc; font-weight: 400; text-align: center; vertical-align: top;">
+           Chittenden-15, x 2;<br>Chittenden-18, x 2;<br>Chittenden-19;<br>Chittenden-20, x 2;<br>Chittenden-21, x 2.
+                        </td>
+                    </tr>
+                    <tr><td colspan="2" style="padding: 0.2rem 0;"><div style="height: 1px; background-color: #f5d442; opacity: 0.4; width: 100%;"></div></td></tr>
+
+                    <!-- County 7 -->
+                    <tr>
+                        <td style="padding: 0.7rem 1rem; color: #ffffcc; font-weight: 400; text-align: center; vertical-align: top;">
+                            <a href="./" style="color: #f5d442; text-decoration: none; font-weight: 700;">
+                                7: <u>East Chittenden-County Area</u>,<br>
+                                State Civil-Government's<br>
+                                10-Representative-Offices,<br>
+                                (Total of: 43,233);<br>
+                                & All <u>Re-Assembled As</u>:<br>
+                                <u>7-Reps-Districts</u>.
+                            </a>
+                        </td>
+                        <td style="padding: 0.7rem 1rem; color: #ffffcc; font-weight: 400; text-align: center; vertical-align: top;">
+                            Chittenden-9;<br>Chittenden-11;<br>Chittenden-12;<br>Chittenden-13, x 2;<br>
+                            Chittenden-14, x 2;<br>Chittenden-16; Chittenden-17.
+                        </td>
+                    </tr>
+                    <tr><td colspan="2" style="padding: 0.2rem 0;"><div style="height: 1px; background-color: #f5d442; opacity: 0.4; width: 100%;"></div></td></tr>
+
+                    <!-- County 8 -->
+                    <tr>
+                        <td style="padding: 0.7rem 1rem; color: #ffffcc; font-weight: 400; text-align: center; vertical-align: top;">
+                            <a href="./" style="color: #f5d442; text-decoration: none; font-weight: 700;">
+                                8: <u>South-East<br>Chittenden-County</u>;<br>
+                                State Civil-Government's<br>
+                                10-Representative-Offices,<br>
+                                (Each Representing 4,323,<br>with Total of: 43,233);<br>
+                                & All <u>Re-Assembled As</u>:<br>
+                                <u>8-Reps-Districts</u>.
+                            </a>
+                        </td>
+                        <td style="padding: 0.7rem 1rem; color: #ffffcc; font-weight: 400; text-align: center; vertical-align: top;">
+                            Chittenden-1;<br>Chittenden-2;<br>Chittenden-4;<br>Chittenden-5;<br>
+                            Chittenden-6;<br>Chittenden-7;<br>Chittenden-8;<br>Addison-3, x 2.
+                        </td>
+                    </tr>
+                    <tr><td colspan="2" style="padding: 0.2rem 0;"><div style="height: 1px; background-color: #f5d442; opacity: 0.4; width: 100%;"></div></td></tr>
+
+                    <!-- County 9 -->
+                    <tr>
+                        <td style="padding: 0.7rem 1rem; color: #ffffcc; font-weight: 400; text-align: center; vertical-align: top;">
+                            <a href="./" style="color: #f5d442; text-decoration: none; font-weight: 700;">
+                                9: <u>Central Vermont</u>,<br>
+                                State Civil-Government's<br>
+                                10-Representative-Offices,<br>
+                                (Total of: 43,233);<br>
+                                & All <u>Re-Assembled As</u>:<br>
+                                <u>5-Reps-Districts</u>.
+                            </a>
+                        </td>
+                        <td style="padding: 0.7rem 1rem; color: #ffffcc; font-weight: 400; text-align: center; vertical-align: top;">
+                            Washington-1, x 2;<br>Washington-2, x 2;<br>Washington-Chittenden, x 2;<br>
+                            Orange-Washington-Addison, x 2;<br>Addison-4, x 2.
+                        </td>
+                    </tr>
+                    <tr><td colspan="2" style="padding: 0.2rem 0;"><div style="height: 1px; background-color: #f5d442; opacity: 0.4; width: 100%;"></div></td></tr>
+
+                    <!-- County 10 -->
+                    <tr>
+                        <td style="padding: 0.7rem 1rem; color: #ffffcc; font-weight: 400; text-align: center; vertical-align: top;">
+                            <a href="./" style="color: #f5d442; text-decoration: none; font-weight: 700;">
+                                10: <u>Central-East Vermont</u>,<br>
+                                State Civil-Government's<br>
+                                10-Representative-Offices,<br>
+                                (Each Representing 4,323,<br>with Total of: 43,233);<br>
+                                & All <u>Re-Assembled As</u>:<br>
+                                <u>7-Reps-Districts</u>.
+                            </a>
+                        </td>
+                        <td style="padding: 0.7rem 1rem; color: #ffffcc; font-weight: 400; text-align: center; vertical-align: top;">
+                            Orange-1;<br>Orange-2;<br>Orange-3;<br>Washington-Orange, x 2;<br>
+                            Washington-3, x 2;<br>Windsor-Orange-1, x 2;<br>Windsor-Orange-2.
+                        </td>
+                    </tr>
+                    <tr><td colspan="2" style="padding: 0.2rem 0;"><div style="height: 1px; background-color: #f5d442; opacity: 0.4; width: 100%;"></div></td></tr>
+
+                    <!-- County 11 -->
+                    <tr>
+                        <td style="padding: 0.7rem 1rem; color: #ffffcc; font-weight: 400; text-align: center; vertical-align: top;">
+                            <a href="./" style="color: #f5d442; text-decoration: none; font-weight: 700;">
+                                11: <u>North-Rutland,<br>& South-Addison</u>;<br>
+                                State Civil-Government's<br>
+                                10-Representative-Offices,<br>
+                                (Each Representing 4,323,<br>with Total of: 43,233);<br>
+                                & All <u>Re-Assembled As</u>:<br>
+                                <u>9-Reps-Districts</u>.
+                            </a>
+                        </td>
+                        <td style="padding: 0.7rem 1rem; color: #ffffcc; font-weight: 400; text-align: center; vertical-align: top;">
+                            Addison-1, x 2;<br>Addison-2;<br>Addison-5;<br>Windsor-Addison;<br>
+                            Addison-Rutland;<br>Rutland-3;<br>Rutland-8;<br>Rutland-9; Rutland-10.
+                        </td>
+                    </tr>
+                    <tr><td colspan="2" style="padding: 0.2rem 0;"><div style="height: 1px; background-color: #f5d442; opacity: 0.4; width: 100%;"></div></td></tr>
+
+                    <!-- County 12 -->
+                    <tr>
+                        <td style="padding: 0.7rem 1rem; color: #ffffcc; font-weight: 400; text-align: center; vertical-align: top;">
+                            <a href="./" style="color: #f5d442; text-decoration: none; font-weight: 700;">
+                                12: <u>Rutland-County Area</u>,<br>
+                                State Civil-Government's<br>
+                                10-Representative-Offices,<br>
+                                (Each Representing 4,323,<br>with Total of: 43,233);<br>
+                                & All <u>Re-Assembled As</u>:<br>
+                                <u>9-Reps-Districts</u>.
+                            </a>
+                        </td>
+                        <td style="padding: 0.7rem 1rem; color: #ffffcc; font-weight: 400; text-align: center; vertical-align: top;">
+                            Rutland-1;<br>Rutland-2, x 2;<br>Rutland-4; Rutland-5;<br>
+                            Rutland-6; Rutland-7;<br>Rutland-11;<br>Rutland-Windsor;<br>Rutland-Bennington.
+                        </td>
+                    </tr>
+                    <tr><td colspan="2" style="padding: 0.2rem 0;"><div style="height: 1px; background-color: #f5d442; opacity: 0.4; width: 100%;"></div></td></tr>
+
+                    <!-- County 13 -->
+                    <tr>
+                        <td style="padding: 0.7rem 1rem; color: #ffffcc; font-weight: 400; text-align: center; vertical-align: top;">
+                            <a href="./" style="color: #f5d442; text-decoration: none; font-weight: 700;">
+                                13: <u>Windsor-County Area</u>,<br>
+                                State Civil-Government's<br>
+                                10-Representative-Offices,<br>
+                                (Each Representing 4,323,<br>with Total of: 43,233);<br>
+                                & All <u>Re-Assembled As</u>:<br>
+                                <u>7-Reps-Districts</u>.
+                            </a>
+                        </td>
+                        <td style="padding: 0.7rem 1rem; color: #ffffcc; font-weight: 400; text-align: center; vertical-align: top;">
+                            Windsor-1, x 2;<br>Windsor-2;<br>Windsor-3, x 2;<br>Windsor-4;<br>
+Windsor-5;<br>Windsor-6, x 2;<br>Windsor-Windham.
+                        </td>
+                    </tr>
+                    <tr><td colspan="2" style="padding: 0.2rem 0;"><div style="height: 1px; background-color: #f5d442; opacity: 0.4; width: 100%;"></div></td></tr>
+
+                    <!-- County 14 -->
+                    <tr>
+                        <td style="padding: 0.7rem 1rem; color: #ffffcc; font-weight: 400; text-align: center; vertical-align: top;">
+                            <a href="./" style="color: #f5d442; text-decoration: none; font-weight: 700;">
+                                14: <u>SW-Vermont</u>,<br>
+                                State Civil-Government's<br>
+                                10-Representative-Offices,<br>
+                                (Each Representing 4,323,<br>with Total of: 43,233);<br>
+                                & All <u>Re-Assembled As</u>:<br>
+                                <u>7-Reps-Districts</u>.
+                            </a>
+                        </td>
+                        <td style="padding: 0.7rem 1rem; color: #ffffcc; font-weight: 400; text-align: center; vertical-align: top;">
+                            Bennington-1;<br>Bennington-2, x 2;<br>Bennington-3;<br>Bennington-4, x 2;<br>
+                            Bennington-5, x 2,<br>Windham-Windsor-Bennington,<br>Bennington-Rutland.
+                        </td>
+                    </tr>
+                    <tr><td colspan="2" style="padding: 0.2rem 0;"><div style="height: 1px; background-color: #f5d442; opacity: 0.4; width: 100%;"></div></td></tr>
+
+                    <!-- County 15 -->
+                    <tr>
+                        <td style="padding: 0.7rem 1rem; color: #ffffcc; font-weight: 400; text-align: center; vertical-align: top;">
+                            <a href="./" style="color: #f5d442; text-decoration: none; font-weight: 700;">
+                                15: <u>SE-Vermont, Windham</u>;<br>
+                                State Civil-Government's<br>
+                                10-Representative-Offices,<br>
+                                (Each Representing 4,323,<br>with Total of: 43,233);<br>
+                                & All <u>Re-Assembled As</u>:<br>
+                                <u>9-Reps-Districts</u>.
+                            </a>
+                        </td>
+                        <td style="padding: 0.7rem 1rem; color: #ffffcc; font-weight: 400; text-align: center; vertical-align: top;">
+                            Windham-1;<br>Windham-2;<br>Windham-3, x 2;<br>Windham-4;<br>Windham-5;<br>
+				Windham-6; Windham-7;<br>Windham-8; Windham-9.
+                        </td>
+                    </tr>
+
+                    <tr><td colspan="2" style="padding: 0.3rem 0; text-align: center;"><div style="height: 2px; background-color: #444; width: 100%;"></div></td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Centered Dividing Line -->
+        <p style="text-align: center; margin: 0 0 1.5rem 0; font-size: 1.7rem; font-weight: 400; 
+color: #DC143C; line-height: 1.2;">
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        </p>
+
+<!# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~>
+        <!-- Final Explanatory Note -->
+        <div style="background-color: #1a1a1a; padding: .2rem; border-radius: 2px; 
+margin-bottom: 1rem; border: 1px solid #444; text-align: left;">
+            <p style="margin: 0 0 1rem 0; line-height: 1.6; font-size: 1.4rem; font-weight: 400; color: #4dc3ff;">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	We are here-in seeking to Empower Vermont's More Socially-Responsible Local Community-Members 
+to <u>Re-Organize & Re-Build Vermont's Pre-Existing Civil/Statutory State-Government</u>, in manners which 
+More Efficiently <u>Promote Constitutionally-Legitimate Local Self-Governing</u>; all <u>Through 
+Their Own Efforts At Reasonable Application of "Traditional Principles</u> of Republicanism, 
+Common-Law, & Biblical Torah-Law", <u>to the 150-Members & Districts of Vermont's</u> 
+Civil-Government's "<u>House-of-Representatives</u>".<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		Modern Constitutional-Terminology Recognizes this process, as <u>a "Political Sub-Dividing" 
+Process</u>, for <u>De-Centralizing the Full 'Self-Governing Sovereignty of the State of Vermont</u>'.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		Vermont's Population, as estimated at 648,493, is the 'Second Smallest-Population' of Any State 
+in our USA; & the fact that this State's House of Representatives has a quite large number of 150-Members, 
+means, that: Each Representative Represents a Very Small Local Community of People, slightly over 4,000.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		This is an "Advantage" in our efforts here at 'Local Community Organizing'; all as derived from 
+Traditional Principles of Republicanism, Common-Law, & Biblical Torah-Law.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		We have written documents explaining how these Principles may be actually Applied 
+in our modern political real-world; & we also have a few more Specific Vermont-Organizing Foot-Notes, 
+both documents of which are available in the below web-links:
+
+            <a href="/Z-Home-ReferenceDocuments/OrganicHierarchiesUSA-V4.2.pdf"
+               style="color: #4dc3ff; display: block; text-align: left; text-decoration: none; 
+font-size: 1.4rem; font-weight: 400; padding: 0.5rem 0;"
+               onmouseover="this.style.color='#f5d442'; this.style.textDecoration='none'"
+               onmouseout="this.style.color='#4dc3ff'; this.style.textDecoration='none'">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		Responsibly Self-Governing Body-Politic Communities <u>Organic-Hierarchies Organizing</u>: USA.
+            </a>
+            <a href="/USA-LocalJurisdictions/01-NewEngland-SS/Vermont/FootNotes-Arkive/Vermont-Organizing-FootNotes.txt"
+               style="color: #4dc3ff; display: block; text-align: left; text-decoration: none; 
+font-size: 1.4rem; font-weight: 400; padding: 0.5rem 0;"
+               onmouseover="this.style.color='#f5d442'; this.style.textDecoration='none'"
+               onmouseout="this.style.color='#4dc3ff'; this.style.textDecoration='none'">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<u>Vermont-Organizing Foot-Notes</u>.
+             </a>
+          </p>
+        </div>
+
+        <!-- Centered Dividing Line -->
+        <p style="text-align: center; margin: 0 0 1.5rem 0; font-size: 1.7rem; font-weight: 400; 
+color: #DC143C; line-height: 1.2;">
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        </p>
+
+        <!-- General Explanatory Text: Essential Principles -->
+        <div style="background-color: #1a1a1a; padding: .2rem; border-radius: 2px; 
+margin-bottom: 1rem; border: 1px solid #444; text-align: left;">
+            <p style="margin: 0 0 1rem 0; line-height: 1.6; font-size: 1.4rem; font-weight: 400; color: #4dc3ff;">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		"<u>Essential Principles" of "Common-Law Republicanism</u>", <u>Require</u>, that: 
+<u>All Smaller-Communities</u>, <u>become</u> <u>Organized for "Responsible Self-Governing</u>"; 
+<u>all of which</u>, here-under, <u>Mandate</u> Our Vigilantly Engaging In <u>Regular 
+"Political-Polling Process</u>", "Administering Justice", "Keeping the Peace"; 
+& "Paying All of Our Legitimate Commercial-Debts".<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<u>In Pursuit of</u> This "Public Interest", aka: These "Public Purposes", aka: 
+<u>These Essential Organic/Constitutional Purposes</u>, our CLR-Leadership has <u>Re-Assigned</u> 
+the Above Listed <u>Vermont State Representatives-Districts</u>, <u>in-to</u> the Above-Listed 
+Individually Sovereign <u>Common-Law Republic "Super-County Districts</u>".
+            </p>
+        </div>
+
+<!# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~>
+        <!-- Map Section: Population-Density Map -->
+        <div style="margin-bottom: 1.5rem; text-align: center;">
+            <img src="./PopulationDensity-VermontMap.png"
+                 alt="Vermont Population Density Map" 
+                 style="max-width: 40%; height: auto; border: 2px solid #444; border-radius: 8px;">
+        </div>
+
+        <!-- Map Section: Reps-Districts Map -->
+        <div style="margin-bottom: 1.5rem; text-align: center;">
+            <img src="./VT_House_map_2022.jpg"
+                 alt="Vermont State House Representatives Districts Map" 
+                 style="max-width: 40%; height: auto; border: 2px solid #444; border-radius: 8px;">
+        </div>
+
+        <!-- Map Section: Counties Map -->
+        <div style="margin-bottom: 2rem; text-align: center;">
+            <img src="./Vermont-County-Map.jpg"
+                 alt="Vermont Counties Map" 
+                 style="max-width: 30%; height: auto; border: 2px solid #444; border-radius: 8px;">
+        </div>
+
+    </div>
+</main>
+
+    <!-- Footer Section -->
+<footer style="margin-top: .5rem; padding: 1rem; background-color: #111111; color: #1DAD64; 
+font-size: 1.4rem; border-top: 1px solid #444; text-align: center;">
+        <div style="text-align: center; margin: .8rem 0;">
+    <p style="color: #DC143C; font-size: 2rem; font-weight: 400; margin: 0 0 0.5rem 0; line-height: .01;">
+  					      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    </p>
+</div>
+        <p style="margin: 0; line-height: 1.4;">
+            <u>Common-Law Republic, U.S.A.</u>; <u>Empowering Self-Governing Communities</u>.<br>
+            With the help of many others; this entire project, as presented through this web-page,<br>
+            has been engineered, by: Charles Stewart, of Coleman Texas. ... Last updated: 2026-January.
+        </p>
+    </div>
+</footer>
+
+<script src="/js/auth.js"></script>
+
+<style><!-- Mobile responsiveness -->
+<style>
+    @media screen and (max-width: 768px) {
+        nav {
+            flex-direction: column !important;
+        }
+        nav > div {
+            margin: 0.2rem 0 !important;
+        }
+        main {
+            padding: 1rem !important;
+        }
+    }
+</style>
+
+</body>
+</html>
+

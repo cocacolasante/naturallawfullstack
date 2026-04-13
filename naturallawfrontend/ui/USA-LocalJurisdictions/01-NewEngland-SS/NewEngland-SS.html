@@ -4,208 +4,312 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New-England S-State; CLR</title>
-    <style>
-        /* Keep only essential CSS for complex components */
-        :root {
-            --primary-dark: #000000;
-            --secondary-dark: #111111;
-            --tertiary-dark: #1a1a1a;
-            --accent-gold: #f5d442;
-            --accent-gold-hover: #ffe97f;
-            --text-light: #ffffcc;
-            --border-color: #444;
-            --shadow-color: rgba(255, 215, 0, 0.2);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: "Times New Roman", Times, serif;
-            background-color: var(--primary-dark);
-            color: var(--text-light);
-            line-height: 1.6;
-        }
-
-        /* Header and Navigation CSS (keep as-is - too complex for HTML) */
-        .main-header {
-            background-color: var(--primary-dark);
-            border-bottom: 2px solid var(--accent-gold);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-        }
-        .header-title { text-align: center; padding: 1rem 0; }
-        .header-title h1 { font-size: 3.2rem; margin: 0; color: #ffffff; }
-        .topnav {
-            background-color: var(--secondary-dark);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-        .dropdown { position: relative; display: inline-block; margin: 0 0.5rem; }
-        .dropbtn {
-            background-color: transparent;
-            color: var(--accent-gold);
-            padding: 0.8rem 1.2rem;
-            font-size: 1.1rem;
-            border: none;
-            cursor: pointer;
-            font-weight: bold;
-            transition: color 0.3s ease;
-        }
-        .dropbtn:hover { color: var(--accent-gold-hover); }
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: var(--tertiary-dark);
-            min-width: 200px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.4);
-            z-index: 1;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-        }
-        .dropdown-content a {
-            color: var(--text-light);
-            padding: 14px 18px;
-            display: block;
-            text-align: left;
-            font-size: 1.05rem;
-        }
-        .dropdown-content .long-item {
-            white-space: normal;
-            line-height: 1.2;
-            padding: 10px 18px;
-        }
-        .dropdown-content a:hover {
-            background-color: var(--secondary-dark);
-            color: var(--accent-gold);
-        }
-        .dropdown:hover .dropdown-content { display: block; }
-
-        /* Mobile responsiveness */
-        @media screen and (max-width: 768px) {
-            body { font-size: 1.1rem; }
-            .topnav { flex-direction: column; padding: 0; }
-            .dropdown { width: 100%; margin: 0; }
-            .dropbtn { width: 100%; padding: 1rem; font-size: 1.05rem; }
-            .dropdown-content { width: 100%; position: relative; }
-            .dropdown-content a { font-size: 1rem; }
-            .header-title h1 { font-size: 2.4rem; }
-            main { padding: 1rem !important; font-size: 1.1rem !important; }
-            main h2 { font-size: 1.9rem !important; }
-            main p { font-size: 1.2rem !important; }
-            main table { font-size: 1.1rem !important; }
-            main th { font-size: 1.3rem !important; }
-            main td a { font-size: 1.1rem !important; }
-            main img { max-width: 95% !important; }
-            footer p { font-size: 1.2rem !important; }
-        }
-    </style>
 </head>
 
-<body>
-    <!-- Header Section -->  
-    <header class="main-header">
-        <div class="header-title">
-            <h1><u>Common-Law Republic</u>; <u>U.S.A.</u>.</h1>
+<body style="margin: 0; padding: 0; font-family: 'Times New Roman', Times, serif; 
+background-color: #000000; color: #ffffcc; line-height: 1.6;">
+
+<!-- Header Section -->  
+<header style="background: linear-gradient(135deg, #1a1a1a, #2d2d2d); 
+color: #f5d442; text-align: center; padding: 20px 0; position: relative;">
+
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 1rem;">
+        <div style="color: #4dc3ff; font-size: 3.5rem; font-weight: 700; margin: 0; font-family: inherit;">
+            <u>Common-Law Republic</u>; <u>U.S.A.</u>
         </div>
+    </div>
+    
+    <!-- Login Status Indicator; Option-3: Below Title in header -->
+   <div id="loginStatus" style="margin-top: 10px; font-size: 1.4rem; color: #ffffcc;"></div> 
+ 
+    <div style="width: 80%; height: 2px; background-color: #DC143C; margin: 20px auto 0 auto;"></div>
+</header>
 
-        <nav class="topnav">
-            <div class="dropdown">
-                <button class="dropbtn">Home Page.</button>
-                <div class="dropdown-content">
-                    <a href="../../index.html">Home Page.</a>
-                    <a href="../../Z-ReferenceDocuments/BriefGuidelines-PreferentialVotingBallot-Generic-Edit3.pdf">Using Ballots; Instructions.</a>
-                    <a href="../../Z-ReferenceDocuments/OrganicHierarchiesUSA-V4.2.pdf">Social-Organizing Under Constitutional "Organic Hierarchies".</a>
-                </div>
-            </div>
+<!-- Navigation Section -->
+<nav style="background-color: #111111; display: flex; justify-content: center; align-items: center; 
+padding: 0; position: sticky; top: 0; z-index: 1000; margin-bottom: 0.5rem; flex-wrap: wrap;">
 
-            <div class="dropdown">
-                <button class="dropbtn">Register; or: Log-In.</button>
-                <div class="dropdown-content">
-                    <a href="../../Accounts-Profiles-Registering/NewUsers-Registration.html">Register</a>
-                    <a href="../../Accounts-Profiles-Registering/Login.html">Login</a>
-                    <a href="../../Accounts-Profiles-Registering/AccountProfiles-Management-Index.html">AccountProfiles-Management-Index</a>
-                    <a href="../../Accounts-Profiles-Registering/Subscribe-EmailList.html">Subscribe To Email-List</a>
-                </div>
-            </div>
+    <!-- Home-Page DropDown Menu) -->
+    <div style="position: relative; display: inline-block; margin: 0 0.5rem;">
+        <button style="background-color: transparent; color: #f5d442; padding: 0.8rem 1.2rem; 
+font-size: 1.4rem; border: none; cursor: pointer; font-weight: bold;" 
+                onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'"
+                onclick="toggleDropdown('dropdown1')">Home<br>Page.</button>
 
-            <div class="dropdown">
-                <button class="dropbtn">National Civil-Government; Political-Activism.</button>
-                <div class="dropdown-content">
-                    <a href="../../USA-GoverningBodies/Executive-Department-SubDepartments-Agencies/ExcDpt-SubDepartments&Agencies-Listed.html">Executive-Department;<br>Sub-Departments, & Agencies.</a>
-                    <a href="../../USA-GoverningBodies/JudicialDepartment/JudicialIndex.html">Judicial-Department.</a>
-                    <a href="../../USA-GoverningBodies/Legislature-HouseReps/Leg-HRepsIndex.html">Legislature: House Representatives.</a>
-                    <a href="../../USA-GoverningBodies/Legislature-Senate/Leg-Senate.html">Legislature; Senate.</a> 
-                    <a href="../../USA-GoverningBodies/Ballots-Index.html"><u>Ballots</u>.</a>
-                </div>
-            </div>
+        <div id="dropdown1" style="display: none; position: absolute; background-color: #1a1a1a; 
+min-width: 300px; box-shadow: 0 8px 16px rgba(0,0,0,0.4); z-index: 1; border: 1px solid #444; 
+border-radius: 4px;">
 
-            <div class="dropdown">
-                <button class="dropbtn">Local Civil-Governments; Political-Activism.</button>
-                <div class="dropdown-content" style="text-align:center;">
-                    <a href="../../USA-LocalJurisdictions/01-NewEngland-SS/NewEngland-SS.html" value="usa-01">01: New-England</a>
-                    <a href="../../USA-LocalJurisdictions/02-NewYork-SS/NewYork-SS.html" value="usa-02">02: New-York</a>
-                    <a href="../../USA-LocalJurisdictions/03-Jersey-Penn-SS/JerseyPenn-SS.html" value="usa-03">03: Jersey-Penn</a>
-                    <a href="../../USA-LocalJurisdictions/04-GreatLakes-SS/GreatLakes-SS.html" value="usa-04">04: Great-Lakes</a>
-                    <a href="../../USA-LocalJurisdictions/05-VirginiaCarolina-SS/Virginia-Carolina-SS.html" value="usa-05">05: Virginia-Carolina</a>
-                    <a href="../../USA-LocalJurisdictions/06-FloridaGeorgia-SS/FloridaGeorgia-SS.html" value="usa-07">06: Florida-Georgia</a>
-                    <a href="../../USA-LocalJurisdictions/07-MississippiValley-SS/MississippiValley-SS.html" value="usa-06">07: Mississippi-Valley</a>
-                    <a href="../../USA-LocalJurisdictions/08-NorthCentralPlains-SS/NorthCentralPlains-SS.html" value="usa-08">08: NorthCentral-Plains</a>
-                    <a href="../../USA-LocalJurisdictions/09-Texas-SS/Texas-SS.html" value="usa-09">09: Texas</a>
-                    <a href="../../USA-LocalJurisdictions/10-SouthWest-SS/SouthWest-SS.html" value="usa-10">10: South-West</a>
-                    <a href="../../USA-LocalJurisdictions/11-PacificNW-SS/PacificNW-SS.html" value="usa-11">11: Pacific-NW</a>
-                    <a href="../../USA-LocalJurisdictions/12-California-SS/California-SS.html" value="usa-12">12: California</a>
-                </div>
-            </div>
+            <a href="/index.html" style="color: #ffffcc; padding: 12px 16px; display: block; 
+text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Home Page.</a>
 
-            <div class="dropdown">
-                <button class="dropbtn">EveryThing Else:</button>
-                <div class="dropdown-content">
-                    <a href="../../EveryThing-Else/1-Political-Parties/PoliticalParties.html">Political Parties.</a>
-                    <a href="../../EveryThing-Else/2-Religous-&-Spiritual-Communities/SpiritualIndex.html">Religious & Spiritual Communities.</a>
-                    <a href="../../EveryThing-Else/3-Business&Financial-Communities&Corporations/Biz&Finances.html">Business & Financial Communities & Corporations.</a>
-                    <a href="../../EveryThing-Else/4-DNA-Genetic-Racial-Communities/GeneticCommunities.html">DNA, Genetic, Racial, Communities.</a>
-                    <a href="../../EveryThing-Else/5-World-Communities-OutsideOfUSA/World-Communities-Index.html">World-Communities.</a>
-                </div>
-            </div>
+            <a href="/Z-Home-ReferenceDocuments/Twelve-USA-SuperStates-Statutory-OrganizedMoreFully-2025.pdf" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; 
+font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'"> 
+Super-States USA; All 12 Listed & Organized.</a>
 
-            <div class="dropdown">
-                <button class="dropbtn">Support.</button>
-                <div class="dropdown-content">
-                    <a href="../../Support/Support.html">Support-Help-Contacts</a>
-                </div>
-            </div>
-        </nav>
-    </header>
+            <a href="/Z-Home-ReferenceDocuments/OrganicHierarchiesUSA-V4.2.pdf" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; 
+font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'"> 
+Social-Organizing Under "Organic Hierarchies".</a>
 
-    <!-- Main Content Area - Streamlined with HTML formatting -->
-    <center>
-        <main style="max-width: 1000px; padding: 2rem 1rem 1rem 1rem; font-size: 1.38rem;">
-            
-            <h2 style="color: #f5d442; font-size: 2.35rem; margin-bottom: 1rem;">
-                <u>As With-In This</u>: "<u>New-England CLR-Super-State</u>":
-            </h2>
-            
-            <p style="font-size: 1.84rem; color: #f5d442; margin-top: -0.5rem; margin-bottom: 1.5rem; font-weight: 900;">
-                <u>Below Are Listed Details About our</u> Twelve Politically-Sub-Divided<br> 
-                & Individual "<u>Common-Law Republic Mini-States</u>":
-            </p>
-            
-            <p style="font-size: 1.61rem; margin-bottom: 1rem;">
-                <u>Total New-England Super-State's "Population</u>" Included Here-In: <u>15,386,085</u>.<br>
-                <u>Total "US-Civil-Government Representatives-Districts</u>" Included Here-In: <u>21</u>.
-            </p>
+            <a href="/Z-Home-ReferenceDocuments/BriefGuidelines-PreferentialVotingBallot-Generic-Edit3.pdf" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; 
+font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Using Ballots; Instructions.</a>
 
-            <p style="font-size: 1.61rem; margin-bottom: 1rem;">
-                In order to <u>View This Super-State's "Ballots"</u>, Mouse-Click the Web-Link Here:<br>
-                <a href="../state-ballots.html?superstate=new-england"
-                   style="color: #f5d442; text-decoration: underline; font-weight: 900; font-size: 1.3rem;">
-                    <u>View All Ballots</u>, <u>New-England Super-State</u>.
-                </a>
-            </p>
+            <a href="/Support/Support.html" style="color: #ffffcc; padding: 12px 16px; display: block; 
+text-align: left; text-decoration: none; font-size: 1.4rem; border-top: 1px solid #444;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Support, Help, & Contacts.</a>
+
+        </div>
+    </div>
+
+    <!-- Register/Login DropDown Menu-->
+    <div style="position: relative; display: inline-block; margin: 0 0.5rem;">
+        <button style="background-color: transparent; color: #f5d442; padding: 
+0.8rem 1.2rem; font-size: 1.4rem; border: none; cursor: pointer; font-weight: bold;" 
+                onmouseover="this.style.color='#ffe97f'" 
+onmouseout="this.style.color='#f5d442'"
+                onclick="toggleDropdown('dropdown2')">
+Register;<br> or: Log-In.</button>
+
+        <div id="dropdown2" style="display: none; position: absolute; background-color: #1a1a1a; 
+min-width: 300px; box-shadow: 0 8px 16px rgba(0,0,0,0.4); z-index: 1; border: 1px solid #444; 
+border-radius: 4px;">
+
+            <a href="/Accounts-Profiles-Registering/NewUsers-Registration.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Register.</a>
+
+            <a href="/Accounts-Profiles-Registering/Login.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Login.</a>
+
+           <a href="/Accounts-Profiles-Registering/AccountProfiles-Management-Index.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Account Profiles & Management; Index.</a>
+
+            <a href="/Accounts-Profiles-Registering/Subscribe-EmailList.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Subscribe To Email-Lists.</a>
+        </div>
+    </div>
+
+    <!-- National Civil-Government DropDown Menu-->
+    <div style="position: relative; display: inline-block; margin: 0 0.5rem;">
+        <button style="background-color: transparent; color: #f5d442; padding: 0.8rem 1.2rem; 
+font-size: 1.4rem; border: none; cursor: pointer; font-weight: bold;" 
+                onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'"
+                onclick="toggleDropdown('dropdown3')">National Civil-Government,<br>
+Political-Activism.</button>
+
+        <div id="dropdown3" style="display: none; position: absolute; background-color: #1a1a1a; 
+min-width: 500px; box-shadow: 0 8px 16px rgba(0,0,0,0.4); z-index: 1; border: 1px solid #444; 
+border-radius: 4px;">
+
+            <a href="/USA-GoverningBodies/Executive-Department-SubDepartments-Agencies/ExcDpt-SubDepartments&Agencies-Listed.html" 
+style="color: #ffffcc; padding: 8px 16px; display: block; text-align: left; text-decoration: none; 
+white-space: normal; line-height: 1.2; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; 
+this.style.color='#ffffcc'">Executive-Department;<br>Sub-Departments, & Agencies.</a>
+
+            <a href="/USA-GoverningBodies/JudicialDepartment/JudicialIndex.html" style="color: #ffffcc; padding: 12px 16px; 
+display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">Judicial-Department.</a>
+
+           <a href="/USA-GoverningBodies/Legislature-HouseReps/Leg-HRepsIndex.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; 
+this.style.color='#ffffcc'">Legislature: House Representatives.</a>
+
+            <a href="/USA-GoverningBodies/Legislature-Senate/Leg-Senate.html" style="color: #ffffcc; padding: 12px 16px; 
+display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">Legislature; Senate.</a>
+
+            <a href="/USA-GoverningBodies/Ballots-Index.html" style="color: #ffffcc; padding: 12px 16px; display: block; 
+text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'"><u>Ballots</u>.</a>
+        </div>
+    </div>
+
+    <!-- Local Civil- Government DropDown Menu -->
+    <div style="position: relative; display: inline-block; margin: 0 0.5rem;">
+        <button style="background-color: transparent; color: #f5d442; padding: 0.8rem 1.2rem; font-size: 1.4rem; 
+border: none; cursor: pointer; font-weight: bold;" 
+                onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'"
+                onclick="toggleDropdown('dropdown4')">
+Local Civil-Government,<br> Political-Activism.</button>
+
+        <div id="dropdown4" style="display: none; position: absolute; background-color: #1a1a1a; 
+min-width: 400px; box-shadow: 0 8px 16px rgba(0,0,0,0.4); z-index: 1; border: 1px solid #444; 
+border-radius: 4px; text-align: center; max-height: 400px; overflow-y: auto;">
+
+            <a href="/USA-LocalJurisdictions/01-NewEngland-SS/NewEngland-SS.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">01: New-England</a>
+
+            <a href="/USA-LocalJurisdictions/02-NewYork-SS/NewYork-SS.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">02: New-York</a>
+
+            <a href="/USA-LocalJurisdictions/03-Jersey-Penn-SS/JerseyPenn-SS.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">03: Jersey-Penn</a>
+
+            <a href="/USA-LocalJurisdictions/04-GreatLakes-SS/GreatLakes-SS.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">04: Great-Lakes</a>
+
+            <a href="/USA-LocalJurisdictions/05-VirginiaCarolina-SS/VirginiaCarolina-SS.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">05: Virginia-Carolina</a>
+
+            <a href="/USA-LocalJurisdictions/06-FloridaGeorgia-SS/FloridaGeorgia-SS.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">06: Florida-Georgia</a>
+
+            <a href="/USA-LocalJurisdictions/07-MississippiValley-SS/MississippiValley-SS.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">07: Mississippi-Valley</a>
+
+            <a href="/USA-LocalJurisdictions/08-NorthCentralPlains-SS/NorthCentralPlains-SS.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+08: North-Central-Plains</a>
+ 
+            <a href="/USA-LocalJurisdictions/09-Texas-SS/Texas-SS.html" style="color: #ffffcc; padding: 12px 16px; 
+display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">09: Texas</a>
+
+            <a href="/USA-LocalJurisdictions/10-SouthWest-SS/SouthWest-SS.html" style="color: #ffffcc; padding: 12px 16px; 
+display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">10: South-West</a>
+
+            <a href="/USA-LocalJurisdictions/11-PacificNW-SS/PacificNW-SS.html" style="color: #ffffcc; padding: 12px 16px; 
+display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+11: Pacific-North-West</a>
+
+            <a href="/USA-LocalJurisdictions/12-California-SS/California-SS.html" style="color: #ffffcc; padding: 12px 16px; 
+display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">12: California</a>
+        </div>
+    </div>
+
+    <!-- Everything-Else DropDown Menu -->
+    <div style="position: relative; display: inline-block; margin: 0 0.5rem;">
+        <button style="background-color: transparent; color: #f5d442; padding: 0.8rem 1.2rem; 
+font-size: 1.4rem; border: none; cursor: pointer; font-weight: bold;" 
+                onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'"
+                onclick="toggleDropdown('dropdown5')">
+Everything<br> Else:</button>
+
+        <div id="dropdown5" style="display: none; position: absolute; background-color: #1a1a1a; 
+min-width: 400px; box-shadow: 0 8px 16px rgba(0,0,0,0.4); z-index: 1; border: 1px solid #444; 
+border-radius: 4px;">
+
+            <a href="/EveryThing-Else/1-Political-Parties/PoliticalParties.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Political Parties & Activist Communities.</a>
+
+            <a href="/EveryThing-Else/2-Religous-&-Spiritual-Communities/SpiritualIndex.html" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; 
+font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Religious & Spiritual Communities.</a>
+
+            <a href="/EveryThing-Else/3-Business&Financial-Communities&Corporations/Biz&Finances.html" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; 
+font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Business & Financial Corporations & Communities.</a>
+
+            <a href="/EveryThing-Else/4-DNA-Genetic-Racial-Communities/GeneticCommunities.html" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; 
+font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; 
+this.style.color='#ffffcc'">
+Ethnic, Genetic, DNA, & Racial, Communities.</a>
+
+            <a href="/EveryThing-Else/5-World-Communities-OutsideOfUSA/World-Communities-Index.html" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; 
+font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+World Geographical Communities.</a>
+         </div>    
+       </div>
+   </nav>
+</header>
+
+<!-- Body; Main-Content Area; HTML-Formatting, Streamlined; (No-CSS) -->
+<center>
+    <main style="max-width: 1000px; padding: 2rem 1rem 1rem 1rem; font-size: 1.38rem;">        
+        <h2 style="color: #f5d442; font-size: 2.35rem; margin-bottom: 1rem;">
+            <u>As With-In This</u>: "<u>New-England CLR-Super-State</u>":
+        </h2>
+
+        <p style="color: #f5d442; font-weight: 900; font-size: 1.8rem; 
+margin-bottom: 1rem;">
+            <u>To View All "Ballots</u>" Listed Here-Under,<br>
+                & Concerned with USA-National Issues, 
+            <a href="./1-Ballots/AllBallots-Listed-NESS.html" style="color: #f5d442;">
+Mouse-Click Here.</a>
+        </p>
+        
+        <p style="font-size: 1.84rem; color: #ffffcc; margin-top: -0.5rem; 
+margin-bottom: 1.5rem; font-weight: 900;">
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~<br>
+            <u>Below Are Listed Details About our</u> Twelve Politically-Sub-Divided<br> 
+            & Individual "<u>USA Common-Law Republic Mini-States</u>":
+        </p>
+        
+        <p style="font-size: 1.61rem; margin-bottom: 1rem;">
+            <u>Total New-England Super-State's "Population</u>" Included Here-In: <u>15,386,085</u>.<br>
+            <u>Total "US-Civil-Government Representatives-Districts</u>" Included Here-In: <u>21</u>.
+        </p>
 
             <!-- State List Table -->
             <div style="background-color: #111111; border-radius: 12px; padding: 2rem 1rem; max-width: 800px; margin: 2rem auto; box-shadow: 0 4px 10px rgba(255, 215, 0, 0.2); border: 1px solid #444;">
@@ -234,9 +338,9 @@
                         
                         <tr>
                             <td style="padding: 12px 10px; text-align: left;">
-                                <a href="../state-ballots.html?superstate=new-england&state=vermont"
+                                <a href="./Vermont/index.html" 
                                    style="color: #f5d442; text-decoration: underline; font-weight: 900; font-size: 1.3rem;">
-                                    CLR-D-1, Vermont - View Ballots
+                                    CLR-D-1, Vermont
                                 </a>
                             </td>
                             <td style="padding: 12px 10px; text-align: left;">1</td>
@@ -252,9 +356,9 @@
                         
                         <tr>
                             <td style="padding: 12px 10px; text-align: left;">
-                                <a href="../state-ballots.html?superstate=new-england&state=rhode-island"
+                                <a href="./Rhode-Island/index.html" 
                                    style="color: #f5d442; text-decoration: underline; font-weight: 900; font-size: 1.3rem;">
-                                    CLR-D-2, Rhode-Island - View Ballots
+                                    CLR-D-2, Rhode-Island
                                 </a>
                             </td>
                             <td style="padding: 12px 10px; text-align: left;">1 & 2</td>
@@ -270,9 +374,9 @@
                         
                         <tr>
                             <td style="padding: 12px 10px; text-align: left;">
-                                <a href="../state-ballots.html?superstate=new-england&state=maine"
+                                <a href="./Maine/index.html" 
                                    style="color: #f5d442; text-decoration: underline; font-weight: 900; font-size: 1.3rem;">
-                                    CLR-D-3, Maine - View Ballots
+                                    CLR-D-3, Maine
                                 </a>
                             </td>
                             <td style="padding: 12px 10px; text-align: left;">1 & 2</td>
@@ -288,9 +392,9 @@
                         
                         <tr>
                             <td style="padding: 12px 10px; text-align: left;">
-                                <a href="../state-ballots.html?superstate=new-england&state=new-hampshire"
+                                <a href="./New-Hampshire/index.html" 
                                    style="color: #f5d442; text-decoration: underline; font-weight: 900; font-size: 1.3rem;">
-                                    CLR-D-4, New-Hampshire - View Ballots
+                                    CLR-D-4, New-Hampshire
                                 </a>
                             </td>
                             <td style="padding: 12px 10px; text-align: left;">1, & 2</td>
@@ -306,7 +410,7 @@
                         
                         <tr>
                             <td style="padding: 12px 10px; text-align: left;">
-                                <a href="../state-ballots.html?superstate=new-england&state=connecticut" 
+                                <a href="./Connecticut.index.html" 
                                    style="color: #f5d442; text-decoration: underline; font-weight: 900; font-size: 1.3rem;">
                                     CLR-D-5, North-East Connecticut
                                 </a>
@@ -324,7 +428,7 @@
                         
                         <tr>
                             <td style="padding: 12px 10px; text-align: left;">
-                                <a href="../state-ballots.html?superstate=new-england&state=connecticut" 
+                                <a href="./Connecticut.index.html" 
                                    style="color: #f5d442; text-decoration: underline; font-weight: 900; font-size: 1.3rem;">
                                     CLR-D-6, South-Central Connecticut
                                 </a>
@@ -342,7 +446,7 @@
                         
                         <tr>
                             <td style="padding: 12px 10px; text-align: left;">
-                                <a href="../state-ballots.html?superstate=new-england&state=connecticut" 
+                                <a href="./Connecticut.index.html" 
                                    style="color: #f5d442; text-decoration: underline; font-weight: 900; font-size: 1.3rem;">
                                     CLR-D-7, West Connecticut
                                 </a>
@@ -360,7 +464,7 @@
                         
                         <tr>
                             <td style="padding: 12px 10px; text-align: left;">
-                                <a href="../state-ballots.html?superstate=new-england&state=massachusetts" 
+                                <a href="./Massachusetts/index.html" 
                                    style="color: #f5d442; text-decoration: underline; font-weight: 900; font-size: 1.3rem;">
                                     CLR-D-8, West Massachusetts
                                 </a>
@@ -378,7 +482,7 @@
                         
                         <tr>
                             <td style="padding: 12px 10px; text-align: left;">
-                                <a href="../state-ballots.html?superstate=new-england&state=massachusetts" 
+                                <a href="./Massachusetts/index.html" 
                                    style="color: #f5d442; text-decoration: underline; font-weight: 900; font-size: 1.3rem;">
                                     CLR-D-9, Central-East Massachusetts
                                 </a>
@@ -396,7 +500,7 @@
                         
                         <tr>
                             <td style="padding: 12px 10px; text-align: left;">
-                                <a href="../state-ballots.html?superstate=new-england&state=massachusetts" 
+                                <a href="./Massachusetts/index.html" 
                                    style="color: #f5d442; text-decoration: underline; font-weight: 900; font-size: 1.3rem;">
                                     CLR-D-10, North-East Massachusetts
                                 </a>
@@ -414,7 +518,7 @@
                         
                         <tr>
                             <td style="padding: 12px 10px; text-align: left;">
-                                <a href="../state-ballots.html?superstate=new-england&state=massachusetts" 
+                                <a href="./Massachusetts/index.html" 
                                    style="color: #f5d442; text-decoration: underline; font-weight: 900; font-size: 1.3rem;">
                                     CLR-D-11, South Massachusetts
                                 </a>
@@ -432,7 +536,7 @@
                         
                         <tr>
                             <td style="padding: 12px 10px; text-align: left;">
-                                <a href="../state-ballots.html?superstate=new-england&state=massachusetts" 
+                                <a href="./Massachusetts/index.html" 
                                    style="color: #f5d442; text-decoration: underline; font-weight: 900; font-size: 1.3rem;">
                                     CLR-D-12, South-East Massachusetts
                                 </a>
@@ -493,17 +597,40 @@
     </center>
 
     <!-- Footer Section -->
-    <footer style="background-color: #111111; padding: 1rem; margin-top: 2rem; border-top: 2px solid #444;">
-        <center>
-            <div style="padding-top: 0.5rem; margin-top: 0.5rem; border-top: 1px solid #444;">
-                <p style="font-size: 1.4rem;">
-                    <u>Common-Law Republic, U.S.A.</u>; <u>Empowering Self-Governing Communities</u>.<br>
-                    With the help of many others; this entire project, as presented thru this web-page,<br>
-                    has been engineered, by: Charles Stewart, of Coleman Texas. ... Last up-dated: August-2025.
-                </p>
-            </div>
-        </center>
-    </footer>
+<footer style="margin-top: .5rem; padding: 1rem; background-color: #111111; color: #1DAD64; 
+font-size: 1.4rem; border-top: 1px solid #444; text-align: center;">
+        <div style="text-align: center; margin: .8rem 0;">
+    <p style="color: #DC143C; font-size: 2rem; font-weight: 400; margin: 0 0 0.5rem 0; line-height: .01;">
+  					      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    </p>
+</div>
+        <p style="margin: 0; line-height: 1.4;">
+            <u>Common-Law Republic, U.S.A.</u>; <u>Empowering Self-Governing Communities</u>.<br>
+            With the help of many others; this entire project, as presented through this web-page,<br>
+            has been engineered, by: Charles Stewart, of Coleman Texas. ... Last updated: 2026-January.
+        </p>
+    </div>
+</footer>
+
+<script src="/js/auth.js"></script>
+
+<style><!-- Mobile responsiveness -->
+<style>
+    @media screen and (max-width: 768px) {
+        nav {
+            flex-direction: column !important;
+        }
+        nav > div {
+            margin: 0.2rem 0 !important;
+        }
+        main {
+            padding: 1rem !important;
+        }
+    }
+</style>
+
+</body>
+</html>
 
 </body>
 </html>

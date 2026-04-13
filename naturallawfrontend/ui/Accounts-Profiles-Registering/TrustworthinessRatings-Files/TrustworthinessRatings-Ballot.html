@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TrustWorthiness-Rating-Ballot-CLRMembers</title>
+</head>
+
+<body style="margin: 0; padding: 0; font-family: 'Times New Roman', Times, serif;
+background-color: #000000; color: #ffffcc; line-height: 1.6;">
+
+<!-- Header Section -->
+<header style="background: linear-gradient(135deg, #1a1a1a, #2d2d2d); 
+color: #f5d442; text-align: center; padding: 20px 0; position: relative;">
+
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 1rem;">
+        <div style="color: #4dc3ff; font-size: 3.5rem; font-weight: 700; margin: 0; font-family: inherit;">
+            <u>Common-Law Republic</u>; <u>U.S.A.</u>
+        </div>
+    </div>
+    
+    <!-- Login Status Indicator; Option-3: Below Title in header -->
+   <div id="loginStatus" style="margin-top: 10px; font-size: 1.4rem; color: #ffffcc;"></div> 
+ 
+    <div style="width: 80%; height: 2px; background-color: #DC143C; margin: 20px auto 0 auto;"></div>
+</header>
+
+<!-- Navigation Section -->
+<nav style="background-color: #111111; display: flex; justify-content: center; align-items: center; 
+padding: 0; position: sticky; top: 0; z-index: 1000; margin-bottom: 0.5rem; flex-wrap: wrap;">
+
+    <!-- Home-Page DropDown Menu) -->
+    <div style="position: relative; display: inline-block; margin: 0 0.5rem;">
+        <button style="background-color: transparent; color: #f5d442; padding: 0.8rem 1.2rem; 
+font-size: 1.4rem; border: none; cursor: pointer; font-weight: bold;" 
+onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'"
+onclick="toggleDropdown('dropdown1')">Home<br>Page.</button>
+
+        <div id="dropdown1" style="display: none; position: absolute; background-color: #1a1a1a; 
+min-width: 300px; box-shadow: 0 8px 16px rgba(0,0,0,0.4); z-index: 1; border: 1px solid #444; 
+border-radius: 4px;">
+
+            <a href="/index.html" style="color: #ffffcc; padding: 12px 16px; display: block; 
+text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Home Page.</a>
+
+            <a href="/Z-Home-ReferenceDocuments/Twelve-USA-SuperStates-Statutory-OrganizedMoreFully-2025.pdf" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; 
+font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'"> 
+Super-States USA; All 12 Listed & Organized.</a>
+
+            <a href="/Z-Home-ReferenceDocuments/OrganicHierarchiesUSA-V4.2.pdf" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; 
+font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'"> 
+Social-Organizing Under "Organic Hierarchies".</a>
+
+            <a href="/Z-Home-ReferenceDocuments/BriefGuidelines-PreferentialVotingBallot-Generic-Edit3.pdf" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; 
+font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Using Ballots; Instructions.</a>
+
+            <a href="/Support/Support.html" style="color: #ffffcc; padding: 12px 16px; display: block; 
+text-align: left; text-decoration: none; font-size: 1.4rem; border-top: 1px solid #444;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Support, Help, & Contacts.</a>
+
+        </div>
+    </div>
+
+    <!-- Register/Login DropDown Menu-->
+    <div style="position: relative; display: inline-block; margin: 0 0.5rem;">
+        <button style="background-color: transparent; color: #f5d442; padding: 
+		0.8rem 1.2rem; font-size: 1.4rem; border: none; cursor: pointer; font-weight: bold;" 
+			onmouseover="this.style.color='#ffe97f'" 
+			onmouseout="this.style.color='#f5d442'"
+			onclick="toggleDropdown('dropdown2')">
+				Register;<br> or: Log-In.</button>
+
+        <div id="dropdown2" style="display: none; position: absolute; background-color: #1a1a1a; 
+		min-width: 300px; box-shadow: 0 8px 16px rgba(0,0,0,0.4); z-index: 1; border: 1px solid #444; 
+		border-radius: 4px;">
+
+            <a href="/Accounts-Profiles-Registering/NewUsers-Registration.html" style="color: #ffffcc; 
+		padding: 12px 16px; display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               		onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               		onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+				Register.</a>
+
+            <a href="/Accounts-Profiles-Registering/Login.html" style="color: #ffffcc; 
+		padding: 12px 16px; display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+      	         	onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+        	       onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+				Login.</a>
+
+           <a href="/Accounts-Profiles-Registering/AccountProfiles-Management-Index.html" style="color: #ffffcc; 
+		padding: 12px 16px; display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               		onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               		onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+			Account Profiles & Management; Index.</a>
+
+           <a href="/Accounts-Profiles-Registering/TrustworthinessRatings-Files/TrustworthinessRatings-Ballot.html" 
+		style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+              		onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+            		onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+				TrustWorthiness Rating Ballot.</a>
+				
+           <a href="/Accounts-Profiles-Registering/TrustworthinessRatings-Files/Instructions-TrustworthinessBallot.html" 
+		style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               		onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               		onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+				TrustWorthiness Ratings, Instructions For Ballot.</a>
+
+            <a href="/Accounts-Profiles-Registering/Subscribe-EmailList.html" style="color: #ffffcc; 
+		padding: 12px 16px; display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+             		onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+	               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+				Subscribe To Email-Lists.</a>
+        </div>
+    </div>
+
+    <!-- National Civil-Government DropDown Menu-->
+    <div style="position: relative; display: inline-block; margin: 0 0.5rem;">
+        <button style="background-color: transparent; color: #f5d442; padding: 0.8rem 1.2rem; 
+		font-size: 1.4rem; border: none; cursor: pointer; font-weight: bold;" 
+			onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'"
+			onclick="toggleDropdown('dropdown3')">National Civil-Government,<br>
+				Political-Activism.</button>
+
+        <div id="dropdown3" style="display: none; position: absolute; background-color: #1a1a1a; 
+		min-width: 500px; box-shadow: 0 8px 16px rgba(0,0,0,0.4); z-index: 1; border: 1px solid #444; 
+			border-radius: 4px;">
+
+            <a href="/USA-GoverningBodies/Executive-Department-SubDepartments-Agencies/ExcDpt-SubDepartments&Agencies-Listed.html" 
+		style="color: #ffffcc; padding: 8px 16px; display: block; text-align: left; text-decoration: none; 
+			white-space: normal; line-height: 1.2; font-size: 1.4rem;" 
+             		  onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+              		 onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+              		 	Executive-Department;<br>Sub-Departments, & Agencies.</a>
+
+            <a href="/USA-GoverningBodies/JudicialDepartment/JudicialIndex.html" style="color: #ffffcc; padding: 12px 16px; 
+display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">Judicial-Department.</a>
+
+           <a href="/USA-GoverningBodies/Legislature-HouseReps/Leg-HRepsIndex.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; 
+this.style.color='#ffffcc'">Legislature: House Representatives.</a>
+
+            <a href="/USA-GoverningBodies/Legislature-Senate/Leg-Senate.html" style="color: #ffffcc; padding: 12px 16px; 
+display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">Legislature; Senate.</a>
+
+            <a href="/USA-GoverningBodies/Ballots-Index.html" style="color: #ffffcc; padding: 12px 16px; display: block; 
+text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'"><u>Ballots</u>.</a>
+        </div>
+    </div>
+
+    <!-- Local Civil- Government DropDown Menu -->
+    <div style="position: relative; display: inline-block; margin: 0 0.5rem;">
+        <button style="background-color: transparent; color: #f5d442; padding: 0.8rem 1.2rem; font-size: 1.4rem; 
+border: none; cursor: pointer; font-weight: bold;" 
+onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'"
+onclick="toggleDropdown('dropdown4')">
+Local Civil-Government,<br> Political-Activism.</button>
+
+        <div id="dropdown4" style="display: none; position: absolute; background-color: #1a1a1a; 
+min-width: 400px; box-shadow: 0 8px 16px rgba(0,0,0,0.4); z-index: 1; border: 1px solid #444; 
+border-radius: 4px; text-align: center; max-height: 400px; overflow-y: auto;">
+
+            <a href="/USA-LocalJurisdictions/01-NewEngland-SS/NewEngland-SS.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">01: New-England</a>
+
+            <a href="/USA-LocalJurisdictions/02-NewYork-SS/NewYork-SS.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">02: New-York</a>
+
+            <a href="/USA-LocalJurisdictions/03-Jersey-Penn-SS/JerseyPenn-SS.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">03: Jersey-Penn</a>
+
+            <a href="/USA-LocalJurisdictions/04-GreatLakes-SS/GreatLakes-SS.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">04: Great-Lakes</a>
+
+            <a href="/USA-LocalJurisdictions/05-VirginiaCarolina-SS/VirginiaCarolina-SS.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">05: Virginia-Carolina</a>
+
+            <a href="/USA-LocalJurisdictions/06-FloridaGeorgia-SS/FloridaGeorgia-SS.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">06: Florida-Georgia</a>
+
+            <a href="/USA-LocalJurisdictions/07-MississippiValley-SS/MississippiValley-SS.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">07: Mississippi-Valley</a>
+
+            <a href="/USA-LocalJurisdictions/08-NorthCentralPlains-SS/NorthCentralPlains-SS.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+08: North-Central-Plains</a>
+ 
+            <a href="/USA-LocalJurisdictions/09-Texas-SS/Texas-SS.html" style="color: #ffffcc; padding: 12px 16px; 
+display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">09: Texas</a>
+
+            <a href="/USA-LocalJurisdictions/10-SouthWest-SS/SouthWest-SS.html" style="color: #ffffcc; padding: 12px 16px; 
+display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">10: South-West</a>
+
+            <a href="/USA-LocalJurisdictions/11-PacificNW-SS/PacificNW-SS.html" style="color: #ffffcc; padding: 12px 16px; 
+display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+11: Pacific-North-West</a>
+
+            <a href="/USA-LocalJurisdictions/12-California-SS/California-SS.html" style="color: #ffffcc; padding: 12px 16px; 
+display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">12: California</a>
+        </div>
+    </div>
+
+    <!-- Everything-Else DropDown Menu -->
+    <div style="position: relative; display: inline-block; margin: 0 0.5rem;">
+        <button style="background-color: transparent; color: #f5d442; padding: 0.8rem 1.2rem; 
+font-size: 1.4rem; border: none; cursor: pointer; font-weight: bold;" 
+onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'"
+onclick="toggleDropdown('dropdown5')">
+Everything<br> Else:</button>
+
+        <div id="dropdown5" style="display: none; position: absolute; background-color: #1a1a1a; 
+min-width: 400px; box-shadow: 0 8px 16px rgba(0,0,0,0.4); z-index: 1; border: 1px solid #444; 
+border-radius: 4px;">
+
+            <a href="/EveryThing-Else/1-Political-Parties/PoliticalParties.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Political Parties & Activist Communities.</a>
+
+            <a href="/EveryThing-Else/2-Religous-&-Spiritual-Communities/SpiritualIndex.html" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; 
+font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Religious & Spiritual Communities.</a>
+
+            <a href="/EveryThing-Else/3-Business&Financial-Communities&Corporations/Biz&Finances.html" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; 
+font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Business & Financial Corporations & Communities.</a>
+
+            <a href="/EveryThing-Else/4-DNA-Genetic-Racial-Communities/GeneticCommunities.html" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; 
+font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; 
+this.style.color='#ffffcc'">
+Ethnic, Genetic, DNA, & Racial, Communities.</a>
+
+            <a href="/EveryThing-Else/5-World-Communities-OutsideOfUSA/World-Communities-Index.html" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; 
+font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+World Geographical Communities.</a>
+        </div>
+    </div>
+</nav>
+
+	<!-- Main Content Section -->
+		<main style="max-width: 1200px; margin: 0 auto; padding: 2rem;">
+  		  <div style="background-color: #111111; padding: 2rem; border-radius: 12px;
+			box-shadow: 0 4px 10px rgba(255, 215, 0, 0.2); border: 1px solid #444; text-align: center;">
+        
+        <h2 style="color: #f5d442; margin: 0 0 2rem 0; font-size: 2.5rem; line-height: 1.4;">
+            <u>Ballot</u>, for: <u>This User's Rating</u>: of:<br>
+		<u>Trust-Worthiness, Intelligence, & Courage</u>,<br>
+		of: <u>Other CLR-Registered-Users</u>.
+        </h2>
+        
+
+
+		<p style="margin: 0; line-height: 1.7; font-size: 1.6rem; color: #4dc3ff; text-align: left;">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		These "Trust-Worthiness Ratings Ballot" Web-Pages, have Many Valuable Applications 
+with-in our Common-Law Republic Community & Web-Site; all of which are Explained More Fully 
+in the second & lower half of our CLR-Web-Site's Page which is entitled similarily as: 
+"Users-Account Profile Settings & Management Page"; as available, here:
+</p>
+
+        <!-- Link To Users-Account Profile Settings & Management Page -->
+    <div style="text-align: center; margin: 1.5rem 0;">
+        <div style="font-size: 1.5rem; font-weight: 400; line-height: 2; color: #ffffcc; 
+        text-align: center; display: inline-block;">
+            <a href="AccountProfiles-Management-Index.html"
+            style="color: #f5d442; text-decoration: none; font-weight: 700; font-size: 1.5rem;"
+            onmouseover="this.style.color='#ffe97f'; this.style.textDecoration='none'" 
+            onmouseout="this.style.color='#f5d442'; this.style.textDecoration='none'">
+                <u>Users-Account Profile Settings & Management Page</u>.
+            </a>
+        </div>
+    </div>
+
+        <!-- Centered Dividing Line -->
+        <p style="text-align: center; margin: 1.5rem 0; font-size: 2.1rem; font-weight: 700; 
+color: #DC143C; line-height: 1.2;">
+            _____________________________________________________
+        </p>
+
+            <p style="margin: 0; line-height: 1.7; font-size: 1.6rem; color: #4dc3ff;">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		Here-under; we next here present: <u>our web-site's Entire Ballot Interface,<br>
+which Lists All of Our CLR-Members Users-Names</u>, & which also Empowes All of Our CLR-Members 
+To Rate/Vote On Each & All Of Them, (except for voting/rating on them-selves), <u>As Follows</u>:
+            </p>
+<br>
+        <!-- Message Area -->
+        <div id="message" style="display: none; padding: 12px; border-radius: 6px; margin-bottom: 1.5rem; 
+text-align: center; font-size: 1.4rem;"></div>
+
+        <!-- Ratings Form -->
+        <form id="ratingsForm">
+            
+            <!-- User Status (shows who is logged in) -->
+            <div id="userStatus" style="background-color: #1a1a1a; padding: 1rem; border-radius: 8px; 
+margin-bottom: 1.5rem; border: 2px solid #f5d442;"></div>
+
+            <!-- Ratings Table -->
+
+         <div style="background-color: #1a1a1a; padding: 1.5rem; border-radius: 8px; 
+border-left: 4px solid #f5d442; margin-bottom: 2rem; overflow-x: auto;">
+
+<table id="ratingsTable" style="width: 100%; border-collapse: collapse; color: #ffffcc; font-size: 1.4rem;">
+    <thead>
+        <tr style="background-color: #2d2d2d; border-bottom: 2px solid #f5d442;">
+            <th style="padding: 12px; text-align: left; color: #f5d442; font-size: 1.5rem; min-width: 150px;">
+User Name
+            </th>
+            <th style="padding: 12px; text-align: center; color: #f5d442; font-size: 1.5rem; min-width: 200px;">
+Trust-Worthiness<br>
+<span style="font-size: 1.2rem; color: #ffffcc;">(0-100)</span>
+            </th>
+            <th style="padding: 12px; text-align: center; color: #f5d442; font-size: 1.5rem; min-width: 200px;">
+Intelligence<br>
+<span style="font-size: 1.2rem; color: #ffffcc;">(0-100)</span>
+            </th>
+            <th style="padding: 12px; text-align: center; color: #f5d442; font-size: 1.5rem; min-width: 200px;">
+Courage<br>
+<span style="font-size: 1.2rem; color: #ffffcc;">(0-100)</span>
+            </th>
+        </tr>
+    </thead>
+    <tbody id="ratingsTableBody">
+        <!-- Rows will be dynamically populated by JavaScript -->
+        <tr>
+            <td colspan="4" style="padding: 20px; text-align: center; color: #f5d442;">
+Loading users...
+            </td>
+        </tr>
+    </tbody>
+</table>
+            </div>
+
+            <!-- Submit Button -->
+            <div style="text-align: center;">
+<button type="submit"
+        style="background: linear-gradient(135deg, #DC143C, #8B0000); color: #f5d442; 
+border: 2px solid #FFD700; padding: 12px 30px; font-size: 1.5rem; font-weight: bold; 
+border-radius: 8px; cursor: pointer; letter-spacing: 1px; 
+box-shadow: 0 4px 8px rgba(0,0,0,0.3); transition: all 0.3s ease;"
+        onmouseover="this.style.transform='translateY(-2px)'; 
+this.style.boxShadow='0 6px 12px rgba(0,0,0,0.4)'"
+        onmouseout="this.style.transform='translateY(0)'; 
+this.style.boxShadow='0 4px 8px rgba(0,0,0,0.3)'">
+    Submit Ratings
+</button>
+            </div>
+        </form>
+    </div>
+
+        <!-- Centered Dividing Line -->
+        <p style="text-align: center; margin: 1.5rem 0; font-size: 1.7rem; font-weight: 400; 
+color: #DC143C; line-height: 1.2;">
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        </p>
+
+            <p style="margin: 0; line-height: 1.7; font-size: 1.6rem; color: #4dc3ff;">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		Also; a can be seen; <u>our 'Zero/0 to 100 Numerical Weighted/Preferential Voting-Range</u>', 
+provides <u>a Wide-Range of Granularity, for Fine-Tuning</u> each of these ratings-votes. And, here-under; 
+<u>we find it helpful to Organize Groupings</u> of these smaller & fine-tuned numerical-values, 
+<u>into Larger Categories</u>, which we can then use <u>to Attach Specific Labels</u>, 
+which seem to us to be <u>Easier to be Processed by normal Human Minds</u>.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		Here-under, & before we actually present our specific 'Ballot Voting-Interface' here-in; 
+we are also providing a brief <u>Trust-worthiness Hierarichal-Organizing Chart</u>", 
+which shows how we empowering our registered-users to organize this information, 
+according to their own clearly-expressed preferences, as follows:
+            </p>
+        </div>
+
+        <!-- Centered Dividing Line -->
+        <p style="text-align: center; margin: 1.5rem 0; font-size: 1.7rem; font-weight: 400; 
+color: #DC143C; line-height: 1.2;">
+            ~~~~~~~~~~~~~~~~~~~
+        </p>
+
+		<!-- Threshold Levels List -->
+		<div style="text-align: left; padding: 0 1rem;">
+			<p style="margin: 0 0 0.7rem 0; padding: 0; line-height: 1.5; font-size: 1.4rem; 
+			font-weight: 400; color: #ffe97f; text-align: center;">
+		<span style="font-size: 1.7rem; font-weight: 600; color: #f0ca46;">
+			<u>Reference Notes</u>, Suggesting:<br>
+<u>How General CLR-Community-Consensus Might Consider Identifying & Labeling</u><br> 
+Specific <u>Sectional-Categories of Hierarchy</u>, <u>According To</u>:<br> 
+the <u>Specific 'Numerical Values/Weights</u>'  which Our CLR-Community-Members<br>
+are Collectively <u>Assigning to Our Specific/Individual CLR-Community-Members</u>.
+			</p>
+		</div>
+<br>
+		<div style="text-align: left; padding: 0 1rem;">
+			<p style="margin: 0 0 0.7rem 0; padding: 0; line-height: 1.5; font-size: 1.4rem; 
+			font-weight: 400; color: #ffe97f; text-align: left;">
+		<span style="font-size: 1.4rem; font-weight: 500; color: #f0ca46;">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<u>100 - 95</u>: This numerical-value, recognizes & affirms, that: 
+<u>the CLR-Community Member Identified</u>, <u>Is Extremely Seriously Trust-Worthy</u>; & that, 
+he/she <u>Is Worthy of Being Actively Promoted To Serious Leadership Positions</u>.</span>
+<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<u>94 - 85</u>: This numerical-value, recognizes & affirms, that:
+<u>the CLR-Community Member Identified</u>, <u>Is Quite Respectably Trust-Worthy</u>; &, 
+generally speaking, he/she <u>Is Worthy of being entrustd with Serious Leadership Positions</u>.
+<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<u>84 - 75</u>: This numerical-value, recognizes & affirms, that: 
+<u>the CLR-Community Member Identified</u>, <u>Is Very Respectably Trust-Worthy</u>.
+<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<u>74 - 65</u>: This numerical-value, recognizes & affirms, that:
+<u>the CLR-Community Member Identified</u>, <u>Is Respectably Trust-Worthy</u>; but, that: 
+there does <u>Not Exist Sufficiently Confidentce</u> in his/her Trust-worthiness, 
+in order <u>To Consider him/her Worthy of Any Serious Leadership Position</u>.
+<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<u>64 - 50</u>: This numerical-value, recognizes & affirms, that:
+<u>the CLR-Community Member Identified</u>, Is <u>Some-what Trust-Worthy</u>; 
+& that he/she is regularily Contributing Respectable Value to our community; but also, 
+that: he/she is <u>Lacking In Sufficient Trust-worthiness to be considered as Worthy of 
+Any Serious Leadership Position</u>.
+<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<u>49 - 33</u>: This numerical-value, recognizes & affirms, that:
+<u>the CLR-Community Member Identified</u>, Is <u>Some-what Lacking In Trust-Worthiness</u>; 
+but, the voter also recognizes, that, this member Does Seem to be Contributing Some Value to our community, 
+& that: <u>No Serious Complaints Against Them</u> are presently being alleged.
+<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<u>32 - 08</u>: This numerical-value, recognizes & affirms, that:
+<u>the CLR-Community Member Identified</u>, Is <u>Quite Lacking In Trust-Worthiness</u>; &, 
+Motion For Their Removal From Our CLR-Community May Be Reasonably Considered</u>.
+<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<u>07 - 00</u>: This numerical-value, recognizes & affirms, that:
+<u>the CLR-Community Member Identified</u>, Is <u>So Very Seriously Lacking In Trust-Worthiness</u>, 
+That: <u>They Should Be Immediately Removed From Our CLR-Community</u>.
+    </p>
+</main>
+
+<!-- Footer Section -->
+<footer style="margin-top: .5rem; padding: 1rem; background-color: #111111; color: #1DAD64; 
+font-size: 1.4rem; border-top: 1px solid #444; text-align: center;">
+    <div style="text-align: center; margin: .8rem 0;">
+        <p style="color: #DC143C; font-size: 2rem; font-weight: 400; margin: 0 0 0.5rem 0; line-height: 1.2;">
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        </p>
+    </div>
+    <p style="margin: 0; line-height: 1.4;">
+        <u>Common-Law Republic, U.S.A.</u>; <u>Empowering Self-Governing Communities</u>.<br>
+        With the help of many others; this entire project, as presented through this web-page,<br>
+        has been engineered, by: Charles Stewart, of Coleman Texas. ... Last updated: 2026-January.
+    </p>
+</footer>
+
+<script src="/js/auth.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', async function() {
+  if (!isLoggedIn()) {
+    document.querySelector('.container') && (document.querySelector('.container').innerHTML = '<div style="text-align:center;padding:2rem;"><p>Please <a href="/Accounts-Profiles-Registering/Login.html" style="color:#f5d442;">log in</a> to rate users.</p></div>');
+    return;
+  }
+
+  // Load users via search endpoint
+  var userList = document.getElementById('userList') || document.getElementById('ratingsList') || document.querySelector('.users-list');
+  if (!userList) {
+    // Create a container for the user list
+    var container = document.querySelector('.container') || document.querySelector('main') || document.body;
+    userList = document.createElement('div');
+    userList.id = 'userList';
+    container.appendChild(userList);
+  }
+
+  try {
+    var res = await authFetch(API_URL + '/public/users/search?username=');
+    if (!res.ok) throw new Error('Failed to load users');
+    var users = await res.json();
+    if (!Array.isArray(users)) users = users.users || [];
+
+    var html = '<h3 style="color:#f5d442;margin:1rem 0;">Rate Users</h3>';
+    html += '<div style="margin-bottom:1rem;color:#ffffcc;">Rate each user\'s trustworthiness on a scale of 1-100.</div>';
+
+    for (var i = 0; i < users.length; i++) {
+      var u = users[i];
+      // Get current trust score
+      var scoreRes = await fetch(API_URL + '/public/users/' + u.id + '/trust-score');
+      var scoreData = scoreRes.ok ? await scoreRes.json() : { score: 0, vote_count: 0 };
+
+      html += '<div style="background:#1a1a1a;border:1px solid #444;border-radius:8px;padding:1rem;margin:0.5rem 0;display:flex;justify-content:space-between;align-items:center;">';
+      html += '<div><strong style="color:#f5d442;">' + (u.username || u.email) + '</strong>';
+      html += '<br><small style="color:#999;">Current trust score: ' + (scoreData.score ? scoreData.score.toFixed(1) : 'N/A') + ' (' + scoreData.vote_count + ' votes)</small></div>';
+      html += '<div><input type="number" min="1" max="100" placeholder="1-100" data-user-id="' + u.id + '" style="width:80px;padding:0.5rem;background:#111;border:1px solid #444;color:#ffffcc;border-radius:4px;text-align:center;" />';
+      html += ' <button onclick="submitTrust(' + u.id + ', this)" style="padding:0.5rem 1rem;background:#f5d442;color:#000;border:none;border-radius:4px;cursor:pointer;font-weight:bold;">Rate</button></div>';
+      html += '</div>';
+    }
+
+    if (users.length === 0) html += '<p style="color:#999;">No users found.</p>';
+    userList.innerHTML = html;
+  } catch(e) {
+    userList.innerHTML = '<p style="color:#c00;">Error loading users: ' + e.message + '</p>';
+  }
+});
+
+async function submitTrust(userId, btn) {
+  var input = btn.parentElement.querySelector('input');
+  var score = parseInt(input.value);
+  if (!score || score < 1 || score > 100) { alert('Please enter a score between 1 and 100.'); return; }
+
+  try {
+    var res = await authFetch(API_URL + '/users/' + userId + '/trust', {
+      method: 'POST',
+      body: JSON.stringify({ score: score })
+    });
+    if (res.ok) {
+      btn.textContent = 'Rated!';
+      btn.style.backgroundColor = '#1DAD64';
+      setTimeout(function() { btn.textContent = 'Rate'; btn.style.backgroundColor = '#f5d442'; }, 2000);
+    } else {
+      var d = await res.json();
+      alert('Error: ' + (d.error || 'Failed to submit rating'));
+    }
+  } catch(e) { alert('Error: ' + e.message); }
+}
+</script>
+
+<!-- Mobile responsiveness -->
+<style>
+    @media screen and (max-width: 768px) {
+        nav {
+            flex-direction: column !important;
+        }
+        nav > div {
+            margin: 0.2rem 0 !important;
+        }
+        main {
+            padding: 1rem !important;
+        }
+        table {
+            font-size: 1.2rem !important;
+        }
+        th, td {
+            padding: 8px !important;
+        }
+        input[type="number"] {
+            width: 60px !important;
+            font-size: 1.2rem !important;
+        }
+    }
+</style>
+
+</body>
+</html>
+

@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CLR-Ballot-Prez001-USA-PresidentNominees</title>
+</head>
+
+<body style="margin: 0; padding: 0; font-family: 'Times New Roman', Times, serif; 
+background-color: #000000; color: #ffffcc; line-height: 1.6;">
+
+<!-- Header Section -->  
+<header style="background: linear-gradient(135deg, #1a1a1a, #2d2d2d); 
+color: #f5d442; text-align: center; padding: 20px 0; position: relative;">
+
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 1rem;">
+        <div style="color: #ffffcc; font-size: 3.5rem; font-weight: 700; margin: 0; font-family: inherit;">
+            <u>Common-Law Republic</u>; <u>U.S.A.</u>.
+        </div>
+    </div>
+    
+    <!-- Login Status Indicator; Option-3: Below Title in header -->
+   <div id="loginStatus" style="margin-top: 10px; font-size: 1.4rem; color: #ffffcc;"></div> 
+ 
+    <div style="width: 80%; height: 2px; background-color: #DC143C; margin: 20px auto 0 auto;"></div>
+</header>
+
+<!-- Navigation Section -->
+<nav style="background-color: #111111; display: flex; justify-content: center; align-items: center; 
+padding: 0; position: sticky; top: 0; z-index: 1000; margin-bottom: 0.5rem; flex-wrap: wrap;">
+
+    <!-- Home-Page DropDown Menu) -->
+    <div style="position: relative; display: inline-block; margin: 0 0.5rem;">
+        <button style="background-color: transparent; color: #f5d442; padding: 0.8rem 1.2rem; 
+font-size: 1.4rem; border: none; cursor: pointer; font-weight: bold;" 
+                onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'"
+                onclick="toggleDropdown('dropdown1')">Home<br>Page.</button>
+
+        <div id="dropdown1" style="display: none; position: absolute; background-color: #1a1a1a; 
+min-width: 300px; box-shadow: 0 8px 16px rgba(0,0,0,0.4); z-index: 1; border: 1px solid #444; 
+border-radius: 4px;">
+
+            <a href="/index.html" style="color: #ffffcc; padding: 12px 16px; display: block; 
+text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Home Page.</a>
+
+            <a href="/Z-Home-ReferenceDocuments/Twelve-USA-SuperStates-Statutory-OrganizedMoreFully-2025.pdf" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; 
+font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'"> 
+Super-States USA; All 12 Listed & Organized.</a>
+
+            <a href="/Z-Home-ReferenceDocuments/OrganicHierarchiesUSA-V4.2.pdf" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; 
+font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'"> 
+Social-Organizing Under "Organic Hierarchies".</a>
+
+            <a href="/Z-Home-ReferenceDocuments/BriefGuidelines-PreferentialVotingBallot-Generic-Edit3.pdf" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; 
+font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Using Ballots; Instructions.</a>
+
+            <a href="/Support/Support.html" style="color: #ffffcc; padding: 12px 16px; display: block; 
+text-align: left; text-decoration: none; font-size: 1.4rem; border-top: 1px solid #444;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Support, Help, & Contacts.</a>
+
+        </div>
+    </div>
+
+    <!-- Register/Login DropDown Menu-->
+    <div style="position: relative; display: inline-block; margin: 0 0.5rem;">
+        <button style="background-color: transparent; color: #f5d442; padding: 
+0.8rem 1.2rem; font-size: 1.4rem; border: none; cursor: pointer; font-weight: bold;" 
+                onmouseover="this.style.color='#ffe97f'" 
+onmouseout="this.style.color='#f5d442'"
+                onclick="toggleDropdown('dropdown2')">
+Register;<br> or: Log-In.</button>
+
+        <div id="dropdown2" style="display: none; position: absolute; background-color: #1a1a1a; 
+min-width: 300px; box-shadow: 0 8px 16px rgba(0,0,0,0.4); z-index: 1; border: 1px solid #444; 
+border-radius: 4px;">
+
+            <a href="/Accounts-Profiles-Registering/NewUsers-Registration.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Register.</a>
+
+            <a href="/Accounts-Profiles-Registering/Login.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Login.</a>
+
+           <a href="/Accounts-Profiles-Registering/AccountProfiles-Management-Index.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Account Profiles & Management; Index.</a>
+
+            <a href="/Accounts-Profiles-Registering/Subscribe-EmailList.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Subscribe To Email-Lists.</a>
+        </div>
+    </div>
+
+    <!-- National Civil-Government DropDown Menu-->
+    <div style="position: relative; display: inline-block; margin: 0 0.5rem;">
+        <button style="background-color: transparent; color: #f5d442; padding: 0.8rem 1.2rem; 
+font-size: 1.4rem; border: none; cursor: pointer; font-weight: bold;" 
+                onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'"
+                onclick="toggleDropdown('dropdown3')">National Civil-Govrnmt,<br>
+Political-Activism.</button>
+
+        <div id="dropdown3" style="display: none; position: absolute; background-color: #1a1a1a; 
+min-width: 400px; box-shadow: 0 8px 16px rgba(0,0,0,0.4); z-index: 1; border: 1px solid #444; 
+border-radius: 4px;">
+
+            <a href="/USA-GoverningBodies/Executive-Department-SubDepartments-Agencies/ExcDpt-SubDepartments&Agencies-Listed.html" 
+style="color: #ffffcc; padding: 8px 16px; display: block; text-align: left; text-decoration: none; 
+white-space: normal; line-height: 1.2; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; 
+this.style.color='#ffffcc'">Executive-Department;<br>Sub-Departments, & Agencies.</a>
+
+            <a href="/USA-GoverningBodies/JudicialDepartment/JudicialIndex.html" style="color: #ffffcc; padding: 12px 16px; 
+display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">Judicial-Department.</a>
+
+           <a href="/USA-GoverningBodies/Legislature-HouseReps/Leg-HRepsIndex.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; 
+this.style.color='#ffffcc'">Legislature: House Representatives.</a>
+
+            <a href="/USA-GoverningBodies/Legislature-Senate/Leg-Senate.html" style="color: #ffffcc; padding: 12px 16px; 
+display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">Legislature; Senate.</a>
+
+            <a href="/USA-GoverningBodies/Ballots-Index.html" style="color: #ffffcc; padding: 12px 16px; display: block; 
+text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'"><u>Ballots</u>.</a>
+        </div>
+    </div>
+
+    <!-- Local Civil- Government DropDown Menu -->
+    <div style="position: relative; display: inline-block; margin: 0 0.5rem;">
+        <button style="background-color: transparent; color: #f5d442; padding: 0.8rem 1.2rem; font-size: 1.4rem; 
+border: none; cursor: pointer; font-weight: bold;" 
+                onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'"
+                onclick="toggleDropdown('dropdown4')">
+Local Civil-Govrnmt,<br> Political-Activism.</button>
+
+        <div id="dropdown4" style="display: none; position: absolute; background-color: #1a1a1a; 
+min-width: 300px; box-shadow: 0 8px 16px rgba(0,0,0,0.4); z-index: 1; border: 1px solid #444; 
+border-radius: 4px; text-align: center; max-height: 400px; overflow-y: auto;">
+
+            <a href="/USA-LocalJurisdictions/01-NewEngland-SS/NewEngland-SS.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">01: New-England</a>
+
+            <a href="/USA-LocalJurisdictions/02-NewYork-SS/NewYork-SS.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">02: New-York</a>
+
+            <a href="/USA-LocalJurisdictions/03-Jersey-Penn-SS/JerseyPenn-SS.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">03: Jersey-Penn</a>
+
+            <a href="/USA-LocalJurisdictions/04-GreatLakes-SS/GreatLakes-SS.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">04: Great-Lakes</a>
+
+            <a href="/USA-LocalJurisdictions/05-VirginiaCarolina-SS/VirginiaCarolina-SS.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">05: Virginia-Carolina</a>
+
+            <a href="/USA-LocalJurisdictions/06-FloridaGeorgia-SS/FloridaGeorgia-SS.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">06: Florida-Georgia</a>
+
+            <a href="/USA-LocalJurisdictions/07-MississippiValley-SS/MississippiValley-SS.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">07: Mississippi-Valley</a>
+
+            <a href="/USA-LocalJurisdictions/08-NorthCentralPlains-SS/NorthCentralPlains-SS.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+08: North-Central-Plains</a>
+ 
+            <a href="/USA-LocalJurisdictions/09-Texas-SS/Texas-SS.html" style="color: #ffffcc; padding: 12px 16px; 
+display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">09: Texas</a>
+
+            <a href="/USA-LocalJurisdictions/10-SouthWest-SS/SouthWest-SS.html" style="color: #ffffcc; padding: 12px 16px; 
+display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">10: South-West</a>
+
+            <a href="/USA-LocalJurisdictions/11-PacificNW-SS/PacificNW-SS.html" style="color: #ffffcc; padding: 12px 16px; 
+display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+11: Pacific-North-West</a>
+
+            <a href="/USA-LocalJurisdictions/12-California-SS/California-SS.html" style="color: #ffffcc; padding: 12px 16px; 
+display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">12: California</a>
+        </div>
+    </div>
+
+    <!-- Everything-Else DropDown Menu -->
+    <div style="position: relative; display: inline-block; margin: 0 0.5rem;">
+        <button style="background-color: transparent; color: #f5d442; padding: 0.8rem 1.2rem; 
+font-size: 1.4rem; border: none; cursor: pointer; font-weight: bold;" 
+                onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'"
+                onclick="toggleDropdown('dropdown5')">
+Everything<br> Else:</button>
+
+        <div id="dropdown5" style="display: none; position: absolute; background-color: #1a1a1a; 
+min-width: 400px; box-shadow: 0 8px 16px rgba(0,0,0,0.4); z-index: 1; border: 1px solid #444; 
+border-radius: 4px;">
+
+            <a href="/EveryThing-Else/1-Political-Parties/PoliticalParties.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Political Parties & Activist Communities.</a>
+
+            <a href="/EveryThing-Else/2-Religous-&-Spiritual-Communities/SpiritualIndex.html" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; 
+font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Religious & Spiritual Communities.</a>
+
+            <a href="/EveryThing-Else/3-Business&Financial-Communities&Corporations/Biz&Finances.html" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; 
+font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Business & Financial Corporations & Communities.</a>
+
+            <a href="/EveryThing-Else/4-DNA-Genetic-Racial-Communities/GeneticCommunities.html" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; 
+font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; 
+this.style.color='#ffffcc'">
+Ethnic, Genetic, DNA, & Racial, Communities.</a>
+
+            <a href="/EveryThing-Else/5-World-Communities-OutsideOfUSA/World-Communities-Index.html" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; 
+font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+World Geographical Communities.</a>
+        </div>
+    </div>
+</nav>
+
+<!-- Main Content Section -->
+<main style="max-width: 1200px; margin: 0 auto; padding: 2rem;">
+    <div style="background-color: #111111; padding: 2rem; border-radius: 12px; 
+box-shadow: 0 4px 10px rgba(255, 215, 0, 0.2); border: 1px solid #444;">
+        
+        <h2 style="color: #f5d442; text-align: center; font-size: 2.8rem; margin: 0 0 1rem 0;">
+<u>Ballot: Prez-001</u>:<br>
+<u>Office of the U.S.A. President</u>.</h2>
+
+        <h3 style="color: #f5d442; text-align: center; font-size: 2rem; margin: 0 0 2rem 0;">
+Weighted/Preferential-Voting;<br>
+Nominated Potential-Occupants; Listing By Last-Names: A - Z.</h3>
+
+    <div style="background-color: #1a1a1a; padding: 1.5rem; 
+border-radius: 8px; margin-bottom: 2rem; border: 1px solid #444; text-align: center;">
+        <h4 style="color: #1DAD64; font-size: 2.4rem; margin: 0 0 1rem 0;"><u>Instructions</u>:</h4>
+        <p style="font-size: 1.5rem; line-height: 1.6; margin: 0;">
+<strong>Registered-Users in our Common-Law Republic Community should:<br>
+Insert Numbers <u>Closer to 100 for your Preferred Candidates</u>; &:<br>
+Insert Numbers <u>Closer to Zero/0 for your Opposed Candidates</u>; &:<br>
+Insert Numbers <u>Closer to 50 for Candidates you are Indifferent about</u>.<br>
+Leave Empty for Candidates you have No-Opinion on.<br> 
+Leave Empty where & if Your-Name Might Appear here-in.</strong>
+<br><br>
+<span style="color: #1DAD64;">✓ You may assign the same score to multiple candidates.</span><br>
+<span style="color: #1DAD64;">✓ You may update your votes at any time.</span>
+<br>
+(To view "More-Detailed Instructions", just 
+<a href="https://commonlawrepublic.us/Z-Home-ReferenceDocuments/BriefGuidelines-PreferentialVotingBallot-Generic-Edit3.pdf" 
+   target="_blank" 
+   style="color: #f5d442; text-decoration: none; font-weight: bold;"
+   onmouseover="this.style.color='#ffe97f'; this.style.textDecoration='underline'" 
+   onmouseout="this.style.color='#f5d442'; this.style.textDecoration='none'">Mouse-Click Here</a>.)<br>
+((These same 'more-detailed instructions' are also under our "Home" Tab.))
+    </p>
+</div>
+
+        <!-- Message display -->
+        <div id="message" style="text-align: center; margin-bottom: 1.5rem;"></div>
+
+        <!-- Ballot Form -->
+        <form id="ballotForm">
+            <div style="overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; background-color: #1a1a1a;">
+                    <thead>
+                        <tr style="background-color: #2d2d2d;">
+                            <th style="padding: 12px; border: 1px solid #444; color: #f5d442; font-size: 1.6rem; text-align: left;">Ranked-Vote<br>(0-100):</th>
+                            <th style="padding: 12px; border: 1px solid #444; color: #f5d442; font-size: 1.6rem; text-align: left;">Name:</th>
+                            <th style="padding: 12px; border: 1px solid #444; color: #f5d442; font-size: 1.6rem; text-align: left;">Party:</th>
+                            <th style="padding: 12px; border: 1px solid #444; color: #f5d442; font-size: 1.6rem; text-align: left;">Web-Page:</th>
+                        </tr>
+                    </thead>
+                    <tbody id="candidateTableBody">
+                        <!-- Candidates A-M -->
+                        <tr><td style="padding: 8px; border: 1px solid #444;"><input type="number" name="Baldwin, Chuck" min="0" max="100" style="width: 80px; padding: 6px; background-color: #000; border: 1px solid #666; color: #ffffcc; font-size: 1.4rem;"></td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Baldwin, Chuck</td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Constitution</td><td style="padding: 8px; border: 1px solid #444;"><a href="https://libertyfellowshipmt.com" target="_blank" style="color: #f5d442; text-decoration: none;" onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'">LibertyFellowshipMt.com</a></td></tr>
+
+                        <tr><td style="padding: 8px; border: 1px solid #444;"><input type="number" name="Beck, Glen" min="0" max="100" style="width: 80px; padding: 6px; background-color: #000; border: 1px solid #666; color: #ffffcc; font-size: 1.4rem;"></td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Beck, Glen</td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Republican</td><td style="padding: 8px; border: 1px solid #444;"><a href="https://glennbeck.com" target="_blank" style="color: #f5d442; text-decoration: none;" onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'">GlennBeck.com</a></td></tr>
+
+                        <tr><td style="padding: 8px; border: 1px solid #444;"><input type="number" name="Biden, Joseph" min="0" max="100" style="width: 80px; padding: 6px; background-color: #000; border: 1px solid #666; color: #ffffcc; font-size: 1.4rem;"></td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Biden, Joseph</td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Democrat</td><td style="padding: 8px; border: 1px solid #444;"><a href="https://en.wikipedia.org/wiki/Joe_Biden" target="_blank" style="color: #f5d442; text-decoration: none;" onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'">JoeBiden.wkpda</a></td></tr>
+
+                        <tr><td style="padding: 8px; border: 1px solid #444;"><input type="number" name="Bush, George Jr." min="0" max="100" style="width: 80px; padding: 6px; background-color: #000; border: 1px solid #666; color: #ffffcc; font-size: 1.4rem;"></td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Bush, George Jr.</td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Republican</td><td style="padding: 8px; border: 1px solid #444;"><a href="https://en.wikipedia.org/wiki/George_W._Bush" target="_blank" style="color: #f5d442; text-decoration: none;" onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'">GeorgeWBush.wkpda</a></td></tr>
+
+                        <tr><td style="padding: 8px; border: 1px solid #444;"><input type="number" name="Chomsky, Noam" min="0" max="100" style="width: 80px; padding: 6px; background-color: #000; border: 1px solid #666; color: #ffffcc; font-size: 1.4rem;"></td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Chomsky, Noam</td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Socialist?</td><td style="padding: 8px; border: 1px solid #444;"><a href="https://chomsky.info" target="_blank" style="color: #f5d442; text-decoration: none;" onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'">Chomsky.info</a></td></tr>
+
+                        <tr><td style="padding: 8px; border: 1px solid #444;"><input type="number" name="Clinton, Hillary" min="0" max="100" style="width: 80px; padding: 6px; background-color: #000; border: 1px solid #666; color: #ffffcc; font-size: 1.4rem;"></td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Clinton, Hillary</td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Democrat</td><td style="padding: 8px; border: 1px solid #444;"><a href="https://hillaryclinton.com" target="_blank" style="color: #f5d442; text-decoration: none;" onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'">HillaryClinton.com</a></td></tr>
+
+                        <tr><td style="padding: 8px; border: 1px solid #444;"><input type="number" name="Corbett, James" min="0" max="100" style="width: 80px; padding: 6px; background-color: #000; border: 1px solid #666; color: #ffffcc; font-size: 1.4rem;"></td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Corbett, James</td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">???</td><td style="padding: 8px; border: 1px solid #444;"><a href="https://corbettreport.com" target="_blank" style="color: #f5d442; text-decoration: none;" onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'">CorbettReport.com</a></td></tr>
+
+                        <tr><td style="padding: 8px; border: 1px solid #444;"><input type="number" name="Dingis, Eric" min="0" max="100" style="width: 80px; padding: 6px; background-color: #000; border: 1px solid #666; color: #ffffcc; font-size: 1.4rem;"></td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Dingis, Eric</td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">???</td><td style="padding: 8px; border: 1px solid #444;"><a href="https://brighteon.com/bf1a3d3f-a681-486b-b90e-26ac322ac8d4" target="_blank" style="color: #f5d442; text-decoration: none;" onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'">Eric Brighteon-Video</a></td></tr>
+
+                        <tr><td style="padding: 8px; border: 1px solid #444;"><input type="number" name="Duke, David" min="0" max="100" style="width: 80px; padding: 6px; background-color: #000; border: 1px solid #666; color: #ffffcc; font-size: 1.4rem;"></td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Duke, David</td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Republican?</td><td style="padding: 8px; border: 1px solid #444;"><a href="https://davidduke.com" target="_blank" style="color: #f5d442; text-decoration: none;" onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'">DavidDuke.com</a></td></tr>
+
+                        <tr><td style="padding: 8px; border: 1px solid #444;"><input type="number" name="Farrell, Joseph" min="0" max="100" style="width: 80px; padding: 6px; background-color: #000; border: 1px solid #666; color: #ffffcc; font-size: 1.4rem;"></td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Farrell, Joseph</td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">?</td><td style="padding: 8px; border: 1px solid #444;"><a href="https://gizadeathstar.com/" target="_blank" style="color: #f5d442; text-decoration: none;" onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'">GizaDeathStar.com</a></td></tr>
+
+                        <tr><td style="padding: 8px; border: 1px solid #444;"><input type="number" name="Geiger, James" min="0" max="100" style="width: 80px; padding: 6px; background-color: #000; border: 1px solid #666; color: #ffffcc; font-size: 1.4rem;"></td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Geiger, James</td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Republic</td><td style="padding: 8px; border: 1px solid #444;"><a href="https://republicfortheunitedstatesofamerica.org/?s=Geiger" target="_blank" style="color: #f5d442; text-decoration: none;" onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'">Geiger-RFTUSA.org</a></td></tr>
+
+                        <tr><td style="padding: 8px; border: 1px solid #444;"><input type="number" name="Hammond, Lewis" min="0" max="100" style="width: 80px; padding: 6px; background-color: #000; border: 1px solid #666; color: #ffffcc; font-size: 1.4rem;"></td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Hammond, Lewis</td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">?</td><td style="padding: 8px; border: 1px solid #444;"><a href="https://waynecountyassembly.info/" target="_blank" style="color: #f5d442; text-decoration: none;" onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'">WayneCountyAssembly.info</a></td></tr>
+
+                        <tr><td style="padding: 8px; border: 1px solid #444;"><input type="number" name="Harris, Kamala" min="0" max="100" style="width: 80px; padding: 6px; background-color: #000; border: 1px solid #666; color: #ffffcc; font-size: 1.4rem;"></td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Harris, Kamala</td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Democrat</td><td style="padding: 8px; border: 1px solid #444;"><a href="https://en.wikipedia.org/wiki/Kamala_Harris" target="_blank" style="color: #f5d442; text-decoration: none;" onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'">KamalaHarris.wkpda</a></td></tr>
+
+                        <tr><td style="padding: 8px; border: 1px solid #444;"><input type="number" name="Hartman, Tom" min="0" max="100" style="width: 80px; padding: 6px; background-color: #000; border: 1px solid #666; color: #ffffcc; font-size: 1.4rem;"></td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Hartman, Tom</td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Democrat</td><td style="padding: 8px; border: 1px solid #444;"><a href="https://thomhartmann.com" target="_blank" style="color: #f5d442; text-decoration: none;" onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'">ThomHartmann.com</a></td></tr>
+
+                        <tr><td style="padding: 8px; border: 1px solid #444;"><input type="number" name="Hedges, Chris" min="0" max="100" style="width: 80px; padding: 6px; background-color: #000; border: 1px solid #666; color: #ffffcc; font-size: 1.4rem;"></td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Hedges, Chris</td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Socialist?</td><td style="padding: 8px; border: 1px solid #444;"><a href="https://en.wikipedia.org/wiki/Chris_Hedges" target="_blank" style="color: #f5d442; text-decoration: none;" onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'">ChrisHedges.wkpda</a></td></tr>
+
+                        <tr><td style="padding: 8px; border: 1px solid #444;"><input type="number" name="Johns, Daniel" min="0" max="100" style="width: 80px; padding: 6px; background-color: #000; border: 1px solid #666; color: #ffffcc; font-size: 1.4rem;"></td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Johns, Daniel</td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">?</td><td style="padding: 8px; border: 1px solid #444;"><a href="http://www.pastordan.net/" target="_blank" style="color: #f5d442; text-decoration: none;" onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'">PastorDan.net</a></td></tr>
+
+                        <tr><td style="padding: 8px; border: 1px solid #444;"><input type="number" name="Jones, Alex" min="0" max="100" style="width: 80px; padding: 6px; background-color: #000; border: 1px solid #666; color: #ffffcc; font-size: 1.4rem;"></td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Jones, Alex</td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Republican</td><td style="padding: 8px; border: 1px solid #444;"><a href="https://infowars.com" target="_blank" style="color: #f5d442; text-decoration: none;" onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'">InfoWars.com</a></td></tr>
+
+                        <tr><td style="padding: 8px; border: 1px solid #444;"><input type="number" name="Landholt, Nicholas" min="0" max="100" style="width: 80px; padding: 6px; background-color: #000; border: 1px solid #666; color: #ffffcc; font-size: 1.4rem;"></td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Landholt, Nicholas</td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">??</td><td style="padding: 8px; border: 1px solid #444;"><a href="https://www.facebook.com/landholt2016/" target="_blank" style="color: #f5d442; text-decoration: none;" onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'">Landholt.Facebook</a></td></tr>
+
+                        <tr><td style="padding: 8px; border: 1px solid #444;"><input type="number" name="Leahy, Patrick" min="0" max="100" style="width: 80px; padding: 6px; background-color: #000; border: 1px solid #666; color: #ffffcc; font-size: 1.4rem;"></td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Leahy, Patrick</td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Democrat</td><td style="padding: 8px; border: 1px solid #444;"><a href="https://en.wikipedia.org/wiki/Patrick_Leahy" target="_blank" style="color: #f5d442; text-decoration: none;" onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'">PatrickLeahy.wkpda</a></td></tr>
+
+                        <tr><td style="padding: 8px; border: 1px solid #444;"><input type="number" name="Mack, Richard" min="0" max="100" style="width: 80px; padding: 6px; background-color: #000; border: 1px solid #666; color: #ffffcc; font-size: 1.4rem;"></td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Mack, Richard</td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Constitution?</td><td style="padding: 8px; border: 1px solid #444;"><a href="https://cspoa.org/" target="_blank" style="color: #f5d442; text-decoration: none;" onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'">CSPOA.org</a></td></tr>
+
+                        <tr><td style="padding: 8px; border: 1px solid #444;"><input type="number" name="Makow, Henry" min="0" max="100" style="width: 80px; padding: 6px; background-color: #000; border: 1px solid #666; color: #ffffcc; font-size: 1.4rem;"></td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Makow, Henry</td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Constitution?</td><td style="padding: 8px; border: 1px solid #444;"><a href="https://henrymakow.com" target="_blank" style="color: #f5d442; text-decoration: none;" onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'">HenryMakow.com</a></td></tr>
+
+                        <tr><td style="padding: 8px; border: 1px solid #444;"><input type="number" name="Musk, Elon" min="0" max="100" style="width: 80px; padding: 6px; background-color: #000; border: 1px solid #666; color: #ffffcc; font-size: 1.4rem;"></td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Musk, Elon</td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Republican</td><td style="padding: 8px; border: 1px solid #444;"><a href="https://en.wikipedia.org/wiki/Elon_Musk" target="_blank" style="color: #f5d442; text-decoration: none;" onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'">ElonMusk.wkpda</a></td></tr>
+
+                        <!-- Candidates N-Z -->
+                        <tr><td style="padding: 8px; border: 1px solid #444;"><input type="number" name="Nader, Ralph" min="0" max="100" style="width: 80px; padding: 6px; background-color: #000; border: 1px solid #666; color: #ffffcc; font-size: 1.4rem;"></td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Nader, Ralph</td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Green?</td><td style="padding: 8px; border: 1px solid #444;"><a href="https://nader.org" target="_blank" style="color: #f5d442; text-decoration: none;" onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'">Nader.org</a></td></tr>
+
+                        <tr><td style="padding: 8px; border: 1px solid #444;"><input type="number" name="Nalley, Paul" min="0" max="100" style="width: 80px; padding: 6px; background-color: #000; border: 1px solid #666; color: #ffffcc; font-size: 1.4rem;"></td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Nalley, Paul</td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">???</td><td style="padding: 8px; border: 1px solid #444;"><a href="https://www.youtube.com/watch?v=3rndk0OgfYg" target="_blank" style="color: #f5d442; text-decoration: none;" onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'">PaulNalley.Video.Yt</a></td></tr>
+
+                        <tr><td style="padding: 8px; border: 1px solid #444;"><input type="number" name="Obama, Barack" min="0" max="100" style="width: 80px; padding: 6px; background-color: #000; border: 1px solid #666; color: #ffffcc; font-size: 1.4rem;"></td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Obama, Barack</td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Democrat</td><td style="padding: 8px; border: 1px solid #444;"><a href="https://en.wikipedia.org/wiki/Barack_Obama" target="_blank" style="color: #f5d442; text-decoration: none;" onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'">BarackObama.wkpda</a></td></tr>
+
+                        <tr><td style="padding: 8px; border: 1px solid #444;"><input type="number" name="Paul, Rand" min="0" max="100" style="width: 80px; padding: 6px; background-color: #000; border: 1px solid #666; color: #ffffcc; font-size: 1.4rem;"></td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Paul, Rand</td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Republican</td><td style="padding: 8px; border: 1px solid #444;"><a href="https://randpaul.com" target="_blank" style="color: #f5d442; text-decoration: none;" onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'">RandPaul.com</a></td></tr>
+
+                        <tr><td style="padding: 8px; border: 1px solid #444;"><input type="number" name="Paul, Ron" min="0" max="100" style="width: 80px; padding: 6px; background-color: #000; border: 1px solid #666; color: #ffffcc; font-size: 1.4rem;"></td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Paul, Ron</td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Republican</td><td style="padding: 8px; border: 1px solid #444;"><a href="http://ronpaulinstitute.org/" target="_blank" style="color: #f5d442; text-decoration: none;" onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'">RonPaulInstitute.org</a></td></tr>
+
+                        <tr><td style="padding: 8px; border: 1px solid #444;"><input type="number" name="Pelosi, Nancy" min="0" max="100" style="width: 80px; padding: 6px; background-color: #000; border: 1px solid #666; color: #ffffcc; font-size: 1.4rem;"></td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Pelosi, Nancy</td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Democrat</td><td style="padding: 8px; border: 1px solid #444;"><a href="https://pelosi.house.gov/" target="_blank" style="color: #f5d442; text-decoration: none;" onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'">Pelosi.House.gov</a></td></tr>
+
+                        <tr><td style="padding: 8px; border: 1px solid #444;"><input type="number" name="Rhodes, Stewart" min="0" max="100" style="width: 80px; padding: 6px; background-color: #000; border: 1px solid #666; color: #ffffcc; font-size: 1.4rem;"></td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Rhodes, Stewart</td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Constitution?</td><td style="padding: 8px; border: 1px solid #444;"><a href="https://en.wikipedia.org/wiki/Stewart_Rhodes" target="_blank" style="color: #f5d442; text-decoration: none;" onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'">StewartRhodes.wkpda</a></td></tr>
+
+                        <tr><td style="padding: 8px; border: 1px solid #444;"><input type="number" name="Roberts, John" min="0" max="100" style="width: 80px; padding: 6px; background-color: #000; border: 1px solid #666; color: #ffffcc; font-size: 1.4rem;"></td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Roberts, John</td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Republican</td><td style="padding: 8px; border: 1px solid #444;"><a href="https://en.wikipedia.org/wiki/John_Roberts" target="_blank" style="color: #f5d442; text-decoration: none;" onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'">JohnRoberts.wkpda</a></td></tr>
+
+                        <tr><td style="padding: 8px; border: 1px solid #444;"><input type="number" name="Sanders, Bernie" min="0" max="100" style="width: 80px; padding: 6px; background-color: #000; border: 1px solid #666; color: #ffffcc; font-size: 1.4rem;"></td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Sanders, Bernie</td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Democrat/Socialist</td><td style="padding: 8px; border: 1px solid #444;"><a href="https://berniesanders.com" target="_blank" style="color: #f5d442; text-decoration: none;" onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'">BernieSanders.com</a></td></tr>
+
+                        <tr><td style="padding: 8px; border: 1px solid #444;"><input type="number" name="Sawant, Kshama" min="0" max="100" style="width: 80px; padding: 6px; background-color: #000; border: 1px solid #666; color: #ffffcc; font-size: 1.4rem;"></td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Sawant, Kshama</td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Socialist</td><td style="padding: 8px; border: 1px solid #444;"><a href="https://en.wikipedia.org/wiki/Kshama_Sawant" target="_blank" style="color: #f5d442; text-decoration: none;" onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'">KshamaSawant.wkpda</a></td></tr>
+
+                        <tr><td style="padding: 8px; border: 1px solid #444;"><input type="number" name="Stein, Jill" min="0" max="100" style="width: 80px; padding: 6px; background-color: #000; border: 1px solid #666; color: #ffffcc; font-size: 1.4rem;"></td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Stein, Jill</td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Green</td><td style="padding: 8px; border: 1px solid #444;"><a href="https://wikipedia.org/wiki/Jill_Stein" target="_blank" style="color: #f5d442; text-decoration: none;" onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'">JillStein.wkpda</a></td></tr>
+
+                        <tr><td style="padding: 8px; border: 1px solid #444;"><input type="number" name="Stewart, Charles" min="0" max="100" style="width: 80px; padding: 6px; background-color: #000; border: 1px solid #666; color: #ffffcc; font-size: 1.4rem;"></td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Stewart, Charles</td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Independent</td><td style="padding: 8px; border: 1px solid #444;"><a href="http://ConstitutionalGov.us/Archive/Charles/" target="_blank" style="color: #f5d442; text-decoration: none;" onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'">CStewart.arkive</a></td></tr>
+
+                        <tr><td style="padding: 8px; border: 1px solid #444;"><input type="number" name="Thiel, Peter" min="0" max="100" style="width: 80px; padding: 6px; background-color: #000; border: 1px solid #666; color: #ffffcc; font-size: 1.4rem;"></td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Thiel, Peter</td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Republican?</td><td style="padding: 8px; border: 1px solid #444;"><a href="https://en.wikipedia.org/wiki/Peter_Thiel" target="_blank" style="color: #f5d442; text-decoration: none;" onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'">PeterThiel.wkpda</a></td></tr>
+
+                        <tr><td style="padding: 8px; border: 1px solid #444;"><input type="number" name="Trump, Donald" min="0" max="100" style="width: 80px; padding: 6px; background-color: #000; border: 1px solid #666; color: #ffffcc; font-size: 1.4rem;"></td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Trump, Donald</td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Republican</td><td style="padding: 8px; border: 1px solid #444;"><a href="https://donaldjtrump.com" target="_blank" style="color: #f5d442; text-decoration: none;" onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'">DonaldJTrump.com</a></td></tr>
+
+                        <tr><td style="padding: 8px; border: 1px solid #444;"><input type="number" name="Turner, Tim" min="0" max="100" style="width: 80px; padding: 6px; background-color: #000; border: 1px solid #666; color: #ffffcc; font-size: 1.4rem;"></td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Turner, Tim</td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Republic</td><td style="padding: 8px; border: 1px solid #444;"><a href="https://www.amazon.com/James-Timothy-Turner-President-Political/dp/0997276657" target="_blank" style="color: #f5d442; text-decoration: none;" onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'">TimTurner.amazon</a></td></tr>
+
+                        <tr><td style="padding: 8px; border: 1px solid #444;"><input type="number" name="Van-Schaick, Michael" min="0" max="100" style="width: 80px; padding: 6px; background-color: #000; border: 1px solid #666; color: #ffffcc; font-size: 1.4rem;"></td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Van-Schaick, Michael</td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">?</td><td style="padding: 8px; border: 1px solid #444;"><a href="https://righteousarmy.org/" target="_blank" style="color: #f5d442; text-decoration: none;" onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'">RighteousArmy.org</a></td></tr>
+
+                        <tr><td style="padding: 8px; border: 1px solid #444;"><input type="number" name="Ventura, Jesse" min="0" max="100" style="width: 80px; padding: 6px; background-color: #000; border: 1px solid #666; color: #ffffcc; font-size: 1.4rem;"></td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Ventura, Jesse</td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Constitution?</td><td style="padding: 8px; border: 1px solid #444;"><a href="https://wikipedia.org/wiki/Jesse_Ventura" target="_blank" style="color: #f5d442; text-decoration: none;" onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'">JesseVentura.wkpda</a></td></tr>
+
+                        <tr><td style="padding: 8px; border: 1px solid #444;"><input type="number" name="Von-Reitz, Anna" min="0" max="100" style="width: 80px; padding: 6px; background-color: #000; border: 1px solid #666; color: #ffffcc; font-size: 1.4rem;"></td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Von-Reitz, Anna</td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">?</td><td style="padding: 8px; border: 1px solid #444;"><a href="https://tasa.americanstatenationals.org/" target="_blank" style="color: #f5d442; text-decoration: none;" onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'">TASA Profile</a></td></tr>
+
+                        <tr><td style="padding: 8px; border: 1px solid #444;"><input type="number" name="Zarzano, Michael" min="0" max="100" style="width: 80px; padding: 6px; background-color: #000; border: 1px solid #666; color: #ffffcc; font-size: 1.4rem;"></td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Zarzano, Michael</td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">?</td><td style="padding: 8px; border: 1px solid #444;"><a href="https://unitedcountiesofamerica.com/" target="_blank" style="color: #f5d442; text-decoration: none;" onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'">UnitedCountiesOfAmerica.com</a></td></tr>
+
+                        <tr><td style="padding: 8px; border: 1px solid #444;"><input type="number" name="Zuckerberg, Mark" min="0" max="100" style="width: 80px; padding: 6px; background-color: #000; border: 1px solid #666; color: #ffffcc; font-size: 1.4rem;"></td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Zuckerberg, Mark</td><td style="padding: 8px; border: 1px solid #444; color: #ffffcc; font-size: 1.4rem;">Democrat?</td><td style="padding: 8px; border: 1px solid #444;"><a href="https://en.wikipedia.org/wiki/Mark_Zuckerberg" target="_blank" style="color: #f5d442; text-decoration: none;" onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'">MarkZuckerberg.wkpda</a></td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="text-align: center; margin-top: 30px; padding: 20px;">
+                <button type="submit" 
+                        style="background: linear-gradient(135deg, #DC143C, #8B0000); 
+color: #f5d442; border: 2px solid #FFD700; padding: 15px 40px; font-size: 1.3rem; 
+font-weight: bold; border-radius: 8px; cursor: pointer; text-transform: uppercase; 
+letter-spacing: 1px; box-shadow: 0 4px 8px rgba(0,0,0,0.3); transition: all 0.3s ease;"
+                        onmouseover="this.style.transform='translateY(-2px)'; 
+this.style.boxShadow='0 6px 12px rgba(0,0,0,0.4)'"
+                        onmouseout="this.style.transform='translateY(0)'; 
+this.style.boxShadow='0 4px 8px rgba(0,0,0,0.3)'">
+                    Submit Ballot
+                </button>
+            </div>
+        </form>
+    </div>
+</main>
+
+<!-- Footer Section -->
+<footer style="margin-top: .5rem; padding: 1rem; background-color: #111111; color: #1DAD64; font-size: 1.4rem; border-top: 1px solid #444; text-align: center;">
+    <div>
+        <p style="margin: 0; line-height: 1.4;">
+<u>Common-Law Republic, U.S.A.</u>; <u>Empowering Self-Governing Communities</u>.<br>
+    With the help of many others; this entire project, as presented thru this web-page,<br>
+    has been engineered, by: Charles Stewart, of Coleman Texas. ... Last up-dated: January-2026.</p>
+    </div>
+</footer>
+
+<script src="/js/auth.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Disable ballot form submission - voting not yet connected to backend
+  var form = document.getElementById('ballotForm');
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Online voting for this ballot is coming soon. Please visit the active ballots page for currently available ballots.');
+    });
+  }
+  // Show notice
+  var notice = document.createElement('div');
+  notice.style.cssText = 'background:#1a1a1a;border:2px solid #f5d442;border-radius:8px;padding:1rem;margin:1rem auto;max-width:800px;text-align:center;color:#ffffcc;font-size:1.1rem;';
+  notice.innerHTML = '<strong style="color:#f5d442;">Note:</strong> This ballot is displayed for reference. Online voting will be available soon. <a href="/USA-GoverningBodies/ballot-detail.html" style="color:#f5d442;">View active ballots here</a>.';
+  var main = document.querySelector('main') || document.querySelector('.container') || document.body.children[1];
+  if (main) main.insertBefore(notice, main.firstChild);
+});
+</script>
+
+<!-- Mobile responsiveness -->
+<style>
+    @media screen and (max-width: 768px) {
+        nav {
+            flex-direction: column !important;
+        }
+        nav > div {
+            margin: 0.2rem 0 !important;
+        }
+        main {
+            padding: 1rem !important;
+        }
+    }
+</style>
+
+</body>
+</html>

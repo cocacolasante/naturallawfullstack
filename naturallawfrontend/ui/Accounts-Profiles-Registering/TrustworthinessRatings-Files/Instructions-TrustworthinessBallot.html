@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Instructions; For Using TrustWorthiness-Ratings Ballot</title>
+</head>
+
+<body style="margin: 0; padding: 0; font-family: 'Times New Roman', Times, serif; 
+background-color: #000000; color: #ffffcc; line-height: 1.6;">
+
+<!-- Header Section -->  
+<header style="background: linear-gradient(135deg, #1a1a1a, #2d2d2d); 
+color: #f5d442; text-align: center; padding: 20px 0; position: relative;">
+
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 1rem;">
+        <div style="color: #4dc3ff; font-size: 3.5rem; font-weight: 700; margin: 0; font-family: inherit;">
+            <u>Common-Law Republic</u>; <u>U.S.A.</u>
+        </div>
+    </div>
+    
+    <!-- Login Status Indicator; Option-3: Below Title in header -->
+   <div id="loginStatus" style="margin-top: 10px; font-size: 1.4rem; color: #ffffcc;"></div> 
+ 
+    <div style="width: 80%; height: 2px; background-color: #DC143C; margin: 20px auto 0 auto;"></div>
+</header>
+
+<!-- Navigation Section -->
+<nav style="background-color: #111111; display: flex; justify-content: center; align-items: center; 
+padding: 0; position: sticky; top: 0; z-index: 1000; margin-bottom: 0.5rem; flex-wrap: wrap;">
+
+    <!-- Home-Page DropDown Menu) -->
+    <div style="position: relative; display: inline-block; margin: 0 0.5rem;">
+        <button style="background-color: transparent; color: #f5d442; padding: 0.8rem 1.2rem; 
+font-size: 1.4rem; border: none; cursor: pointer; font-weight: bold;" 
+                onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'"
+                onclick="toggleDropdown('dropdown1')">Home<br>Page.</button>
+
+        <div id="dropdown1" style="display: none; position: absolute; background-color: #1a1a1a; 
+min-width: 300px; box-shadow: 0 8px 16px rgba(0,0,0,0.4); z-index: 1; border: 1px solid #444; 
+border-radius: 4px;">
+
+            <a href="/index.html" style="color: #ffffcc; padding: 12px 16px; display: block; 
+text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Home Page.</a>
+
+            <a href="/Z-Home-ReferenceDocuments/Twelve-USA-SuperStates-Statutory-OrganizedMoreFully-2025.pdf" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; 
+font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'"> 
+Super-States USA; All 12 Listed & Organized.</a>
+
+            <a href="/Z-Home-ReferenceDocuments/OrganicHierarchiesUSA-V4.2.pdf" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; 
+font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'"> 
+Social-Organizing Under "Organic Hierarchies".</a>
+
+            <a href="/Z-Home-ReferenceDocuments/BriefGuidelines-PreferentialVotingBallot-Generic-Edit3.pdf" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; 
+font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Using Ballots; Instructions.</a>
+
+            <a href="/Support/Support.html" style="color: #ffffcc; padding: 12px 16px; display: block; 
+text-align: left; text-decoration: none; font-size: 1.4rem; border-top: 1px solid #444;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Support, Help, & Contacts.</a>
+
+        </div>
+    </div>
+
+    <!-- Register/Login DropDown Menu-->
+    <div style="position: relative; display: inline-block; margin: 0 0.5rem;">
+        <button style="background-color: transparent; color: #f5d442; padding: 
+0.8rem 1.2rem; font-size: 1.4rem; border: none; cursor: pointer; font-weight: bold;" 
+                onmouseover="this.style.color='#ffe97f'" 
+onmouseout="this.style.color='#f5d442'"
+                onclick="toggleDropdown('dropdown2')">
+Register;<br> or: Log-In.</button>
+
+        <div id="dropdown2" style="display: none; position: absolute; background-color: #1a1a1a; 
+min-width: 300px; box-shadow: 0 8px 16px rgba(0,0,0,0.4); z-index: 1; border: 1px solid #444; 
+border-radius: 4px;">
+
+            <a href="/Accounts-Profiles-Registering/NewUsers-Registration.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Register.</a>
+
+            <a href="/Accounts-Profiles-Registering/Login.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Login.</a>
+
+           <a href="/Accounts-Profiles-Registering/AccountProfiles-Management-Index.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Account Profiles & Management; Index.</a>
+
+           <a href="/Accounts-Profiles-Registering/TrustworthinessRatings-Files/TrustworthinessRatings-Ballot.html" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+TrustWorthiness Rating Ballot.</a>
+
+           <a href="/Accounts-Profiles-Registering/TrustworthinessRatings-Files/Instructions-TrustworthinessBallot.html" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+TrustWorthiness Ratings, Instructions For Ballot.</a>
+
+            <a href="/Accounts-Profiles-Registering/Subscribe-EmailList.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Subscribe To Email-Lists.</a>
+        </div>
+    </div>
+
+    <!-- National Civil-Government DropDown Menu-->
+    <div style="position: relative; display: inline-block; margin: 0 0.5rem;">
+        <button style="background-color: transparent; color: #f5d442; padding: 0.8rem 1.2rem; 
+font-size: 1.4rem; border: none; cursor: pointer; font-weight: bold;" 
+                onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'"
+                onclick="toggleDropdown('dropdown3')">National Civil-Government,<br>
+Political-Activism.</button>
+
+        <div id="dropdown3" style="display: none; position: absolute; background-color: #1a1a1a; 
+min-width: 500px; box-shadow: 0 8px 16px rgba(0,0,0,0.4); z-index: 1; border: 1px solid #444; 
+border-radius: 4px;">
+
+            <a href="/USA-GoverningBodies/Executive-Department-SubDepartments-Agencies/ExcDpt-SubDepartments&Agencies-Listed.html" 
+style="color: #ffffcc; padding: 8px 16px; display: block; text-align: left; text-decoration: none; 
+white-space: normal; line-height: 1.2; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; 
+this.style.color='#ffffcc'">Executive-Department;<br>Sub-Departments, & Agencies.</a>
+
+            <a href="/USA-GoverningBodies/JudicialDepartment/JudicialIndex.html" style="color: #ffffcc; padding: 12px 16px; 
+display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">Judicial-Department.</a>
+
+           <a href="/USA-GoverningBodies/Legislature-HouseReps/Leg-HRepsIndex.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; 
+this.style.color='#ffffcc'">Legislature: House Representatives.</a>
+
+            <a href="/USA-GoverningBodies/Legislature-Senate/Leg-Senate.html" style="color: #ffffcc; padding: 12px 16px; 
+display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">Legislature; Senate.</a>
+
+            <a href="/USA-GoverningBodies/Ballots-Index.html" style="color: #ffffcc; padding: 12px 16px; display: block; 
+text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'"><u>Ballots</u>.</a>
+        </div>
+    </div>
+
+    <!-- Local Civil- Government DropDown Menu -->
+    <div style="position: relative; display: inline-block; margin: 0 0.5rem;">
+        <button style="background-color: transparent; color: #f5d442; padding: 0.8rem 1.2rem; font-size: 1.4rem; 
+border: none; cursor: pointer; font-weight: bold;" 
+                onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'"
+                onclick="toggleDropdown('dropdown4')">
+Local Civil-Government,<br> Political-Activism.</button>
+
+        <div id="dropdown4" style="display: none; position: absolute; background-color: #1a1a1a; 
+min-width: 400px; box-shadow: 0 8px 16px rgba(0,0,0,0.4); z-index: 1; border: 1px solid #444; 
+border-radius: 4px; text-align: center; max-height: 400px; overflow-y: auto;">
+
+            <a href="/USA-LocalJurisdictions/01-NewEngland-SS/NewEngland-SS.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">01: New-England</a>
+
+            <a href="/USA-LocalJurisdictions/02-NewYork-SS/NewYork-SS.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">02: New-York</a>
+
+            <a href="/USA-LocalJurisdictions/03-Jersey-Penn-SS/JerseyPenn-SS.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">03: Jersey-Penn</a>
+
+            <a href="/USA-LocalJurisdictions/04-GreatLakes-SS/GreatLakes-SS.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">04: Great-Lakes</a>
+
+            <a href="/USA-LocalJurisdictions/05-VirginiaCarolina-SS/VirginiaCarolina-SS.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">05: Virginia-Carolina</a>
+
+            <a href="/USA-LocalJurisdictions/06-FloridaGeorgia-SS/FloridaGeorgia-SS.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">06: Florida-Georgia</a>
+
+            <a href="/USA-LocalJurisdictions/07-MississippiValley-SS/MississippiValley-SS.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">07: Mississippi-Valley</a>
+
+            <a href="/USA-LocalJurisdictions/08-NorthCentralPlains-SS/NorthCentralPlains-SS.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+08: North-Central-Plains</a>
+ 
+            <a href="/USA-LocalJurisdictions/09-Texas-SS/Texas-SS.html" style="color: #ffffcc; padding: 12px 16px; 
+display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">09: Texas</a>
+
+            <a href="/USA-LocalJurisdictions/10-SouthWest-SS/SouthWest-SS.html" style="color: #ffffcc; padding: 12px 16px; 
+display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">10: South-West</a>
+
+            <a href="/USA-LocalJurisdictions/11-PacificNW-SS/PacificNW-SS.html" style="color: #ffffcc; padding: 12px 16px; 
+display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+11: Pacific-North-West</a>
+
+            <a href="/USA-LocalJurisdictions/12-California-SS/California-SS.html" style="color: #ffffcc; padding: 12px 16px; 
+display: block; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">12: California</a>
+        </div>
+    </div>
+
+    <!-- Everything-Else DropDown Menu -->
+    <div style="position: relative; display: inline-block; margin: 0 0.5rem;">
+        <button style="background-color: transparent; color: #f5d442; padding: 0.8rem 1.2rem; 
+font-size: 1.4rem; border: none; cursor: pointer; font-weight: bold;" 
+                onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'"
+                onclick="toggleDropdown('dropdown5')">
+Everything<br> Else:</button>
+
+        <div id="dropdown5" style="display: none; position: absolute; background-color: #1a1a1a; 
+min-width: 400px; box-shadow: 0 8px 16px rgba(0,0,0,0.4); z-index: 1; border: 1px solid #444; 
+border-radius: 4px;">
+
+            <a href="/EveryThing-Else/1-Political-Parties/PoliticalParties.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Political Parties & Activist Communities.</a>
+
+            <a href="/EveryThing-Else/2-Religous-&-Spiritual-Communities/SpiritualIndex.html" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; 
+font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Religious & Spiritual Communities.</a>
+
+            <a href="/EveryThing-Else/3-Business&Financial-Communities&Corporations/Biz&Finances.html" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; 
+font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Business & Financial Corporations & Communities.</a>
+
+            <a href="/EveryThing-Else/4-DNA-Genetic-Racial-Communities/GeneticCommunities.html" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; 
+font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; 
+this.style.color='#ffffcc'">
+Ethnic, Genetic, DNA, & Racial, Communities.</a>
+
+            <a href="/EveryThing-Else/5-World-Communities-OutsideOfUSA/World-Communities-Index.html" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; 
+font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+World Geographical Communities.</a>
+        </div>
+    </div>
+</nav>
+    <br><br>
+
+ <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+<!-- Main Content Area -->
+<main style="max-width: 1100px; margin: 0 auto; padding: 2rem;">
+    <div style="background-color: #111111; padding: 2rem; border-radius: 12px; 
+box-shadow: 0 4px 10px rgba(255, 215, 0, 0.2); border: 1px solid #444; text-align: center;">   
+        
+            <!-- Yellow Header Section -->
+            <h2 style="margin: 0 0 1.5rem 0; line-height: 1.4; font-size: 1.9rem; font-weight: 700; 
+color: #f5d442; text-align: center;">
+                <u>Detailed Instructions & Explanations</u>, Regarding:<br>
+		<u>How To Use our</u> Common-Law Republic Web-Site's "<u>Ballot</u>",<br> 
+		<u>for Rating the Trust-Worthiness, Intelligence, & Courage, of Other CLR-Members</u>.
+            </h2>
+           
+        <!-- Introductory Text -->
+        <div style="background-color: #1a1a1a; margin: 0 0 2rem 0; padding: 1.5rem; border-radius: 12px; 
+border: 2px solid #f5d442; text-align: left;"><br>
+    <p style="color: #DC143C; font-size: 2rem; font-weight: 400; margin: 0 0 0.5rem 0; line-height: .01; 
+text-align: center;">
+  					      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		    </p><br>
+            <div style="margin: 0 0 1.5rem 0; line-height: 1.6; font-size: 1.5rem; font-weight: 400; 
+color: #4dc3ff; text-align: left;"<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		Much of the information contained in this "Instructions Page", is very "Intuitive"; 
+& <u>the quickest way to become familiar with the issues discussed here-in</u>, 
+<u>is to actually Look At the actual "Ratings Ballot</u>" Page which we are here-in discussing; 
+& which page may be viewed more directly, <u>here</u>:
+            </div>
+            <div style="text-align: center; margin: 1.5rem 0; padding: 1rem; background-color: #111111; 
+border-radius: 8px; border: 2px solid #f5d442;">
+                <a href="./CLRMembers-SelfGoverning/Trustworthiness-Intelligence-Courage-RatingBallot-CLRMembers.html"
+         style="color: #f5d442; text-decoration: none; font-weight: 700; font-size: 1.6rem; line-height: 1.5;"
+onmouseover="this.style.color='#ffe97f'; this.style.textDecoration='underline'" 
+onmouseout="this.style.color='#f5d442'; this.style.textDecoration='none'">
+		"<u>Ballot</u>" for <u>Rating the TrustWorthiness</u>, <u>Intelligence</u>,<br>
+<u>& Courage</u>; <u>of Other CLR-Members</u>.
+                </a>
+	        </div>
+            </div>
+
+        <!-- Centered Dividing Line -->
+        <p style="text-align: center; margin: 1.5rem 0; font-size: 1.7rem; font-weight: 400; 
+color: #DC143C; line-height: 1.2;">
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        </p>
+            <!-- Explanations & Instructions; Text Section -->
+            <div style="background-color: #111111; padding: 1rem; border-radius: 6px;">
+		<p style="margin: 0 0 1.2rem 0; line-height: 1.5; font-size: 1.4rem; font-weight: 400; 
+color: #4dc3ff; text-align: left;">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<u>Our here-in referenced "Trustworthiness Ratings Ballot Page"</u>" is of "Great Importance", 
+because: It <u>Empowers</u> Each of Our Registered Common-Law Republic web-site <u>Account-Holders</u>, 
+<u>to Responsibly Participate in Organizing</u> All of our Registered Members, as: 
+<u>Our Own "Responsibly Self-Governing Community</u>".<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<u>This is the Essence of Common-Law Republicanism & Responsible Self-Governing</u>.
+<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		This entire process is <u>designed to Prompt the Development of a: 
+"Responsibly Self-Governing Community Culture</u>", which can then <u>Serve as a Model or Template</u> 
+for Multitudes of <u>Other: "Responsibly Self-Governing Communities" to develop from</u>. <br><br>		
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		But, perhaps many among you already realized this; & you just want to see 
+the darn 'detailed explanations & instructions'; which, here-under, we next present, as follows:
+<br><br>		
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		When Any Individual Registers on our web-site as a Common-Law-Republic Community-Member, 
+they should be able to Access Their Own Private & "Blank" Form/Version of Their Own 
+"TrustWorthiness-Ratings Ballot" Page, by navigating to our second-from-left Pull-Down-Memu, 
+entitled as: "Reigister; or Log-In."; &, there-under, as the fourth menu-item down from the top, 
+they should see a menu-item/option, to open a link to a page, entitled as: "TrustWorthiness Ratings Ballot."<br>		
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		These actions should take the new account-holder directly to Their Own "Blank" Version 
+of Their Own "TrustWorthiness-Ratings Ballot" Page. 
+
+
+. Fr; &, If any such Primary-CLR-Community-Member, Wishes for Their Beliefs/Judgements regarding 
+these issues To Be Kept Private from Other CLR-Community Members; then, 
+They Need To Leave This Page Completely Blank.
+		Any Data that any such Primary-CLR-Community-Member might choose to fill-in on this 
+"Trustworthiness Ratings Ballot Page", Will Be Shared Across Our Entre Common-Law Republic 
+Web-Site Community of Registered Users/Account-Holders.<br>		
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		People who do not like this rule, should likely just leave this entire page blank.<br><br>	
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		But, a very good option; is to Just "Selectively-Choose", as with-in that Blank-Ballot's Listing of 
+All of our CLR-Community-Members, Only those Other CLR-Community Secondary-Members whom 
+that Primary-Member Feels Comfortable Sharing his/her Ratings Beliefs/Judgements on that individual(s) 
+with our entire CLR-Community, Internally/Publicly.<br>		
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		Here-by, our community-management here-in, expects, that: Each Primary 
+CLR-Community-Member Should be abkle to Achieve Sufficient Privacy about His/Her Beliefs/Judgements regarding 
+the Trustworthiness of Other CLR-Community-Members as to maintain a reasonable comfort-level for him/her.<br>		
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		Again; people who do not like this rule, should just leave this entire page blank.<br><br>
+  
+		
+		 <u>can Compose Their Own</u> 
+Privately-Composed, but Internally-Displayed CLR-Community-Wide Public Listing</u>, of: 
+
+"Trustworthiness Ratings Ballot Page" 
+
+
+
+
+		There are Two Main Categories, where-in: our "Trustworthiness Ratings Ballot Page" 
+will have Significant Usefulness; these being:<br>		
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		1: Internal Common-Law-Republic Community-Wide, aka: Internally-Public, 
+
+Listing  
+
+
+
+
+		1: <u>Private Individual CLR-Members</u> can use the data which they here-by compose & save, 
+to Organize & Enhance Their Own Presence & Community Interactions in our web-site here.<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		1a: Primary Common-Law-Republic Community-Members <u>can Compose Their Own</u> 
+Privately-Composed, but Internally-Displayed CLR-Community-Wide Public Listing</u>, of: 
+<u>Their Own Hieriarchially-Organized Trust-worthy & Non-Trust-worthy CLR-Community Members</u>; 
+&, there-under, these Primary-Members Can <u>Decide Which of Their Own Groups of Other 
+CLR-Community Secondary-Members</u>, (if any) <u>will be Allowed To View Specific Details Related To 
+The Primary-User's Accounts-Details</u>, including The Primary-Users Detailed User-Profile Entries, 
+such as their full Names, their Geographical-Locations, & Contact-Info.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		This is a feature that can not only be used to quickly build trust with other community members; 
+& it can also be used to dis-associate & create cyber-distance between that primary-user 
+& the other secondary-users whom he/she dislikes. <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		This "Private Usage of Trust-worthiness Ratings Ballot" Subject, 
+is covered in even greater detail here-in below.<br><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		1b: Because each 'Trust-worthiness Ratings Ballot' of Each Private Primary Common-Law-Republic 
+Community-Member, is Displayed Among our Entire CLR-Community, Internally-Publicly; here-under, 
+Each such Ballot has Significant 'Equal-Opportunity', for Affecting: the "Collective Decision-Making & 
+Adjudicatory Process of our Entire Responsibly Self-Governing Common-LawRepublic Community.  
+
+</u> 
+<u>can Compose Their Own</u> 
+
+<br><br><br><br>
+*********************************************************
+<br><br><br><br><br><br><br><br><br><br>
+*********************************************************
+<br><br>		
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<u>On the other end of all of this</u>, <u>is empowerment</u>, for each & all of our individual account-holders; 
+because, in each of the six sections of their Main 'Account-Profile-Settings Data' File, 
+they will then find <u>a powerful tool for them to control, 'who' may, or may not, 'view', 
+each of the many data-items which they have entered</u> in-to their 'Account-Profile-Settings Data' file.
+
+ We next here explain how these tools work in more detailed-manner, as follows:
+
+ Under (or next-to) each Larger-Box for Entering & Displaying Your Main 'Account-Profile-Settings Data'; 
+you will also find a <u>Smaller-Box</u>, for you to <u>Enter, Change, & Display:  
+a Numerical "Trustworthiness Threshold Setting"</u>, (0-100); 
+through which You can Set Your Chosen "Numerical Threshold", for: 
+<u>Your Control over Who Can View That Specific Data-Entry Information</u> 
+which you have entered in the Larger & Main Data-Entry Box next to it. 
+These "Thresholds" are Set By You, in a Different Web-Page, which is entitled, as: 
+"User Trustworthiness-Ratings Page", & which you also have full editorial control over; 
+all as Based On Your Ratings Of the "Trustworthiness" of Other CLR Web-Site Account-Holders. 
+Presently; our web-site's computer's data-base, translates all of these sorts of 
+'<u>Trustworthiness Numerical-Value Entries</u>', as follows:
+                </p>
+
+
+specific smaller each of these 
+
+
+		This Ballot is the tool that we are using to accomplish all of this; &, 
+We then Share This Information with All of Our CLR-Community-Members. 
+Here-by, we are Sharing with each & all of our CLR-Community Members, 
+with a "Collective Over-View", or "Snap-Shot Picture", of: what is a "Reasonable Interpretation" of 
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+; for each & all of our members to review, & to respond to as they might see fit.  
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+as added valuable information; 
+we are also collecting data from our users completing these allots, regardingtheir opinions also of our other users Intelligence, & Courage . 
+
+e empowers 
+
+		By default; your entire data profile here is kept completely private; but, 
+you may mark portions of it, or all of it, to be shared; either publicly; or 
+only with your own chosen smaller communities with whom you have developed 
+your own higher-levels of "Trust-Worthiness".
+            </p>
+
+       <!-- Final Explanatory Section -->
+        <div style="background-color: #1a1a1a; margin: 0; padding: 1.5rem; border-radius: 12px; 
+border: 1px solid #444; text-align: left;">
+            <p style="margin: 0 0 1.2rem 0; line-height: 1.5; font-size: 1.4rem; font-weight: 400; color: #4dc3ff;">
+                Regarding our previously-referenced web-page, of: 
+"<u>Other CLR-Account-Holders TrustWorthiness Ratings Page</u>"; that page 
+is designed to be used by our individual CLR-Community Members, to produce a "Community Consensus", 
+regarding: <u>Who are the More Socially-Responsible Members of Our Community</u>; 
+&, who among us have developed reputations as being a bit less socially-responsible.<br>
+                This is the Essence of "Self-Governing" & "Self-Policing", 
+which virtually all modern governments claim to be doing; (but which, in actual practice, 
+they are failing to perform in manners which are objectively reasonable & lawful).
+            </p>
+            
+            <p style="margin: 0 0 1.2rem 0; line-height: 1.5; font-size: 1.4rem; font-weight: 400; color: #4dc3ff;">
+                Our entire Common-Law Republic Data-base is Designed 
+to Expand Out-wardly, From Each Individual User-Account-Holder; 
+&, here-under, technically-speaking, 
+Every Ballot, on Every Issue & Candidate in our entire system, 
+Does Reflect Data Entered Primarily From Each such Registered-Account-Holder/User.<br>
+                All other Issues & Candidates, Are Only 'Secondary-Data', 
+which has been uniquely attached to that primary-data.
+            </p>
+            
+            <p style="margin: 0 0 1.2rem 0; line-height: 1.5; font-size: 1.4rem; font-weight: 400; color: #4dc3ff;">
+                Here-under, & technically-speaking; 
+the Only Real Difference between This "CLR-Members Trustworthiness Ballot", 
+& the many other ballots presented here in our CLR-Web-Site, is that, this ballot, 
+is designed for "Voting On Trustworthiness" of "Our Own Internal CLR-Community Members"; 
+where-as, virtually All of our Other Ballots, 
+are designed for "Voting On Out-Side Community Members & Issues".
+            </p>
+            
+        </div>
+
+    </div>
+</main>
+
+******************************************************
+ After that data has been entered in-to that web-page, & submitted in-to our data-base; 
+it may be modified by the account-holder to which it is dedicated to serving, 
+at any time which that account holder might decides to change it, 
+& for any reason that he/she might choose to so change it.
+
+
+
+
+****************************************************************************
+
+                <!-- Centered Dividing Line -->
+                <p style="text-align: center; margin: 1.2rem 0; font-size: 1.5rem; font-weight: 400; 
+color: #DC143C; line-height: 1.2;">
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                </p>
+                
+                <!-- Threshold Levels List -->
+                <div style="text-align: left; padding: 0 1rem;">
+ <p style="margin: 0 0 0.7rem 0; padding: 0; line-height: 1.5; font-size: 1.4rem; 
+font-weight: 400; color: #f5d442; text-align: left;">
+     • <span style="font-size: 1.4rem; font-weight: 700; color: #ffe97f;"><u>0 = Public</u>:</span> 
+<span style="font-size: 1.4rem; font-weight: 400; color: #f5d442;">Non-Registered CLR-Account-Holders 
+who are randomly browsing our web-site, can view this data-entry section.</span>
+ </p>
+ 
+ <p style="margin: 0 0 0.7rem 0; padding: 0; line-height: 1.5; font-size: 1.4rem; 
+font-weight: 400; color: #f5d442; text-align: left;">
+     • <span style="font-size: 1.4rem; font-weight: 700; color: #ffe97f;"><u>01 - 32 = Lowest-Level Viewing-Threshold</u>:</span> 
+<span style="font-size: 1.4rem; font-weight: 400; color: #f5d442;">Viewable Only by 
+CLR-Account-Holders to whom you have assigned at least a '01% Trustworthiness Rating'.</span>
+ </p>
+ 
+ <p style="margin: 0 0 0.7rem 0; padding: 0; line-height: 1.5; font-size: 1.4rem; 
+font-weight: 400; color: #f5d442; text-align: left;">
+     • <span style="font-size: 1.4rem; font-weight: 700; color: #ffe97f;"><u>33 - 49 = Lower-Middle Viewing-Threshold</u>:</span> 
+<span style="font-size: 1.4rem; font-weight: 400; color: #f5d442;">Viewable Only by 
+CLR-Account-Holders to whom you have assigned at least a '33% Trustworthiness Rating'.</span>
+ </p>
+ 
+ <p style="margin: 0 0 0.7rem 0; padding: 0; line-height: 1.5; font-size: 1.4rem; 
+font-weight: 400; color: #f5d442; text-align: left;">
+     • <span style="font-size: 1.4rem; font-weight: 700; color: #ffe97f;"><u>50 - 64 = Middle Viewing-Threshold</u>:</span> 
+<span style="font-size: 1.4rem; font-weight: 400; color: #f5d442;">Viewable Only by 
+CLR-Account-Holders to whom you have assigned at least a '50% Trustworthiness Rating'.</span>
+ </p>
+ 
+ <p style="margin: 0 0 0.7rem 0; padding: 0; line-height: 1.5; font-size: 1.4rem; 
+font-weight: 400; color: #f5d442; text-align: left;">
+     • <span style="font-size: 1.4rem; font-weight: 700; color: #ffe97f;"><u>65 - 74 = Upper-Middle Viewing-Threshold</u>:</span> 
+<span style="font-size: 1.4rem; font-weight: 400; color: #f5d442;">Viewable Only by 
+CLR-Account-Holders to whom you have assigned at least a '65% Trustworthiness Rating'.</span>
+ </p>
+ 
+ <p style="margin: 0 0 0.7rem 0; padding: 0; line-height: 1.5; font-size: 1.4rem; 
+font-weight: 400; color: #f5d442; text-align: left;">
+     • <span style="font-size: 1.4rem; font-weight: 700; color: #ffe97f;"><u>75 - 84 = Higher Viewing-Threshold</u>:</span> 
+<span style="font-size: 1.4rem; font-weight: 400; color: #f5d442;">Viewable Only by 
+CLR-Account-Holders to whom you have assigned at least a '75% Trustworthiness Rating'.</span>
+ </p>
+ 
+ <p style="margin: 0 0 0.7rem 0; padding: 0; line-height: 1.5; font-size: 1.4rem; 
+font-weight: 400; color: #f5d442; text-align: left;">
+     • <span style="font-size: 1.4rem; font-weight: 700; color: #ffe97f;"><u>85 - 94 = Very-Higher Viewing-Threshold</u>:</span> 
+<span style="font-size: 1.4rem; font-weight: 400; color: #f5d442;">Viewable Only by 
+CLR-Account-Holders to whom you have assigned at least a '85% Trustworthiness Rating'.</span>
+ </p>
+ 
+ <p style="margin: 0; padding: 0; line-height: 1.5; font-size: 1.4rem; 
+font-weight: 400; color: #f5d442; text-align: left;">
+     • <span style="font-size: 1.4rem; font-weight: 700; color: #ffe97f;"><u>95 - 100 = Highest Viewing-Threshold</u>:</span> 
+<span style="font-size: 1.4rem; font-weight: 400; color: #f5d442;">Viewable Only by 
+CLR-Account-Holders to whom you have assigned at least a '95% Trustworthiness Rating'.</span>
+ </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Centered Dividing Line -->
+        <p style="text-align: center; margin: 1.5rem 0; font-size: 1.7rem; font-weight: 400; 
+color: #DC143C; line-height: 1.2;">
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        </p>
+
+<!-- Footer Section -->
+<footer style="margin-top: .5rem; padding: 1rem; background-color: #111111; color: #1DAD64; 
+font-size: 1.4rem; border-top: 1px solid #444; text-align: center;">
+        <div style="text-align: center; margin: .8rem 0;">
+    <p style="color: #DC143C; font-size: 2rem; font-weight: 400; margin: 0 0 0.5rem 0; line-height: .01;">
+  					      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    </p>
+</div>
+        <p style="margin: 0; line-height: 1.4;">
+            <u>Common-Law Republic, U.S.A.</u>; <u>Empowering Self-Governing Communities</u>.<br>
+            With the help of many others; this entire project, as presented through this web-page,<br>
+            has been engineered, by: Charles Stewart, of Coleman Texas. ... Last updated: 2026-January.
+        </p>
+    </div>
+</footer>
+
+<script src="/js/auth.js"></script>
+
+<style><!-- Mobile responsiveness -->
+<style>
+    @media screen and (max-width: 768px) {
+        nav {
+            flex-direction: column !important;
+        }
+        nav > div {
+            margin: 0.2rem 0 !important;
+        }
+        main {
+            padding: 1rem !important;
+        }
+    }
+</style>
+
+</body>
+</html>

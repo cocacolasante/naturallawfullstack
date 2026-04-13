@@ -1,497 +1,503 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NewUsers-RegistrationForm-CLR</title>
-
-<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-<style>
- :root {
-      --primary-dark: #000000;
-      --secondary-dark: #111111;
-      --tertiary-dark: #1a1a1a;
-      --accent-gold: #f5d442;
-      --accent-gold-hover: #ffe97f;
-      --text-light: #ffffcc;
-      --text-white: #fefefe;
-      --highlight-pink: #ff33e3;
-      --border-color: #444;
-      --shadow-color: rgba(255, 215, 0, 0.2);
-    }
-
-    select:disabled {
-    background-color: #444;
-    opacity: 0.6;
-    cursor: not-allowed;
-}
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-body {
-    margin: 0;
-    padding: 0;
-    font-family: "Times New Roman", Times, serif;  /* Changed from "Segoe UI" */
-    background-color: var(--primary-dark);
-    color: var(--text-light);
-    line-height: 1.6;
-}
-
-    /* Typography */
-    h1, h2, h3, h4, h5, h6 {
-      color: var(--accent-gold);
-      margin-bottom: 1rem;
-    }
-
-    a {
-      color: var(--accent-gold);
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-
-    a:hover {
-      color: var(--accent-gold-hover);
-    }
-
-    /* Header Styles */
-    .main-header {
-      background-color: var(--primary-dark);
-      border-bottom: 2px solid var(--accent-gold);
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-    }
-
-    .header-title {
-    text-align: center;
-    padding: 1rem 0;    /* Reduced from 1.5rem to 0.5rem */
-}
-
-    .header-title h1 {
-      font-size: 2.7rem;
-      margin: 0;
-        color: #ffffff;   /* Changed to white, overriding the default gold color */
-    }
-
-    /* Navigation Styles */
-.topnav {
-    background-color: var(--secondary-dark);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0.0rem 0;    /* Reduced from 0.5rem to 0rem */
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-.topnav {
-    background-color: var(--secondary-dark);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0.0rem 0;    /* Reduced from 0.5rem to 0rem */
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-    .dropdown {
-      position: relative;
-      display: inline-block;
-      margin: 0 0.5rem;
-    }
-
-    .dropbtn {
-      background-color: transparent;
-      color: var(--accent-gold);
-      padding: 0.8rem 1.2rem;
-      font-size: 1rem;
-      border: none;
-      cursor: pointer;
-      font-weight: bold;
-      transition: color 0.3s ease;
-    }
-
-    .dropbtn:hover {
-      color: var(--accent-gold-hover);
-    }
-
-    .dropdown-content {
-      display: none;
-      position: absolute;
-      background-color: var(--tertiary-dark);
-      min-width: 200px;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.4);
-      z-index: 1;
-      border: 1px solid var(--border-color);
-      border-radius: 4px;
-    }
-
-    .dropdown-content a {
-      color: var(--text-light);
-      padding: 12px 16px;
-      display: block;
-      text-align: left;
-    }
-
-.dropdown-content .long-item {
-    white-space: normal;
-    line-height: 1.2;
-    padding: 8px 16px;
-}
-
-    .dropdown-content a:hover {
-      background-color: var(--secondary-dark);
-      color: var(--accent-gold);
-    }
-
-    .dropdown:hover .dropdown-content {
-      display: block;
-    }
-
-    /* Main Container Styles */
-
- @media screen and (max-width: 768px) {
-      .topnav {
-        flex-direction: column;
-        padding: 0;
-      }
-
-      .dropdown {
-        width: 100%;
-        margin: 0;
-      }
-
-      .dropbtn {
-        width: 100%;
-        padding: 1rem;
-      }
-
-      .dropdown-content {
-        width: 100%;
-        position: relative;
-      }
-
-      .container {
-        padding: 1rem;
-      }
-
-      .content-section {
-        padding: 1rem;
-      }
-    }
-
-/* Registration Page Styles */
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 2rem;
-}
-
-.registration-section {
-    background-color: var(--secondary-dark);
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px var(--shadow-color);
- font-size: 1.1rem;
-    border: 1px solid var(--border-color);
-}
-
-.registration-section h2 {
-    color: var(--accent-gold);
-    text-align: center;
-    margin-bottom: 2rem;
-    font-size: 2.5rem
-}
-
-.status-message, .form-intro, .form-note, .level-info, .anonymous-note {
-    margin-bottom: 1.5rem;
-    text-align: center;
-}
-
-.admin-note {
-    color: var(--accent-gold);
-    font-size: 0.9rem;
-    margin: 1rem 0;
-}
-
-.form-group {
-    margin-bottom: 1.5rem;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    color: var(--accent-gold);
-}
-
-.input-note {
-    font-size: 0.9rem;
-    margin-bottom: 0.5rem;
-    color: var(--text-light);
-}
-
-.registration-form input, 
-.registration-form select {
-    width: 100%;
-    padding: 0.8rem;
-    background-color: var(--tertiary-dark);
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    color: var(--text-light);
-    font-family: inherit;
-}
-
-.registration-form input:focus, 
-.registration-form select:focus {
-    outline: none;
-    border-color: var(--accent-gold);
-    box-shadow: 0 0 5px var(--shadow-color);
-}
-
-.submit-btn {
-    background-color: var(--accent-gold);
-    color: var(--primary-dark);
-    padding: 1rem 2rem;
-    border: none;
-    border-radius: 4px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    cursor: pointer;
-    display: block;
-    margin: 2rem auto 0;
-    transition: background-color 0.3s ease;
-}
-
-.submit-btn:hover {
-    background-color: var(--accent-gold-hover);
-}
-
-/* Responsive adjustments */
-@media screen and (max-width: 768px) {
-    .container {
-        padding: 1rem;
-    }
-    
-    .registration-section {
-        padding: 1rem;
-    }
-
-.clear-btn {
-    background-color: var(--tertiary-dark);
-    color: var(--text-light);
-    border: 1px solid var(--border-color);
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.9rem;
-}
-
-.clear-btn:hover {
-    background-color: var(--secondary-dark);
-    border-color: var(--accent-gold);
-}
-}
-    /* Footer Styles */
-        footer {
-            margin-top: 4rem;
-            padding: 1rem;
-            background-color: var(--secondary-dark);
-            color: var(--text-light);
-            font-size: 0.9rem;
-            border-top: 1px solid var(--border-color);
-            text-align: center;
-        }
-
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>New-User-Registration-CommonLawRepublic-USA</title>
 </head>
-<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 
-<body>
-    <header class="main-header">
-    <div class="header-title">
-      <h1><u>Common-Law Republic</u>; <u>U.S.A.</u>.</h1>
+<body style="margin: 0; padding: 0; font-family: 'Times New Roman', Times, serif; 
+background-color: #000000; color: #ffffcc; line-height: 1.6;">
+
+<!-- Header Section -->  
+<header style="background: linear-gradient(135deg, #1a1a1a, #2d2d2d); 
+color: #f5d442; text-align: center; padding: 20px 0; position: relative;">
+
+    <div style="max-width: 1200px; margin: 0 auto; padding: 0 1rem;">
+        <div style="color: #4dc3ff; font-size: 3.5rem; font-weight: 700; margin: 0; font-family: inherit;">
+            <u>Common-Law Republic</u>; <u>U.S.A.</u>
+        </div>
+    </div>
+    
+    <!-- Login Status Indicator; Option-3: Below Title in header -->
+   <div id="loginStatus" style="margin-top: 10px; font-size: 1.4rem; color: #ffffcc;"></div> 
+ 
+    <div style="width: 80%; height: 2px; background-color: #DC143C; margin: 20px auto 0 auto;"></div>
+</header>
+
+	<!-- Navigation Section -->
+	<nav style="background-color: #111111; display: flex; justify-content: center; align-items: center; 
+	padding: 0; position: sticky; top: 0; z-index: 1000; margin-bottom: 0.5rem; flex-wrap: wrap;">
+
+	<!-- Home-Page DropDown Menu) -->
+	<div style="position: relative; display: inline-block; margin: 0 0.5rem;">
+	<button style="background-color: transparent; color: #f5d442; padding: 0.5rem 
+	0.7rem; font-size: 1.4rem; border: none; cursor: pointer; font-weight: bold;" 
+	onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'"
+	onclick="toggleDropdown('dropdown1')">Home<br>Page.</button>
+
+	<div id="dropdown1" style="display: none; position: absolute; background-color: 
+#1a1a1a; min-width: 300px; box-shadow: 0 8px 16px rgba(0,0,0,0.4); z-index: 1; 
+border: 1px solid #444; border-radius: 4px;">
+
+            <a href="/index.html" style="color: #ffffcc; padding: 12px 16px; display: block; 
+text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Home Page.</a>
+
+            <a href="/Z-Home-ReferenceDocuments/Twelve-USA-SuperStates-Statutory-OrganizedMoreFully-2025.pdf" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; 
+font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'"> 
+Super-States USA; All 12 Listed & Organized.</a>
+
+            <a href="/Z-Home-ReferenceDocuments/OrganicHierarchiesUSA-V4.2.pdf" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; 
+font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'"> 
+Social-Organizing Under "Organic Hierarchies".</a>
+
+            <a href="/Z-Home-ReferenceDocuments/BriefGuidelines-PreferentialVotingBallot-Generic-Edit3.pdf" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; 
+font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Using Ballots; Instructions.</a>
+
+            <a href="/Support/Support.html" style="color: #ffffcc; padding: 12px 16px; display: block; 
+text-align: left; text-decoration: none; font-size: 1.4rem; border-top: 1px solid #444;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Support, Help, & Contacts.</a>
+
+        </div>
     </div>
 
-    <!-- Navigation Bar -->
-    <nav class="topnav">
-      <div class="dropdown">
-        <button class="dropbtn">Home.</button>
-        <div class="dropdown-content">
-          <a href="index.html">Main Page</a>
-          <a href="#">CommonLaw-Republic Governing-Modal Explained.</a>
-          <a href="#">Political Voting & Elections Process Explained.</a>
-        </div>
-      </div>
+	<!-- Register/Login DropDown Menu-->
+	<div style="position: relative; display: inline-block; margin: 0 0.5rem;">
+	<button style="background-color: transparent; color: #f5d442; padding: 0.5rem 
+	0.7rem; font-size: 1.4rem; border: none; cursor: pointer; font-weight: bold;" 
+                onmouseover="this.style.color='#ffe97f'" 
+		onmouseout="this.style.color='#f5d442'"
+                onclick="toggleDropdown('dropdown2')">
+		Register;<br> or: Log-In.</button>
 
-      <div class="dropdown">
-        <button class="dropbtn">Register, or Log-In.</button>
-        <div class="dropdown-content">
-          <a href="NewUsers-Registration.html">Register</a>
-          <a href="Login.html">Login</a>
-          <a href="AccountProfiles-Management-Index.html">Profile</a>
-        </div>
-      </div>
+        <div id="dropdown2" style="display: none; position: absolute; background-color: #1a1a1a; 
+min-width: 300px; box-shadow: 0 8px 16px rgba(0,0,0,0.4); z-index: 1; border: 1px solid #444; 
+border-radius: 4px;">
 
-      <div class="dropdown">
-        <button class="dropbtn">Local Community Organizing.</button>
-        <div class="dropdown-content">
-          <a href="#">Local Communities</a>
-          <a href="#">Members Directory</a>
-          <a href="#">Events</a>
-        </div>
-      </div>
+            <a href="/Accounts-Profiles-Registering/NewUsers-Registration.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Register.</a>
 
-      <div class="dropdown">
-        <button class="dropbtn">Private/Special/Religious Organizing.</button>
-        <div class="dropdown-content">
-          <a href="#">Religious Communities</a>
-          <a href="#">Political Parties</a>
-          <a href="#">Economics Research Communities</a>
-          <a href="#">Trade Unions</a>
-          <a href="#">Agriculture & Food-Production Communities</a>
-          <a href="#">Environmental Activists</a>
-          <a href="#">Health Activists</a>
-          <a href="#">Conspiracy Research Communities</a>
-        </div>
-      </div>
+            <a href="/Accounts-Profiles-Registering/Login.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Login.</a>
 
-      <div class="dropdown">
-        <button class="dropbtn">Support.</button>
-        <div class="dropdown-content">
-          <a href="#">Help Center</a>
-          <a href="#">Contact Us</a>
-          <a href="#">FAQ</a>
-        </div>
-      </div>
-    </nav>
-  </header>
+           <a href="/Accounts-Profiles-Registering/AccountProfiles-Management-Index.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Account Profiles & Management; Index.</a>
 
- <!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-  <!-- Add this inside the body tag, after the header -->
-<main class="container">
-    <div class="registration-section">
-        <h2><u>New-Users Registration-Form</u>:</h2>    
-        <div class="status-message">
-            <p>Presently, <u>Our Computer Is Recognizing You As</u> an "<u>Un-Registered Non-User</u>"".</p>
-            <p>If you "Already Have An Account" with us; then, just: <a href="./Login.html">Login Here.</a></p>
-        </div>
-<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+           <a href="/Accounts-Profiles-Registering/TrustworthinessRatings-Files/TrustworthinessRatings-Ballot.html" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+TrustWorthiness Rating Ballot.</a>
 
-        <div class="form-intro">
-            <p>To get this entire "Registration Process" started,<br>
-               we here <u>Only Require the Following Four Very Simple Data-Entries</u> from you;<br>
-               as follows:</p>
-        </div>
+           <a href="/Accounts-Profiles-Registering/TrustworthinessRatings-Files/Instructions-TrustworthinessBallot.html" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+TrustWorthiness Ratings, Instructions For Ballot.</a>
 
-        <form class="registration-form" method="POST" id="registrationForm">
-            <div class="form-group">
-                <label>1: Please here Enter <u>Your Main "Email-Address</u>":</label>
-                <input type="email" name="email" required>
+            <a href="/Accounts-Profiles-Registering/Subscribe-EmailList.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Subscribe To Email-Lists.</a>
+        </div>
+    </div>
+
+	<!-- National Civil-Government DropDown Menu-->
+	<div style="position: relative; display: inline-block; margin: 0 0.5rem;">
+	<button style="background-color: transparent; color: #f5d442; padding: 0.5rem 
+	0.7rem; font-size: 1.4rem; border: none; cursor: pointer; font-weight: bold;" 
+	onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'"
+	onclick="toggleDropdown('dropdown3')">
+	National Activism<br> & Government.</button>
+
+        <div id="dropdown3" style="display: none; position: absolute; background-color: #1a1a1a; 
+min-width: 300px; box-shadow: 0 8px 16px rgba(0,0,0,0.4); z-index: 1; border: 1px solid #444; 
+border-radius: 4px;">
+
+            <a href="/USA-GoverningBodies/Executive-Department-SubDepartments-Agencies/ExcDpt-SubDepartments&Agencies-Listed.html" 
+style="color: #ffffcc; padding: 8px 16px; display: block; text-align: left; text-decoration: none; 
+white-space: normal; line-height: 1.2; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; 
+this.style.color='#ffffcc'">Executive-Department;<br>Sub-Departments, & Agencies.</a>
+
+            <a href="/USA-GoverningBodies/JudicialDepartment/JudicialIndex.html" style="color: #ffffcc; padding: 12px 16px; 
+display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">Judicial-Department.</a>
+
+           <a href="/USA-GoverningBodies/Legislature-HouseReps/Leg-HRepsIndex.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; 
+this.style.color='#ffffcc'">Legislature: House Representatives.</a>
+
+            <a href="/USA-GoverningBodies/Legislature-Senate/Leg-Senate.html" style="color: #ffffcc; padding: 12px 16px; 
+display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">Legislature; Senate.</a>
+
+            <a href="/USA-GoverningBodies/Ballots-Index.html" style="color: #ffffcc; padding: 12px 16px; display: block; 
+text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'"><u>Ballots</u>.</a>
+        </div>
+    </div>
+
+	<!-- Local Civil- Government DropDown Menu -->
+	<div style="position: relative; display: inline-block; margin: 0 0.5rem;">
+	<button style="background-color: transparent; color: #f5d442; padding: 0.5rem 
+	0.7rem; font-size: 1.4rem; border: none; cursor: pointer; font-weight: bold;" 
+	onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'"
+	onclick="toggleDropdown('dropdown4')">
+	Local Activism<br>& Government.</button>
+
+        <div id="dropdown4" style="display: none; position: absolute; background-color: #1a1a1a; 
+min-width: 300px; box-shadow: 0 8px 16px rgba(0,0,0,0.4); z-index: 1; border: 1px solid #444; 
+border-radius: 4px; text-align: center; max-height: 400px; overflow-y: auto;">
+
+	<a href="/USA-LocalJurisdictions/01-NewEngland-SS/NewEngland-SS.html" 
+	style="color: #ffffcc; padding: 8px 16px; display: block; text-align: left; 
+	text-decoration: none; white-space: normal; line-height: 1.2; font-size: 1.4rem;" 
+	onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+	onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+		01: New-England</a>
+
+	<a href="/USA-LocalJurisdictions/02-NewYork-SS/NewYork-SS.html" 
+	style="color: #ffffcc; padding: 8px 16px; display: block; text-align: left; 
+	text-decoration: none; white-space: normal; line-height: 1.2; font-size: 1.4rem;" 
+	onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+	onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+		02: New-York</a>
+
+	<a href="/USA-LocalJurisdictions/03-Jersey-Penn-SS/JerseyPenn-SS.html" 
+	style="color: #ffffcc; padding: 8px 16px; display: block; text-align: left; 
+	text-decoration: none; white-space: normal; line-height: 1.2; font-size: 1.4rem;"
+ 	onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+	onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+		03: Jersey-Penn</a>
+
+	<a href="/USA-LocalJurisdictions/04-GreatLakes-SS/GreatLakes-SS.html" 
+	style="color: #ffffcc; padding: 8px 16px; display: block; text-align: left; 
+	text-decoration: none; white-space: normal; line-height: 1.2; font-size: 1.4rem;"
+	onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+	onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+		04: Great-Lakes</a>
+
+            <a href="/USA-LocalJurisdictions/05-VirginiaCarolina-SS/VirginiaCarolina-SS.html" 
+	style="color: #ffffcc; padding: 8px 16px; display: block; text-align: left; 
+	text-decoration: none; white-space: normal; line-height: 1.2; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+		05: Virginia-Carolina</a>
+
+            <a href="/USA-LocalJurisdictions/06-FloridaGeorgia-SS/FloridaGeorgia-SS.html" 
+	style="color: #ffffcc; padding: 8px 16px; display: block; text-align: left; 
+	text-decoration: none; white-space: normal; line-height: 1.2; font-size: 1.4rem;" 
+             onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+		06: Florida-Georgia</a>
+
+            <a href="/USA-LocalJurisdictions/07-MississippiValley-SS/MississippiValley-SS.html" 
+	style="color: #ffffcc; padding: 8px 16px; display: block; text-align: left; 
+	text-decoration: none; white-space: normal; line-height: 1.2; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+		07: Mississippi-Valley</a>
+
+            <a href="/USA-LocalJurisdictions/08-NorthCentralPlains-SS/NorthCentralPlains-SS.html" 
+	style="color: #ffffcc; padding: 8px 16px; display: block; text-align: left; 
+	text-decoration: none; white-space: normal; line-height: 1.2; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+		08: North-Central-Plains</a>
+ 
+            <a href="/USA-LocalJurisdictions/09-Texas-SS/Texas-SS.html" 
+	style="color: #ffffcc; padding: 8px 16px; display: block; text-align: left; 
+	text-decoration: none; white-space: normal; line-height: 1.2; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+		09: Texas</a>
+
+            <a href="/USA-LocalJurisdictions/10-SouthWest-SS/SouthWest-SS.html" 
+	style="color: #ffffcc; padding: 8px 16px; display: block; text-align: left; 
+	text-decoration: none; white-space: normal; line-height: 1.2; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+		10: South-West</a>
+
+            <a href="/USA-LocalJurisdictions/11-PacificNW-SS/PacificNW-SS.html" 
+	style="color: #ffffcc; padding: 8px 16px; display: block; text-align: left; 
+	text-decoration: none; white-space: normal; line-height: 1.2; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+		11: Pacific-North-West</a>
+
+            <a href="/USA-LocalJurisdictions/12-California-SS/California-SS.html" 
+	style="color: #ffffcc; padding: 8px 16px; display: block; text-align: left; 
+	text-decoration: none; white-space: normal; line-height: 1.2; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+		12: California</a>
+        </div>
+    </div>
+
+	<!-- Everything-Else DropDown Menu -->
+	<div style="position: relative; display: inline-block; margin: 0 0.5rem;">
+	<button style="background-color: transparent; color: #f5d442; padding: 0.5rem 
+	0.7rem; font-size: 1.4rem; border: none; cursor: pointer; font-weight: bold;" 
+	onmouseover="this.style.color='#ffe97f'" onmouseout="this.style.color='#f5d442'"
+	onclick="toggleDropdown('dropdown5')">
+		Everything<br> Else:</button>
+
+	<div id="dropdown5" style="display: none; position: absolute; right: 0; background-color: #1a1a1a; 
+min-width: 400px; box-shadow: 0 8px 16px rgba(0,0,0,0.4); z-index: 1; border: 1px solid #444; 
+border-radius: 4px;">
+
+            <a href="/EveryThing-Else/1-Political-Parties/PoliticalParties.html" style="color: #ffffcc; 
+padding: 12px 16px; display: block; text-align: left; text-decoration: none; font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Political Parties & Activist Communities.</a>
+
+            <a href="/EveryThing-Else/2-Religous-&-Spiritual-Communities/SpiritualIndex.html" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; 
+font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Religious & Spiritual Communities.</a>
+
+            <a href="/EveryThing-Else/3-Business&Financial-Communities&Corporations/Biz&Finances.html" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; 
+font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+Business & Financial Corporations & Communities.</a>
+
+            <a href="/EveryThing-Else/4-DNA-Genetic-Racial-Communities/GeneticCommunities.html" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; 
+font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; 
+this.style.color='#ffffcc'">
+Ethnic, Genetic, DNA, & Racial, Communities.</a>
+
+            <a href="/EveryThing-Else/5-World-Communities-OutsideOfUSA/World-Communities-Index.html" 
+style="color: #ffffcc; padding: 12px 16px; display: block; text-align: left; text-decoration: none; 
+font-size: 1.4rem;" 
+               onmouseover="this.style.backgroundColor='#111111'; this.style.color='#f5d442'" 
+               onmouseout="this.style.backgroundColor='transparent'; this.style.color='#ffffcc'">
+World Geographical Communities.</a>
+        </div>
+    </div>
+</nav>
+
+<!-- Main Content Area -->
+<main style="max-width: 800px; margin: 0 auto; padding: 2rem;">
+    <div style="background-color: #111111; padding: 2rem; border-radius: 12px; 
+box-shadow: 0 4px 10px rgba(255, 215, 0, 0.2); border: 1px solid #444;">
+        
+        <h2 style="color: #f5d442; text-align: center; margin-bottom: 2rem; 
+font-size: 2.8rem; margin: 0 0 2rem 0;">
+            <u>Create Your Account</u>:
+        </h2>
+
+        <form id="registrationForm" style="max-width: 600px; margin: 0 auto;">
+            
+            <!-- Email Field -->
+		<div style="margin-bottom: 1.5rem;">
+		<label for="email" style="display: block; margin-bottom: 0.5rem; 
+		color: #f5d442; font-size: 1.4rem; font-weight: bold;">
+                    <u>Email Address</u>:
+                </label>
+                <input type="email" id="email" name="email" autocomplete="email" required 
+                       style="width: 100%; padding: 12px 16px; font-size: 1.4rem; border: 2px solid #444; 
+border-radius: 6px; background-color: #1a1a1a; color: #ffffcc; box-sizing: border-box;"
+                       onfocus="this.style.borderColor='#f5d442'" 
+                       onblur="this.style.borderColor='#444'"
+                       placeholder="your.email@example.com" />
             </div>
 
-            <div class="form-group">
-                <label>2: Please here Choose & Enter a your own self-chosen "<u>Password</u>";</label>
-                <p class="input-note">(We allow for short & insecure passwords, it is your risk, & you can re-set it later):</p>
-                <input type="password" name="password" required>
+            <!-- Password Field -->
+            <div style="margin-bottom: 1.5rem;">
+                <label for="password" style="display: block; margin-bottom: 0.5rem; color: #f5d442; 
+font-size: 1.4rem; font-weight: bold;">
+                    <u>Password</u>:
+                </label>
+                <div style="position: relative;">
+                    <input type="password" id="password" name="password" autocomplete="new-password" required 
+                           style="width: 100%; padding: 12px 50px 12px 16px; font-size: 1.4rem; border: 2px solid #444; 
+border-radius: 6px; background-color: #1a1a1a; color: #ffffcc; box-sizing: border-box;"
+                           onfocus="this.style.borderColor='#f5d442'" 
+                           onblur="this.style.borderColor='#444'"
+                           placeholder="Create a password" />
+                    <button type="button" id="togglePassword" 
+                            style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); 
+background: none; border: none; color: #f5d442; font-size: 1.2rem; cursor: pointer;"
+                            onclick="togglePasswordVisibility()">👁️</button>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label>3: Please here Choose & Enter a your own self-chosen "<u>User-Name</u>":</label>
-                <input type="text" name="name" required>
+            <!-- Username Field -->
+            <div style="margin-bottom: 1.5rem;">
+                <label for="username" style="display: block; margin-bottom: 0.5rem; color: #f5d442; 
+font-size: 1.4rem; font-weight: bold;">
+                    <u>Username</u>:
+                </label>
+                <input type="text" id="username" name="username" autocomplete="username" required 
+                       style="width: 100%; padding: 12px 16px; font-size: 1.4rem; border: 2px solid #444; 
+border-radius: 6px; background-color: #1a1a1a; color: #ffffcc; box-sizing: border-box;"
+                       onfocus="this.style.borderColor='#f5d442'" 
+                       onblur="this.style.borderColor='#444'"
+                       placeholder="Choose a username" />
             </div>
 
-            <div class="form-group">
-    <label>4: <u>The Only Other Step to Complete</u> here, is, to: 
-      "<u>Select</u>" from the following Pull-Down Menu, 
-      <u>One of the following 22 Geographical Locations</u>, 
-      which Best Describes <u>Your Present "Home Geographical-Location</u>":<br>
-      (These Geographical Locations are Illustrated for the USA, 
-      on the Map on our CLR-Front-Page)</label>
-<div class="form-group">
-    <label>Select Your Region:</label>
-    <select id="region" name="region">
-        <option value="">Select Region</option>
-        <optgroup label="USA Regions">
-            <option value="usa-01">USA-01: New-England</option>
-            <option value="usa-02">USA-02: New-York</option>
-            <option value="usa-03">USA-03: Jersey-Penn</option>
-            <option value="usa-04">USA-04: Great-Lakes</option>
-            <option value="usa-05">USA-05: Virginia-Carolina</option>
-            <option value="usa-06">USA-06: Mississippi-Valley</option>
-            <option value="usa-07">USA-07: Florida-Georgia</option>
-            <option value="usa-08">USA-08: West-Great-Lakes</option>
-            <option value="usa-09">USA-09: Texas</option>
-            <option value="usa-10">USA-10: South-West</option>
-            <option value="usa-11">USA-11: Pacific-NW</option>
-            <option value="usa-12">USA-12: California</option>
-        </optgroup>
-        <optgroup label="World Regions">
-            <option value="world-01">World-01: North-America Canada</option>
-            <option value="world-02">World-02: Western-Europe</option>
-            <option value="world-03">World-03: Pacific-Ocean</option>
-            <option value="world-04">World-04: South-East Asia</option>
-            <option value="world-05">World-05: Northern-Asia & Eastern-Europe</option>
-            <option value="world-06">World-06: Central-&-South-America</option>
-            <option value="world-07">World-07: Eastern-Mediterranean & North-Africa</option>
-            <option value="world-08">World-08: India</option>
-            <option value="world-09">World-09: South-&-Central Africa</option>
-            <option value="world-10">World-10: China</option>
-        </optgroup>
-    </select>
-</div>
-
-            <div class="form-note">
-                <p><u>That Is It</u>!<br>
-                    Our Computer here is programmed next to immediately Send to you, 
-                    a "Confirmation Email", after you mouse-click on our below "Submit" Button. 
-                In that Email, you will be asked to "<u>Reply To Confirm Your Email-Address</u>"; 
-                & Once We Have That Reply from you, 
-                <u>You Will Be Properly Registered In Our Data-Base</u>.</p>
+            <!-- Region Field (UPDATED with 24 regions) -->
+            <div style="margin-bottom: 1.5rem;">
+                <label for="region" style="display: block; margin-bottom: 0.5rem; color: #f5d442; 
+font-size: 1.4rem; font-weight: bold;">
+                    <u>Your Region</u>:
+                </label>
+                <select id="region" name="region" required 
+                        style="width: 100%; padding: 12px 16px; font-size: 1.4rem; border: 2px solid #444; 
+border-radius: 6px; background-color: #1a1a1a; color: #ffffcc; cursor: pointer; box-sizing: border-box;"
+                        onfocus="this.style.borderColor='#f5d442'" 
+                        onblur="this.style.borderColor='#444'">
+                    <option value="" style="background-color: #1a1a1a; color: #888;">Select your region...</option>
+                    
+                    <optgroup label="─── USA Regions ───" style="background-color: #2d2d2d; color: #f5d442; font-weight: bold;">
+                        <option value="USA-01: New-England" style="background-color: #1a1a1a; color: #ffffcc;">USA-01: New-England</option>
+                        <option value="USA-02: New-York" style="background-color: #1a1a1a; color: #ffffcc;">USA-02: New-York</option>
+                        <option value="USA-03: Jersey-Penn" style="background-color: #1a1a1a; color: #ffffcc;">USA-03: Jersey-Penn</option>
+                        <option value="USA-04: Virginia-Carolina" style="background-color: #1a1a1a; color: #ffffcc;">USA-04: Virginia-Carolina</option>
+                        <option value="USA-05: Florida-Georgia" style="background-color: #1a1a1a; color: #ffffcc;">USA-05: Florida-Georgia</option>
+                        <option value="USA-06: Mississippi-Valley" style="background-color: #1a1a1a; color: #ffffcc;">USA-06: Mississippi-Valley</option>
+                        <option value="USA-07: Great-Lakes" style="background-color: #1a1a1a; color: #ffffcc;">USA-07: Great-Lakes</option>
+                        <option value="USA-08: North-Central-Plains" style="background-color: #1a1a1a; color: #ffffcc;">USA-08: North-Central-Plains</option>
+                        <option value="USA-09: Texas" style="background-color: #1a1a1a; color: #ffffcc;">USA-09: Texas</option>
+                        <option value="USA-10: South-West" style="background-color: #1a1a1a; color: #ffffcc;">USA-10: South-West</option>
+                        <option value="USA-11: Pacific-NW" style="background-color: #1a1a1a; color: #ffffcc;">USA-11: Pacific-NW</option>
+                        <option value="USA-12: California" style="background-color: #1a1a1a; color: #ffffcc;">USA-12: California</option>
+                    </optgroup>
+                    
+                    <optgroup label="─── World Regions ───" style="background-color: #2d2d2d; color: #f5d442; font-weight: bold;">
+                        <option value="World-01: North-America Canada" style="background-color: #1a1a1a; color: #ffffcc;">World-01: North-America Canada</option>
+                        <option value="World-02: Central & South America" style="background-color: #1a1a1a; color: #ffffcc;">World-02: Central & South America</option>
+                        <option value="World-03: Southern & Central Africa" style="background-color: #1a1a1a; color: #ffffcc;">World-03: Southern & Central Africa</option>
+                        <option value="World-04: Northern & Eastern Africa" style="background-color: #1a1a1a; color: #ffffcc;">World-04: Northern & Eastern Africa</option>
+                        <option value="World-05: Arabia" style="background-color: #1a1a1a; color: #ffffcc;">World-05: Arabia</option>
+                        <option value="World-06: Western-Europe" style="background-color: #1a1a1a; color: #ffffcc;">World-06: Western-Europe</option>
+                        <option value="World-07: Northern-Asia & Eastern-Europe" style="background-color: #1a1a1a; color: #ffffcc;">World-07: Northern-Asia & Eastern-Europe</option>
+                        <option value="World-08: India" style="background-color: #1a1a1a; color: #ffffcc;">World-08: India</option>
+                        <option value="World-09: North-China" style="background-color: #1a1a1a; color: #ffffcc;">World-09: North-China</option>
+                        <option value="World-10: South-China" style="background-color: #1a1a1a; color: #ffffcc;">World-10: South-China</option>
+                        <option value="World-11: South-East Asia" style="background-color: #1a1a1a; color: #ffffcc;">World-11: South-East Asia</option>
+                        <option value="World-12: Pacific-Ocean" style="background-color: #1a1a1a; color: #ffffcc;">World-12: Pacific-Ocean</option>
+                    </optgroup>
+                </select>
             </div>
 
-            <div class="level-info">
-                <p>This is All of the Data which we need to get you "Minimally Registered",
-                    as a "Lower-Level-User" in our Community here. 
-                    We encourage you, that, after you have so become properly Registered 
-                    as one of our "Lower-Level-Users", then please <u>Provide Additional Information 
-                    about your-self</u>; & there-by, <u>You Can Quickly & Easily Progress to 
-                    any One Of Our Numerous other "Higher-Level-User" Accounts</u>.</p>
+            <!-- Submit Button -->
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <button type="submit"
+                        style="background: linear-gradient(135deg, #DC143C, #8B0000); color: #f5d442; 
+border: 2px solid #FFD700; padding: 12px 30px; font-size: 1.5rem; font-weight: bold; 
+border-radius: 8px; cursor: pointer; letter-spacing: 1px; 
+box-shadow: 0 4px 8px rgba(0,0,0,0.3); transition: all 0.3s ease;"
+                        onmouseover="this.style.transform='translateY(-2px)'; 
+this.style.boxShadow='0 6px 12px rgba(0,0,0,0.4)'"
+                        onmouseout="this.style.transform='translateY(0)'; 
+this.style.boxShadow='0 4px 8px rgba(0,0,0,0.3)'">
+                    Create User-Profile
+                </button>
             </div>
 
-            <div class="anonymous-note">
-                <p>("Completely Un-Registered & Anonymous Users" are Only Allowed to
-                    Browse Most of our Web-Pages; but, 
-                    & they will not be allowed to view much of our more sensitive data.)</p>
-            </div>
+            <!-- Message Area -->
+            <div id="message" style="display: none; padding: 12px; border-radius: 6px; margin-bottom: 1rem; 
+text-align: center; font-size: 1.2rem;"></div>
 
-            <button type="submit" class="submit-btn" id="registerForm">Create User-Profile.</button>
+            <!-- Form-Options Links -->
+            <div style="text-align: center; border-top: 1px solid #444; padding-top: 1.5rem;">
+                <p style="margin: 0; color: #ffffcc; font-size: 1.4rem;">
+                    Already have an account? 
+                    <a href="./Login.html" 
+                       style="color: #f5d442; text-decoration: none; font-weight: bold;"
+                       onmouseover="this.style.color='#ffe97f'; this.style.textDecoration='underline'" 
+                       onmouseout="this.style.color='#f5d442'; this.style.textDecoration='none'">
+                        Login here
+                    </a>
+                </p>
+            </div>
         </form>
     </div>
-      <!-- Footer Section -->
-     <footer>
-        <div class="footer-bottom">
-            <p><u>Common-Law Republic, U.S.A.</u>; <u>Empowering Self-Governing Communities</u>.<br>
-                With the help of many others; this entire project, as presented thru this web-page,<br>
-                has been engineered, by: Charles Stewart, of Coleman Texas. ... Last up-dated: June-2025.</p>
-        </div>
-    </footer>
-    
 </main>
 
-<script type="module">
-  import { handleRegistrationSubmit } from './Registration.js';
 
-  document.addEventListener("DOMContentLoaded", () => {
-    // Attach to the form with id="registrationForm"
-    const form = document.getElementById('registrationForm');
-    if (form) {
-      form.addEventListener('submit', handleRegistrationSubmit);
-    }
-  });
+	<!-- Footer Section -->
+	<footer style="margin-top: 1.5rem; padding: 1rem; background-color: #111111; 
+	color: #1DAD64; font-size: 1.4rem; border-top: 2px solid #444; text-align: center;">
+<br>
+	<div style="color: #DC143C; font-size: 2rem; font-weight: 400; 
+	margin: 0 0 1.5rem 0; line-height: .1;">
+					~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+		</div>
+
+	<div style="text-align: center; margin: .8rem 0;">
+		<div style="margin: 0; line-height: 1.4;">
+			<u>Common-Law Republic, U.S.A.</u>; 
+		<u>Empowering Self-Governing Communities</u>.<br>
+	With the help of many others, this web-site has been engineered, by: 
+	Charles Stewart, of Coleman Texas. ... Last updated: 2026-April.
+			</div>
+		</div>
+	</footer>
+
+<script src="/js/auth.js"></script>
+<script type="module">
+import { handleRegistrationSubmit } from './Registration.js';
+var form = document.getElementById('registrationForm') || document.querySelector('form');
+if (form) form.addEventListener('submit', handleRegistrationSubmit);
 </script>
 
+<!-- Mobile responsiveness -->
+<style>
+    @media screen and (max-width: 768px) {
+        nav {
+            flex-direction: column !important;
+        }
+        nav > div {
+            margin: 0.2rem 0 !important;
+        }
+        main {
+            padding: 1rem !important;
+        }
+    }
+</style>
 
 </body>
 </html>

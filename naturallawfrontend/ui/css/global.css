@@ -1,0 +1,62 @@
+/* Global CSS Variables and Base Styles */
+:root {
+  --primary-dark: #000000;
+  --secondary-dark: #111111;
+  --tertiary-dark: #1a1a1a;
+  --accent-gold: #f5d442;
+  --accent-gold-hover: #ffe97f;
+  --text-light: #ffffcc;
+  --text-white: #fefefe;
+  --highlight-pink: #ff33e3;
+  --highlight-cyan: #4dc3ff;
+  --highlight-red: #DC143C;
+  --highlight-green: #1DAD64;
+  --border-color: #444;
+  --shadow-color: rgba(255, 215, 0, 0.2);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: "Times New Roman", Times, serif;
+  background-color: var(--primary-dark);
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 { color: var(--accent-gold); margin-bottom: 1rem; }
+a { color: var(--accent-gold); text-decoration: none; transition: color 0.3s ease; }
+a:hover { color: var(--accent-gold-hover); }
+
+/* Common layout */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+.content-section {
+  background-color: var(--secondary-dark);
+  margin: 0.5rem 0;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px var(--shadow-color);
+  border: 1px solid var(--border-color);
+}
+
+/* Footer */
+.main-footer {
+  background-color: var(--secondary-dark);
+  padding: 1rem;
+  margin-top: 1rem;
+  border-top: 2px solid var(--border-color);
+}
+.footer-content { max-width: 1000px; margin: 0 auto; }
+.footer-section { padding: 0.2rem; text-align: center; }
+.footer-bottom {
+  text-align: center;
+  padding-top: 0.5rem;
+  margin-top: 0.5rem;
+  border-top: 1px solid var(--border-color);
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .container { padding: 1rem; }
+  .content-section { padding: 1rem; }
+}

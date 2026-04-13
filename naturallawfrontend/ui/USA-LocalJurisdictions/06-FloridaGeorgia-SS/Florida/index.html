@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oregon-LocalCommunities</title>
+    <style>
+        :root {
+            --primary-dark: #000000;
+            --secondary-dark: #111111;
+            --tertiary-dark: #1a1a1a;
+            --accent-gold: #f5d442;
+            --accent-gold-hover: #ffe97f;
+            --text-light: #ffffcc;
+            --text-white: #fefefe;
+            --highlight-pink: #ff33e3;
+            --border-color: #444;
+            --shadow-color: rgba(255, 215, 0, 0.2);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            margin: 0; padding: 0;
+            font-family: "Times New Roman", Times, serif;
+            background-color: var(--primary-dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            text-align: center;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+        }
+        a {
+            color: var(--accent-gold);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        a:hover { color: var(--accent-gold-hover); }
+        .main-header {
+            background-color: var(--primary-dark);
+            border-bottom: 2px solid var(--accent-gold);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .header-title { text-align: center; padding: 1rem 0; }
+        .header-title h1 { font-size: 2.7rem; margin: 0; color: #ffffff; }
+        .topnav {
+            background-color: var(--secondary-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            margin: 0 0.5rem;
+        }
+        .dropbtn {
+            background-color: transparent;
+            color: var(--accent-gold);
+            padding: 0.8rem 1.2rem;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .dropbtn:hover { color: var(--accent-gold-hover); }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--tertiary-dark);
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+            z-index: 1;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+        }
+        .dropdown-content a {
+            color: var(--text-light);
+            padding: 12px 16px;
+            display: block;
+            text-align: left;
+        }
+        .dropdown-content a:hover {
+            background-color: var(--secondary-dark);
+            color: var(--accent-gold);
+        }
+        .dropdown:hover .dropdown-content { display: block; }
+        .main-content {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem 1rem 1rem 1rem;
+            background-color: var(--secondary-dark);
+            border-radius: 12px;
+            box-shadow: 0 4px 10px var(--shadow-color);
+            border: 1px solid var(--border-color);
+        }
+        .section {
+            margin: 2rem 0 1.5rem 0;
+        }
+        .section img {
+            max-width: 95%;
+            height: auto;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px var(--shadow-color);
+        }
+        .quote {
+            font-size: 1.1rem;
+            background-color: var(--tertiary-dark);
+            border-left: 5px solid var(--accent-gold);
+            padding: 1rem;
+            margin: 2rem auto 2rem auto;
+            max-width: 700px;
+            border-radius: 8px;
+            text-align: left;
+            color: var(--text-light);
+        }
+        .explanation-link {
+            margin-top: 1.5rem;
+        }
+        .explanation-link a {
+            font-size: 1.1rem;
+            text-decoration: underline;
+            color: var(--accent-gold);
+        }
+        .explanation-link a:hover {
+            color: var(--accent-gold-hover);
+        }
+        footer {
+            margin-top: 4rem;
+            padding: 1rem;
+            background-color: var(--secondary-dark);
+            color: var(--text-light);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border-color);
+        }
+        @media screen and (max-width: 768px) {
+            .topnav { flex-direction: column; }
+            .dropdown { width: 100%; margin: 0; }
+            .dropbtn { width: 100%; padding: 1rem; }
+            .dropdown-content { width: 100%; position: relative; }
+            .main-content { padding: 1.2rem 0.4rem; }
+            .section img { max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-title">
+            <h1><u>Common-Law Republic</u>; <u>U.S.A.</u>.</h1>
+        </div>
+        <nav class="topnav">
+            <div class="dropdown">
+                <button class="dropbtn">Home</button>
+                <div class="dropdown-content">
+                    <a href="index.html">Main Page</a>
+                    <a href="#">CommonLaw-Republic Governing-Modal Explained</a>
+                    <a href="#">Political Voting & Elections Process Explained</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="dropbtn">Register, or Log-In</button>
+                <div class="dropdown-content">
+                    <a href="registration.html">Register</a>
+                    <a href="#">Login</a>
+                    <a href="ProfileIndexManagement.html">Profile</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="dropbtn">Local Community Organizing</button>
+                <div class="dropdown-content">
+                    <a href="#">Residence & Geographical-Location</a>
+                    <p>USA Super-States</p>
+                    <a href="#" value="usa-00">USA-00: National-USA</a>
+                    <a href="./NewEngland-SS.html" value="usa-01">USA-01: New-England</a>
+                    <a href="../02-NewYork-SS/NewYork-SS.html" value="usa-02">USA-02: New-York</a>
+                    <a href="../03-Jersey-Penn-SS/JerseyPenn-SS.html" value="usa-03">USA-03: Jersey-Penn</a>
+                    <a href="../04-GreatLakes-SS/GreatLakes-SS.html" value="usa-04">USA-04: Great-Lakes</a>
+                    <a href="../05-VirginiaCarolina-SS/VirginiaCarolina-SS.html" value="usa-05">USA-05: Virginia-Carolina</a>
+                    <a href="../06-MississippiValley-SS/MississippiValley-SS.html" value="usa-06">USA-06: Mississippi-Valley</a>
+                    <a href="../07-FloridaGeorgia-SS/FloridaGeorgia-SS.html" value="usa-07">USA-07: Florida-Georgia</a>
+                    <a href="../08-WestGreatLakes-SS/WestreatLakes-ss.html" value="usa-08">USA-08: West-Great-Lakes</a>
+                    <a href="../09-Texas-SS/Texas-SS.html" value="usa-09">USA-09: Texas</a>
+                    <a href="../10-SouthWest-SS/SouthWest-SS.html" value="usa-10">USA-10: South-West</a>
+                    <a href="../11-PacificNW-SS/PacificNW-SS.html" value="usa-11">USA-11: Pacific-NW</a>
+                    <a href="../12-California-SS/California-SS.html" value="usa-12">USA-12: California</a>
+                    <p>World Regions:</p>
+                    <a href="../../WorldJurisdictions/01-NorthAmerica-Canada/NorthAmerica-Canada.html" value="world-01">World-01: North-America Canada</a>
+                    <a href="../../WorldJurisdictions/02-WesternEurope/WesternEurope.html" value="world-02">World-02: Western-Europe</a>
+                    <a href="../../WorldJurisdictions/03-PacificOcean/PacificOcean.html" value="world-03">World-03: Pacific-Ocean</a>
+                    <a href="../../WorldJurisdictions/04-SouthEastAsia/SouthEastAsia.html" value="world-04">World-04: South-East Asia</a>
+                    <a href="../../WorldJurisdictions/05-NorthAsia-&-EasternEurope/NorthAsia-&-EasternEurope.html" value="world-05">World-05: Northern-Asia & Eastern-Europe</a>
+                    <a href="../../WorldJurisdictions/06-Central-&SouthAmerica/Central&SouthAmerica.html" value="world-06">World-06: Central-&-South-America</a>
+                    <a href="../../WorldJurisdictions/07-EasrernMediteranean&NorthAfrica/EasternMediteranean-&-NorthAfrica.html" value="world-07">World-07: Eastern-Mediterranean & North-Africa</a>
+                    <a href="../../WorldJurisdictions/08-India/India.html" value="world-08">World-08: India</a>
+                    <a href="../../WorldJurisdictions/09-South&CentralAfrica/South&CentralAfrica.html" value="world-09">World-09: South-&-Central Africa</a>
+                    <a href="../../WorldJurisdictions/10-China/China.html" value="world-10">World-10: China</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="dropbtn">Private/Special/Religious Organizing</button>
+                <div class="dropdown-content">
+                    <a href="#">USA Federal-Government; Departments & Agencies</a>
+                    <a href="#">Religious & Spiritual Communities</a>
+                    <a href="#">Political Parties</a>
+                    <a href="#">Business & Financial Communities & Corporations</a>
+                    <a href="#">Trade Unions</a>
+                    <a href="#">Food Production & Distribution Communities</a>
+                    <a href="#">Environmental Activist Communities</a>
+                    <a href="#">Health Activist Communities</a>
+                    <a href="#">DNA, Genetic, Racial, Blood-line, & Ethnic Communities</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="dropbtn">Support</button>
+                <div class="dropdown-content">
+                    <a href="#">Help Center</a>
+                    <a href="#">Contact Us</a>
+                    <a href="#">FAQ</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main class="main-content">
+        <section class="section">
+            <h2><span style="
+                color: #f5d442;">Welcome to the</span><br>
+                <u style="font-size:2.3rem;">Oregon Common-Law Republic<br> 
+                    Community Organizing Web-Page</u>.</h2>
+            <div class="quote">
+                <strong>
+                    "<u>De facto</u>: In fact, in deed, actually. <br>
+                    This phrase is used to characterize an officer, <u>a government</u>, 
+                    a past action, or a state of affairs which must be accepted for all practical purposes, 
+                    but is <u>illegal or illegitimate</u>.<br>
+                    Thus an office, position or status existing under a claim or color 
+                    of right such as a de facto corporation. <br>
+                    In this sense, <u>it is the contrary of de jure</u>, <u>which means</u> 
+                    rightful, <u>legitimate</u>, just <u>or constitutional</u>.<br>
+                    <u>Thus an officer</u>, king, <u>or government de facto</u> <u>is 
+                    one who is in actual possession of the office</u> or supreme power, 
+                    but <u>by usurpation</u>, or without lawful title; <u>while an officer, 
+                    king, or government de jure</u> <u>is one who has</u> just claim 
+                    and <u>rightful title to the office</u> or power; <u>but</u> has never 
+                    had plenary possession of it, or <u>is not in actual possession</u>.<br><br>
+                    <u>Black’s Law Dictionary</u>; 5th Edition, 1979, West Pub. Co., St Paul Minn.
+                </strong>
+            </div>
+            <img src="OregonStatutory.gif" alt="Oregon Statutory Map">
+            <div class="section" style="background:none; box-shadow:none; border:none; margin:0;">
+                <p style="font-size:1.1rem;">
+                    <strong>The above Twelve County-based Geographical-Districts <br>
+                    are designed to be Sovereign Self-Governing Community-Jurisdictions. 
+                    <br>
+                    Each of these should Directly-Elect Their Own Leader, who is to <br>
+                    Join with Eleven Others in exercising the Supreme Judicial-Power of 
+                    this State.<br>
+                    <span class="explanation-link">
+                        For more explanation <a href="#">click here.</a>
+                    </span>
+                    </strong>
+                </p>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="footer-bottom">
+            <p><u>Common-Law Republic, U.S.A.</u>; <u>Empowering Self-Governing Communities</u>.<br>
+                With the help of many others; this entire project, as presented thru this web-page,<br>
+                has been engineered, by: Charles Stewart, of Coleman Texas. ... Last up-dated: June-2025.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,8 @@
+            <!-- Insert Table Here; Listing All User-Names Alphabetically; roughly as follows: -->
+User-Name:			Trustworthness-Rating:		Intelligence Rating:			Courage Rating:<br>
+
+CharlesStewart		[	]	(Average: [	])		[	]	(Average: [	])	[	]	(Average: [	])<br>
+PontousPilate		[	]	(Average: [	])		[	]	(Average: [	])	[	]	(Average: [	])<br>
+UserXYZ			[	]	(Average: [	])		[	]	(Average: [	])	[	]	(Average: [	])<br>
+UserZYX			[	]	(Average: [	])		[	]	(Average: [	])	[	]	(Average: [	])<br>
+            <!-- End Table Here -->
