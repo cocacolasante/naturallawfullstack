@@ -1,13 +1,13 @@
 package handlers
 
 import (
-	"database/sql"
 	"net/http"
 	"strconv"
 	"voting-api/database"
 	"voting-api/models"
 
 	"github.com/gin-gonic/gin"
+	"github.com/lib/pq"
 )
 
 type VoteHandler struct {
@@ -18,6 +18,8 @@ func NewVoteHandler(db *database.DB) *VoteHandler {
 	return &VoteHandler{db: db}
 }
 
+// Vote upserts a user's score (0-100) for one or more options on a ballot.
+// Each ScoreEntry is independent — a user can score every option on a ballot.
 func (h *VoteHandler) Vote(c *gin.Context) {
 	userID, exists := c.Get("user_id")
 	if !exists {
@@ -38,50 +40,75 @@ func (h *VoteHandler) Vote(c *gin.Context) {
 		return
 	}
 
-	// Support both option_id (from frontend) and ballot_item_id
-	ballotItemID := req.BallotItemID
-	if ballotItemID == 0 && req.OptionID != 0 {
-		ballotItemID = req.OptionID
+	// Normalize entries: resolve option_id alias, validate score range, collect IDs.
+	type normalized struct {
+		ItemID int
+		Score  int
+	}
+	entries := make([]normalized, 0, len(req.Scores))
+	itemIDs := make([]int, 0, len(req.Scores))
+	for _, s := range req.Scores {
+		itemID := s.BallotItemID
+		if itemID == 0 {
+			itemID = s.OptionID
+		}
+		if itemID == 0 {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "option_id or ballot_item_id is required for each score"})
+			return
+		}
+		if s.Score == nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "score is required for each entry"})
+			return
+		}
+		if *s.Score < 0 || *s.Score > 100 {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "score must be between 0 and 100"})
+			return
+		}
+		entries = append(entries, normalized{ItemID: itemID, Score: *s.Score})
+		itemIDs = append(itemIDs, itemID)
 	}
 
-	if ballotItemID == 0 {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "option_id or ballot_item_id is required"})
-		return
-	}
-
-	// Check if ballot exists and is active
-	var ballotExists bool
-	err = h.db.QueryRow("SELECT is_active FROM ballots WHERE id = $1", ballotID).Scan(&ballotExists)
-	if err == sql.ErrNoRows {
-		c.JSON(http.StatusNotFound, gin.H{"error": "Ballot not found"})
-		return
-	} else if err != nil {
+	// Verify the ballot exists and is active.
+	var isActive bool
+	err = h.db.QueryRow("SELECT is_active FROM ballots WHERE id = $1", ballotID).Scan(&isActive)
+	if err != nil {
+		if err.Error() == "sql: no rows in result set" {
+			c.JSON(http.StatusNotFound, gin.H{"error": "Ballot not found"})
+			return
+		}
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
 		return
 	}
-
-	if !ballotExists {
+	if !isActive {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "Ballot is not active"})
 		return
 	}
 
-	// Check if ballot item belongs to this ballot
-	var itemBallotID int
-	err = h.db.QueryRow("SELECT ballot_id FROM ballot_items WHERE id = $1", ballotItemID).Scan(&itemBallotID)
-	if err == sql.ErrNoRows {
-		c.JSON(http.StatusNotFound, gin.H{"error": "Ballot item not found"})
-		return
-	} else if err != nil {
+	// Verify every submitted ballot item belongs to this ballot.
+	rows, err := h.db.Query("SELECT id FROM ballot_items WHERE ballot_id = $1 AND id = ANY($2)", ballotID, pq.Array(itemIDs))
+	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
 		return
 	}
-
-	if itemBallotID != ballotID {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "Ballot item does not belong to this ballot"})
-		return
+	valid := make(map[int]bool, len(itemIDs))
+	for rows.Next() {
+		var id int
+		if err := rows.Scan(&id); err != nil {
+			rows.Close()
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
+			return
+		}
+		valid[id] = true
+	}
+	rows.Close()
+	for _, id := range itemIDs {
+		if !valid[id] {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "Ballot item does not belong to this ballot"})
+			return
+		}
 	}
 
-	// Start transaction
+	// Upsert each (user_id, ballot_item_id) score in a single transaction.
 	tx, err := h.db.Begin()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
@@ -89,54 +116,38 @@ func (h *VoteHandler) Vote(c *gin.Context) {
 	}
 	defer tx.Rollback()
 
-	// Check if user has already voted on this ballot
-	var existingVoteID int
-	var existingBallotItemID int
-	err = tx.QueryRow("SELECT id, ballot_item_id FROM votes WHERE user_id = $1 AND ballot_id = $2", userID, ballotID).Scan(&existingVoteID, &existingBallotItemID)
-	
-	if err == nil {
-		// User has already voted, update their vote
-		// First decrease vote count for previous choice
-		_, err = tx.Exec("UPDATE ballot_items SET vote_count = vote_count - 1 WHERE id = $1", existingBallotItemID)
-		if err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "Error updating vote count"})
-			return
-		}
-
-		// Update the vote record
-		_, err = tx.Exec("UPDATE votes SET ballot_item_id = $1 WHERE id = $2", ballotItemID, existingVoteID)
-		if err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "Error updating vote"})
-			return
-		}
-	} else if err == sql.ErrNoRows {
-		// User hasn't voted yet, create new vote
-		_, err = tx.Exec("INSERT INTO votes (user_id, ballot_id, ballot_item_id) VALUES ($1, $2, $3)", userID, ballotID, ballotItemID)
-		if err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{"error": "Error creating vote"})
-			return
-		}
-	} else {
+	stmt, err := tx.Prepare(`
+		INSERT INTO votes (user_id, ballot_id, ballot_item_id, score)
+		VALUES ($1, $2, $3, $4)
+		ON CONFLICT (user_id, ballot_item_id)
+		DO UPDATE SET score = EXCLUDED.score, updated_at = CURRENT_TIMESTAMP
+	`)
+	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
 		return
 	}
+	defer stmt.Close()
 
-	// Increase vote count for chosen item
-	_, err = tx.Exec("UPDATE ballot_items SET vote_count = vote_count + 1 WHERE id = $1", ballotItemID)
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, gin.H{"error": "Error updating vote count"})
-		return
+	for _, e := range entries {
+		if _, err := stmt.Exec(userID, ballotID, e.ItemID, e.Score); err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Error recording vote"})
+			return
+		}
 	}
 
-	// Commit transaction
-	if err = tx.Commit(); err != nil {
+	if err := tx.Commit(); err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Error committing transaction"})
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"message": "Vote recorded successfully"})
+	c.JSON(http.StatusOK, gin.H{
+		"message":     "Vote recorded successfully",
+		"ballot_id":   ballotID,
+		"score_count": len(entries),
+	})
 }
 
+// GetUserVote returns every score the user has cast on this ballot.
 func (h *VoteHandler) GetUserVote(c *gin.Context) {
 	userID, exists := c.Get("user_id")
 	if !exists {
@@ -151,31 +162,60 @@ func (h *VoteHandler) GetUserVote(c *gin.Context) {
 		return
 	}
 
-	var vote models.Vote
-	err = h.db.QueryRow(
-		"SELECT id, user_id, ballot_id, ballot_item_id, created_at FROM votes WHERE user_id = $1 AND ballot_id = $2",
+	rows, err := h.db.Query(
+		`SELECT id, user_id, ballot_id, ballot_item_id, score, created_at, updated_at
+		 FROM votes WHERE user_id = $1 AND ballot_id = $2 ORDER BY ballot_item_id ASC`,
 		userID, ballotID,
-	).Scan(&vote.ID, &vote.UserID, &vote.BallotID, &vote.BallotItemID, &vote.CreatedAt)
-
-	if err == sql.ErrNoRows {
-		c.JSON(http.StatusNotFound, gin.H{"error": "No vote found for this ballot"})
-		return
-	} else if err != nil {
+	)
+	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
 		return
 	}
+	defer rows.Close()
 
-	// Return response with both option_id and ballot_item_id for compatibility
+	type entry struct {
+		ID           int    `json:"id"`
+		UserID       int    `json:"user_id"`
+		BallotID     int    `json:"ballot_id"`
+		BallotItemID int    `json:"ballot_item_id"`
+		OptionID     int    `json:"option_id"` // Frontend alias
+		Score        int    `json:"score"`
+		CreatedAt    string `json:"created_at"`
+		UpdatedAt    string `json:"updated_at"`
+	}
+
+	scores := make([]entry, 0)
+	for rows.Next() {
+		var v models.Vote
+		if err := rows.Scan(&v.ID, &v.UserID, &v.BallotID, &v.BallotItemID, &v.Score, &v.CreatedAt, &v.UpdatedAt); err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
+			return
+		}
+		scores = append(scores, entry{
+			ID:           v.ID,
+			UserID:       v.UserID,
+			BallotID:     v.BallotID,
+			BallotItemID: v.BallotItemID,
+			OptionID:     v.BallotItemID,
+			Score:        v.Score,
+			CreatedAt:    v.CreatedAt.Format("2006-01-02T15:04:05Z07:00"),
+			UpdatedAt:    v.UpdatedAt.Format("2006-01-02T15:04:05Z07:00"),
+		})
+	}
+
+	if len(scores) == 0 {
+		c.JSON(http.StatusNotFound, gin.H{"error": "No vote found for this ballot"})
+		return
+	}
+
 	c.JSON(http.StatusOK, gin.H{
-		"id":              vote.ID,
-		"user_id":         vote.UserID,
-		"ballot_id":       vote.BallotID,
-		"ballot_item_id":  vote.BallotItemID,
-		"option_id":       vote.BallotItemID, // Frontend expects option_id
-		"created_at":      vote.CreatedAt,
+		"ballot_id": ballotID,
+		"scores":    scores,
 	})
 }
 
+// GetBallotResults returns each option's average score (0-100) and voter count.
+// Sorted by average score descending so the leading option appears first.
 func (h *VoteHandler) GetBallotResults(c *gin.Context) {
 	ballotIDStr := c.Param("id")
 	ballotID, err := strconv.Atoi(ballotIDStr)
@@ -184,25 +224,27 @@ func (h *VoteHandler) GetBallotResults(c *gin.Context) {
 		return
 	}
 
-	// Check if ballot exists
 	var ballotExists bool
 	err = h.db.QueryRow("SELECT EXISTS(SELECT 1 FROM ballots WHERE id = $1)", ballotID).Scan(&ballotExists)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
 		return
 	}
-
 	if !ballotExists {
 		c.JSON(http.StatusNotFound, gin.H{"error": "Ballot not found"})
 		return
 	}
 
-	// Get ballot items with vote counts
 	rows, err := h.db.Query(`
-		SELECT id, ballot_id, title, description, vote_count
-		FROM ballot_items 
-		WHERE ballot_id = $1 
-		ORDER BY vote_count DESC, id ASC
+		SELECT bi.id, bi.ballot_id, bi.title, bi.description,
+		       COALESCE(AVG(v.score), 0)::float8 AS average_score,
+		       COALESCE(SUM(v.score), 0)::bigint AS total_score,
+		       COUNT(v.id)::bigint AS voter_count
+		FROM ballot_items bi
+		LEFT JOIN votes v ON v.ballot_item_id = bi.id
+		WHERE bi.ballot_id = $1
+		GROUP BY bi.id, bi.ballot_id, bi.title, bi.description
+		ORDER BY average_score DESC, bi.id ASC
 	`, ballotID)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Error fetching results"})
@@ -211,39 +253,36 @@ func (h *VoteHandler) GetBallotResults(c *gin.Context) {
 	defer rows.Close()
 
 	type ResultItem struct {
-		ID          int    `json:"id"`
-		OptionID    int    `json:"option_id"` // Frontend expects option_id
-		BallotID    int    `json:"ballot_id"`
-		Title       string `json:"title"`
-		OptionTitle string `json:"option_title"` // Alias for title
-		Description string `json:"description"`
-		VoteCount   int    `json:"vote_count"`
+		ID           int     `json:"id"`
+		OptionID     int     `json:"option_id"`
+		BallotID     int     `json:"ballot_id"`
+		Title        string  `json:"title"`
+		OptionTitle  string  `json:"option_title"`
+		Description  string  `json:"description"`
+		AverageScore float64 `json:"average_score"`
+		TotalScore   int64   `json:"total_score"`
+		VoterCount   int64   `json:"voter_count"`
 	}
 
 	results := make([]ResultItem, 0)
-	totalVotes := 0
+	var totalVoters int64
 	for rows.Next() {
-		var item models.BallotItem
-		err := rows.Scan(&item.ID, &item.BallotID, &item.Title, &item.Description, &item.VoteCount)
-		if err != nil {
+		var r ResultItem
+		if err := rows.Scan(&r.ID, &r.BallotID, &r.Title, &r.Description, &r.AverageScore, &r.TotalScore, &r.VoterCount); err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Error scanning result"})
 			return
 		}
-		results = append(results, ResultItem{
-			ID:          item.ID,
-			OptionID:    item.ID,
-			BallotID:    item.BallotID,
-			Title:       item.Title,
-			OptionTitle: item.Title,
-			Description: item.Description,
-			VoteCount:   item.VoteCount,
-		})
-		totalVotes += item.VoteCount
+		r.OptionID = r.ID
+		r.OptionTitle = r.Title
+		results = append(results, r)
+		if r.VoterCount > totalVoters {
+			totalVoters = r.VoterCount
+		}
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"ballot_id":   ballotID,
-		"results":     results,
-		"total_votes": totalVotes,
+		"ballot_id":    ballotID,
+		"results":      results,
+		"total_voters": totalVoters,
 	})
 }

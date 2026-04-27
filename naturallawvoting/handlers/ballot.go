@@ -56,9 +56,9 @@ func (h *BallotHandler) CreateBallot(c *gin.Context) {
 	for _, item := range req.Items {
 		var ballotItem models.BallotItem
 		err = tx.QueryRow(
-			"INSERT INTO ballot_items (ballot_id, title, description) VALUES ($1, $2, $3) RETURNING id, ballot_id, title, description, vote_count",
+			"INSERT INTO ballot_items (ballot_id, title, description) VALUES ($1, $2, $3) RETURNING id, ballot_id, title, description",
 			ballot.ID, item.Title, item.Description,
-		).Scan(&ballotItem.ID, &ballotItem.BallotID, &ballotItem.Title, &ballotItem.Description, &ballotItem.VoteCount)
+		).Scan(&ballotItem.ID, &ballotItem.BallotID, &ballotItem.Title, &ballotItem.Description)
 
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Error creating ballot items"})
@@ -170,11 +170,10 @@ func (h *BallotHandler) GetBallot(c *gin.Context) {
 		return
 	}
 
-	// Get ballot items with vote counts
 	rows, err := h.db.Query(`
-		SELECT id, ballot_id, title, description, vote_count
-		FROM ballot_items 
-		WHERE ballot_id = $1 
+		SELECT id, ballot_id, title, description
+		FROM ballot_items
+		WHERE ballot_id = $1
 		ORDER BY id ASC
 	`, ballotID)
 	if err != nil {
@@ -186,7 +185,7 @@ func (h *BallotHandler) GetBallot(c *gin.Context) {
 	var items []models.BallotItem
 	for rows.Next() {
 		var item models.BallotItem
-		err := rows.Scan(&item.ID, &item.BallotID, &item.Title, &item.Description, &item.VoteCount)
+		err := rows.Scan(&item.ID, &item.BallotID, &item.Title, &item.Description)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Error scanning ballot item"})
 			return

@@ -2136,8 +2136,8 @@ func seedBallotItems(db *sql.DB) error {
 		// Insert the options
 		for i, opt := range options {
 			query := `
-				INSERT INTO ballot_items (ballot_id, title, description, vote_count)
-				VALUES ($1, $2, $3, 0)
+				INSERT INTO ballot_items (ballot_id, title, description)
+				VALUES ($1, $2, $3)
 				ON CONFLICT DO NOTHING
 			`
 
@@ -2193,39 +2193,28 @@ func seedVotes(db *sql.DB) error {
 		userID       int
 		ballotID     int
 		ballotItemID int
+		score        int
 	}{
-		// Alice votes for Infrastructure in executive ballot
-		{userID1, execBallotID, infrastructureItemID},
-		// Bob votes for Expand Courts in judicial ballot
-		{userID2, judicialBallotID, expandCourtsItemID},
+		// Alice strongly supports Infrastructure on the executive ballot
+		{userID1, execBallotID, infrastructureItemID, 90},
+		// Bob strongly supports Expand Courts on the judicial ballot
+		{userID2, judicialBallotID, expandCourtsItemID, 85},
 	}
 
+	now := time.Now()
 	for i, vote := range votes {
-		// Insert vote
 		query := `
-			INSERT INTO votes (user_id, ballot_id, ballot_item_id, created_at)
-			VALUES ($1, $2, $3, $4)
-			ON CONFLICT (user_id, ballot_id) DO NOTHING
+			INSERT INTO votes (user_id, ballot_id, ballot_item_id, score, created_at, updated_at)
+			VALUES ($1, $2, $3, $4, $5, $5)
+			ON CONFLICT (user_id, ballot_item_id)
+			DO UPDATE SET score = EXCLUDED.score, updated_at = EXCLUDED.updated_at
 		`
 
-		now := time.Now()
-		_, err := db.Exec(query, vote.userID, vote.ballotID, vote.ballotItemID, now)
-		if err != nil {
+		if _, err := db.Exec(query, vote.userID, vote.ballotID, vote.ballotItemID, vote.score, now); err != nil {
 			return fmt.Errorf("failed to insert vote #%d: %v", i+1, err)
 		}
 
-		// Update vote count
-		updateQuery := `
-			UPDATE ballot_items
-			SET vote_count = vote_count + 1
-			WHERE id = $1
-		`
-		_, err = db.Exec(updateQuery, vote.ballotItemID)
-		if err != nil {
-			return fmt.Errorf("failed to update vote count for item %d: %v", vote.ballotItemID, err)
-		}
-
-		log.Printf("✓ Vote recorded: User %d voted on ballot %d", vote.userID, vote.ballotID)
+		log.Printf("✓ Vote recorded: User %d scored item %d at %d/100", vote.userID, vote.ballotItemID, vote.score)
 	}
 
 	return nil

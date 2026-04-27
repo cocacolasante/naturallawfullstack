@@ -341,12 +341,13 @@
                 </div>
 
                 <div class="results-section">
-                    <h3 class="section-title">Voting Results</h3>
+                    <h3 class="section-title">Weighted Scores (0-100)</h3>
+                    <p style="color:#888;font-size:0.95rem;margin-bottom:1rem;">Each option's average score across all voters. Bars represent the average score, not vote share.</p>
                     <div id="resultsContainer"></div>
 
                     <div class="total-votes">
-                        <span class="total-votes-label">Total Votes Cast</span>
-                        <div class="total-votes-number" id="totalVotes">0</div>
+                        <span class="total-votes-label">Total Voters</span>
+                        <div class="total-votes-number" id="totalVoters">0</div>
                     </div>
                 </div>
 
@@ -419,12 +420,15 @@
             resultsContainer.innerHTML = '';
 
             const resultsArray = results.results || [];
-            const totalVotes = results.total_votes || 0;
+            const totalVoters = results.total_voters || 0;
 
-            document.getElementById('totalVotes').textContent = totalVotes.toLocaleString();
+            document.getElementById('totalVoters').textContent = totalVoters.toLocaleString();
 
-            resultsArray.forEach(result => {
-                const percentage = totalVotes > 0 ? ((result.vote_count / totalVotes) * 100).toFixed(1) : 0;
+            const sortedResults = [...resultsArray].sort((a, b) => (b.average_score || 0) - (a.average_score || 0));
+
+            sortedResults.forEach(result => {
+                const avg = Number(result.average_score || 0);
+                const voterCount = Number(result.voter_count || 0);
 
                 const resultItem = document.createElement('div');
                 resultItem.className = 'result-item';
@@ -432,11 +436,11 @@
                 resultItem.innerHTML = `
                     <div class="result-header">
                         <span class="result-title">${escapeHtml(result.option_title || 'Untitled Option')}</span>
-                        <span class="result-votes">${result.vote_count.toLocaleString()} votes</span>
+                        <span class="result-votes">${avg.toFixed(1)} / 100 &middot; ${voterCount.toLocaleString()} ${voterCount === 1 ? 'voter' : 'voters'}</span>
                     </div>
                     <div class="progress-bar">
-                        <div class="progress-fill" style="width: ${percentage}%;">
-                            <span class="progress-percentage">${percentage}%</span>
+                        <div class="progress-fill" style="width: ${avg.toFixed(1)}%;">
+                            <span class="progress-percentage">${avg.toFixed(1)}</span>
                         </div>
                     </div>
                 `;

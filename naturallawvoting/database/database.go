@@ -88,18 +88,19 @@ CREATE TABLE IF NOT EXISTS ballot_items (
     id SERIAL PRIMARY KEY,
     ballot_id INTEGER NOT NULL REFERENCES ballots(id) ON DELETE CASCADE,
     title VARCHAR(200) NOT NULL,
-    description TEXT,
-    vote_count INTEGER DEFAULT 0
+    description TEXT
 );
 
--- Create votes table
+-- Create votes table: one row per (user, ballot_item) with a 0-100 score
 CREATE TABLE IF NOT EXISTS votes (
     id SERIAL PRIMARY KEY,
     user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     ballot_id INTEGER NOT NULL REFERENCES ballots(id) ON DELETE CASCADE,
     ballot_item_id INTEGER NOT NULL REFERENCES ballot_items(id) ON DELETE CASCADE,
+    score INTEGER NOT NULL DEFAULT 0 CHECK (score >= 0 AND score <= 100),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    UNIQUE(user_id, ballot_id)
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(user_id, ballot_item_id)
 );
 
 -- Create user_profiles table
@@ -221,6 +222,10 @@ CREATE TRIGGER update_user_race_ethnicity_updated_at BEFORE UPDATE ON user_race_
 
 DROP TRIGGER IF EXISTS update_economic_info_updated_at ON economic_info;
 CREATE TRIGGER update_economic_info_updated_at BEFORE UPDATE ON economic_info
+    FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+DROP TRIGGER IF EXISTS update_votes_updated_at ON votes;
+CREATE TRIGGER update_votes_updated_at BEFORE UPDATE ON votes
     FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 
 -- Trust votes: one score (1-100) per voter-subject pair

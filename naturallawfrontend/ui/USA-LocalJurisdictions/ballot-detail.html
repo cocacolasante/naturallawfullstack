@@ -190,7 +190,6 @@
             border-radius: 8px;
             padding: 1.5rem;
             margin-bottom: 1rem;
-            cursor: pointer;
             transition: all 0.3s ease;
         }
 
@@ -199,22 +198,12 @@
             box-shadow: 0 4px 12px var(--shadow-color);
         }
 
-        .option-card.selected {
-            border-color: var(--accent-gold);
-            background-color: rgba(245, 212, 66, 0.1);
-        }
-
         .option-header {
             display: flex;
             align-items: center;
+            justify-content: space-between;
             gap: 1rem;
             margin-bottom: 0.5rem;
-        }
-
-        .option-radio {
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
         }
 
         .option-title {
@@ -225,8 +214,58 @@
 
         .option-description {
             color: var(--text-light);
-            margin-left: 2rem;
             line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .score-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .score-slider {
+            flex: 1;
+            accent-color: var(--accent-gold);
+            cursor: pointer;
+            height: 6px;
+        }
+
+        .score-value {
+            font-weight: bold;
+            color: var(--accent-gold);
+            min-width: 3.5rem;
+            text-align: right;
+            font-size: 1.1rem;
+        }
+
+        .score-input {
+            width: 4rem;
+            padding: 0.3rem 0.5rem;
+            background-color: var(--secondary-dark);
+            color: var(--text-light);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .score-help {
+            color: #888;
+            font-size: 0.9rem;
+            margin: 0.5rem 0 1.5rem;
+        }
+
+        .offline-section {
+            margin-top: 2.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .offline-title {
+            color: var(--accent-gold);
+            margin-bottom: 0.5rem;
         }
 
         .btn {
@@ -389,17 +428,29 @@
 
                 <div id="alreadyVotedNotice" style="display: none;">
                     <div class="message message-info">
-                        <p>You have already voted on this ballot. Your vote: <strong id="userVoteDisplay"></strong></p>
+                        <p>You have already scored this ballot. Adjust the sliders below to update your scores at any time.</p>
                     </div>
                 </div>
 
                 <div id="votingSection" class="options-section">
-                    <h3 class="section-title">Cast Your Vote</h3>
+                    <h3 class="section-title">Score Each Option (0-100)</h3>
+                    <p class="score-help">Rate every option from 0 (strongly oppose) to 100 (strongly support). Each option is scored independently.</p>
                     <div id="optionsContainer"></div>
 
                     <div class="btn-group">
-                        <button id="submitVoteBtn" class="btn btn-primary" onclick="submitVote()">Submit Vote</button>
+                        <button id="submitVoteBtn" class="btn btn-primary" onclick="submitVote()">Submit Scores</button>
                         <a href="#" id="viewResultsLink" class="btn btn-secondary">View Results</a>
+                    </div>
+
+                    <div class="offline-section">
+                        <h4 class="offline-title">Score Offline</h4>
+                        <p class="score-help">Download a copy of this ballot to score offline, then upload your filled-out file to load your scores back into the sliders. Click Submit Scores afterward to record them.</p>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-secondary" onclick="downloadBallot('json')">Download JSON</button>
+                            <button type="button" class="btn btn-secondary" onclick="downloadBallot('csv')">Download CSV</button>
+                            <button type="button" class="btn btn-secondary" onclick="document.getElementById('uploadInput').click()">Upload Filled Ballot</button>
+                            <input type="file" id="uploadInput" accept=".json,.csv,application/json,text/csv" style="display:none" onchange="handleBallotUpload(event)">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -420,8 +471,9 @@
         const state = urlParams.get('state');
 
         let currentBallot = null;
-        let selectedOptionId = null;
+        let userScores = {}; // { ballot_item_id: score }
         let userToken = null;
+        let hasExistingVote = false;
 
         document.addEventListener('DOMContentLoaded', function() {
             if (!ballotId) {
@@ -437,11 +489,9 @@
             document.getElementById('backLink').href = backUrl;
             document.getElementById('viewResultsLink').href = `ballot-results.html?id=${ballotId}&superstate=${superstate}${state ? '&state=' + state : ''}`;
 
-            loadBallotDetails();
-
-            if (userToken) {
-                checkUserVote();
-            }
+            loadBallotDetails().then(() => {
+                if (userToken) checkUserVote();
+            });
         });
 
         async function loadBallotDetails() {
@@ -466,15 +516,25 @@
 
             try {
                 const response = await fetch(`${API_BASE_URL}/ballots/${ballotId}/my-vote`, {
-                    headers: {
-                        'Authorization': `Bearer ${userToken}`
-                    }
+                    headers: { 'Authorization': `Bearer ${userToken}` }
                 });
 
                 if (response.ok) {
                     const voteData = await response.json();
-                    if (voteData.option_id) {
-                        showAlreadyVoted(voteData);
+                    const scores = voteData.scores || [];
+                    if (scores.length > 0) {
+                        hasExistingVote = true;
+                        scores.forEach(s => {
+                            userScores[s.ballot_item_id] = s.score;
+                            const slider = document.getElementById(`score-slider-${s.ballot_item_id}`);
+                            const input = document.getElementById(`score-input-${s.ballot_item_id}`);
+                            const valueLabel = document.getElementById(`score-value-${s.ballot_item_id}`);
+                            if (slider) slider.value = s.score;
+                            if (input) input.value = s.score;
+                            if (valueLabel) valueLabel.textContent = `${s.score} / 100`;
+                        });
+                        document.getElementById('alreadyVotedNotice').style.display = 'block';
+                        document.getElementById('submitVoteBtn').textContent = 'Update Scores';
                     }
                 }
             } catch (error) {
@@ -519,46 +579,62 @@
             }
 
             options.forEach(option => {
+                const initial = userScores[option.id] ?? 0;
+                userScores[option.id] = initial;
+
                 const optionCard = document.createElement('div');
                 optionCard.className = 'option-card';
-                optionCard.onclick = () => selectOption(option.id, optionCard);
-
                 optionCard.innerHTML = `
                     <div class="option-header">
-                        <input type="radio" name="vote-option" class="option-radio" value="${option.id}">
                         <h4 class="option-title">${escapeHtml(option.title || 'Untitled Option')}</h4>
                     </div>
                     ${option.description ? `<p class="option-description">${escapeHtml(option.description)}</p>` : ''}
+                    <div class="score-row">
+                        <input type="range" min="0" max="100" value="${initial}"
+                               id="score-slider-${option.id}" class="score-slider"
+                               oninput="onScoreChange(${option.id}, this.value, 'slider')">
+                        <input type="number" min="0" max="100" value="${initial}"
+                               id="score-input-${option.id}" class="score-input"
+                               oninput="onScoreChange(${option.id}, this.value, 'input')">
+                        <span class="score-value" id="score-value-${option.id}">${initial} / 100</span>
+                    </div>
                 `;
-
                 optionsContainer.appendChild(optionCard);
             });
         }
 
-        function selectOption(optionId, cardElement) {
-            selectedOptionId = optionId;
-
-            document.querySelectorAll('.option-card').forEach(card => {
-                card.classList.remove('selected');
-            });
-            cardElement.classList.add('selected');
-
-            const radio = cardElement.querySelector('input[type="radio"]');
-            radio.checked = true;
+        function onScoreChange(optionId, rawValue, source) {
+            let n = parseInt(rawValue, 10);
+            if (isNaN(n)) n = 0;
+            if (n < 0) n = 0;
+            if (n > 100) n = 100;
+            userScores[optionId] = n;
+            const slider = document.getElementById(`score-slider-${optionId}`);
+            const input = document.getElementById(`score-input-${optionId}`);
+            const valueLabel = document.getElementById(`score-value-${optionId}`);
+            if (source !== 'slider' && slider) slider.value = n;
+            if (source !== 'input' && input) input.value = n;
+            if (valueLabel) valueLabel.textContent = `${n} / 100`;
         }
 
         async function submitVote() {
-            if (!selectedOptionId) {
-                showMessage('Please select an option before submitting your vote.', 'warning');
-                return;
-            }
-
             if (!userToken) {
                 showMessage('You must be logged in to vote. <a href="../Accounts-Profiles-Registering/Login.html">Login here</a>.', 'error');
                 return;
             }
 
+            const scores = Object.entries(userScores).map(([optionId, score]) => ({
+                option_id: parseInt(optionId, 10),
+                score: score
+            }));
+
+            if (scores.length === 0) {
+                showMessage('No options to score.', 'warning');
+                return;
+            }
+
             const submitBtn = document.getElementById('submitVoteBtn');
+            const originalLabel = submitBtn.textContent;
             submitBtn.disabled = true;
             submitBtn.textContent = 'Submitting...';
 
@@ -569,40 +645,165 @@
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${userToken}`
                     },
-                    body: JSON.stringify({
-                        option_id: selectedOptionId
-                    })
+                    body: JSON.stringify({ scores: scores })
                 });
 
                 const data = await response.json();
 
                 if (response.ok) {
-                    showMessage('Your vote has been submitted successfully!', 'success');
+                    showMessage('Your scores have been submitted successfully!', 'success');
                     setTimeout(() => {
                         window.location.href = `ballot-results.html?id=${ballotId}&superstate=${superstate}${state ? '&state=' + state : ''}`;
                     }, 1500);
                 } else {
-                    throw new Error(data.error || 'Failed to submit vote');
+                    throw new Error(data.error || 'Failed to submit scores');
                 }
 
             } catch (error) {
-                console.error('Error submitting vote:', error);
-                showMessage(error.message || 'Failed to submit vote. Please try again.', 'error');
+                console.error('Error submitting scores:', error);
+                showMessage(error.message || 'Failed to submit scores. Please try again.', 'error');
                 submitBtn.disabled = false;
-                submitBtn.textContent = 'Submit Vote';
+                submitBtn.textContent = originalLabel;
             }
         }
 
-        function showAlreadyVoted(voteData) {
-            const notice = document.getElementById('alreadyVotedNotice');
-            const votingSection = document.getElementById('votingSection');
+        function downloadBallot(format) {
+            if (!currentBallot) return;
+            const options = currentBallot.options || [];
+            const safeName = (currentBallot.title || `ballot-${ballotId}`).replace(/[^a-z0-9-_]+/gi, '_').slice(0, 60);
+            let blob, filename;
 
-            const option = currentBallot.options?.find(opt => opt.id === voteData.option_id);
-            const optionTitle = option ? option.title : 'Unknown option';
+            if (format === 'csv') {
+                const rows = [['option_id', 'title', 'score']];
+                options.forEach(opt => {
+                    rows.push([opt.id, opt.title || '', userScores[opt.id] ?? 0]);
+                });
+                const csv = rows.map(r => r.map(csvEscape).join(',')).join('\r\n');
+                blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+                filename = `${safeName}-ballot-${ballotId}.csv`;
+            } else {
+                const payload = {
+                    ballot_id: Number(ballotId),
+                    ballot_title: currentBallot.title || '',
+                    exported_at: new Date().toISOString(),
+                    scores: options.map(opt => ({
+                        option_id: opt.id,
+                        title: opt.title || '',
+                        score: userScores[opt.id] ?? 0
+                    }))
+                };
+                blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+                filename = `${safeName}-ballot-${ballotId}.json`;
+            }
 
-            document.getElementById('userVoteDisplay').textContent = optionTitle;
-            notice.style.display = 'block';
-            votingSection.style.display = 'none';
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        function csvEscape(value) {
+            const s = String(value ?? '');
+            if (/[",\r\n]/.test(s)) {
+                return '"' + s.replace(/"/g, '""') + '"';
+            }
+            return s;
+        }
+
+        async function handleBallotUpload(event) {
+            const file = event.target.files && event.target.files[0];
+            event.target.value = '';
+            if (!file) return;
+
+            try {
+                const text = await file.text();
+                const isCSV = file.name.toLowerCase().endsWith('.csv') || file.type === 'text/csv';
+                const parsed = isCSV ? parseCSVScores(text) : parseJSONScores(text);
+                applyImportedScores(parsed);
+            } catch (err) {
+                console.error('Error importing ballot:', err);
+                showMessage(err.message || 'Failed to read uploaded file.', 'error');
+            }
+        }
+
+        function parseJSONScores(text) {
+            const data = JSON.parse(text);
+            if (data.ballot_id && Number(data.ballot_id) !== Number(ballotId)) {
+                throw new Error(`This file is for ballot ${data.ballot_id}, not ballot ${ballotId}.`);
+            }
+            const scores = Array.isArray(data.scores) ? data.scores : [];
+            return scores.map(s => ({
+                option_id: Number(s.option_id ?? s.ballot_item_id),
+                score: Number(s.score)
+            }));
+        }
+
+        function parseCSVScores(text) {
+            const lines = text.split(/\r?\n/).filter(l => l.trim().length > 0);
+            if (lines.length === 0) return [];
+            const header = splitCSVRow(lines[0]).map(h => h.trim().toLowerCase());
+            const idIdx = header.indexOf('option_id');
+            const scoreIdx = header.indexOf('score');
+            if (idIdx === -1 || scoreIdx === -1) {
+                throw new Error('CSV must include "option_id" and "score" columns.');
+            }
+            const out = [];
+            for (let i = 1; i < lines.length; i++) {
+                const row = splitCSVRow(lines[i]);
+                out.push({ option_id: Number(row[idIdx]), score: Number(row[scoreIdx]) });
+            }
+            return out;
+        }
+
+        function splitCSVRow(line) {
+            const out = [];
+            let cur = '';
+            let inQuotes = false;
+            for (let i = 0; i < line.length; i++) {
+                const ch = line[i];
+                if (inQuotes) {
+                    if (ch === '"' && line[i + 1] === '"') { cur += '"'; i++; }
+                    else if (ch === '"') { inQuotes = false; }
+                    else { cur += ch; }
+                } else if (ch === '"') {
+                    inQuotes = true;
+                } else if (ch === ',') {
+                    out.push(cur);
+                    cur = '';
+                } else {
+                    cur += ch;
+                }
+            }
+            out.push(cur);
+            return out;
+        }
+
+        function applyImportedScores(entries) {
+            const validIds = new Set((currentBallot.options || []).map(o => o.id));
+            let applied = 0;
+            const skipped = [];
+            entries.forEach(e => {
+                if (!validIds.has(e.option_id)) {
+                    skipped.push(`unknown option ${e.option_id}`);
+                    return;
+                }
+                if (!Number.isFinite(e.score)) {
+                    skipped.push(`option ${e.option_id} (invalid score)`);
+                    return;
+                }
+                let n = Math.round(e.score);
+                if (n < 0) n = 0;
+                if (n > 100) n = 100;
+                onScoreChange(e.option_id, n, 'import');
+                applied++;
+            });
+            const msg = `Loaded ${applied} score${applied === 1 ? '' : 's'} from file. Click Submit Scores to record them.`;
+            const fullMsg = skipped.length ? `${msg} Skipped: ${skipped.join(', ')}.` : msg;
+            showMessage(fullMsg, applied > 0 ? 'success' : 'warning');
         }
 
         function showMessage(message, type) {

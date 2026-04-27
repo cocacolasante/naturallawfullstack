@@ -584,8 +584,8 @@ body {
                 <!-- Results Summary -->
                 <div class="results-summary">
                     <div class="summary-item">
-                        <span class="summary-value" id="totalVotes">0</span>
-                        <span class="summary-label">Total Votes</span>
+                        <span class="summary-value" id="totalVoters">0</span>
+                        <span class="summary-label">Voters</span>
                     </div>
                     <div class="summary-item">
                         <span class="summary-value" id="optionCount">0</span>
@@ -595,7 +595,8 @@ body {
 
                 <!-- Results Section -->
                 <div class="results-section">
-                    <h3 class="section-title">Voting Results</h3>
+                    <h3 class="section-title">Weighted Scores (0-100)</h3>
+                    <p style="color:#888;font-size:0.95rem;margin-bottom:1rem;">Each option's average score across all voters. Bars represent the average score, not vote share.</p>
                     <div id="resultsContainer"></div>
                 </div>
 
@@ -701,68 +702,62 @@ body {
             // Creator
             document.getElementById('ballotCreator').textContent = currentBallot.created_by || 'Anonymous';
 
-            // Calculate total votes
             const results = resultsData.results || [];
-            const totalVotes = results.reduce((sum, result) => sum + (result.vote_count || 0), 0);
+            const totalVoters = resultsData.total_voters || 0;
 
-            // Display summary
-            document.getElementById('totalVotes').textContent = totalVotes.toLocaleString();
+            document.getElementById('totalVoters').textContent = totalVoters.toLocaleString();
             document.getElementById('optionCount').textContent = results.length;
 
-            // Display individual results
-            displayResultCards(results, totalVotes);
+            displayResultCards(results, totalVoters);
 
-            // Show content
             loadingState.style.display = 'none';
             resultsContent.style.display = 'block';
         }
 
-        // Display result cards
-        function displayResultCards(results, totalVotes) {
+        // Render one card per option, sorted by average score descending.
+        function displayResultCards(results, totalVoters) {
             const resultsContainer = document.getElementById('resultsContainer');
             resultsContainer.innerHTML = '';
 
-            if (results.length === 0) {
-                resultsContainer.innerHTML = '<div class="message message-info"><p>No votes have been cast yet.</p></div>';
+            if (results.length === 0 || totalVoters === 0) {
+                resultsContainer.innerHTML = '<div class="message message-info"><p>No scores have been cast yet.</p></div>';
                 return;
             }
 
-            // Find winning option (most votes)
-            const maxVotes = Math.max(...results.map(r => r.vote_count || 0));
-
-            // Sort by vote count (descending)
-            const sortedResults = [...results].sort((a, b) => (b.vote_count || 0) - (a.vote_count || 0));
+            const maxAvg = Math.max(...results.map(r => r.average_score || 0));
+            const sortedResults = [...results].sort((a, b) => (b.average_score || 0) - (a.average_score || 0));
 
             sortedResults.forEach(result => {
-                const voteCount = result.vote_count || 0;
-                const percentage = totalVotes > 0 ? ((voteCount / totalVotes) * 100).toFixed(1) : 0;
-                const isWinning = voteCount === maxVotes && maxVotes > 0;
+                const avg = Number(result.average_score || 0);
+                const voterCount = Number(result.voter_count || 0);
+                const totalScore = Number(result.total_score || 0);
+                const isLeading = avg === maxAvg && maxAvg > 0;
 
-                // Find option details from ballot
                 const option = currentBallot.options?.find(opt => opt.id === result.option_id);
                 const optionTitle = option ? option.title : result.option_title || 'Unknown Option';
                 const optionDescription = option ? option.description : '';
 
                 const resultCard = document.createElement('div');
-                resultCard.className = `result-card ${isWinning ? 'winning' : ''}`;
+                resultCard.className = `result-card ${isLeading ? 'winning' : ''}`;
 
                 resultCard.innerHTML = `
                     <div class="result-header">
                         <h4 class="option-title">
                             ${escapeHtml(optionTitle)}
-                            ${isWinning && totalVotes > 0 ? '<span class="winning-badge">Leading</span>' : ''}
+                            ${isLeading ? '<span class="winning-badge">Leading</span>' : ''}
                         </h4>
                         <div>
-                            <span class="vote-count">${voteCount.toLocaleString()} ${voteCount === 1 ? 'vote' : 'votes'}</span>
-                            <span class="percentage">${percentage}%</span>
+                            <span class="vote-count">${voterCount.toLocaleString()} ${voterCount === 1 ? 'voter' : 'voters'}</span>
+                            <span class="percentage">${avg.toFixed(1)} / 100</span>
                         </div>
                     </div>
                     ${optionDescription ? `<p class="option-description">${escapeHtml(optionDescription)}</p>` : ''}
                     <div class="progress-bar-container">
-                        <div class="progress-bar" style="width: ${percentage}%">
-                            ${percentage > 10 ? `<span class="progress-bar-text">${percentage}%</span>` : ''}
+                        <div class="progress-bar" style="width: ${avg.toFixed(1)}%">
+                            ${avg > 10 ? `<span class="progress-bar-text">${avg.toFixed(1)}</span>` : ''}
                         </div>
                     </div>
+                    <p class="option-description" style="font-size:0.85rem;color:#888;margin-top:0.5rem;">Total score: ${totalScore.toLocaleString()}</p>
                 `;
 
                 resultsContainer.appendChild(resultCard);

@@ -78,15 +78,15 @@ func TestFullVotingFlow(t *testing.T) {
 				AddRow(ballotID, "Integration Test Ballot", "Testing the full workflow", "", "", "", "", userID, true, createdAt, createdAt))
 
 		// Mock ballot items insertion
-		testSetup.Mock.ExpectQuery("INSERT INTO ballot_items (ballot_id, title, description) VALUES ($1, $2, $3) RETURNING id, ballot_id, title, description, vote_count").
+		testSetup.Mock.ExpectQuery("INSERT INTO ballot_items (ballot_id, title, description) VALUES ($1, $2, $3) RETURNING id, ballot_id, title, description").
 			WithArgs(ballotID, "Option A", "First choice").
-			WillReturnRows(sqlmock.NewRows([]string{"id", "ballot_id", "title", "description", "vote_count"}).
-				AddRow(1, ballotID, "Option A", "First choice", 0))
+			WillReturnRows(sqlmock.NewRows([]string{"id", "ballot_id", "title", "description"}).
+				AddRow(1, ballotID, "Option A", "First choice"))
 
-		testSetup.Mock.ExpectQuery("INSERT INTO ballot_items (ballot_id, title, description) VALUES ($1, $2, $3) RETURNING id, ballot_id, title, description, vote_count").
+		testSetup.Mock.ExpectQuery("INSERT INTO ballot_items (ballot_id, title, description) VALUES ($1, $2, $3) RETURNING id, ballot_id, title, description").
 			WithArgs(ballotID, "Option B", "Second choice").
-			WillReturnRows(sqlmock.NewRows([]string{"id", "ballot_id", "title", "description", "vote_count"}).
-				AddRow(2, ballotID, "Option B", "Second choice", 0))
+			WillReturnRows(sqlmock.NewRows([]string{"id", "ballot_id", "title", "description"}).
+				AddRow(2, ballotID, "Option B", "Second choice"))
 
 		// Mock transaction commit
 		testSetup.Mock.ExpectCommit()
@@ -161,15 +161,15 @@ func TestFullVotingFlow(t *testing.T) {
 
 		// Mock ballot items query
 		testSetup.Mock.ExpectQuery(`
-		SELECT id, ballot_id, title, description, vote_count
+		SELECT id, ballot_id, title, description
 		FROM ballot_items
 		WHERE ballot_id = $1
 		ORDER BY id ASC
 	`).
 			WithArgs(ballotID).
-			WillReturnRows(sqlmock.NewRows([]string{"id", "ballot_id", "title", "description", "vote_count"}).
-				AddRow(1, ballotID, "Option A", "First choice", 0).
-				AddRow(2, ballotID, "Option B", "Second choice", 0))
+			WillReturnRows(sqlmock.NewRows([]string{"id", "ballot_id", "title", "description"}).
+				AddRow(1, ballotID, "Option A", "First choice").
+				AddRow(2, ballotID, "Option B", "Second choice"))
 
 		req, err := CreateTestRequest("GET", fmt.Sprintf("/api/v1/public/ballots/%d", ballotID), nil)
 		require.NoError(t, err)
@@ -185,48 +185,49 @@ func TestFullVotingFlow(t *testing.T) {
 
 		assert.Equal(t, ballotID, ballot.ID)
 		require.Len(t, ballot.Items, 2)
-		assert.Equal(t, 0, ballot.Items[0].VoteCount)
-		assert.Equal(t, 0, ballot.Items[1].VoteCount)
+		assert.Equal(t, "Option A", ballot.Items[0].Title)
+		assert.Equal(t, "Option B", ballot.Items[1].Title)
 
 		assert.NoError(t, testSetup.Mock.ExpectationsWereMet())
 	})
 
 	t.Run("5. Vote on Ballot", func(t *testing.T) {
-		ballotItemID := 1
+		itemA := 1
+		itemB := 2
 
 		// Mock ballot exists and is active
 		testSetup.Mock.ExpectQuery("SELECT is_active FROM ballots WHERE id = $1").
 			WithArgs(ballotID).
 			WillReturnRows(sqlmock.NewRows([]string{"is_active"}).AddRow(true))
 
-		// Mock ballot item belongs to ballot
-		testSetup.Mock.ExpectQuery("SELECT ballot_id FROM ballot_items WHERE id = $1").
-			WithArgs(ballotItemID).
-			WillReturnRows(sqlmock.NewRows([]string{"ballot_id"}).AddRow(ballotID))
+		// Mock all submitted ballot items belong to this ballot
+		testSetup.Mock.ExpectQuery("SELECT id FROM ballot_items WHERE ballot_id = $1 AND id = ANY($2)").
+			WithArgs(ballotID, sqlmock.AnyArg()).
+			WillReturnRows(sqlmock.NewRows([]string{"id"}).AddRow(itemA).AddRow(itemB))
 
-		// Mock transaction begin
+		// Transaction with prepared upsert per score
 		testSetup.Mock.ExpectBegin()
-
-		// Mock no existing vote
-		testSetup.Mock.ExpectQuery("SELECT id, ballot_item_id FROM votes WHERE user_id = $1 AND ballot_id = $2").
-			WithArgs(userID, ballotID).
-			WillReturnError(sql.ErrNoRows)
-
-		// Mock insert new vote
-		testSetup.Mock.ExpectExec("INSERT INTO votes (user_id, ballot_id, ballot_item_id) VALUES ($1, $2, $3)").
-			WithArgs(userID, ballotID, ballotItemID).
+		upsertSQL := `
+		INSERT INTO votes (user_id, ballot_id, ballot_item_id, score)
+		VALUES ($1, $2, $3, $4)
+		ON CONFLICT (user_id, ballot_item_id)
+		DO UPDATE SET score = EXCLUDED.score, updated_at = CURRENT_TIMESTAMP
+	`
+		testSetup.Mock.ExpectPrepare(upsertSQL)
+		testSetup.Mock.ExpectExec(upsertSQL).
+			WithArgs(userID, ballotID, itemA, 80).
 			WillReturnResult(sqlmock.NewResult(1, 1))
-
-		// Mock update vote count
-		testSetup.Mock.ExpectExec("UPDATE ballot_items SET vote_count = vote_count + 1 WHERE id = $1").
-			WithArgs(ballotItemID).
-			WillReturnResult(sqlmock.NewResult(0, 1))
-
-		// Mock transaction commit
+		testSetup.Mock.ExpectExec(upsertSQL).
+			WithArgs(userID, ballotID, itemB, 30).
+			WillReturnResult(sqlmock.NewResult(2, 1))
 		testSetup.Mock.ExpectCommit()
 
+		score80, score30 := 80, 30
 		reqBody := models.VoteRequest{
-			BallotItemID: ballotItemID,
+			Scores: []models.ScoreEntry{
+				{BallotItemID: itemA, Score: &score80},
+				{BallotItemID: itemB, Score: &score30},
+			},
 		}
 
 		req, err := CreateAuthenticatedRequest("POST", fmt.Sprintf("/api/v1/ballots/%d/vote", ballotID), reqBody, userID, email)
@@ -236,19 +237,20 @@ func TestFullVotingFlow(t *testing.T) {
 		testSetup.Router.ServeHTTP(recorder, req)
 
 		assert.Equal(t, 200, recorder.Code)
-
 		assert.NoError(t, testSetup.Mock.ExpectationsWereMet())
 	})
 
 	t.Run("6. Get User's Vote", func(t *testing.T) {
-		ballotItemID := 1
+		itemA := 1
+		itemB := 2
 
-		// Mock user vote found
 		createdAt := time.Date(2023, 1, 1, 0, 0, 0, 0, time.UTC)
-		testSetup.Mock.ExpectQuery("SELECT id, user_id, ballot_id, ballot_item_id, created_at FROM votes WHERE user_id = $1 AND ballot_id = $2").
+		testSetup.Mock.ExpectQuery(`SELECT id, user_id, ballot_id, ballot_item_id, score, created_at, updated_at
+		 FROM votes WHERE user_id = $1 AND ballot_id = $2 ORDER BY ballot_item_id ASC`).
 			WithArgs(userID, ballotID).
-			WillReturnRows(sqlmock.NewRows([]string{"id", "user_id", "ballot_id", "ballot_item_id", "created_at"}).
-				AddRow(1, userID, ballotID, ballotItemID, createdAt))
+			WillReturnRows(sqlmock.NewRows([]string{"id", "user_id", "ballot_id", "ballot_item_id", "score", "created_at", "updated_at"}).
+				AddRow(1, userID, ballotID, itemA, 80, createdAt, createdAt).
+				AddRow(2, userID, ballotID, itemB, 30, createdAt, createdAt))
 
 		req, err := CreateAuthenticatedRequest("GET", fmt.Sprintf("/api/v1/ballots/%d/my-vote", ballotID), nil, userID, email)
 		require.NoError(t, err)
@@ -258,13 +260,18 @@ func TestFullVotingFlow(t *testing.T) {
 
 		assert.Equal(t, 200, recorder.Code)
 
-		var vote models.Vote
-		err = parseJSONResponse(recorder, &vote)
+		var response map[string]interface{}
+		err = parseJSONResponse(recorder, &response)
 		require.NoError(t, err)
 
-		assert.Equal(t, userID, vote.UserID)
-		assert.Equal(t, ballotID, vote.BallotID)
-		assert.Equal(t, ballotItemID, vote.BallotItemID)
+		assert.Equal(t, float64(ballotID), response["ballot_id"])
+		scores, ok := response["scores"].([]interface{})
+		require.True(t, ok)
+		require.Len(t, scores, 2)
+
+		first := scores[0].(map[string]interface{})
+		assert.Equal(t, float64(itemA), first["ballot_item_id"])
+		assert.Equal(t, float64(80), first["score"])
 
 		assert.NoError(t, testSetup.Mock.ExpectationsWereMet())
 	})
@@ -275,16 +282,22 @@ func TestFullVotingFlow(t *testing.T) {
 			WithArgs(ballotID).
 			WillReturnRows(sqlmock.NewRows([]string{"exists"}).AddRow(true))
 
-		// Mock ballot results (Option A should have 1 vote now)
-		testSetup.Mock.ExpectQuery(`SELECT id, ballot_id, title, description, vote_count
-		FROM ballot_items
-		WHERE ballot_id = $1
-		ORDER BY vote_count DESC, id ASC
+		// Mock weighted-score aggregation
+		testSetup.Mock.ExpectQuery(`
+		SELECT bi.id, bi.ballot_id, bi.title, bi.description,
+		       COALESCE(AVG(v.score), 0)::float8 AS average_score,
+		       COALESCE(SUM(v.score), 0)::bigint AS total_score,
+		       COUNT(v.id)::bigint AS voter_count
+		FROM ballot_items bi
+		LEFT JOIN votes v ON v.ballot_item_id = bi.id
+		WHERE bi.ballot_id = $1
+		GROUP BY bi.id, bi.ballot_id, bi.title, bi.description
+		ORDER BY average_score DESC, bi.id ASC
 	`).
 			WithArgs(ballotID).
-			WillReturnRows(sqlmock.NewRows([]string{"id", "ballot_id", "title", "description", "vote_count"}).
-				AddRow(1, ballotID, "Option A", "First choice", 1).
-				AddRow(2, ballotID, "Option B", "Second choice", 0))
+			WillReturnRows(sqlmock.NewRows([]string{"id", "ballot_id", "title", "description", "average_score", "total_score", "voter_count"}).
+				AddRow(1, ballotID, "Option A", "First choice", 80.0, int64(80), int64(1)).
+				AddRow(2, ballotID, "Option B", "Second choice", 30.0, int64(30), int64(1)))
 
 		req, err := CreateTestRequest("GET", fmt.Sprintf("/api/v1/public/ballots/%d/results", ballotID), nil)
 		require.NoError(t, err)
@@ -299,16 +312,15 @@ func TestFullVotingFlow(t *testing.T) {
 		require.NoError(t, err)
 
 		assert.Equal(t, float64(ballotID), response["ballot_id"])
-		assert.Equal(t, float64(1), response["total_votes"])
+		assert.Equal(t, float64(1), response["total_voters"])
 
 		results, ok := response["results"].([]interface{})
 		require.True(t, ok)
 		require.Len(t, results, 2)
 
-		// Option A should be first (highest vote count)
 		firstResult := results[0].(map[string]interface{})
 		assert.Equal(t, "Option A", firstResult["title"])
-		assert.Equal(t, float64(1), firstResult["vote_count"])
+		assert.Equal(t, float64(80), firstResult["average_score"])
 
 		assert.NoError(t, testSetup.Mock.ExpectationsWereMet())
 	})

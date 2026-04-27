@@ -36,15 +36,15 @@ func TestCreateBallot(t *testing.T) {
 				AddRow(1, "Best Programming Language", "Vote for your favorite", "", "", "", "", userID, true, createdAt, createdAt))
 
 		// Mock ballot items insertion
-		testSetup.Mock.ExpectQuery("INSERT INTO ballot_items (ballot_id, title, description) VALUES ($1, $2, $3) RETURNING id, ballot_id, title, description, vote_count").
+		testSetup.Mock.ExpectQuery("INSERT INTO ballot_items (ballot_id, title, description) VALUES ($1, $2, $3) RETURNING id, ballot_id, title, description").
 			WithArgs(1, "Go", "Fast and efficient").
-			WillReturnRows(sqlmock.NewRows([]string{"id", "ballot_id", "title", "description", "vote_count"}).
-				AddRow(1, 1, "Go", "Fast and efficient", 0))
+			WillReturnRows(sqlmock.NewRows([]string{"id", "ballot_id", "title", "description"}).
+				AddRow(1, 1, "Go", "Fast and efficient"))
 
-		testSetup.Mock.ExpectQuery("INSERT INTO ballot_items (ballot_id, title, description) VALUES ($1, $2, $3) RETURNING id, ballot_id, title, description, vote_count").
+		testSetup.Mock.ExpectQuery("INSERT INTO ballot_items (ballot_id, title, description) VALUES ($1, $2, $3) RETURNING id, ballot_id, title, description").
 			WithArgs(1, "Python", "Easy to learn").
-			WillReturnRows(sqlmock.NewRows([]string{"id", "ballot_id", "title", "description", "vote_count"}).
-				AddRow(2, 1, "Python", "Easy to learn", 0))
+			WillReturnRows(sqlmock.NewRows([]string{"id", "ballot_id", "title", "description"}).
+				AddRow(2, 1, "Python", "Easy to learn"))
 
 		// Mock transaction commit
 		testSetup.Mock.ExpectCommit()
@@ -190,7 +190,7 @@ func TestCreateBallot(t *testing.T) {
 			WithArgs("Test Ballot", "Test", "", "", "", "", userID).
 			WillReturnRows(sqlmock.NewRows([]string{"id", "title", "description", "category", "superstate", "state", "district", "creator_id", "is_active", "created_at", "updated_at"}).
 				AddRow(1, "Test Ballot", "Test", "", "", "", "", userID, true, createdAt, createdAt))
-		testSetup.Mock.ExpectQuery("INSERT INTO ballot_items (ballot_id, title, description) VALUES ($1, $2, $3) RETURNING id, ballot_id, title, description, vote_count").
+		testSetup.Mock.ExpectQuery("INSERT INTO ballot_items (ballot_id, title, description) VALUES ($1, $2, $3) RETURNING id, ballot_id, title, description").
 			WithArgs(1, "Option 1", "First").
 			WillReturnError(errors.New("item insert error"))
 
@@ -227,14 +227,14 @@ func TestCreateBallot(t *testing.T) {
 			WithArgs("Test Ballot", "Test", "", "", "", "", userID).
 			WillReturnRows(sqlmock.NewRows([]string{"id", "title", "description", "category", "superstate", "state", "district", "creator_id", "is_active", "created_at", "updated_at"}).
 				AddRow(1, "Test Ballot", "Test", "", "", "", "", userID, true, createdAt, createdAt))
-		testSetup.Mock.ExpectQuery("INSERT INTO ballot_items (ballot_id, title, description) VALUES ($1, $2, $3) RETURNING id, ballot_id, title, description, vote_count").
+		testSetup.Mock.ExpectQuery("INSERT INTO ballot_items (ballot_id, title, description) VALUES ($1, $2, $3) RETURNING id, ballot_id, title, description").
 			WithArgs(1, "Option 1", "First").
-			WillReturnRows(sqlmock.NewRows([]string{"id", "ballot_id", "title", "description", "vote_count"}).
-				AddRow(1, 1, "Option 1", "First", 0))
-		testSetup.Mock.ExpectQuery("INSERT INTO ballot_items (ballot_id, title, description) VALUES ($1, $2, $3) RETURNING id, ballot_id, title, description, vote_count").
+			WillReturnRows(sqlmock.NewRows([]string{"id", "ballot_id", "title", "description"}).
+				AddRow(1, 1, "Option 1", "First"))
+		testSetup.Mock.ExpectQuery("INSERT INTO ballot_items (ballot_id, title, description) VALUES ($1, $2, $3) RETURNING id, ballot_id, title, description").
 			WithArgs(1, "Option 2", "Second").
-			WillReturnRows(sqlmock.NewRows([]string{"id", "ballot_id", "title", "description", "vote_count"}).
-				AddRow(2, 1, "Option 2", "Second", 0))
+			WillReturnRows(sqlmock.NewRows([]string{"id", "ballot_id", "title", "description"}).
+				AddRow(2, 1, "Option 2", "Second"))
 		testSetup.Mock.ExpectCommit().WillReturnError(errors.New("commit error"))
 
 		reqBody := map[string]interface{}{
@@ -517,15 +517,15 @@ func TestGetBallot(t *testing.T) {
 
 		// Mock ballot items query
 		testSetup.Mock.ExpectQuery(`
-		SELECT id, ballot_id, title, description, vote_count
+		SELECT id, ballot_id, title, description
 		FROM ballot_items
 		WHERE ballot_id = $1
 		ORDER BY id ASC
 	`).
 			WithArgs(ballotID).
-			WillReturnRows(sqlmock.NewRows([]string{"id", "ballot_id", "title", "description", "vote_count"}).
-				AddRow(1, ballotID, "Option 1", "First option", 5).
-				AddRow(2, ballotID, "Option 2", "Second option", 3))
+			WillReturnRows(sqlmock.NewRows([]string{"id", "ballot_id", "title", "description"}).
+				AddRow(1, ballotID, "Option 1", "First option").
+				AddRow(2, ballotID, "Option 2", "Second option"))
 
 		req, err := CreateTestRequest("GET", fmt.Sprintf("/api/v1/public/ballots/%d", ballotID), nil)
 		require.NoError(t, err)
@@ -616,7 +616,7 @@ func TestGetBallot(t *testing.T) {
 				AddRow(ballotID, "Test Ballot", "Test Description", "", "", "", "", 1, true, createdAt, createdAt))
 
 		testSetup.Mock.ExpectQuery(`
-		SELECT id, ballot_id, title, description, vote_count
+		SELECT id, ballot_id, title, description
 		FROM ballot_items
 		WHERE ballot_id = $1
 		ORDER BY id ASC
@@ -652,7 +652,7 @@ func TestGetBallot(t *testing.T) {
 
 		// Return wrong columns to trigger scan error
 		testSetup.Mock.ExpectQuery(`
-		SELECT id, ballot_id, title, description, vote_count
+		SELECT id, ballot_id, title, description
 		FROM ballot_items
 		WHERE ballot_id = $1
 		ORDER BY id ASC
