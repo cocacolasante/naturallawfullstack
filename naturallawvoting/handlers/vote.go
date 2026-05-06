@@ -265,7 +265,6 @@ func (h *VoteHandler) GetBallotResults(c *gin.Context) {
 	}
 
 	results := make([]ResultItem, 0)
-	var totalVoters int64
 	for rows.Next() {
 		var r ResultItem
 		if err := rows.Scan(&r.ID, &r.BallotID, &r.Title, &r.Description, &r.AverageScore, &r.TotalScore, &r.VoterCount); err != nil {
@@ -275,9 +274,17 @@ func (h *VoteHandler) GetBallotResults(c *gin.Context) {
 		r.OptionID = r.ID
 		r.OptionTitle = r.Title
 		results = append(results, r)
-		if r.VoterCount > totalVoters {
-			totalVoters = r.VoterCount
-		}
+	}
+
+	// total_voters is the count of distinct users who scored any option on the ballot.
+	// Computed separately so subsets of voters across options aren't conflated.
+	var totalVoters int64
+	if err := h.db.QueryRow(
+		`SELECT COUNT(DISTINCT user_id) FROM votes WHERE ballot_id = $1`,
+		ballotID,
+	).Scan(&totalVoters); err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Error fetching results"})
+		return
 	}
 
 	c.JSON(http.StatusOK, gin.H{

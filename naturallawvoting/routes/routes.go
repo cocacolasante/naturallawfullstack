@@ -1,6 +1,8 @@
 package routes
 
 import (
+	"os"
+	"strings"
 	"voting-api/database"
 	"voting-api/handlers"
 	"voting-api/middleware"
@@ -8,20 +10,43 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// allowedOrigins reads ALLOWED_ORIGINS (comma-separated) and falls back to the
+// production hostnames. Frontend, backend, and DB share a host in production,
+// so most requests are same-origin; this list governs cross-origin browsers.
+func allowedOrigins() map[string]struct{} {
+	raw := os.Getenv("ALLOWED_ORIGINS")
+	if raw == "" {
+		raw = "https://commonlawrepublic.us,https://www.commonlawrepublic.us"
+	}
+	set := make(map[string]struct{})
+	for _, o := range strings.Split(raw, ",") {
+		if o = strings.TrimSpace(o); o != "" {
+			set[o] = struct{}{}
+		}
+	}
+	return set
+}
+
 func SetupRoutes(db *database.DB) *gin.Engine {
 	r := gin.Default()
 
-	// CORS middleware
+	origins := allowedOrigins()
+
 	r.Use(func(c *gin.Context) {
-		c.Header("Access-Control-Allow-Origin", "*")
-		c.Header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
-		c.Header("Access-Control-Allow-Headers", "Origin, Content-Type, Accept, Authorization")
-		
+		origin := c.GetHeader("Origin")
+		if _, ok := origins[origin]; ok {
+			c.Header("Access-Control-Allow-Origin", origin)
+			c.Header("Vary", "Origin")
+			c.Header("Access-Control-Allow-Credentials", "true")
+			c.Header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+			c.Header("Access-Control-Allow-Headers", "Origin, Content-Type, Accept, Authorization")
+		}
+
 		if c.Request.Method == "OPTIONS" {
 			c.AbortWithStatus(204)
 			return
 		}
-		
+
 		c.Next()
 	})
 

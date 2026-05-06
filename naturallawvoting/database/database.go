@@ -60,13 +60,14 @@ CREATE TABLE IF NOT EXISTS ballots (
     category VARCHAR(100),
     superstate VARCHAR(100),
     state VARCHAR(100),
+    district VARCHAR(100) DEFAULT '',
     creator_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
     is_active BOOLEAN DEFAULT true,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Add columns if they don't exist (for existing databases)
+-- Backfill columns on databases that predate their addition to CREATE TABLE.
 DO $$
 BEGIN
     IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = 'ballots' AND column_name = 'category') THEN
@@ -103,10 +104,11 @@ CREATE TABLE IF NOT EXISTS votes (
     UNIQUE(user_id, ballot_item_id)
 );
 
--- Create user_profiles table
+-- Create user_profiles table.
+-- email cascades on UPDATE so a user changing their email keeps their profile linked.
 CREATE TABLE IF NOT EXISTS user_profiles (
     user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
-    email VARCHAR(255) PRIMARY KEY REFERENCES users(email) ON DELETE CASCADE,
+    email VARCHAR(255) PRIMARY KEY REFERENCES users(email) ON UPDATE CASCADE ON DELETE CASCADE,
     full_name VARCHAR(255),
     birthday DATE,
     gender VARCHAR(50),
@@ -116,6 +118,32 @@ CREATE TABLE IF NOT EXISTS user_profiles (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+-- Upgrade pre-existing user_profiles.email FK to include ON UPDATE CASCADE.
+DO $$
+DECLARE
+    v_constraint_name TEXT;
+    v_update_action CHAR(1);
+BEGIN
+    SELECT c.conname, c.confupdtype
+    INTO v_constraint_name, v_update_action
+    FROM pg_constraint c
+    JOIN pg_class t ON t.oid = c.conrelid
+    WHERE t.relname = 'user_profiles'
+      AND c.contype = 'f'
+      AND c.conkey = ARRAY[(
+          SELECT attnum FROM pg_attribute
+          WHERE attrelid = t.oid AND attname = 'email'
+      )::SMALLINT];
+
+    IF v_constraint_name IS NOT NULL AND v_update_action <> 'c' THEN
+        EXECUTE format('ALTER TABLE user_profiles DROP CONSTRAINT %I', v_constraint_name);
+        ALTER TABLE user_profiles
+            ADD CONSTRAINT user_profiles_email_fkey
+            FOREIGN KEY (email) REFERENCES users(email)
+            ON UPDATE CASCADE ON DELETE CASCADE;
+    END IF;
+END $$;
 
 -- Create user_addresses table
 CREATE TABLE IF NOT EXISTS user_addresses (
@@ -254,6 +282,22 @@ CREATE TABLE IF NOT EXISTS profile_visibility (
 
 CREATE INDEX IF NOT EXISTS idx_trust_votes_subject ON trust_votes(subject_id);
 CREATE INDEX IF NOT EXISTS idx_trust_votes_voter ON trust_votes(voter_id);
+
+-- Trigram index for ILIKE '%foo%' username search. Conditional because
+-- pg_trgm requires superuser to install on managed Postgres; if it's not
+-- available the search still works, just without index acceleration.
+DO $$
+BEGIN
+    IF EXISTS (SELECT 1 FROM pg_available_extensions WHERE name = 'pg_trgm') THEN
+        BEGIN
+            CREATE EXTENSION IF NOT EXISTS pg_trgm;
+            CREATE INDEX IF NOT EXISTS idx_users_username_trgm
+                ON users USING gin (username gin_trgm_ops);
+        EXCEPTION WHEN insufficient_privilege THEN
+            NULL;
+        END;
+    END IF;
+END $$;
 
 DROP TRIGGER IF EXISTS update_trust_votes_updated_at ON trust_votes;
 CREATE TRIGGER update_trust_votes_updated_at BEFORE UPDATE ON trust_votes

@@ -39,6 +39,8 @@ const getBallotResultsSQL = `
 		ORDER BY average_score DESC, bi.id ASC
 	`
 
+const getBallotDistinctVotersSQL = `SELECT COUNT(DISTINCT user_id) FROM votes WHERE ballot_id = $1`
+
 func intp(v int) *int { return &v }
 
 // singleScoreRequest builds a VoteRequest carrying one option's score.
@@ -629,6 +631,10 @@ func TestGetBallotResults(t *testing.T) {
 				AddRow(2, ballotID, "Option 2", "Second option", 50.0, int64(100), int64(2)).
 				AddRow(3, ballotID, "Option 3", "Third option", 10.0, int64(20), int64(2)))
 
+		testSetup.Mock.ExpectQuery(getBallotDistinctVotersSQL).
+			WithArgs(ballotID).
+			WillReturnRows(sqlmock.NewRows([]string{"count"}).AddRow(int64(2)))
+
 		req, err := CreateTestRequest("GET", fmt.Sprintf("/api/v1/public/ballots/%d/results", ballotID), nil)
 		require.NoError(t, err)
 
@@ -686,6 +692,10 @@ func TestGetBallotResults(t *testing.T) {
 		testSetup.Mock.ExpectQuery(getBallotResultsSQL).
 			WithArgs(ballotID).
 			WillReturnRows(sqlmock.NewRows([]string{"id", "ballot_id", "title", "description", "average_score", "total_score", "voter_count"}))
+
+		testSetup.Mock.ExpectQuery(getBallotDistinctVotersSQL).
+			WithArgs(ballotID).
+			WillReturnRows(sqlmock.NewRows([]string{"count"}).AddRow(int64(0)))
 
 		req, err := CreateTestRequest("GET", fmt.Sprintf("/api/v1/public/ballots/%d/results", ballotID), nil)
 		require.NoError(t, err)

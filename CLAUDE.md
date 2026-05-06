@@ -183,7 +183,7 @@ The application uses PostgreSQL with the following tables:
 - `users` - User accounts with username, email, password_hash
 - `ballots` - Voting ballots with title, description, category (for filtering by department), creator reference
 - `ballot_items` - Individual voting options linked to ballots
-- `votes` - User votes with UNIQUE constraint (user_id, ballot_id) to enforce one vote per ballot
+- `votes` - One row per (user, ballot_item) carrying a 0-100 score. UNIQUE(user_id, ballot_item_id) lets a user score every option on a ballot but only once per option.
 
 **Profile tables:**
 - `user_profiles` - Personal information (full_name, birthday, gender, mothers_maiden_name, phone_number, additional_emails)
@@ -215,6 +215,7 @@ The backend requires these environment variables (can be set via `.env` file):
 
 **Optional:**
 - `PORT` - Server port (default: 8080)
+- `ALLOWED_ORIGINS` - Comma-separated CORS allowlist. Defaults to `https://commonlawrepublic.us,https://www.commonlawrepublic.us`.
 
 See `ENVIRONMENT_SETUP.md` for detailed setup instructions including database creation and JWT secret generation.
 
@@ -232,8 +233,8 @@ See `ENVIRONMENT_SETUP.md` for detailed setup instructions including database cr
 - `GET /api/v1/profile` - Get basic user profile
 - `GET /api/v1/my-ballots` - Get user's created ballots
 - `POST /api/v1/ballots` - Create new ballot
-- `POST /api/v1/ballots/:ballot_id/vote` - Submit vote (accepts `option_id` or `ballot_item_id`)
-- `GET /api/v1/ballots/:ballot_id/my-vote` - Get user's vote for specific ballot (returns `option_id`)
+- `POST /api/v1/ballots/:ballot_id/vote` - Submit/update one or more option scores for a ballot. Body shape: `{ "scores": [{ "option_id": <id>, "score": <0-100> }, ...] }` (`ballot_item_id` is also accepted as an alias for `option_id`). Each entry is upserted independently.
+- `GET /api/v1/ballots/:ballot_id/my-vote` - Returns every score this user has cast on the ballot, as `{ "ballot_id": <id>, "scores": [...] }`. Each score row includes both `option_id` and `ballot_item_id` for frontend compatibility.
 
 **Profile management (all require JWT):**
 - User Info: GET/POST/PUT/DELETE `/api/v1/profile/info`
@@ -250,27 +251,27 @@ See `ENVIRONMENT_SETUP.md` for detailed setup instructions including database cr
 The API uses specific field names to maintain compatibility with the frontend:
 
 - Ballot responses use `"options"` array (JSON field name for `Items` in Go struct)
-- Vote submission accepts `"option_id"` field which maps internally to `ballot_item_id`
-- Vote retrieval returns both `"option_id"` and `"ballot_item_id"` for compatibility
-- Results endpoint includes both `"option_id"` and `"option_title"` fields
+- Vote submission carries a `"scores"` array; each entry accepts `"option_id"` (frontend alias) or `"ballot_item_id"` plus a 0-100 `"score"`
+- Vote retrieval returns a `"scores"` array with both `"option_id"` and `"ballot_item_id"` on each entry for compatibility
+- Results endpoint includes both `"option_id"` and `"option_title"` fields per option, plus `average_score`, `total_score`, and `voter_count`
 
 **Example Vote Request:**
 ```json
 POST /api/v1/ballots/3/vote
 {
-  "option_id": 5
+  "scores": [
+    { "option_id": 5, "score": 80 },
+    { "option_id": 6, "score": 30 }
+  ]
 }
 ```
 
 **Example Vote Response:**
 ```json
 {
-  "id": 1,
-  "user_id": 2,
-  "ballot_id": 3,
-  "option_id": 5,
-  "ballot_item_id": 5,
-  "created_at": "2025-01-14T12:00:00Z"
+  "message":     "Vote recorded successfully",
+  "ballot_id":   3,
+  "score_count": 2
 }
 ```
 
@@ -350,15 +351,16 @@ The frontend is vanilla HTML/CSS/JavaScript with no framework.
 - Schema changes should be added to the migration SQL string
 
 ### Vote Constraint Enforcement
-- One vote per user per ballot enforced by UNIQUE(user_id, ballot_id) constraint
-- When user changes vote, the application deletes old vote and creates new one
-- `ballot_items.vote_count` is maintained via application logic, not database triggers
+- One score per (user, ballot_item) enforced by UNIQUE(user_id, ballot_item_id). A single user can score every option on a ballot, but only once per option.
+- Vote submissions upsert via `INSERT ... ON CONFLICT (user_id, ballot_item_id) DO UPDATE SET score = EXCLUDED.score, updated_at = CURRENT_TIMESTAMP` — re-submitting overwrites the prior score in place.
+- All scores in a single `POST /api/v1/ballots/:ballot_id/vote` payload are upserted inside one transaction, so a partial failure rolls everything back.
+- Score values are integers in `[0, 100]`; the DB enforces the range with a CHECK constraint.
 
 ## Important Notes
 
 - The backend uses Go 1.23.0+ with Gin framework v1.10.1
 - Database connection pooling is handled by `database/sql` package
 - JWT tokens include user_id in claims for authentication
-- CORS is wide open (`Access-Control-Allow-Origin: *`) - restrict in production
+- CORS is restricted to an allowlist driven by the `ALLOWED_ORIGINS` env var (comma-separated). Defaults to `https://commonlawrepublic.us,https://www.commonlawrepublic.us` when unset. Add dev origins (e.g. `http://localhost:3000`) when running cross-origin locally; same-origin deployments need no entries.
 - Database schema auto-migrates on every startup - be cautious with destructive changes
 - Profile tables use different primary keys (some use user_id, some use email) - refer to schema when writing queries

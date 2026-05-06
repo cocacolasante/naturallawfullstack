@@ -122,13 +122,11 @@ func TestFullVotingFlow(t *testing.T) {
 		// Mock ballots query - updated columns
 		createdAt := time.Date(2023, 1, 1, 0, 0, 0, 0, time.UTC)
 		testSetup.Mock.ExpectQuery(`
-		SELECT b.id, b.title, b.description, b.category, COALESCE(b.superstate, ''), COALESCE(b.state, ''), COALESCE(b.district, ''), b.creator_id, b.is_active, b.created_at, b.updated_at,
-		       u.username as creator_username
+		SELECT b.id, b.title, b.description, b.category, COALESCE(b.superstate, ''), COALESCE(b.state, ''), COALESCE(b.district, ''), b.creator_id, b.is_active, b.created_at, b.updated_at
 		FROM ballots b
-		JOIN users u ON b.creator_id = u.id
 		WHERE b.is_active = true ORDER BY b.created_at DESC`).
-			WillReturnRows(sqlmock.NewRows([]string{"id", "title", "description", "category", "superstate", "state", "district", "creator_id", "is_active", "created_at", "updated_at", "creator_username"}).
-				AddRow(ballotID, "Integration Test Ballot", "Testing the full workflow", "", "", "", "", userID, true, createdAt, createdAt, username))
+			WillReturnRows(sqlmock.NewRows([]string{"id", "title", "description", "category", "superstate", "state", "district", "creator_id", "is_active", "created_at", "updated_at"}).
+				AddRow(ballotID, "Integration Test Ballot", "Testing the full workflow", "", "", "", "", userID, true, createdAt, createdAt))
 
 		req, err := CreateTestRequest("GET", "/api/v1/public/ballots", nil)
 		require.NoError(t, err)
@@ -298,6 +296,10 @@ func TestFullVotingFlow(t *testing.T) {
 			WillReturnRows(sqlmock.NewRows([]string{"id", "ballot_id", "title", "description", "average_score", "total_score", "voter_count"}).
 				AddRow(1, ballotID, "Option A", "First choice", 80.0, int64(80), int64(1)).
 				AddRow(2, ballotID, "Option B", "Second choice", 30.0, int64(30), int64(1)))
+
+		testSetup.Mock.ExpectQuery(`SELECT COUNT(DISTINCT user_id) FROM votes WHERE ballot_id = $1`).
+			WithArgs(ballotID).
+			WillReturnRows(sqlmock.NewRows([]string{"count"}).AddRow(int64(1)))
 
 		req, err := CreateTestRequest("GET", fmt.Sprintf("/api/v1/public/ballots/%d/results", ballotID), nil)
 		require.NoError(t, err)

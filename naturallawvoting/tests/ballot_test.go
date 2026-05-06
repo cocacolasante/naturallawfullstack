@@ -290,15 +290,13 @@ func TestGetAllBallots(t *testing.T) {
 		// Mock ballots query - updated columns
 		createdAt1 := time.Date(2023, 1, 1, 0, 0, 0, 0, time.UTC)
 		createdAt2 := time.Date(2023, 1, 2, 0, 0, 0, 0, time.UTC)
-		rows := sqlmock.NewRows([]string{"id", "title", "description", "category", "superstate", "state", "district", "creator_id", "is_active", "created_at", "updated_at", "creator_username"}).
-			AddRow(1, "Ballot 1", "Description 1", "", "", "", "", 1, true, createdAt1, createdAt1, "user1").
-			AddRow(2, "Ballot 2", "Description 2", "", "", "", "", 2, true, createdAt2, createdAt2, "user2")
+		rows := sqlmock.NewRows([]string{"id", "title", "description", "category", "superstate", "state", "district", "creator_id", "is_active", "created_at", "updated_at"}).
+			AddRow(1, "Ballot 1", "Description 1", "", "", "", "", 1, true, createdAt1, createdAt1).
+			AddRow(2, "Ballot 2", "Description 2", "", "", "", "", 2, true, createdAt2, createdAt2)
 
 		testSetup.Mock.ExpectQuery(`
-		SELECT b.id, b.title, b.description, b.category, COALESCE(b.superstate, ''), COALESCE(b.state, ''), COALESCE(b.district, ''), b.creator_id, b.is_active, b.created_at, b.updated_at,
-		       u.username as creator_username
+		SELECT b.id, b.title, b.description, b.category, COALESCE(b.superstate, ''), COALESCE(b.state, ''), COALESCE(b.district, ''), b.creator_id, b.is_active, b.created_at, b.updated_at
 		FROM ballots b
-		JOIN users u ON b.creator_id = u.id
 		WHERE b.is_active = true ORDER BY b.created_at DESC`).
 			WillReturnRows(rows)
 
@@ -317,12 +315,10 @@ func TestGetAllBallots(t *testing.T) {
 		require.NoError(t, err)
 		defer testSetup.DB.Close()
 
-		rows := sqlmock.NewRows([]string{"id", "title", "description", "category", "superstate", "state", "district", "creator_id", "is_active", "created_at", "updated_at", "creator_username"})
+		rows := sqlmock.NewRows([]string{"id", "title", "description", "category", "superstate", "state", "district", "creator_id", "is_active", "created_at", "updated_at"})
 		testSetup.Mock.ExpectQuery(`
-		SELECT b.id, b.title, b.description, b.category, COALESCE(b.superstate, ''), COALESCE(b.state, ''), COALESCE(b.district, ''), b.creator_id, b.is_active, b.created_at, b.updated_at,
-		       u.username as creator_username
+		SELECT b.id, b.title, b.description, b.category, COALESCE(b.superstate, ''), COALESCE(b.state, ''), COALESCE(b.district, ''), b.creator_id, b.is_active, b.created_at, b.updated_at
 		FROM ballots b
-		JOIN users u ON b.creator_id = u.id
 		WHERE b.is_active = true ORDER BY b.created_at DESC`).
 			WillReturnRows(rows)
 
@@ -342,14 +338,12 @@ func TestGetAllBallots(t *testing.T) {
 		defer testSetup.DB.Close()
 
 		createdAt := time.Date(2023, 1, 1, 0, 0, 0, 0, time.UTC)
-		rows := sqlmock.NewRows([]string{"id", "title", "description", "category", "superstate", "state", "district", "creator_id", "is_active", "created_at", "updated_at", "creator_username"}).
-			AddRow(1, "Exec Ballot", "Description", "executive", "", "", "", 1, true, createdAt, createdAt, "user1")
+		rows := sqlmock.NewRows([]string{"id", "title", "description", "category", "superstate", "state", "district", "creator_id", "is_active", "created_at", "updated_at"}).
+			AddRow(1, "Exec Ballot", "Description", "executive", "", "", "", 1, true, createdAt, createdAt)
 
 		testSetup.Mock.ExpectQuery(`
-		SELECT b.id, b.title, b.description, b.category, COALESCE(b.superstate, ''), COALESCE(b.state, ''), COALESCE(b.district, ''), b.creator_id, b.is_active, b.created_at, b.updated_at,
-		       u.username as creator_username
+		SELECT b.id, b.title, b.description, b.category, COALESCE(b.superstate, ''), COALESCE(b.state, ''), COALESCE(b.district, ''), b.creator_id, b.is_active, b.created_at, b.updated_at
 		FROM ballots b
-		JOIN users u ON b.creator_id = u.id
 		WHERE b.is_active = true AND b.category = $1 ORDER BY b.created_at DESC`).
 			WithArgs("executive").
 			WillReturnRows(rows)
@@ -370,14 +364,12 @@ func TestGetAllBallots(t *testing.T) {
 		defer testSetup.DB.Close()
 
 		createdAt := time.Date(2023, 1, 1, 0, 0, 0, 0, time.UTC)
-		rows := sqlmock.NewRows([]string{"id", "title", "description", "category", "superstate", "state", "district", "creator_id", "is_active", "created_at", "updated_at", "creator_username"}).
-			AddRow(1, "CA Ballot", "Description", "", "US-West", "", "", 1, true, createdAt, createdAt, "user1")
+		rows := sqlmock.NewRows([]string{"id", "title", "description", "category", "superstate", "state", "district", "creator_id", "is_active", "created_at", "updated_at"}).
+			AddRow(1, "CA Ballot", "Description", "", "US-West", "", "", 1, true, createdAt, createdAt)
 
 		testSetup.Mock.ExpectQuery(`
-		SELECT b.id, b.title, b.description, b.category, COALESCE(b.superstate, ''), COALESCE(b.state, ''), COALESCE(b.district, ''), b.creator_id, b.is_active, b.created_at, b.updated_at,
-		       u.username as creator_username
+		SELECT b.id, b.title, b.description, b.category, COALESCE(b.superstate, ''), COALESCE(b.state, ''), COALESCE(b.district, ''), b.creator_id, b.is_active, b.created_at, b.updated_at
 		FROM ballots b
-		JOIN users u ON b.creator_id = u.id
 		WHERE b.is_active = true AND b.superstate = $1 ORDER BY b.created_at DESC`).
 			WithArgs("US-West").
 			WillReturnRows(rows)
@@ -398,14 +390,12 @@ func TestGetAllBallots(t *testing.T) {
 		defer testSetup.DB.Close()
 
 		createdAt := time.Date(2023, 1, 1, 0, 0, 0, 0, time.UTC)
-		rows := sqlmock.NewRows([]string{"id", "title", "description", "category", "superstate", "state", "district", "creator_id", "is_active", "created_at", "updated_at", "creator_username"}).
-			AddRow(1, "CA Ballot", "Description", "", "", "CA", "", 1, true, createdAt, createdAt, "user1")
+		rows := sqlmock.NewRows([]string{"id", "title", "description", "category", "superstate", "state", "district", "creator_id", "is_active", "created_at", "updated_at"}).
+			AddRow(1, "CA Ballot", "Description", "", "", "CA", "", 1, true, createdAt, createdAt)
 
 		testSetup.Mock.ExpectQuery(`
-		SELECT b.id, b.title, b.description, b.category, COALESCE(b.superstate, ''), COALESCE(b.state, ''), COALESCE(b.district, ''), b.creator_id, b.is_active, b.created_at, b.updated_at,
-		       u.username as creator_username
+		SELECT b.id, b.title, b.description, b.category, COALESCE(b.superstate, ''), COALESCE(b.state, ''), COALESCE(b.district, ''), b.creator_id, b.is_active, b.created_at, b.updated_at
 		FROM ballots b
-		JOIN users u ON b.creator_id = u.id
 		WHERE b.is_active = true AND b.state = $1 ORDER BY b.created_at DESC`).
 			WithArgs("CA").
 			WillReturnRows(rows)
@@ -426,14 +416,12 @@ func TestGetAllBallots(t *testing.T) {
 		defer testSetup.DB.Close()
 
 		createdAt := time.Date(2023, 1, 1, 0, 0, 0, 0, time.UTC)
-		rows := sqlmock.NewRows([]string{"id", "title", "description", "category", "superstate", "state", "district", "creator_id", "is_active", "created_at", "updated_at", "creator_username"}).
-			AddRow(1, "District Ballot", "Description", "", "", "", "District 1", 1, true, createdAt, createdAt, "user1")
+		rows := sqlmock.NewRows([]string{"id", "title", "description", "category", "superstate", "state", "district", "creator_id", "is_active", "created_at", "updated_at"}).
+			AddRow(1, "District Ballot", "Description", "", "", "", "District 1", 1, true, createdAt, createdAt)
 
 		testSetup.Mock.ExpectQuery(`
-		SELECT b.id, b.title, b.description, b.category, COALESCE(b.superstate, ''), COALESCE(b.state, ''), COALESCE(b.district, ''), b.creator_id, b.is_active, b.created_at, b.updated_at,
-		       u.username as creator_username
+		SELECT b.id, b.title, b.description, b.category, COALESCE(b.superstate, ''), COALESCE(b.state, ''), COALESCE(b.district, ''), b.creator_id, b.is_active, b.created_at, b.updated_at
 		FROM ballots b
-		JOIN users u ON b.creator_id = u.id
 		WHERE b.is_active = true AND b.district = $1 ORDER BY b.created_at DESC`).
 			WithArgs("District 1").
 			WillReturnRows(rows)
@@ -454,10 +442,8 @@ func TestGetAllBallots(t *testing.T) {
 		defer testSetup.DB.Close()
 
 		testSetup.Mock.ExpectQuery(`
-		SELECT b.id, b.title, b.description, b.category, COALESCE(b.superstate, ''), COALESCE(b.state, ''), COALESCE(b.district, ''), b.creator_id, b.is_active, b.created_at, b.updated_at,
-		       u.username as creator_username
+		SELECT b.id, b.title, b.description, b.category, COALESCE(b.superstate, ''), COALESCE(b.state, ''), COALESCE(b.district, ''), b.creator_id, b.is_active, b.created_at, b.updated_at
 		FROM ballots b
-		JOIN users u ON b.creator_id = u.id
 		WHERE b.is_active = true ORDER BY b.created_at DESC`).
 			WillReturnError(errors.New("db error"))
 
@@ -479,10 +465,8 @@ func TestGetAllBallots(t *testing.T) {
 		// Return wrong number of columns to cause scan error
 		rows := sqlmock.NewRows([]string{"id"}).AddRow("not-an-int")
 		testSetup.Mock.ExpectQuery(`
-		SELECT b.id, b.title, b.description, b.category, COALESCE(b.superstate, ''), COALESCE(b.state, ''), COALESCE(b.district, ''), b.creator_id, b.is_active, b.created_at, b.updated_at,
-		       u.username as creator_username
+		SELECT b.id, b.title, b.description, b.category, COALESCE(b.superstate, ''), COALESCE(b.state, ''), COALESCE(b.district, ''), b.creator_id, b.is_active, b.created_at, b.updated_at
 		FROM ballots b
-		JOIN users u ON b.creator_id = u.id
 		WHERE b.is_active = true ORDER BY b.created_at DESC`).
 			WillReturnRows(rows)
 

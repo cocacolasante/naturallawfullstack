@@ -84,10 +84,8 @@ func (h *BallotHandler) GetAllBallots(c *gin.Context) {
 	district := c.Query("district")
 
 	query := `
-		SELECT b.id, b.title, b.description, b.category, COALESCE(b.superstate, ''), COALESCE(b.state, ''), COALESCE(b.district, ''), b.creator_id, b.is_active, b.created_at, b.updated_at,
-		       u.username as creator_username
+		SELECT b.id, b.title, b.description, b.category, COALESCE(b.superstate, ''), COALESCE(b.state, ''), COALESCE(b.district, ''), b.creator_id, b.is_active, b.created_at, b.updated_at
 		FROM ballots b
-		JOIN users u ON b.creator_id = u.id
 		WHERE b.is_active = true`
 
 	var args []interface{}
@@ -129,10 +127,9 @@ func (h *BallotHandler) GetAllBallots(c *gin.Context) {
 	var ballots []models.Ballot
 	for rows.Next() {
 		var ballot models.Ballot
-		var creatorUsername string
 		err := rows.Scan(
 			&ballot.ID, &ballot.Title, &ballot.Description, &ballot.Category, &ballot.Superstate, &ballot.State, &ballot.District, &ballot.CreatorID,
-			&ballot.IsActive, &ballot.CreatedAt, &ballot.UpdatedAt, &creatorUsername,
+			&ballot.IsActive, &ballot.CreatedAt, &ballot.UpdatedAt,
 		)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Error scanning ballot"})
